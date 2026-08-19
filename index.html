@@ -160,7 +160,8 @@
       z-index: 0;
       overflow: hidden;
     }
-    .fullscreen-video-iframe {
+    .fullscreen-video-iframe,
+    .fullscreen-video-element {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -170,6 +171,7 @@
       min-height: 100vh;
       transform: translate(-50%, -50%);
       transform-origin: center center;
+      object-fit: cover;
       border: none;
       pointer-events: none !important;
       opacity: 0.95;
@@ -1768,15 +1770,24 @@
     
     <!-- 720px Height Full-Bleed Video Banner Section (Top Black Strip Fixed via top: -220px) -->
     <section class="hero-fullscreen-video-section" id="home">
-      <!-- Cropped & Over-scaled Background Video Iframe -->
+      <!-- Crystal Clear High-Definition HTML5 Background Video (0 Controls, 1080p Crisp HD) -->
       <div class="fullscreen-video-wrapper">
-        <iframe 
-          class="fullscreen-video-iframe" 
-          id="hero-bg-iframe"
-          src="https://www.youtube-nocookie.com/embed/Xjc4AAqztFM?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1" 
-          title="Background Video"
-          allow="autoplay; encrypted-media">
-        </iframe>
+        <video 
+          class="fullscreen-video-element" 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          preload="auto">
+          <source src="video/banner.mp4" type="video/mp4">
+          <iframe 
+            class="fullscreen-video-iframe" 
+            id="hero-bg-iframe"
+            src="https://www.youtube-nocookie.com/embed/Xjc4AAqztFM?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1" 
+            title="Background Video"
+            allow="autoplay; encrypted-media">
+          </iframe>
+        </video>
       </div>
 
       <!-- Soft Vignette Overlay -->
