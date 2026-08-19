@@ -156,7 +156,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
+      pointer-events: none !important;
       z-index: 0;
       overflow: hidden;
     }
@@ -171,9 +171,15 @@
       transform: translate(-50%, -50%) scale(1.5);
       transform-origin: center center;
       border: none;
-      pointer-events: none;
+      pointer-events: none !important;
       opacity: 0.95;
       filter: contrast(1.05) brightness(0.92);
+    }
+    video::-webkit-media-controls,
+    video::-webkit-media-controls-enclosure,
+    video::-webkit-media-controls-panel {
+      display: none !important;
+      -webkit-appearance: none !important;
     }
     .video-light-vignette {
       position: absolute;
@@ -1754,7 +1760,7 @@
       <div class="fullscreen-video-wrapper">
         <iframe 
           class="fullscreen-video-iframe" 
-          src="https://www.youtube.com/embed/Xjc4AAqztFM?autoplay=1&mute=1&loop=1&playlist=Xjc4AAqztFM&controls=0&playsinline=1" 
+          src="https://www.youtube.com/embed/Xjc4AAqztFM?autoplay=1&mute=1&loop=1&playlist=Xjc4AAqztFM&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1" 
           title="Background Video"
           allow="autoplay; encrypted-media">
         </iframe>
