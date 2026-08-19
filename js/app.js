@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setup3DCardSpotlight();
   setupNeuralParticleCanvas();
   setupScrollAndEntranceAnimations();
+  initDliCardAsciiBg();
 });
 
 function setupNavLinks() {
@@ -380,5 +381,83 @@ function setupScrollSpy() {
       });
     }
   });
+}
+
+// DLI Course Card ASCII Breathing Field Background Engine
+function initDliCardAsciiBg() {
+  const canvas = document.getElementById('dli-card-ascii-canvas');
+  if (!canvas) return;
+
+  const PALETTE = '   ...:::---+++***◦◦••▢▣';
+  const CELL = 16;
+  const FONT_SIZE = 13;
+  let ctx, w, h;
+
+  function setup() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width < 4 || rect.height < 4) return false;
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    w = rect.width;
+    h = rect.height;
+    ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.font = `500 ${FONT_SIZE}px "JetBrains Mono", monospace`;
+    ctx.textBaseline = 'top';
+    return true;
+  }
+
+  function draw(t) {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, w, h);
+    const cols = Math.ceil(w / CELL);
+    const rows = Math.ceil(h / CELL);
+
+    for (let r = 0; r < rows; r++) {
+      for (let cc = 0; cc < cols; cc++) {
+        const n = (
+          Math.sin(cc * 0.18 + t) +
+          Math.sin(r * 0.24 - t * 0.7) +
+          Math.sin((cc + r) * 0.12 + t * 0.45) +
+          Math.sin(Math.hypot(cc - cols * 0.5, r - rows * 0.5) * 0.16 - t * 0.55)
+        ) / 4;
+        const v = (n + 1) / 2;
+        if (v < 0.22) continue;
+        const idx = Math.min(PALETTE.length - 1, Math.floor(v * PALETTE.length));
+        const ch = PALETTE[idx];
+        if (ch === ' ') continue;
+        
+        const alpha = (0.08 + (v - 0.22) * 0.55);
+        ctx.fillStyle = `rgba(141, 195, 31, ${alpha.toFixed(3)})`;
+        ctx.fillText(ch, cc * CELL, r * CELL);
+      }
+    }
+  }
+
+  let pending = null;
+  window.addEventListener('resize', () => {
+    if (pending) cancelAnimationFrame(pending);
+    pending = requestAnimationFrame(setup);
+  }, { passive: true });
+
+  let t0 = performance.now();
+  setup();
+
+  function tick(now) {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width >= 4 && rect.height >= 4) {
+      if (!ctx || Math.abs(w - rect.width) > 2 || Math.abs(h - rect.height) > 2) {
+        setup();
+      }
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        const t = (now - t0) / 1000 * 0.55;
+        draw(t);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
 }
 
