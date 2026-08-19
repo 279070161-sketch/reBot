@@ -17,8 +17,11 @@ function setupNavLinks() {
   const links = document.querySelectorAll('.hub-nav-link');
   links.forEach(link => {
     link.addEventListener('click', (e) => {
-      links.forEach(l => l.classList.remove('active'));
-      e.currentTarget.classList.add('active');
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        links.forEach(l => l.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+      }
 
       // Auto-close mobile dropdown when a link is clicked
       const navMenu = document.querySelector('.hub-nav-menu');
