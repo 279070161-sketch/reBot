@@ -183,19 +183,18 @@
       pointer-events: none;
     }
 
-    /* Bottom-Aligned Split Glassmorphic Bar Typography */
+    /* Bottom-Aligned Pure Text Split Typography */
     .hero-bottom-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
-      background: rgba(13, 16, 18, 0.38);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 1.2rem 2.25rem;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      padding: 0;
+      box-shadow: none;
       width: 100%;
       position: relative;
       z-index: 2;
@@ -205,7 +204,7 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 0.6rem;
-        padding: 1.25rem 1.5rem;
+        padding: 0;
       }
       .hero-bottom-divider {
         display: none;
@@ -221,7 +220,7 @@
       font-family: var(--font-main);
       white-space: nowrap;
       flex-shrink: 0;
-      text-shadow: none !important;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.8) !important;
     }
     .hero-main-title span {
       color: var(--nv-green);
@@ -229,18 +228,17 @@
     .hero-bottom-divider {
       width: 1px;
       height: 36px;
-      background-color: var(--nv-border);
+      background-color: rgba(255, 255, 255, 0.25);
       flex-shrink: 0;
-      opacity: 0.6;
     }
     .hero-sub-text {
       font-size: clamp(0.85rem, 1.02vw, 1.05rem);
-      color: rgba(240, 244, 247, 0.88);
+      color: rgba(240, 244, 247, 0.95);
       line-height: 1.5;
       font-family: var(--font-main);
       margin: 0;
       max-width: 620px;
-      text-shadow: none !important;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.8) !important;
     }
 
     /* Partner Logo Marquee Section */
