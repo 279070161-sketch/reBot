@@ -147,7 +147,7 @@ function toggleHubAccordion(itemId) {
  * 3D Tilt & Cursor Spotlight Glow Tracking Handler for Product & Showcase Cards
  */
 function setup3DCardSpotlight() {
-  const cards = document.querySelectorAll('.product-summary-card, .accessory-card, .dev-project-card, .gs-info-card, .cocreate-card');
+  const cards = document.querySelectorAll('.product-summary-card, .accessory-card, .dev-project-card, .gs-info-card');
 
   cards.forEach(card => {
     // Add spotlight overlay element if not present
