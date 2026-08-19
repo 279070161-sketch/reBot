@@ -143,11 +143,12 @@
       height: 720px;
       margin-top: -64px;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       overflow: hidden;
       background-color: #0b0e10;
       border-bottom: 1px solid var(--nv-border);
       z-index: 10;
+      padding-bottom: 2.25rem;
     }
     .fullscreen-video-wrapper {
       position: absolute;
@@ -177,43 +178,69 @@
     .video-light-vignette {
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(13, 16, 18, 0.82) 0%, rgba(13, 16, 18, 0.45) 50%, rgba(13, 16, 18, 0.15) 100%);
+      background: linear-gradient(180deg, rgba(13, 16, 18, 0.25) 0%, rgba(13, 16, 18, 0.05) 50%, rgba(13, 16, 18, 0.85) 100%);
       z-index: 1;
       pointer-events: none;
     }
 
-    /* Left-Aligned Clean Typography */
-    .hero-left-text-box {
+    /* Bottom-Aligned Split Glassmorphic Bar Typography */
+    .hero-bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      background: rgba(13, 16, 18, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--nv-border);
+      border-radius: 16px;
+      padding: 1.2rem 2.25rem;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      width: 100%;
       position: relative;
       z-index: 2;
-      max-width: 960px;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+    }
+    @media (max-width: 992px) {
+      .hero-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 1.25rem 1.5rem;
+      }
+      .hero-bottom-divider {
+        display: none;
+      }
     }
     .hero-main-title {
-      font-size: clamp(2.5rem, 4.5vw, 4.2rem);
+      font-size: clamp(1.35rem, 2.1vw, 2rem);
       font-weight: 800;
-      line-height: 1.18;
+      line-height: 1.25;
       color: #ffffff;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
+      margin: 0;
+      letter-spacing: -0.01em;
       font-family: var(--font-main);
+      white-space: nowrap;
+      flex-shrink: 0;
       text-shadow: none !important;
-      max-width: 920px;
     }
     .hero-main-title span {
       color: var(--nv-green);
     }
+    .hero-bottom-divider {
+      width: 1px;
+      height: 36px;
+      background-color: var(--nv-border);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
     .hero-sub-text {
-      font-size: clamp(1.05rem, 1.35vw, 1.3rem);
-      color: rgba(240, 244, 247, 0.92);
-      line-height: 1.65;
+      font-size: clamp(0.85rem, 1.02vw, 1.05rem);
+      color: rgba(240, 244, 247, 0.88);
+      line-height: 1.5;
       font-family: var(--font-main);
+      margin: 0;
+      max-width: 620px;
       text-shadow: none !important;
-      text-align: left;
-      max-width: 840px;
     }
 
     /* Partner Logo Marquee Section */
@@ -1571,12 +1598,13 @@
       <!-- Soft Vignette Overlay -->
       <div class="video-light-vignette"></div>
 
-      <!-- Left-Aligned Pure Text Container -->
-      <div class="container" style="max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
-        <div class="hero-left-text-box">
+      <!-- Bottom-Aligned Glassmorphic Hero Bar -->
+      <div class="container" style="max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2;">
+        <div class="hero-bottom-bar">
           <h1 class="hero-main-title">
             Empowering Embodied AI from <span>Sim-to-Real</span>
           </h1>
+          <div class="hero-bottom-divider"></div>
           <p class="hero-sub-text">
             Fully Open-Source 6+1 DoF Robotic Arm Kit Built for Developers, Researchers, and AI Innovators
           </p>
