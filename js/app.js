@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupNeuralParticleCanvas();
   setupScrollAndEntranceAnimations();
   initDliCardAsciiBg();
+  setupHeroVideoSmoothFade();
 });
 
 function setupNavLinks() {
@@ -459,5 +460,22 @@ function initDliCardAsciiBg() {
   }
 
   requestAnimationFrame(tick);
+}
+
+// Fade in Hero Background Video smoothly to hide YouTube initial buffering controls card
+function setupHeroVideoSmoothFade() {
+  const iframe = document.getElementById('hero-bg-iframe');
+  if (!iframe) return;
+
+  const showVideo = () => {
+    iframe.style.opacity = '0.95';
+  };
+
+  iframe.addEventListener('load', () => {
+    setTimeout(showVideo, 600);
+  });
+
+  // Fallback safety timer
+  setTimeout(showVideo, 1200);
 }
 
