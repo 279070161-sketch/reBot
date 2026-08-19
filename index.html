@@ -1,0 +1,2708 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>reBot | Empowering Embodied AI from Sim-to-Real</title>
+  <meta name="description" content="Fully Open-Source 6+1 DoF Robotic Arm Kit Built for Developers, Researchers, and AI Innovators.">
+  <meta name="theme-color" content="#101014">
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Local DLI Course Design System Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Custom Navigation, Hero Banner, Spec Comparison & Accessories Styles -->
+  <style>
+    .dli-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 64px;
+      background-color: rgba(13, 16, 18, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--nv-border);
+      z-index: 1000;
+    }
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand-divider {
+      color: var(--text-muted);
+      opacity: 0.45;
+      font-weight: 300;
+      font-size: 1.15rem;
+      user-select: none;
+      line-height: 1;
+    }
+    .hub-nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      white-space: nowrap;
+    }
+    .hub-nav-link,
+    .hub-nav-link:hover,
+    .hub-nav-link:focus,
+    .hub-nav-link:active {
+      font-family: var(--font-main);
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none !important;
+      transition: color 0.2s ease;
+      position: relative;
+      padding: 0.4rem 0;
+      white-space: nowrap;
+    }
+    .hub-nav-link:hover, .hub-nav-link.active {
+      color: var(--nv-green);
+      font-weight: 700;
+      text-decoration: none !important;
+    }
+    .hub-nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--nv-green);
+      transition: width 0.2s ease;
+    }
+    .hub-nav-link:hover::after, .hub-nav-link.active::after {
+      width: 100%;
+    }
+    .brand-title span {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    /* Mobile Responsive Hamburger Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--nv-border);
+      color: var(--text-primary);
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .mobile-menu-btn:hover {
+      border-color: var(--nv-green);
+      color: var(--nv-green);
+      background-color: var(--nv-surface-2);
+    }
+
+    @media (max-width: 960px) {
+      .mobile-menu-btn {
+        display: flex;
+      }
+      .hub-nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: var(--nv-surface-1);
+        border-bottom: 1px solid var(--nv-border);
+        padding: 1.2rem 2rem;
+        gap: 1.2rem;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        align-items: flex-start;
+      }
+      .hub-nav-menu.open {
+        display: flex;
+      }
+    }
+
+    /* 720px Height Full-Bleed Background Video Section (Extends under transparent header) */
+    .hero-fullscreen-video-section {
+      position: relative;
+      width: 100%;
+      height: 720px;
+      margin-top: -64px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background-color: #0b0e10;
+      border-bottom: 1px solid var(--nv-border);
+      z-index: 10;
+    }
+    .fullscreen-video-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .fullscreen-video-iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 56.25vw;
+      min-width: 177.78vh;
+      min-height: 100vh;
+      transform: translate(-50%, -50%) scale(1.5);
+      transform-origin: center center;
+      border: none;
+      pointer-events: none;
+      opacity: 0.95;
+      filter: contrast(1.05) brightness(0.92);
+    }
+    .video-light-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(13, 16, 18, 0.82) 0%, rgba(13, 16, 18, 0.45) 50%, rgba(13, 16, 18, 0.15) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Left-Aligned Clean Typography */
+    .hero-left-text-box {
+      position: relative;
+      z-index: 2;
+      max-width: 960px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .hero-main-title {
+      font-size: clamp(2.5rem, 4.5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.18;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      font-family: var(--font-main);
+      text-shadow: none !important;
+      max-width: 920px;
+    }
+    .hero-main-title span {
+      color: var(--nv-green);
+    }
+    .hero-sub-text {
+      font-size: clamp(1.05rem, 1.35vw, 1.3rem);
+      color: rgba(240, 244, 247, 0.92);
+      line-height: 1.65;
+      font-family: var(--font-main);
+      text-shadow: none !important;
+      text-align: left;
+      max-width: 840px;
+    }
+
+    /* Partner Logo Marquee Section */
+    .partners-marquee-section {
+      background-color: var(--nv-surface-1);
+      border-bottom: 1px solid var(--nv-border);
+      padding: 2.25rem 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+    }
+    .partners-header {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-code);
+    }
+    .marquee-container {
+      display: flex;
+      overflow: hidden;
+      user-select: none;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 4.5rem;
+      align-items: center;
+      animation: marqueeScroll 35s linear infinite;
+      white-space: nowrap;
+      will-change: transform;
+      width: max-content;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .partner-logo-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      flex-shrink: 0;
+    }
+    .partner-logo-item img {
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(0.85);
+      opacity: 0.75;
+      transition: all 0.25s ease;
+    }
+    .partner-logo-item:hover img {
+      filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(141, 195, 31, 0.6));
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    /* Per-Logo Optical Volume & Height Balancing */
+    .logo-nvidia { height: 26px; }
+    .logo-openelab { height: 44px; }
+    .logo-chaihuo { height: 48px; }
+    .logo-agora { height: 38px; transform: scale(1.35); }
+    .logo-fabhub { height: 44px; }
+    .logo-miters { height: 34px; }
+    .logo-solo { height: 30px; }
+
+    /* ==========================================================================
+       High Performance & Extensive Application Video Section Styling
+       ========================================================================== */
+    .high-performance-section {
+      padding: 5.5rem 0;
+      background: radial-gradient(circle at 50% 0%, rgba(141, 195, 31, 0.09) 0%, transparent 65%), radial-gradient(circle at 10% 80%, rgba(141, 195, 31, 0.04) 0%, transparent 50%), rgba(21, 25, 28, 0.65);
+      border-bottom: 1px solid var(--nv-border);
+      position: relative;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 992px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .video-card {
+      background-color: var(--nv-dark-bg);
+      border: 1px solid var(--nv-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      background-color: #000000;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: none;
+    }
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: none;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .video-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-grow: 1;
+    }
+    .video-card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .video-card-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      font-family: var(--font-main);
+    }
+
+    /* ==========================================================================
+       Specification Section Styling
+       ========================================================================== */
+    .spec-section {
+      padding: 5rem 0;
+      background: radial-gradient(circle at 15% 20%, rgba(141, 195, 31, 0.08) 0%, transparent 55%), radial-gradient(circle at 85% 75%, rgba(141, 195, 31, 0.04) 0%, transparent 55%), rgba(13, 16, 18, 0.65);
+      border-bottom: 1px solid var(--nv-border);
+      position: relative;
+    }
+    .section-title-group {
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto 3.5rem;
+    }
+    .section-main-title {
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+      font-family: var(--font-main);
+    }
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      font-family: var(--font-main);
+    }
+
+    /* Product Highlight Quick Cards */
+    .spec-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 768px) {
+      .spec-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* 3D Tilt & Cursor Following Spotlight Light Glow System */
+    .product-summary-card,
+    .accessory-card,
+    .dev-project-card,
+    .gs-info-card,
+    .cocreate-card,
+    .video-card,
+    .community-channels-section,
+    .section-title-group {
+      position: relative;
+      z-index: 2;
+      transform-style: preserve-3d;
+      transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.15s ease, border-color 0.3s ease;
+      will-change: transform, box-shadow;
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+    }
+
+    /* Dynamic Cursor-Responsive Border Edge Lighting (Subtle & Refined) */
+    .product-summary-card::before,
+    .accessory-card::before,
+    .dev-project-card::before,
+    .gs-info-card::before,
+    .cocreate-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1.2px;
+      background: radial-gradient(
+        220px circle at var(--mouse-x) var(--mouse-y),
+        rgba(141, 195, 31, 0.65) 0%,
+        rgba(141, 195, 31, 0.25) 45%,
+        rgba(255, 255, 255, 0.06) 75%,
+        transparent 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 12;
+    }
+
+    .product-summary-card:hover::before,
+    .accessory-card:hover::before,
+    .dev-project-card:hover::before,
+    .gs-info-card:hover::before,
+    .cocreate-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-spotlight-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      background: radial-gradient(
+        320px circle at var(--mouse-x) var(--mouse-y),
+        rgba(141, 195, 31, 0.16) 0%,
+        rgba(141, 195, 31, 0.05) 40%,
+        transparent 70%
+      );
+    }
+
+    .product-summary-card:hover .card-spotlight-glow,
+    .accessory-card:hover .card-spotlight-glow,
+    .dev-project-card:hover .card-spotlight-glow,
+    .gs-info-card:hover .card-spotlight-glow,
+    .cocreate-card:hover .card-spotlight-glow {
+      opacity: 1;
+    }
+
+    /* Scroll & Entrance Animation System */
+    .hero-main-title,
+    .hero-sub-text {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-main-title.is-visible,
+    .hero-sub-text.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered Grid Delays */
+    .video-grid .video-card:nth-child(1) { transition-delay: 0.05s; }
+    .video-grid .video-card:nth-child(2) { transition-delay: 0.18s; }
+    .video-grid .video-card:nth-child(3) { transition-delay: 0.31s; }
+
+    .accessory-grid .accessory-card:nth-child(1) { transition-delay: 0.05s; }
+    .accessory-grid .accessory-card:nth-child(2) { transition-delay: 0.12s; }
+    .accessory-grid .accessory-card:nth-child(3) { transition-delay: 0.19s; }
+    .accessory-grid .accessory-card:nth-child(4) { transition-delay: 0.26s; }
+    .accessory-grid .accessory-card:nth-child(5) { transition-delay: 0.33s; }
+    .accessory-grid .accessory-card:nth-child(6) { transition-delay: 0.4s; }
+    .accessory-grid .accessory-card:nth-child(7) { transition-delay: 0.47s; }
+    .accessory-grid .accessory-card:nth-child(8) { transition-delay: 0.54s; }
+
+    .cocreate-cards-grid .cocreate-card:nth-child(1) { transition-delay: 0.08s; }
+    .cocreate-cards-grid .cocreate-card:nth-child(2) { transition-delay: 0.22s; }
+
+    .product-summary-card {
+      background-color: var(--nv-surface-1);
+      border: 1px solid var(--nv-border);
+      border-radius: 16px;
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-summary-card:hover {
+      border-color: var(--nv-green);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+    }
+    .product-img-wrapper {
+      width: 100%;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .product-img-wrapper img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+    }
+    .product-card-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      font-family: var(--font-main);
+    }
+    .product-quick-specs {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+    .quick-spec-badge {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--nv-border);
+      padding: 0.4rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: var(--font-code);
+    }
+    .quick-spec-badge.highlight {
+      border-color: rgba(141, 195, 31, 0.4);
+      color: var(--nv-green);
+      background-color: rgba(141, 195, 31, 0.08);
+    }
+
+    /* Expand / Collapse Control Button */
+    .toggle-specs-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .toggle-specs-btn {
+      background-color: var(--nv-surface-1);
+      border: 1px solid var(--nv-border);
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.85rem 2.25rem;
+      border-radius: 30px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+    .toggle-specs-btn:hover {
+      border-color: var(--nv-green);
+      color: var(--nv-green);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(141, 195, 31, 0.2);
+    }
+
+    /* Collapsible Specification Matrix Container */
+    .spec-comparison-content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    }
+    .spec-comparison-content.expanded {
+      max-height: 2500px;
+      opacity: 1;
+    }
+
+    /* Dark Mode Spec Matrix Table Card */
+    .spec-table-card {
+      background-color: #121619;
+      border: 1px solid var(--nv-border);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+    .spec-table-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 2px solid var(--nv-border);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .spec-header-col {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      font-family: var(--font-main);
+    }
+    .spec-header-col:first-child {
+      border-right: 1px solid var(--nv-border);
+    }
+
+    /* Spec Row Pairs */
+    .spec-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1.1rem 0;
+      align-items: center;
+    }
+    .spec-row:last-child {
+      border-bottom: none;
+    }
+    .spec-cell {
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .spec-cell:first-child {
+      border-right: 1px solid var(--nv-border);
+    }
+    .spec-label {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-family: var(--font-main);
+      font-weight: 500;
+    }
+    .spec-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      font-family: var(--font-main);
+      text-align: right;
+    }
+    .spec-value.green-highlight {
+      color: var(--nv-green);
+      font-weight: 800;
+    }
+
+    /* Scenario Images Row */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--nv-border);
+    }
+    .scenario-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--nv-border);
+      height: 240px;
+    }
+    .scenario-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .scenario-card:hover img {
+      transform: scale(1.04);
+    }
+    .scenario-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: right;
+      font-family: var(--font-main);
+    }
+
+    /* ==========================================================================
+       Accessories Section Styling (Complete Your AI Robotics Station)
+       ========================================================================== */
+    .accessories-section {
+      padding: 5.5rem 0;
+      background: radial-gradient(circle at 50% 0%, rgba(141, 195, 31, 0.06) 0%, transparent 60%), radial-gradient(circle at 80% 90%, rgba(141, 195, 31, 0.06) 0%, transparent 50%), rgba(11, 14, 16, 0.65);
+      border-bottom: 1px solid var(--nv-border);
+      position: relative;
+    }
+    .accessories-section .section-main-title {
+      color: var(--text-primary);
+    }
+    .accessories-section .section-subtitle {
+      color: var(--text-secondary);
+    }
+
+    /* Tabs Filter Pills */
+    .accessories-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .tab-pill-btn {
+      background-color: var(--nv-surface-1);
+      border: 1px solid var(--nv-border);
+      color: var(--text-secondary);
+      font-family: var(--font-main);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .tab-pill-btn:hover, .tab-pill-btn.active {
+      border-color: var(--nv-green);
+      color: #ffffff;
+      background-color: var(--nv-surface-2);
+      box-shadow: 0 4px 16px rgba(141, 195, 31, 0.15);
+    }
+    .tab-pill-btn.active {
+      background-color: rgba(141, 195, 31, 0.12);
+      border-color: var(--nv-green);
+      color: var(--nv-green);
+      font-weight: 700;
+    }
+
+    /* Accessories Product Grid (4 Columns Desktop, 2 Columns Tablet, 1 Column Mobile) */
+    .accessory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.75rem;
+    }
+    @media (max-width: 1100px) {
+      .accessory-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .accessory-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .accessory-card {
+      background-color: var(--nv-surface-1);
+      border: 1px solid var(--nv-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .accessory-card:hover {
+      border-color: var(--nv-green);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    }
+
+    .accessory-img-box {
+      width: 100%;
+      height: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--nv-surface-2);
+      border-radius: 12px;
+      padding: 0;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .accessory-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .accessory-card:hover .accessory-img-box img {
+      transform: scale(1.06);
+    }
+
+    .accessory-info {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin-bottom: 0;
+    }
+    .accessory-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: 0.6rem;
+      font-family: var(--font-main);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 2.8rem;
+    }
+    .accessory-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+    }
+    .accessory-price {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--nv-green);
+      font-family: var(--font-main);
+    }
+
+    /* Shopping Cart Icon Action Button (Bottom Right) */
+    .accessory-cart-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: rgba(141, 195, 31, 0.12);
+      border: 1px solid var(--nv-green);
+      color: var(--nv-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      text-decoration: none !important;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .accessory-cart-btn:hover {
+      background-color: var(--nv-green);
+      color: #000000;
+      transform: scale(1.1);
+      box-shadow: 0 4px 14px rgba(141, 195, 31, 0.4);
+    }
+
+    /* Empty Tab Placeholder for RS Accessories */
+    .rs-empty-placeholder {
+      display: none;
+      background-color: var(--nv-surface-1);
+      border: 1px dashed var(--nv-border);
+      border-radius: 20px;
+      padding: 4rem 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+    .rs-empty-placeholder i {
+      font-size: 3rem;
+      color: var(--nv-green);
+      margin-bottom: 1.25rem;
+      opacity: 0.8;
+    }
+    .rs-empty-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-family: var(--font-main);
+    }
+    /* ==========================================================================
+       Developer Hub Collapsible Section Styling
+       ========================================================================== */
+    .developer-hub-section {
+      padding: 5.5rem 0;
+      background: radial-gradient(circle at 50% 30%, rgba(141, 195, 31, 0.07) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(141, 195, 31, 0.04) 0%, transparent 50%), rgba(13, 16, 18, 0.65);
+      border-bottom: 1px solid var(--nv-border);
+      position: relative;
+    }
+    
+    .hub-accordion-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 1440px;
+      margin: 0 auto;
+      border-top: 1px solid var(--nv-border);
+    }
+
+    .hub-accordion-item {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid var(--nv-border);
+      border-radius: 0;
+      overflow: hidden;
+      transition: background-color 0.3s ease;
+    }
+
+    .hub-accordion-item.active {
+      border-bottom-color: var(--nv-border);
+      box-shadow: none;
+    }
+
+    .hub-accordion-header {
+      padding: 1.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      background-color: transparent;
+      transition: background-color 0.25s ease;
+    }
+
+    .hub-accordion-header:hover {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .hub-accordion-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .hub-accordion-title {
+      font-family: var(--font-main);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hub-accordion-item.active .hub-accordion-title {
+      color: var(--nv-green);
+    }
+
+    .hub-accordion-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .hub-accordion-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--nv-surface-2);
+      border: 1px solid var(--nv-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .hub-accordion-item.active .hub-accordion-icon {
+      transform: rotate(180deg);
+      border-color: var(--nv-green);
+      color: var(--nv-green);
+      background-color: rgba(141, 195, 31, 0.1);
+    }
+
+    .hub-accordion-content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, padding 0.35s ease;
+      padding: 0 1rem;
+      will-change: max-height, opacity;
+    }
+
+    .hub-accordion-item.active .hub-accordion-content {
+      opacity: 1;
+      padding: 0.5rem 1rem 2.5rem 1rem;
+    }
+
+    /* Horizontal Auto-Scroll Marquee Carousel */
+    .dev-marquee-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      user-select: none;
+      padding: 1rem 0;
+      mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    }
+
+    .dev-marquee-track {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation: devMarqueeScroll 45s linear infinite;
+      will-change: transform;
+    }
+
+    .dev-marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes devMarqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Varied Sized Cards (尺寸不同图片卡片排列) */
+    .dev-project-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--nv-border);
+      background-color: var(--nv-surface-2);
+      flex-shrink: 0;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+      cursor: pointer;
+    }
+
+    .dev-project-card:hover {
+      border-color: var(--nv-green);
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(141, 195, 31, 0.2);
+      z-index: 10;
+    }
+
+    /* Card Aspect Ratio & Size Variants */
+    .dev-card-wide { width: 340px; height: 230px; }
+    .dev-card-medium { width: 280px; height: 230px; }
+    .dev-card-square { width: 240px; height: 230px; }
+    .dev-card-portrait { width: 200px; height: 230px; }
+
+    .dev-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+
+    .dev-project-card:hover .dev-card-img {
+      transform: scale(1.1);
+      filter: brightness(0.75);
+    }
+
+    /* Glassmorphism Hover Overlay displaying Author, Title, Description */
+    .dev-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13, 16, 18, 0.15) 0%, rgba(13, 16, 18, 0.94) 100%);
+      backdrop-filter: blur(4px);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      transform: translateY(10px);
+    }
+
+    .dev-project-card:hover .dev-card-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .dev-card-author {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--nv-green);
+      font-family: var(--font-code);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .dev-card-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+      font-family: var(--font-main);
+    }
+
+    .dev-card-desc {
+      font-size: 0.82rem;
+      color: rgba(240, 244, 247, 0.85);
+      line-height: 1.4;
+      font-family: var(--font-main);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* 02 Getting Started 2-Column Layout (DM vs RS) */
+    .getting-started-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      padding: 0.5rem 0 1rem 0;
+    }
+
+    @media (max-width: 992px) {
+      .getting-started-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .gs-column {
+      background-color: var(--nv-surface-2);
+      border-radius: 16px;
+      border: 1px solid var(--nv-border);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* DM Accent Theme (NVIDIA Neon Green) */
+    .gs-column-dm {
+      border-top: 4px solid var(--nv-green);
+    }
+    .gs-column-dm .gs-tag-accent {
+      background-color: rgba(141, 195, 31, 0.15);
+      color: var(--nv-green);
+      border: 1px solid rgba(141, 195, 31, 0.3);
+    }
+    .gs-column-dm .gs-step-num {
+      background-color: rgba(141, 195, 31, 0.15);
+      color: var(--nv-green);
+      border: 1px solid rgba(141, 195, 31, 0.4);
+    }
+
+    /* RS Accent Theme (Cyber Cyan / Blue) */
+    .gs-column-rs {
+      border-top: 4px solid #00D2FF;
+    }
+    .gs-column-rs .gs-tag-accent {
+      background-color: rgba(0, 210, 255, 0.15);
+      color: #00D2FF;
+      border: 1px solid rgba(0, 210, 255, 0.3);
+    }
+    .gs-column-rs .gs-step-num {
+      background-color: rgba(0, 210, 255, 0.15);
+      color: #00D2FF;
+      border: 1px solid rgba(0, 210, 255, 0.4);
+    }
+
+    .gs-header {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--nv-border);
+    }
+
+    .gs-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .gs-model-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: var(--font-main);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .gs-model-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* Top 3 Info Cards Grid */
+    .gs-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 640px) {
+      .gs-info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .gs-info-card {
+      background-color: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 0.85rem;
+    }
+
+    .gs-info-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.35rem;
+      font-family: var(--font-main);
+    }
+
+    .gs-info-text {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* Step List Items */
+    .gs-step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .gs-step-item {
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--nv-border);
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .gs-step-item:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      background-color: rgba(255, 255, 255, 0.04);
+      transform: translateX(4px);
+    }
+
+    .gs-column-dm .gs-step-item:hover {
+      border-color: rgba(141, 195, 31, 0.5);
+    }
+
+    .gs-column-rs .gs-step-item:hover {
+      border-color: rgba(0, 210, 255, 0.5);
+    }
+
+    .gs-step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.88rem;
+      flex-shrink: 0;
+      font-family: var(--font-code);
+      margin-top: 0.1rem;
+    }
+
+    .gs-step-content {
+      flex: 1;
+    }
+
+    .gs-step-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .gs-step-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      font-family: var(--font-main);
+    }
+
+    .gs-step-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      font-family: var(--font-main);
+    }
+
+    .gs-step-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    .gs-step-link-icon {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-left: auto;
+      align-self: center;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .gs-step-item:hover .gs-step-link-icon {
+      color: #ffffff;
+      transform: translateX(3px);
+    }
+
+    /* ==========================================================================
+       Co-Create with Seeed Section Styling
+       ========================================================================== */
+    .cocreate-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+    .cocreate-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
+      align-items: stretch;
+    }
+    @media (max-width: 960px) {
+      .cocreate-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .cocreate-card {
+      background-color: var(--nv-dark-bg);
+      border: 1px solid var(--nv-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none !important;
+      color: inherit;
+    }
+    .cocreate-img-box {
+      width: 100%;
+      height: 100%;
+      flex: 1;
+      overflow: hidden;
+      background-color: #0b0e10;
+      position: relative;
+      display: flex;
+    }
+    .cocreate-img-box img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .cocreate-card-body {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-grow: 1;
+    }
+    .cocreate-card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cocreate-card-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      font-family: var(--font-main);
+    }
+
+    /* Community Channels Section */
+    .community-channels-section {
+      background-color: var(--nv-dark-bg);
+      border: 1px solid var(--nv-border);
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+    }
+    .community-section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-main);
+    }
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 960px) {
+      .community-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 580px) {
+      .community-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .community-item-btn {
+      background-color: var(--nv-surface-1);
+      border: 1px solid var(--nv-border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none !important;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .community-item-btn:hover {
+      border-color: var(--nv-green);
+      background-color: rgba(141, 195, 31, 0.08);
+      transform: translateY(-2px);
+    }
+    .community-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--nv-green);
+      flex-shrink: 0;
+    }
+    .community-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .community-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-main);
+    }
+    .community-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: var(--font-main);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Header Navbar (Logo + | + reBot, Responsive Hamburger Menu)
+       ========================================================================== -->
+  <header class="dli-header">
+    <div class="brand-container">
+      <img src="image/seeed_logo_w.svg" alt="Seeed Studio Logo" class="brand-logo-img">
+      <span class="brand-divider">|</span>
+      <div class="brand-title">
+        <span>reBot</span>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav style="flex: 1; display: flex; justify-content: center; margin: 0 1.5rem;">
+      <ul class="hub-nav-menu">
+        <li><a href="#home" class="hub-nav-link active">Home</a></li>
+        <li><a href="#performance" class="hub-nav-link">Performance</a></li>
+        <li><a href="#specification" class="hub-nav-link">Specification</a></li>
+        <li><a href="#accessories" class="hub-nav-link">Accessories</a></li>
+        <li><a href="#developer-hub" class="hub-nav-link">Developer Hub</a></li>
+        <li><a href="#sensecraft" class="hub-nav-link">SenseCraft</a></li>
+        <li><a href="../DLI Course/index.html" class="hub-nav-link">DLI Course</a></li>
+        <li><a href="#wiki" class="hub-nav-link">Wiki Tutorials</a></li>
+        <li><a href="#user-demos" class="hub-nav-link">User Demos</a></li>
+        <li><a href="#submissions" class="hub-nav-link">Project Submissions</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Right (Responsive Mobile Hamburger Menu Button Only) -->
+    <div class="header-right">
+      <button class="mobile-menu-btn" id="mobile-menu-btn" title="Toggle Navigation Menu" aria-label="Toggle Navigation Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       Main Landing View
+       ========================================================================== -->
+  <main id="landing-view">
+    
+    <!-- 720px Height Full-Bleed Video Banner Section (Top Black Strip Fixed via top: -220px) -->
+    <section class="hero-fullscreen-video-section" id="home">
+      <!-- Cropped & Over-scaled Background Video Iframe -->
+      <div class="fullscreen-video-wrapper">
+        <iframe 
+          class="fullscreen-video-iframe" 
+          src="https://www.youtube.com/embed/Xjc4AAqztFM?autoplay=1&mute=1&loop=1&playlist=Xjc4AAqztFM&controls=0&playsinline=1" 
+          title="Background Video"
+          allow="autoplay; encrypted-media">
+        </iframe>
+      </div>
+
+      <!-- Soft Vignette Overlay -->
+      <div class="video-light-vignette"></div>
+
+      <!-- Left-Aligned Pure Text Container -->
+      <div class="container" style="max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
+        <div class="hero-left-text-box">
+          <h1 class="hero-main-title">
+            Empowering Embodied AI from <span>Sim-to-Real</span>
+          </h1>
+          <p class="hero-sub-text">
+            Fully Open-Source 6+1 DoF Robotic Arm Kit Built for Developers, Researchers, and AI Innovators
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Monochrome SVG Logo Marquee Carousel -->
+    <section class="partners-marquee-section">
+      <div class="partners-header">POWERED BY INDUSTRY & RESEARCH ECOSYSTEM PARTNERS</div>
+      
+      <div class="marquee-container">
+        <div class="marquee-track">
+          
+          <!-- Track Set 1 -->
+          <div class="partner-logo-item" title="NVIDIA">
+            <img src="image/logo/NVIDIA_logo.svg" alt="NVIDIA Logo" class="logo-nvidia">
+          </div>
+          <div class="partner-logo-item" title="OpenELAB">
+            <img src="image/logo/OPENELAB_Logo_Final_04-horizontal_2_2b022bbb-431d-46ff-b1e2-e4073456bb7d.svg" alt="OpenELAB Logo" class="logo-openelab">
+          </div>
+          <div class="partner-logo-item" title="Chaihuo Maker Space">
+            <img src="image/logo/CHAIHUO.svg" alt="Chaihuo Maker Space Logo" class="logo-chaihuo">
+          </div>
+          <div class="partner-logo-item" title="Agora">
+            <img src="image/logo/agora.svg" alt="Agora Logo" class="logo-agora">
+          </div>
+          <div class="partner-logo-item" title="Fab Hub">
+            <img src="image/logo/fab%20hub.svg" alt="Fab Hub Logo" class="logo-fabhub">
+          </div>
+          <div class="partner-logo-item" title="MITERS">
+            <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters">
+          </div>
+          <div class="partner-logo-item" title="Solo">
+            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo">
+          </div>
+
+          <!-- Track Set 2 -->
+          <div class="partner-logo-item" title="NVIDIA">
+            <img src="image/logo/NVIDIA_logo.svg" alt="NVIDIA Logo" class="logo-nvidia">
+          </div>
+          <div class="partner-logo-item" title="OpenELAB">
+            <img src="image/logo/OPENELAB_Logo_Final_04-horizontal_2_2b022bbb-431d-46ff-b1e2-e4073456bb7d.svg" alt="OpenELAB Logo" class="logo-openelab">
+          </div>
+          <div class="partner-logo-item" title="Chaihuo Maker Space">
+            <img src="image/logo/CHAIHUO.svg" alt="Chaihuo Maker Space Logo" class="logo-chaihuo">
+          </div>
+          <div class="partner-logo-item" title="Agora">
+            <img src="image/logo/agora.svg" alt="Agora Logo" class="logo-agora">
+          </div>
+          <div class="partner-logo-item" title="Fab Hub">
+            <img src="image/logo/fab%20hub.svg" alt="Fab Hub Logo" class="logo-fabhub">
+          </div>
+          <div class="partner-logo-item" title="MITERS">
+            <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters">
+          </div>
+          <div class="partner-logo-item" title="Solo">
+            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo">
+          </div>
+
+          <!-- Track Set 3 -->
+          <div class="partner-logo-item" title="NVIDIA">
+            <img src="image/logo/NVIDIA_logo.svg" alt="NVIDIA Logo" class="logo-nvidia">
+          </div>
+          <div class="partner-logo-item" title="OpenELAB">
+            <img src="image/logo/OPENELAB_Logo_Final_04-horizontal_2_2b022bbb-431d-46ff-b1e2-e4073456bb7d.svg" alt="OpenELAB Logo" class="logo-openelab">
+          </div>
+          <div class="partner-logo-item" title="Chaihuo Maker Space">
+            <img src="image/logo/CHAIHUO.svg" alt="Chaihuo Maker Space Logo" class="logo-chaihuo">
+          </div>
+          <div class="partner-logo-item" title="Agora">
+            <img src="image/logo/agora.svg" alt="Agora Logo" class="logo-agora">
+          </div>
+          <div class="partner-logo-item" title="Fab Hub">
+            <img src="image/logo/fab%20hub.svg" alt="Fab Hub Logo" class="logo-fabhub">
+          </div>
+          <div class="partner-logo-item" title="MITERS">
+            <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters">
+          </div>
+          <div class="partner-logo-item" title="Solo">
+            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo">
+          </div>
+
+          <!-- Track Set 4 -->
+          <div class="partner-logo-item" title="NVIDIA">
+            <img src="image/logo/NVIDIA_logo.svg" alt="NVIDIA Logo" class="logo-nvidia">
+          </div>
+          <div class="partner-logo-item" title="OpenELAB">
+            <img src="image/logo/OPENELAB_Logo_Final_04-horizontal_2_2b022bbb-431d-46ff-b1e2-e4073456bb7d.svg" alt="OpenELAB Logo" class="logo-openelab">
+          </div>
+          <div class="partner-logo-item" title="Chaihuo Maker Space">
+            <img src="image/logo/CHAIHUO.svg" alt="Chaihuo Maker Space Logo" class="logo-chaihuo">
+          </div>
+          <div class="partner-logo-item" title="Agora">
+            <img src="image/logo/agora.svg" alt="Agora Logo" class="logo-agora">
+          </div>
+          <div class="partner-logo-item" title="Fab Hub">
+            <img src="image/logo/fab%20hub.svg" alt="Fab Hub Logo" class="logo-fabhub">
+          </div>
+          <div class="partner-logo-item" title="MITERS">
+            <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters">
+          </div>
+          <div class="partner-logo-item" title="Solo">
+            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         High Performance & Extensive Application Section (Video Showcase)
+         ========================================================================== -->
+    <section class="high-performance-section" id="performance">
+      <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem;">
+        
+        <!-- Section Header -->
+        <div class="section-title-group">
+          <h2 class="section-main-title">High Performance & Extensive Application</h2>
+        </div>
+
+        <!-- Video Grid (3 Videos) -->
+        <div class="video-grid">
+          
+          <!-- Video 1 -->
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video src="video/飞书20260818-111648.mp4" autoplay loop muted playsinline preload="metadata"></video>
+            </div>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video src="video/飞书20260818-111657.mp4" autoplay loop muted playsinline preload="metadata"></video>
+            </div>
+          </div>
+
+          <!-- Video 3 -->
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video src="video/飞书20260818-111703.mp4" autoplay loop muted playsinline preload="metadata"></video>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Specification Module Section (Official Uploaded Assets)
+         ========================================================================== -->
+    <section class="spec-section" id="specification">
+      <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem;">
+        
+        <!-- Section Header -->
+        <div class="section-title-group">
+          <h2 class="section-main-title">Specification</h2>
+          <p class="section-subtitle">Find the Right Configuration for You</p>
+        </div>
+
+        <!-- Product Summary Cards Grid (Always Visible, Official dm.png & rs.png) -->
+        <div class="spec-cards-grid">
+          <!-- Card 1: reBot Arm Dm -->
+          <div class="product-summary-card">
+            <div class="product-img-wrapper">
+              <img src="image/dm.png" alt="reBot Arm Dm Robotic Arm">
+            </div>
+            <h3 class="product-card-title">reBot Arm Dm</h3>
+            <div class="product-quick-specs">
+              <span class="quick-spec-badge">6+1 DoF</span>
+              <span class="quick-spec-badge">1.5kg Payload</span>
+              <span class="quick-spec-badge">DAMIAO Motors</span>
+            </div>
+          </div>
+
+          <!-- Card 2: reBot Arm RS -->
+          <div class="product-summary-card">
+            <div class="product-img-wrapper">
+              <img src="image/rs.png" alt="reBot Arm RS Robotic Arm">
+            </div>
+            <h3 class="product-card-title">reBot Arm RS</h3>
+            <div class="product-quick-specs">
+              <span class="quick-spec-badge highlight">6+1 DoF</span>
+              <span class="quick-spec-badge highlight">2.5kg Payload</span>
+              <span class="quick-spec-badge highlight">RobStride Motors</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collapsible Toggle Control Button -->
+        <div class="toggle-specs-container">
+          <button class="toggle-specs-btn" id="toggle-specs-btn" aria-label="Toggle Detailed Specification Matrix">
+            <span class="toggle-label">Expand Detailed Specification</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+
+        <!-- Collapsible Specification Comparison Content Matrix (Collapsed by Default) -->
+        <div class="spec-comparison-content" id="spec-comparison-content">
+          <div class="spec-table-card">
+            
+            <!-- Table Header -->
+            <div class="spec-table-header">
+              <div class="spec-header-col">reBot Arm Dm</div>
+              <div class="spec-header-col">reBot Arm RS</div>
+            </div>
+
+            <!-- Row 1: DoF -->
+            <div class="spec-row">
+              <div class="spec-cell">
+                <span class="spec-label">Degrees of Freedom</span>
+                <span class="spec-value">6 +1</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Degrees of Freedom</span>
+                <span class="spec-value">6 +1</span>
+              </div>
+            </div>
+
+            <!-- Row 2: Rated Payload -->
+            <div class="spec-row">
+              <div class="spec-cell">
+                <span class="spec-label">Rated Payload</span>
+                <span class="spec-value">1.5kg</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Rated Payload</span>
+                <span class="spec-value green-highlight">2.5kg</span>
+              </div>
+            </div>
+
+            <!-- Row 3: Max Payload -->
+            <div class="spec-row">
+              <div class="spec-cell">
+                <span class="spec-label">Max Payload</span>
+                <span class="spec-value">2.5kg</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Max Payload</span>
+                <span class="spec-value">5kg</span>
+              </div>
+            </div>
+
+            <!-- Row 4: Precision -->
+            <div class="spec-row">
+              <div class="spec-cell">
+                <span class="spec-label">Precision</span>
+                <span class="spec-value">±0.2mm</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Precision</span>
+                <span class="spec-value green-highlight">±0.1mm</span>
+              </div>
+            </div>
+
+            <!-- Row 5: Reach -->
+            <div class="spec-row">
+              <div class="spec-cell">
+                <span class="spec-label">Reach</span>
+                <span class="spec-value">767mm</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Reach</span>
+                <span class="spec-value">754mm</span>
+              </div>
+            </div>
+
+            <!-- Row 6: Motor Specs -->
+            <div class="spec-row">
+              <div class="spec-cell">
+                <span class="spec-label">Motor Specs</span>
+                <span class="spec-value">DAMIAO 4310 / 4340P</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Motor Specs</span>
+                <span class="spec-value green-highlight">RobStride Dynamics 00 / 06</span>
+              </div>
+            </div>
+
+            <!-- Row 7: Construction & Finish -->
+            <div class="spec-row">
+              <div class="spec-cell">
+                <span class="spec-label">Construction & Finish</span>
+                <span class="spec-value">Industrial CNC</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Construction & Finish</span>
+                <span class="spec-value">Industrial CNC</span>
+              </div>
+            </div>
+
+            <!-- Row 8: Target Application Scenarios -->
+            <div class="spec-row">
+              <div class="spec-cell">
+                <span class="spec-label">Application Scenarios</span>
+                <span class="spec-value">Home & Domestic</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Application Scenarios</span>
+                <span class="spec-value">Lab & Light Industrial</span>
+              </div>
+            </div>
+
+            <!-- Row 9: Official Application Showcase Images Grid (dmapp.png & rsapp.png) -->
+            <div class="scenario-grid">
+              <div class="scenario-card">
+                <img src="image/dmapp.png" alt="reBot Arm Dm Home Domestic Scenario">
+                <div class="scenario-overlay">Home & Domestic Automation</div>
+              </div>
+              <div class="scenario-card">
+                <img src="image/rsapp.png" alt="reBot Arm RS Lab Micro-Soldering Scenario">
+                <div class="scenario-overlay">Lab / Light Industrial Scenarios</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Accessories Module Section (Complete Your AI Robotics Station)
+         ========================================================================== -->
+    <section class="accessories-section" id="accessories">
+      <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem;">
+        
+        <!-- Section Header -->
+        <div class="section-title-group" style="text-align: center; margin: 0 auto 3.5rem;">
+          <h2 class="section-main-title">Complete Your AI Robotics Station</h2>
+          <p class="section-subtitle">Plug-and-play accessories verified by Seeed team</p>
+        </div>
+
+        <!-- Filter Pills Tabs -->
+        <div class="accessories-tabs">
+          <button class="tab-pill-btn active" id="tab-btn-dm" data-target="dm">
+            reBot Arm Dm Accessories
+          </button>
+          <button class="tab-pill-btn" id="tab-btn-rs" data-target="rs">
+            reBot Arm RS Accessories
+          </button>
+        </div>
+
+        <!-- Dm Accessories Product Grid (8 Verified Products) -->
+        <div class="accessory-grid" id="dm-accessories-grid">
+          
+          <!-- Product 1: Orbbec Gemini 2 -->
+          <div class="accessory-card">
+            <div class="accessory-img-box">
+              <img src="image/orbbec_gemini_2.jpg" alt="Orbbec Gemini 2 3D Camera">
+            </div>
+            <div class="accessory-info">
+              <h3 class="accessory-title">Orbbec Gemini 2 3D Camera</h3>
+              <div class="accessory-price-row">
+                <span class="accessory-price">$240.00</span>
+                <a href="https://www.seeedstudio.com/Orbbec-Gemini-2-3D-Camera-p-6464.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2: Orbbec Gemini 336 -->
+          <div class="accessory-card">
+            <div class="accessory-img-box">
+              <img src="image/orbbec_gemini_336.jpg" alt="Orbbec Gemini 336 3D Camera">
+            </div>
+            <div class="accessory-info">
+              <h3 class="accessory-title">Orbbec Gemini 336 3D Camera</h3>
+              <div class="accessory-price-row">
+                <span class="accessory-price">$349.00</span>
+                <a href="https://www.seeedstudio.com/Orbbec-Gemini-336-3D-Camera-3D-p-6662.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3: Intel RealSense D435i -->
+          <div class="accessory-card">
+            <div class="accessory-img-box">
+              <img src="image/realsense_d435i.jpg" alt="Intel RealSense Depth Camera D435i">
+            </div>
+            <div class="accessory-info">
+              <h3 class="accessory-title">Intel RealSense Depth Camera D435i</h3>
+              <div class="accessory-price-row">
+                <span class="accessory-price">$389.00</span>
+                <a href="https://www.seeedstudio.com/Intel-RealSense-Depth-Camera-D435i-p-4423.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4: RealSense D405 -->
+          <div class="accessory-card">
+            <div class="accessory-img-box">
+              <img src="image/realsense_d405.jpg" alt="RealSense D405 3D Camera">
+            </div>
+            <div class="accessory-info">
+              <h3 class="accessory-title">RealSense D405 3D Camera</h3>
+              <div class="accessory-price-row">
+                <span class="accessory-price">$279.00</span>
+                <a href="https://www.seeedstudio.com/RealSense-D405-3D-Camera-p-6758.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5: ET-S231-90 USB Camera -->
+          <div class="accessory-card">
+            <div class="accessory-img-box">
+              <img src="image/usb_camera_s231.jpg" alt="ET-S231-90 USB Camera">
+            </div>
+            <div class="accessory-info">
+              <h3 class="accessory-title">ET-S231-90 USB Camera</h3>
+              <div class="accessory-price-row">
+                <span class="accessory-price">$39.00</span>
+                <a href="https://www.seeedstudio.com/ET-S231-90-USB-Camera-p-6684.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6: Power Adapter Kit DM -->
+          <div class="accessory-card">
+            <div class="accessory-img-box">
+              <img src="image/power_adapter_dm.jpg" alt="Power Adapter Kit for reBot Arm B601-DM">
+            </div>
+            <div class="accessory-info">
+              <h3 class="accessory-title">Power Adapter Kit for reBot Arm B601-DM</h3>
+              <div class="accessory-price-row">
+                <span class="accessory-price">$49.00</span>
+                <a href="https://www.seeedstudio.com/Power-Adapter-Kit-for-reBot-Arm-B601-DM-p-6874.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 7: DM4340P Actuator -->
+          <div class="accessory-card">
+            <div class="accessory-img-box">
+              <img src="image/dm4340p_actuator.jpg" alt="DM4340P Actuator">
+            </div>
+            <div class="accessory-info">
+              <h3 class="accessory-title">DM4340P High Torque Actuator</h3>
+              <div class="accessory-price-row">
+                <span class="accessory-price">$129.00</span>
+                <a href="https://www.seeedstudio.com/DM4340P-Actuator-p-6663.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 8: Damiao 4310 Motor -->
+          <div class="accessory-card">
+            <div class="accessory-img-box">
+              <img src="image/damiao_4310_motor.jpg" alt="Damiao 4310 Actuator Motor">
+            </div>
+            <div class="accessory-info">
+              <h3 class="accessory-title">Damiao 4310 Actuator Motor</h3>
+              <div class="accessory-price-row">
+                <span class="accessory-price">$99.00</span>
+                <a href="https://www.seeedstudio.com/Damiao-4310-Actuator-Motor-p-6823.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Empty Tab Placeholder for RS Accessories -->
+        <div class="rs-empty-placeholder" id="rs-empty-placeholder">
+          <i class="fas fa-tools"></i>
+          <h3 class="rs-empty-title">reBot Arm RS Accessories Coming Soon</h3>
+          <p class="rs-empty-sub">Verified expansion modules, high-precision grippers, and cameras for RS Series are currently in testing.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Developer Hub Module Section (Collapsible Accordion List)
+         ========================================================================== -->
+    <section class="developer-hub-section" id="developer-hub">
+      <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem;">
+        
+        <!-- Section Header -->
+        <div class="section-title-group" style="text-align: center; margin: 0 auto 3rem;">
+          <h2 class="section-main-title">Developer Hub</h2>
+          <p class="section-subtitle">Explore projects, tutorials, and co-creation opportunities with global developers</p>
+        </div>
+
+        <!-- Accordion List -->
+        <div class="hub-accordion-container">
+          
+          <!-- Accordion Item 01: See What You Can Build -->
+          <div class="hub-accordion-item" id="hub-item-01">
+            <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-01')">
+              <div class="hub-accordion-title-group">
+                <h3 class="hub-accordion-title">
+                  <i class="fas fa-cubes" style="color: var(--nv-green); font-size: 1.1rem;"></i>
+                  01 See What You Can Build
+                </h3>
+                <p class="hub-accordion-subtitle">Explore real-world projects and creative builds from global developers</p>
+              </div>
+              <div class="hub-accordion-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            
+            <div class="hub-accordion-content">
+              <!-- Horizontal Auto-Scroll Marquee Carousel (15 Cards + Duplicated Set for Infinite Loop) -->
+              <div class="dev-marquee-wrapper">
+                <div class="dev-marquee-track">
+                  
+                  <!-- 1. GEM-4 (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/new-writeup-1778618527713', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/GEM-4.png" alt="GEM-4 Gemma Embodied AI" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-kaggle"></i> GEM-4 (Kaggle)</div>
+                      <h4 class="dev-card-title">Gemma Physical Assistance</h4>
+                      <p class="dev-card-desc">Gemma Embodied 4 Physical Assistance AI agent built for reBot Arm.</p>
+                    </div>
+                  </div>
+
+                  <!-- 2. Linyan Fu (Medium) -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/Linyan_Fu/status/2056383947341525180', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Linyan.png" alt="Linyan Fu Sim2Real Policy" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Linyan Fu</div>
+                      <h4 class="dev-card-title">Sim2Real Policy Deployment</h4>
+                      <p class="dev-card-desc">Zero-shot Sim2Real deployment and vision-guided control on reBot Arm.</p>
+                    </div>
+                  </div>
+
+                  <!-- 3. Apheth D Almeida (Portrait) -->
+                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://x.com/Apheth_DAlmeida/status/2053503164507476096', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Sameer.png" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Apheth D Almeida</div>
+                      <h4 class="dev-card-title">6 DoF Kinematic Teleop</h4>
+                      <p class="dev-card-desc">Real-time inverse kinematics and teleoperation pipeline for reBot.</p>
+                    </div>
+                  </div>
+
+                  <!-- 4. Dhruv Diddi (Square) -->
+                  <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/DhruvDiddi/status/2046605015008383284', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Diddi.png" alt="Dhruv Diddi Pick & Place" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Dhruv Diddi</div>
+                      <h4 class="dev-card-title">Autonomous Pick & Place</h4>
+                      <p class="dev-card-desc">3D vision-guided autonomous pick & place manipulation demo.</p>
+                    </div>
+                  </div>
+
+                  <!-- 5. Ed Henderson (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Henderson.jpg" alt="Ed Henderson LeRobot Policy" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
+                      <h4 class="dev-card-title">LeRobot Integration</h4>
+                      <p class="dev-card-desc">Hugging Face LeRobot policy training & deployment on reBot B601.</p>
+                    </div>
+                  </div>
+
+                  <!-- 6. Binh Pham (Medium) -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/pham_blnh/status/2061994096374505710', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Binh_Pham.png" alt="Binh Pham ROS 2 MoveIt" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Binh Pham</div>
+                      <h4 class="dev-card-title">ROS 2 MoveIt Pipeline</h4>
+                      <p class="dev-card-desc">High-precision ROS 2 motion planning and trajectory execution.</p>
+                    </div>
+                  </div>
+
+                  <!-- 7. FangTianChongHui (Portrait) -->
+                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://www.instagram.com/reel/DY7Ny8OPjVu/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_fangtianchonghui.png" alt="FangTianChongHui Actuator Joint Motor" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-instagram"></i> FangTianChongHui</div>
+                      <h4 class="dev-card-title">Precision Actuator Control</h4>
+                      <p class="dev-card-desc">High-torque joint motor response and precision manipulation demo.</p>
+                    </div>
+                  </div>
+
+                  <!-- 8. Xense YaoLin Dong (Square) -->
+                  <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/dong1505lin', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_xensedyl.png" alt="Xense YaoLin Dong Tactile Sensor" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Xense YaoLin Dong</div>
+                      <h4 class="dev-card-title">Tactile Sensing Integration</h4>
+                      <p class="dev-card-desc">Tactile sensor integration for adaptive force feedback grasping.</p>
+                    </div>
+                  </div>
+
+                  <!-- 9. yoshikai_man (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/yoshikai_man/status/2079938975398244705', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/YOR_Car.png" alt="yoshikai_man Desktop Automation Workbench" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> yoshikai_man</div>
+                      <h4 class="dev-card-title">Desktop Assembly Bot</h4>
+                      <p class="dev-card-desc">Custom desktop automation & assembly workflow using reBot RS.</p>
+                    </div>
+                  </div>
+
+                  <!-- 10. Li Pengdong (hei-rebot-lift) (Medium) -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://github.com/lipengdong/hei-rebot-lift', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/hei-robot-lift-play.gif" alt="Li Pengdong Vertical Lift" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-github"></i> Li Pengdong</div>
+                      <h4 class="dev-card-title">hei-rebot-lift System</h4>
+                      <p class="dev-card-desc">Open-source z-axis vertical lifting platform expansion for reBot.</p>
+                    </div>
+                  </div>
+
+                  <!-- 11. Martin Kemka (Square) -->
+                  <div class="dev-project-card dev-card-square" onclick="window.open('https://www.linkedin.com/posts/activity-7484390995862781952-TX4m', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/VR_with_reBot.png" alt="Martin Kemka Industrial Automation" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Martin Kemka</div>
+                      <h4 class="dev-card-title">Industrial Automation AI</h4>
+                      <p class="dev-card-desc">Integrating Physical AI models into industrial automation testbeds.</p>
+                    </div>
+                  </div>
+
+                  <!-- 12. Kamil Buczyński (Portrait) -->
+                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://www.linkedin.com/posts/kamil-buczy%C5%84ski-102843301_seeedstudio-rebotarm-seeedprojectofthemonth-ugcPost-7485297094715461633-RV_6', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/reBot_grasp_fruit.png" alt="Kamil Buczyński Full Stack Robotics Lab" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Kamil Buczyński</div>
+                      <h4 class="dev-card-title">Project of the Month</h4>
+                      <p class="dev-card-desc">Seeed Studio community project spotlight: full-stack arm control.</p>
+                    </div>
+                  </div>
+
+                  <!-- 13. Daniel Dorado (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.linkedin.com/posts/doradodaniel_computervision-spatialai-sim2real-share-7474727487374184448-NhwX', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/Daniel_Dorado.jpg" alt="Daniel Dorado Spatial AI Vision" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Daniel Dorado</div>
+                      <h4 class="dev-card-title">Spatial AI & Sim2Real</h4>
+                      <p class="dev-card-desc">Computer vision, spatial AI, and ROS 2 diagnostics integration.</p>
+                    </div>
+                  </div>
+
+                  <!-- 14. Asier Arranz (Medium) -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://www.linkedin.com/posts/asierarranz_nvidia-physicalai-isaaclab-ugcPost-7480271721942417408-YNwu', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/Groot_N1.7.png" alt="Asier Arranz NVIDIA Isaac Lab GPU AI" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Asier Arranz</div>
+                      <h4 class="dev-card-title">NVIDIA Isaac Lab Physical AI</h4>
+                      <p class="dev-card-desc">NVIDIA Isaac Lab reinforcement learning policy trained on reBot.</p>
+                    </div>
+                  </div>
+
+                  <!-- 15. Ed Henderson Demo 2 (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Henderson_2.png" alt="Ed Henderson Dual Arm Teleop" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
+                      <h4 class="dev-card-title">Dual Arm Teleop Demo</h4>
+                      <p class="dev-card-desc">Dual reBot arm bilateral teleoperation & imitation learning.</p>
+                    </div>
+                  </div>
+
+                  <!-- Duplicated 15 Cards for Seamless Infinite Horizontal Loop -->
+                  <!-- 1 Dup -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/new-writeup-1778618527713', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/GEM-4.png" alt="GEM-4 Gemma Embodied AI" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-kaggle"></i> GEM-4 (Kaggle)</div>
+                      <h4 class="dev-card-title">Gemma Physical Assistance</h4>
+                      <p class="dev-card-desc">Gemma Embodied 4 Physical Assistance AI agent built for reBot Arm.</p>
+                    </div>
+                  </div>
+
+                  <!-- 2 Dup -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/Linyan_Fu/status/2056383947341525180', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Linyan.png" alt="Linyan Fu Sim2Real Policy" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Linyan Fu</div>
+                      <h4 class="dev-card-title">Sim2Real Policy Deployment</h4>
+                      <p class="dev-card-desc">Zero-shot Sim2Real deployment and vision-guided control on reBot Arm.</p>
+                    </div>
+                  </div>
+
+                  <!-- 3 Dup -->
+                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://x.com/Apheth_DAlmeida/status/2053503164507476096', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Sameer.png" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Apheth D Almeida</div>
+                      <h4 class="dev-card-title">6 DoF Kinematic Teleop</h4>
+                      <p class="dev-card-desc">Real-time inverse kinematics and teleoperation pipeline for reBot.</p>
+                    </div>
+                  </div>
+
+                  <!-- 4 Dup -->
+                  <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/DhruvDiddi/status/2046605015008383284', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Diddi.png" alt="Dhruv Diddi Pick & Place" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Dhruv Diddi</div>
+                      <h4 class="dev-card-title">Autonomous Pick & Place</h4>
+                      <p class="dev-card-desc">3D vision-guided autonomous pick & place manipulation demo.</p>
+                    </div>
+                  </div>
+
+                  <!-- 5 Dup -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Henderson.jpg" alt="Ed Henderson LeRobot Policy" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
+                      <h4 class="dev-card-title">LeRobot Integration</h4>
+                      <p class="dev-card-desc">Hugging Face LeRobot policy training & deployment on reBot B601.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item 02: Getting Started now -->
+          <div class="hub-accordion-item" id="hub-item-02">
+            <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-02')">
+              <div class="hub-accordion-title-group">
+                <h3 class="hub-accordion-title">
+                  <i class="fas fa-rocket" style="color: var(--nv-green); font-size: 1.1rem;"></i>
+                  02 Getting Started now
+                </h3>
+                <p class="hub-accordion-subtitle">Comprehensive getting-started guides for both DM and RS actuator editions</p>
+              </div>
+              <div class="hub-accordion-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            
+            <div class="hub-accordion-content">
+              <div class="getting-started-grid">
+                
+                <!-- Left Column: reBot B601-DM Robotic Arm -->
+                <div class="gs-column gs-column-dm">
+                  <div class="gs-header">
+                    <div class="gs-title-row">
+                      <div class="gs-model-title">
+                        <i class="fas fa-microchip" style="color: var(--nv-green);"></i>
+                        reBot B601-DM Robotic Arm
+                      </div>
+                      <span class="gs-step-badge gs-tag-accent">Damiao Actuator</span>
+                    </div>
+                    <p class="gs-model-subtitle">Ideal for Damiao motor edition users to learn arm control, LeRobot, Pinocchio, and ROS 2</p>
+                  </div>
+
+                  <!-- 3 Info Cards -->
+                  <div class="gs-info-grid">
+                    <div class="gs-info-card">
+                      <div class="gs-info-label"><i class="fas fa-users" style="color: var(--nv-green); margin-right: 4px;"></i> Target Audience</div>
+                      <div class="gs-info-text">Users of B601-DM arm who want to learn robotic arm control and AI data collection</div>
+                    </div>
+                    <div class="gs-info-card">
+                      <div class="gs-info-label"><i class="fas fa-bullseye" style="color: var(--nv-green); margin-right: 4px;"></i> Learning Goals</div>
+                      <div class="gs-info-text">Master driver setup, kinematics modeling, LeRobot data collection, and vision-guided grasping demos</div>
+                    </div>
+                    <div class="gs-info-card">
+                      <div class="gs-info-label"><i class="fas fa-route" style="color: var(--nv-green); margin-right: 4px;"></i> Recommended Order</div>
+                      <div class="gs-info-text">Quick Start → LeRobot → Pinocchio → Vision Grasping → ROS 2</div>
+                    </div>
+                  </div>
+
+                  <!-- Step List -->
+                  <div class="gs-step-list">
+                    
+                    <!-- Step 1 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_b601_dm_getting_started/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">1</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">Quick Start</div>
+                          <span class="gs-step-badge" style="background: rgba(141, 195, 31, 0.2); color: var(--nv-green);">Essential</span>
+                        </div>
+                        <p class="gs-step-desc">Check power supply, CAN communication, driver environment, and basic movement to verify arm hardware status.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 2 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_lerobot/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">2</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">LeRobot Data Collection</div>
+                          <span class="gs-step-badge" style="background: rgba(0, 210, 255, 0.15); color: #00D2FF;">AI Data</span>
+                        </div>
+                        <p class="gs-step-desc">Use LeRobot for teleoperation, data recording, and imitation learning dataset preparation.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 3 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_pinocchio_meshcat/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">3</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">Pinocchio & Meshcat</div>
+                          <span class="gs-step-badge" style="background: rgba(255, 170, 0, 0.15); color: #FFAA00;">Control Basics</span>
+                        </div>
+                        <p class="gs-step-desc">Learn arm model loading, visualization, forward/inverse kinematics, and joint space control basics.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 4 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_grasping_demo/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">4</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">Vision Grasping Demo</div>
+                          <span class="gs-step-badge" style="background: rgba(186, 85, 211, 0.15); color: #BA55D3;">Application</span>
+                        </div>
+                        <p class="gs-step-desc">Combine robotic arm with vision algorithms to perform object grasping in real-world scenarios.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 5 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_ros2_integration/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">5</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">ROS 2 Integration</div>
+                          <span class="gs-step-badge" style="background: rgba(50, 205, 50, 0.15); color: #32CD32;">System Integration</span>
+                        </div>
+                        <p class="gs-step-desc">Integrate the arm into ROS 2 for seamless combination with MoveIt, perception nodes, and system applications.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 6 -->
+                    <a href="https://rebot-devarm.w0x7ce.eu/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">6</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">Web Simulator Development</div>
+                          <span class="gs-step-badge" style="background: rgba(255, 99, 71, 0.15); color: #FF6347;">Simulation Dev</span>
+                        </div>
+                        <p class="gs-step-desc">Learn integrated development with Web Simulator and ROS 2/MuJoCo for synchronized virtual and physical control.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                  </div>
+                </div>
+
+                <!-- Right Column: reBot B601-RS Robotic Arm -->
+                <div class="gs-column gs-column-rs">
+                  <div class="gs-header">
+                    <div class="gs-title-row">
+                      <div class="gs-model-title">
+                        <i class="fas fa-cogs" style="color: #00D2FF;"></i>
+                        reBot B601-RS Robotic Arm
+                      </div>
+                      <span class="gs-step-badge gs-tag-accent">Robstride Actuator</span>
+                    </div>
+                    <p class="gs-model-subtitle">Ideal for beginner arm setup, teleoperation, vision grasping, ROS 2 integration, and AI data collection</p>
+                  </div>
+
+                  <!-- 3 Info Cards -->
+                  <div class="gs-info-grid">
+                    <div class="gs-info-card">
+                      <div class="gs-info-label"><i class="fas fa-users" style="color: #00D2FF; margin-right: 4px;"></i> Target Audience</div>
+                      <div class="gs-info-text">First-time reBot Arm users who want to quickly achieve real arm control</div>
+                    </div>
+                    <div class="gs-info-card">
+                      <div class="gs-info-label"><i class="fas fa-bullseye" style="color: #00D2FF; margin-right: 4px;"></i> Learning Goals</div>
+                      <div class="gs-info-text">From hardware power-on to LeRobot teleoperation, vision grasping, and ROS 2 integration</div>
+                    </div>
+                    <div class="gs-info-card">
+                      <div class="gs-info-label"><i class="fas fa-route" style="color: #00D2FF; margin-right: 4px;"></i> Recommended Order</div>
+                      <div class="gs-info-text">Quick Start → LeRobot → Pinocchio → Vision Grasping → ROS 2</div>
+                    </div>
+                  </div>
+
+                  <!-- Step List -->
+                  <div class="gs-step-list">
+                    
+                    <!-- Step 1 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">1</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">Quick Start</div>
+                          <span class="gs-step-badge" style="background: rgba(0, 210, 255, 0.2); color: #00D2FF;">Essential</span>
+                        </div>
+                        <p class="gs-step-desc">Complete unboxing, wiring, power supply, driver check, and basic motion tests to ensure normal operation.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 2 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_lerobot/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">2</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">LeRobot Teleop & Data Collection</div>
+                          <span class="gs-step-badge" style="background: rgba(141, 195, 31, 0.15); color: var(--nv-green);">Data Collection</span>
+                        </div>
+                        <p class="gs-step-desc">Learn teleoperation data collection via leader-follower arms for imitation learning and embodied AI tasks.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 3 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_pinocchio_meshcat/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">3</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">Pinocchio Kinematics Visualization</div>
+                          <span class="gs-step-badge" style="background: rgba(255, 170, 0, 0.15); color: #FFAA00;">Advanced Control</span>
+                        </div>
+                        <p class="gs-step-desc">Understand arm kinematics models, joints, coordinate frames, and forward/inverse kinematics for control algorithms.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 4 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_grasping_demo/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">4</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">Vision Grasping Demo</div>
+                          <span class="gs-step-badge" style="background: rgba(186, 85, 211, 0.15); color: #BA55D3;">Application</span>
+                        </div>
+                        <p class="gs-step-desc">Combine camera perception, target recognition, and pose generation to perform real object grasping.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 5 -->
+                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_ros2_integration/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">5</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">ROS 2 Integration</div>
+                          <span class="gs-step-badge" style="background: rgba(50, 205, 50, 0.15); color: #32CD32;">System Integration</span>
+                        </div>
+                        <p class="gs-step-desc">Integrate arm into the ROS 2 ecosystem for seamless combination with perception, planning, and simulation.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 6 -->
+                    <a href="https://rebot-devarm.w0x7ce.eu/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">6</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">Web Simulator Development</div>
+                          <span class="gs-step-badge" style="background: rgba(255, 99, 71, 0.15); color: #FF6347;">Simulation Dev</span>
+                        </div>
+                        <p class="gs-step-desc">Learn integrated development with Web Simulator and ROS 2/MuJoCo for synchronized virtual and physical control.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 7 -->
+                    <a href="https://github.com/Seeed-Projects/reBot-Isaacsim" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">7</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">Isaac Sim Integration</div>
+                          <span class="gs-step-badge" style="background: rgba(141, 195, 31, 0.15); color: var(--nv-green);">Simulation</span>
+                        </div>
+                        <p class="gs-step-desc">Integrate the arm into Isaac Sim for advanced simulation and virtual-to-real synchronization.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                    <!-- Step 8 -->
+                    <a href="https://wiki.seeedstudio.com/cn/robstride_control/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
+                      <div class="gs-step-num">8</div>
+                      <div class="gs-step-content">
+                        <div class="gs-step-title-row">
+                          <div class="gs-step-title">MIT Position Control</div>
+                          <span class="gs-step-badge" style="background: rgba(0, 210, 255, 0.15); color: #00D2FF;">Advanced Control</span>
+                        </div>
+                        <p class="gs-step-desc">Get started with MIT position control on reBot Arm B601-RS to master fundamental control algorithms.</p>
+                      </div>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </a>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item 03: Co-Create with Seeed -->
+          <div class="hub-accordion-item" id="hub-item-03">
+            <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-03')">
+              <div class="hub-accordion-title-group">
+                <h3 class="hub-accordion-title">
+                  <i class="fas fa-hands-helping" style="color: var(--nv-green); font-size: 1.1rem;"></i>
+                  03 Co-Create with Seeed
+                </h3>
+                <p class="hub-accordion-subtitle">Join Seeed's global community, project calls, and partnership programs</p>
+              </div>
+              <div class="hub-accordion-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            
+            <div class="hub-accordion-content">
+              <div class="cocreate-wrapper">
+                
+                <!-- 2 Co-Creation Event Cards -->
+                <div class="cocreate-cards-grid">
+                  
+                  <!-- Left Card: Physical AI Project of the Month -->
+                  <a href="image/75403608-03a0-42d4-b571-a07e64e6945a.png" target="_blank" rel="noopener noreferrer" class="cocreate-card">
+                    <div class="cocreate-img-box">
+                      <img src="image/75403608-03a0-42d4-b571-a07e64e6945a.png" alt="Physical AI Project of the Month">
+                    </div>
+                  </a>
+
+                  <!-- Right Card: Global Physical AI Workshop Partnership Program -->
+                  <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="cocreate-card">
+                    <div class="cocreate-img-box">
+                      <img src="image/f2a6f59d-ce62-42e9-9cdf-4c2a533577f0.jfif" alt="Global Physical AI Workshop Partnership Program">
+                    </div>
+                  </a>
+
+                </div>
+
+                <!-- Bottom Section: Community Groups & Social Channels -->
+                <div class="community-channels-section">
+                  <h4 class="community-section-title">
+                    <i class="fas fa-users" style="color: var(--nv-green);"></i>
+                    Community & Developer Channels
+                  </h4>
+
+                  <div class="community-grid">
+                    
+                    <!-- 1. GitHub -->
+                    <a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" target="_blank" rel="noopener noreferrer" class="community-item-btn">
+                      <div class="community-icon-box">
+                        <i class="fab fa-github"></i>
+                      </div>
+                      <div class="community-info">
+                        <span class="community-name">GitHub</span>
+                        <span class="community-sub">reBot-DevArm Repo</span>
+                      </div>
+                    </a>
+
+                    <!-- 2. Discord -->
+                    <a href="https://discord.gg/seeed" target="_blank" rel="noopener noreferrer" class="community-item-btn">
+                      <div class="community-icon-box" style="color: #5865F2;">
+                        <i class="fab fa-discord"></i>
+                      </div>
+                      <div class="community-info">
+                        <span class="community-name">Discord</span>
+                        <span class="community-sub">Global AI Robotics</span>
+                      </div>
+                    </a>
+
+                    <!-- 3. Facebook -->
+                    <a href="https://www.facebook.com/groups/seeedstudio" target="_blank" rel="noopener noreferrer" class="community-item-btn">
+                      <div class="community-icon-box" style="color: #1877F2;">
+                        <i class="fab fa-facebook"></i>
+                      </div>
+                      <div class="community-info">
+                        <span class="community-name">Facebook</span>
+                        <span class="community-sub">Developer Group</span>
+                      </div>
+                    </a>
+
+                    <!-- 4. 企微群 (WeCom Group) -->
+                    <a href="https://work.weixin.qq.com" target="_blank" rel="noopener noreferrer" class="community-item-btn">
+                      <div class="community-icon-box" style="color: #07C160;">
+                        <i class="fab fa-weixin"></i>
+                      </div>
+                      <div class="community-info">
+                        <span class="community-name">企微群</span>
+                        <span class="community-sub">具身智能开发者群</span>
+                      </div>
+                    </a>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background-color: var(--nv-surface-1); border-top: 1px solid var(--nv-border); padding: 2rem 0; margin-top: 4rem;">
+    <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted); white-space: nowrap;">
+      <div>© 2026 Seeed Studio & NVIDIA DLI | reBot Arm Project</div>
+      <div style="display: flex; gap: 1.8rem;">
+        <a href="#home" style="color: var(--text-secondary);">Home</a>
+        <a href="#specification" style="color: var(--text-secondary);">Specification</a>
+        <a href="#accessories" style="color: var(--text-secondary);">Accessories</a>
+        <a href="#developer-hub" style="color: var(--text-secondary);">Developer Hub</a>
+        <a href="#sensecraft" style="color: var(--text-secondary);">SenseCraft</a>
+        <a href="../DLI Course/index.html" style="color: var(--text-secondary);">DLI Course</a>
+        <a href="#wiki" style="color: var(--text-secondary);">Wiki Tutorials</a>
+        <a href="#user-demos" style="color: var(--text-secondary);">User Demos</a>
+        <a href="#submissions" style="color: var(--text-secondary);">Project Submissions</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="js/app.js"></script>
+</body>
+</html>
