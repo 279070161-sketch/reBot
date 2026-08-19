@@ -320,6 +320,167 @@
     .logo-solo { height: 30px; }
 
     /* ==========================================================================
+       DLI Course Overview Banner Showcase Styling
+       ========================================================================== */
+    .dli-course-showcase-section {
+      padding: 4.5rem 0;
+      background: linear-gradient(180deg, rgba(11, 14, 16, 0.95) 0%, rgba(16, 21, 25, 0.98) 100%);
+      border-bottom: 1px solid var(--nv-border);
+      position: relative;
+    }
+    .dli-course-card {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+      background: rgba(19, 25, 30, 0.75);
+      border: 1px solid var(--nv-border);
+      border-radius: 24px;
+      padding: 3.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+    }
+    .dli-course-card::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -15%;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(141, 195, 31, 0.14) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .dli-course-left {
+      position: relative;
+      z-index: 1;
+    }
+    .dli-course-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--nv-green);
+      background: rgba(141, 195, 31, 0.1);
+      border: 1px solid rgba(141, 195, 31, 0.25);
+      padding: 0.4rem 0.9rem;
+      border-radius: 50px;
+      margin-bottom: 1.25rem;
+      font-family: var(--font-code);
+    }
+    .dli-course-title {
+      font-size: clamp(2.2rem, 3.4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+      font-family: var(--font-main);
+    }
+    .dli-course-title span {
+      color: var(--nv-green);
+    }
+    .dli-course-subtitle {
+      font-size: clamp(1.02rem, 1.2vw, 1.18rem);
+      color: rgba(240, 244, 247, 0.85);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      font-family: var(--font-main);
+    }
+    .dli-course-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.1rem;
+      margin-bottom: 2.25rem;
+    }
+    .dli-stat-item {
+      background: rgba(13, 16, 18, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .dli-stat-val {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: var(--font-code);
+      margin-bottom: 0.2rem;
+    }
+    .dli-stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+    }
+    .dli-course-cta-box {
+      display: flex;
+      gap: 1rem;
+    }
+    .dli-course-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--nv-green);
+      color: #0b0e10;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.85rem 2.25rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 6px 20px rgba(141, 195, 31, 0.35);
+    }
+    .dli-course-btn:hover {
+      background: #9ee027;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(141, 195, 31, 0.5);
+      color: #0b0e10;
+    }
+    .dli-course-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dli-course-img-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: transform 0.4s ease;
+    }
+    .dli-course-img-wrapper:hover {
+      transform: scale(1.02);
+    }
+    .dli-course-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    @media (max-width: 992px) {
+      .dli-course-card {
+        grid-template-columns: 1fr;
+        padding: 2.25rem 1.75rem;
+        gap: 2.5rem;
+      }
+      .dli-course-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ==========================================================================
        High Performance & Extensive Application Video Section Styling
        ========================================================================== */
     .high-performance-section {
@@ -1701,6 +1862,64 @@
           </div>
           <div class="partner-logo-item" title="Solo">
             <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         NVIDIA DLI Series Course Showcase Section
+         ========================================================================== -->
+    <section class="dli-course-showcase-section" id="dli-course">
+      <div class="container" style="max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
+        <div class="dli-course-card">
+          
+          <!-- Left Column: Course Intro & Stats -->
+          <div class="dli-course-left">
+            <div class="dli-course-badge">
+              <i class="fab fa-nvidia" style="color: #76b900;"></i> NVIDIA DLI Series & Seeed Studio
+            </div>
+            <h2 class="dli-course-title">
+              Learning<br><span>Physical AI</span>
+            </h2>
+            <p class="dli-course-subtitle">
+              A Sim-to-Real VLA Pipeline with Seeed reBot Arm and NVIDIA Isaac
+            </p>
+
+            <!-- 2x2 Stats Grid -->
+            <div class="dli-course-stats-grid">
+              <div class="dli-stat-item">
+                <span class="dli-stat-val">19</span>
+                <span class="dli-stat-lbl">Detailed Modules</span>
+              </div>
+              <div class="dli-stat-item">
+                <span class="dli-stat-val">Sim-to-Real</span>
+                <span class="dli-stat-lbl">Full Pipeline</span>
+              </div>
+              <div class="dli-stat-item">
+                <span class="dli-stat-val">5</span>
+                <span class="dli-stat-lbl">Core Chapters</span>
+              </div>
+              <div class="dli-stat-item">
+                <span class="dli-stat-val">20+ Hours</span>
+                <span class="dli-stat-lbl">Intermediate Level</span>
+              </div>
+            </div>
+
+            <!-- CTA Button to Course Page -->
+            <div class="dli-course-cta-box">
+              <a href="../DLI Course/index.html" class="dli-course-btn" target="_blank" rel="noopener">
+                <i class="fas fa-play"></i> Start Learning Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Image DJIc.png -->
+          <div class="dli-course-right">
+            <div class="dli-course-img-wrapper">
+              <img src="image/DJIc.png" alt="Seeed reBot Physical AI DLI Course" class="dli-course-img">
+            </div>
           </div>
 
         </div>
