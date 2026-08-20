@@ -1693,15 +1693,10 @@
     }
     .community-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
     }
     @media (max-width: 960px) {
-      .community-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 580px) {
       .community-grid {
         grid-template-columns: 1fr;
       }
@@ -1709,11 +1704,12 @@
     .community-item-btn {
       background-color: var(--nv-surface-1);
       border: 1px solid var(--nv-border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 1.1rem 1.25rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      justify-content: space-between;
+      gap: 0.75rem;
       text-decoration: none !important;
       transition: all 0.25s ease;
       cursor: pointer;
@@ -1722,6 +1718,28 @@
       border-color: var(--nv-green);
       background-color: rgba(141, 195, 31, 0.08);
       transform: translateY(-2px);
+    }
+    .community-qr-box {
+      width: 56px;
+      height: 56px;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.25s ease;
+    }
+    .community-qr-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+    .community-item-btn:hover .community-qr-box {
+      transform: scale(1.12);
     }
     .community-icon-box {
       width: 42px;
@@ -2924,45 +2942,49 @@
                     
                     <!-- 1. GitHub -->
                     <a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" target="_blank" rel="noopener noreferrer" class="community-item-btn">
-                      <div class="community-icon-box">
-                        <i class="fab fa-github"></i>
+                      <div style="display: flex; align-items: center; gap: 0.85rem;">
+                        <div class="community-icon-box">
+                          <i class="fab fa-github"></i>
+                        </div>
+                        <div class="community-info">
+                          <span class="community-name">GitHub</span>
+                          <span class="community-sub">reBot-DevArm Repo</span>
+                        </div>
                       </div>
-                      <div class="community-info">
-                        <span class="community-name">GitHub</span>
-                        <span class="community-sub">reBot-DevArm Repo</span>
+                      <div class="community-qr-box" title="Scan GitHub QR Code">
+                        <img src="image/qr_github.png" alt="GitHub QR Code">
                       </div>
                     </a>
 
                     <!-- 2. Discord -->
                     <a href="https://discord.gg/seeed" target="_blank" rel="noopener noreferrer" class="community-item-btn">
-                      <div class="community-icon-box" style="color: #5865F2;">
-                        <i class="fab fa-discord"></i>
+                      <div style="display: flex; align-items: center; gap: 0.85rem;">
+                        <div class="community-icon-box" style="color: #5865F2;">
+                          <i class="fab fa-discord"></i>
+                        </div>
+                        <div class="community-info">
+                          <span class="community-name">Discord</span>
+                          <span class="community-sub">Global AI Robotics</span>
+                        </div>
                       </div>
-                      <div class="community-info">
-                        <span class="community-name">Discord</span>
-                        <span class="community-sub">Global AI Robotics</span>
+                      <div class="community-qr-box" title="Scan Discord QR Code">
+                        <img src="image/qr_discord.png" alt="Discord QR Code">
                       </div>
                     </a>
 
                     <!-- 3. Facebook -->
                     <a href="https://www.facebook.com/groups/seeedstudio" target="_blank" rel="noopener noreferrer" class="community-item-btn">
-                      <div class="community-icon-box" style="color: #1877F2;">
-                        <i class="fab fa-facebook"></i>
+                      <div style="display: flex; align-items: center; gap: 0.85rem;">
+                        <div class="community-icon-box" style="color: #1877F2;">
+                          <i class="fab fa-facebook"></i>
+                        </div>
+                        <div class="community-info">
+                          <span class="community-name">Facebook</span>
+                          <span class="community-sub">Developer Group</span>
+                        </div>
                       </div>
-                      <div class="community-info">
-                        <span class="community-name">Facebook</span>
-                        <span class="community-sub">Developer Group</span>
-                      </div>
-                    </a>
-
-                    <!-- 4. 企微群 (WeCom Group) -->
-                    <a href="https://work.weixin.qq.com" target="_blank" rel="noopener noreferrer" class="community-item-btn">
-                      <div class="community-icon-box" style="color: #07C160;">
-                        <i class="fab fa-weixin"></i>
-                      </div>
-                      <div class="community-info">
-                        <span class="community-name">企微群</span>
-                        <span class="community-sub">具身智能开发者群</span>
+                      <div class="community-qr-box" title="Scan Facebook QR Code">
+                        <img src="image/qr_facebook.png" alt="Facebook QR Code">
                       </div>
                     </a>
 
