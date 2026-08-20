@@ -1779,15 +1779,17 @@
     
     <!-- 720px Height Full-Bleed Video Banner Section (Top Black Strip Fixed via top: -220px) -->
     <section class="hero-fullscreen-video-section" id="home">
-      <!-- Full-Length HD 1080p YouTube Original Video Stream (1m38s Complete Video) -->
+      <!-- Native 1080p Ultra HD Full-Length HTML5 Background Video (0 Controls, 0 Lag, 0 Popups) -->
       <div class="fullscreen-video-wrapper">
-        <iframe 
-          class="fullscreen-video-iframe" 
-          id="hero-bg-iframe"
-          src="https://www.youtube-nocookie.com/embed/Xjc4AAqztFM?autoplay=1&mute=1&loop=1&playlist=Xjc4AAqztFM&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1&vq=hd1080" 
-          title="Background Video"
-          allow="autoplay; encrypted-media">
-        </iframe>
+        <video 
+          class="fullscreen-video-element" 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          preload="auto">
+          <source src="video/banner2.mp4" type="video/mp4">
+        </video>
         <!-- Interaction Interceptor Mask Layer -->
         <div class="fullscreen-video-mask"></div>
       </div>
