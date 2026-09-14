@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>reBot | Empowering Physical AI from Sim-to-Real</title>
   <meta name="description" content="Fully Open-Source 6+1 DoF Robotic Arm Kit Built for Developers, Researchers, and AI Innovators.">
-  <meta name="theme-color" content="#101014">
+  <meta name="theme-color" content="#ffffff">
 
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
       right: 0;
       width: 100%;
       height: 64px;
-      background-color: rgba(13, 16, 18, 0.88);
+      background-color: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--nv-border);
@@ -84,6 +84,130 @@
     .hub-nav-link:hover::after, .hub-nav-link.active::after {
       width: 100%;
     }
+
+    /* Header Buy Dropdown Button & Menu */
+    .buy-dropdown-wrapper {
+      position: relative;
+      display: inline-block;
+      list-style: none;
+    }
+    .buy-now-nav-btn {
+      background: var(--nv-green);
+      color: #ffffff !important;
+      font-family: var(--font-main);
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.45rem 1.15rem;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(104, 166, 0, 0.25);
+      text-decoration: none !important;
+      line-height: 1.2;
+    }
+    .buy-now-nav-btn:hover {
+      background-color: var(--nv-green-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(104, 166, 0, 0.35);
+    }
+    .buy-now-nav-btn .dropdown-arrow {
+      font-size: 0.75rem;
+      transition: transform 0.25s ease;
+    }
+    .buy-dropdown-wrapper:hover .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+    .buy-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 260px;
+      background: #FFFFFF;
+      border: 1px solid var(--nv-border);
+      border-radius: 14px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
+      padding: 0.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1050;
+      pointer-events: none;
+    }
+    .buy-dropdown-wrapper:hover .buy-dropdown-menu,
+    .buy-dropdown-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .buy-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 10px;
+      text-decoration: none !important;
+      color: var(--text-primary);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    .buy-dropdown-item:hover {
+      background-color: #F8FAFC;
+      transform: translateX(2px);
+    }
+    .buy-item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .buy-item-icon.taobao-icon {
+      background-color: rgba(255, 80, 0, 0.1);
+      color: #FF5000;
+    }
+    .buy-item-icon.global-icon {
+      background-color: rgba(104, 166, 0, 0.1);
+      color: var(--nv-green);
+    }
+    .buy-item-info {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .buy-item-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+    .buy-item-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .buy-item-ext {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+    }
+    .buy-dropdown-item:hover .buy-item-ext {
+      opacity: 1;
+      color: var(--nv-green);
+    }
+    .buy-dropdown-divider {
+      height: 1px;
+      background-color: #F1F5F9;
+      margin: 0.3rem 0;
+    }
+
     .brand-title span {
       font-size: 1.2rem;
       font-weight: 700;
@@ -123,11 +247,11 @@
         left: 0;
         width: 100%;
         flex-direction: column;
-        background-color: var(--nv-surface-1);
+        background-color: #ffffff;
         border-bottom: 1px solid var(--nv-border);
         padding: 1.2rem 2rem;
         gap: 1.2rem;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
         z-index: 999;
         align-items: flex-start;
       }
@@ -145,7 +269,7 @@
       display: flex;
       align-items: flex-end;
       overflow: hidden;
-      background-color: #0b0e10;
+      background-color: #0F172A;
       border-bottom: 1px solid var(--nv-border);
       z-index: 10;
       padding-bottom: 2.25rem;
@@ -207,49 +331,281 @@
     .video-light-vignette {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(13, 16, 18, 0.15) 0%, rgba(13, 16, 18, 0) 50%, rgba(13, 16, 18, 0.45) 100%);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.15) 40%, rgba(15, 23, 42, 0.85) 100%);
       z-index: 1;
       pointer-events: none;
     }
 
-    /* Bottom-Aligned Pure Text Split Typography */
-    .hero-bottom-bar {
+    /* ==========================================================================
+       Unitree-Style Minimalist Studio Hero Banner Styling
+       ========================================================================== */
+    .unitree-hero-section {
+      position: relative;
+      width: 100%;
+      height: clamp(760px, 92vh, 980px);
+      margin-top: -64px;
+      padding-top: 64px;
+      background: radial-gradient(circle at 75% 45%, #FFFFFF 0%, #F8FAFC 55%, #EDF2F7 100%);
+      border-bottom: 1px solid var(--nv-border);
+      overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      background: transparent;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      border: none;
-      padding: 0;
-      box-shadow: none;
+      user-select: none;
+    }
+    .unitree-hero-3d-viewport {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
       width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #hero-arm-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+      outline: none;
+      pointer-events: auto;
+    }
+    .unitree-hero-3d-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+    }
+    .unitree-hero-container {
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 4rem;
       position: relative;
       z-index: 2;
+      pointer-events: none;
+    }
+    .unitree-hero-content {
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      pointer-events: none;
+    }
+    .unitree-hero-content * {
+      pointer-events: auto;
+    }
+    .hero-tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--nv-green);
+      background: rgba(104, 166, 0, 0.08);
+      border: 1px solid rgba(104, 166, 0, 0.22);
+      padding: 0.4rem 0.95rem 0.4rem 0.75rem;
+      border-radius: 50px;
+      margin-bottom: 1.75rem;
+      font-family: var(--font-code);
+      letter-spacing: 0.5px;
+    }
+    .hero-tag-osi-icon {
+      height: 22px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      flex-shrink: 0;
+    }
+    .unitree-hero-title {
+      font-size: clamp(2.6rem, 4.8vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.12;
+      color: #0F172A;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.03em;
+      font-family: var(--font-main);
+    }
+    .unitree-hero-subtitle {
+      font-size: clamp(1.1rem, 1.45vw, 1.4rem);
+      color: #475569;
+      line-height: 1.55;
+      margin-bottom: 2.5rem;
+      font-family: var(--font-main);
+      font-weight: 400;
+    }
+    .unitree-watch-video-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      background: #0F172A;
+      color: #FFFFFF;
+      font-family: var(--font-main);
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 0.95rem 2.4rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 6px 22px rgba(15, 23, 42, 0.2);
+    }
+    .unitree-watch-video-btn:hover {
+      background: var(--nv-green);
+      color: #FFFFFF;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(104, 166, 0, 0.38);
+    }
+    .unitree-watch-video-btn i {
+      font-size: 0.9rem;
+      transition: transform 0.25s ease;
+    }
+    .unitree-watch-video-btn:hover i {
+      transform: translateX(4px);
     }
     @media (max-width: 992px) {
-      .hero-bottom-bar {
+      .unitree-hero-section {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.6rem;
-        padding: 0;
+        height: auto;
+        min-height: 720px;
+        padding: 100px 1.5rem 3.5rem;
       }
-      .hero-bottom-divider {
-        display: none;
+      .unitree-hero-3d-viewport {
+        position: relative;
+        width: 100%;
+        height: 380px;
       }
+      .unitree-hero-container {
+        padding: 0 1rem;
+      }
+      .unitree-hero-content {
+        max-width: 100%;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* 3D Pick & Place Floating Hints */
+    .arm-pick-hint {
+      position: absolute;
+      z-index: 20;
+      padding: 0.45rem 1rem;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #FFFFFF;
+      font-family: var(--font-main);
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      pointer-events: auto;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+      transform: translate(-50%, -100%);
+      opacity: 0;
+      visibility: hidden;
+      user-select: none;
+    }
+    .arm-pick-hint:hover {
+      background: #0F172A;
+      border-color: var(--nv-green);
+      color: var(--nv-green);
+      transform: translate(-50%, -105%) scale(1.06);
+    }
+    .arm-pick-hint.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Video Lightbox Modal */
+    .hero-video-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-video-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .video-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .video-modal-dialog {
+      position: relative;
+      width: min(1040px, 92vw);
+      background: #000000;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 2001;
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-video-modal.active .video-modal-dialog {
+      transform: scale(1);
+    }
+    .video-modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      font-size: 1.8rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+    .video-modal-close-btn:hover {
+      background: var(--nv-green);
+      transform: scale(1.1);
+      border-color: var(--nv-green);
+    }
+    .video-modal-body {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+    }
+    .video-modal-body video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
     .hero-main-title {
       font-size: clamp(1.35rem, 2.1vw, 2rem);
       font-weight: 800;
       line-height: 1.25;
-      color: #ffffff;
+      color: #FFFFFF;
       margin: 0;
       letter-spacing: -0.01em;
       font-family: var(--font-main);
       white-space: nowrap;
       flex-shrink: 0;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
     }
     .hero-main-title span {
       color: var(--nv-green);
@@ -262,17 +618,17 @@
     }
     .hero-sub-text {
       font-size: clamp(0.85rem, 1.02vw, 1.05rem);
-      color: rgba(240, 244, 247, 0.95);
+      color: #E2E8F0;
       line-height: 1.5;
       font-family: var(--font-main);
       margin: 0;
       max-width: 620px;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
     }
 
     /* Partner Logo Marquee Section */
     .partners-marquee-section {
-      background-color: var(--nv-surface-1);
+      background-color: #FFFFFF;
       border-bottom: 1px solid var(--nv-border);
       padding: 2.25rem 0;
       overflow: hidden;
@@ -334,13 +690,11 @@
     .partner-logo-item img {
       width: auto;
       object-fit: contain;
-      filter: brightness(0) invert(0.85);
-      opacity: 0.75;
+      filter: grayscale(1) opacity(0.65);
       transition: all 0.25s ease;
     }
     .partner-logo-item:hover img {
-      filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(141, 195, 31, 0.6));
-      opacity: 1;
+      filter: grayscale(0) opacity(1) drop-shadow(0 0 8px rgba(104, 166, 0, 0.3));
       transform: translateY(-2px);
     }
 
@@ -358,7 +712,7 @@
        ========================================================================== */
     .dli-course-showcase-section {
       padding: 4.5rem 0;
-      background: linear-gradient(180deg, rgba(11, 14, 16, 0.95) 0%, rgba(16, 21, 25, 0.98) 100%);
+      background: linear-gradient(180deg, #FAFAFC 0%, #FFFFFF 100%);
       border-bottom: 1px solid var(--nv-border);
       position: relative;
     }
@@ -367,163 +721,437 @@
       grid-template-columns: 0.8fr 1.22fr;
       gap: 2.75rem;
       align-items: center;
-      background: rgba(19, 25, 30, 0.75);
+      background: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 24px;
       padding: 3.5rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
       backdrop-filter: blur(16px);
       position: relative;
       overflow: hidden;
     }
-    canvas.dli-card-ascii-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.65;
-      border-radius: 24px;
-    }
-    .dli-course-card::before {
-      content: '';
-      position: absolute;
-      top: -40%;
-      left: -15%;
-      width: 450px;
-      height: 450px;
-      background: radial-gradient(circle, rgba(141, 195, 31, 0.14) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .dli-course-left {
+    /* ==========================================================================
+       Application Scenarios Dual-Column Showcase Styling (Education & Industrial)
+       ========================================================================== */
+    .app-scenarios-section {
+      padding: 5.5rem 0;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+      border-bottom: 1px solid var(--nv-border);
       position: relative;
-      z-index: 1;
     }
-    .dli-course-badge {
+    .app-scenarios-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.25rem;
+      align-items: stretch;
+    }
+    @media (max-width: 1024px) {
+      .app-scenarios-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    .scenario-column-card {
+      background: #FFFFFF;
+      border: 1px solid var(--nv-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .scenario-column-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+      border-color: rgba(104, 166, 0, 0.4);
+    }
+    .scenario-card-header {
+      margin-bottom: 1.25rem;
+    }
+    .scenario-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      font-size: 0.8rem;
+      gap: 0.55rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: var(--nv-green);
-      background: rgba(141, 195, 31, 0.1);
-      border: 1px solid rgba(141, 195, 31, 0.25);
-      padding: 0.4rem 0.9rem;
+      padding: 0.4rem 1rem;
       border-radius: 50px;
-      margin-bottom: 1.25rem;
       font-family: var(--font-code);
+      letter-spacing: 0.5px;
     }
-    .dli-course-title {
-      font-size: clamp(2.2rem, 3.4vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.15;
-      color: #ffffff;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-      font-family: var(--font-main);
-    }
-    .dli-course-title span {
+    .scenario-badge.edu,
+    .scenario-badge.edu-badge {
       color: var(--nv-green);
+      background: rgba(104, 166, 0, 0.09);
+      border: 1px solid rgba(104, 166, 0, 0.25);
     }
-    .dli-course-subtitle {
-      font-size: clamp(1.02rem, 1.2vw, 1.18rem);
-      color: rgba(240, 244, 247, 0.85);
-      line-height: 1.6;
-      margin-bottom: 2rem;
+    .scenario-badge.industrial,
+    .scenario-badge.ind-badge {
+      color: #0088B2;
+      background: rgba(0, 153, 198, 0.09);
+      border: 1px solid rgba(0, 153, 198, 0.25);
+    }
+    .scenario-title {
+      font-size: clamp(1.8rem, 2.3vw, 2.3rem);
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.25;
+      margin-bottom: 0.85rem;
       font-family: var(--font-main);
+      letter-spacing: -0.02em;
     }
-    .dli-course-stats-grid {
+    .scenario-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+      font-family: var(--font-main);
+      min-height: 52px;
+    }
+    .scenario-stats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.1rem;
-      margin-bottom: 2.25rem;
+      gap: 0.85rem;
+      margin-bottom: 1.75rem;
     }
-    .dli-stat-item {
-      background: transparent;
-      border: none;
-      padding: 0;
+    .scenario-stat-item,
+    .scenario-stat-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 0.85rem 1rem;
       display: flex;
       flex-direction: column;
     }
-    .dli-stat-val {
-      font-size: 1.35rem;
+    .scenario-stat-val,
+    .scenario-stat-box .stat-num {
+      font-size: 1.15rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #0F172A;
       font-family: var(--font-code);
       margin-bottom: 0.2rem;
     }
-    .dli-stat-lbl {
-      font-size: 0.75rem;
+    .scenario-stat-lbl,
+    .scenario-stat-box .stat-lbl {
+      font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.6px;
       font-weight: 600;
     }
-    .dli-course-cta-box {
-      display: flex;
-      gap: 1rem;
+    .scenario-media-wrapper {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--nv-border);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      background: #0F172A;
     }
-    .dli-course-btn,
-    .dli-course-btn:hover,
-    .dli-course-btn:focus,
-    .dli-course-btn:active {
-      text-decoration: none !important;
+    .scenario-img,
+    .scenario-media-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
     }
-    .dli-course-btn {
+    .scenario-column-card:hover .scenario-img,
+    .scenario-column-card:hover .scenario-media-img {
+      transform: scale(1.03);
+    }
+    .scenario-action-box {
+      margin-top: auto;
+    }
+    .scenario-primary-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.75rem;
-      background: var(--nv-green);
-      color: #0b0e10;
+      width: 100%;
       font-weight: 700;
-      font-size: 1.05rem;
-      padding: 0.85rem 2.25rem;
+      font-size: 0.98rem;
+      padding: 0.85rem 1.5rem;
       border-radius: 50px;
       text-decoration: none !important;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 6px 20px rgba(141, 195, 31, 0.35);
+      font-family: var(--font-main);
+      background: var(--nv-green);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(104, 166, 0, 0.25);
     }
-    .dli-course-btn:hover {
-      background: #9ee027;
+    .scenario-primary-btn:hover {
+      background: var(--nv-green-hover);
       transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(141, 195, 31, 0.5);
-      color: #0b0e10;
-      text-decoration: none !important;
+      box-shadow: 0 8px 24px rgba(104, 166, 0, 0.35);
+      color: #ffffff;
     }
-    .dli-course-right {
+    .scenario-primary-btn.industrial-btn,
+    .scenario-primary-btn.ind-btn {
+      background: #0F172A;
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.2);
+    }
+    .scenario-primary-btn.industrial-btn:hover,
+    .scenario-primary-btn.ind-btn:hover {
+      background: #0088B2;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 153, 198, 0.35);
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       Quick Experience: MuJoCo Sim-to-Real Simulation Section Styling
+       ========================================================================== */
+    .sim-experience-section {
+      padding: 5.5rem 0;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--nv-border);
       position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: center;
+    }
+    .sim-experience-card {
+      background: #FFFFFF;
+      border: 1px solid var(--nv-border);
+      border-radius: 24px;
+      padding: 2.25rem;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 2.5rem;
       align-items: center;
     }
-    .dli-course-img-wrapper {
+    @media (max-width: 1024px) {
+      .sim-experience-card {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.75rem;
+      }
+    }
+    .sim-left-viewport {
       position: relative;
       width: 100%;
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #F8FAFC;
+      border: 1px solid var(--nv-border);
     }
-    .dli-course-img {
+    .sim-canvas-container {
+      position: relative;
       width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
+      height: 540px;
+      background: #0F172A;
+      border-radius: 20px;
+      overflow: hidden;
     }
-    @media (max-width: 992px) {
-      .dli-course-card {
+    @media (max-width: 768px) {
+      .sim-canvas-container {
+        height: 440px;
+      }
+    }
+    #sim-jenga-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      outline: none;
+      background: #F8FAFC;
+    }
+    .sim-action-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 0.55rem 0.95rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+    .sim-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--font-main);
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 0.65rem 1.4rem;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .sim-action-btn.primary {
+      background: var(--nv-green);
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(104, 166, 0, 0.4);
+    }
+    .sim-action-btn.primary:hover {
+      background: var(--nv-green-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(104, 166, 0, 0.55);
+    }
+    .sim-action-btn.secondary {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .sim-action-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--nv-green);
+      box-shadow: 0 0 10px var(--nv-green);
+      animation: pulse-glow 1.8s infinite;
+    }
+    @keyframes pulse-glow {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+      100% { opacity: 0.4; transform: scale(0.9); }
+    }
+    .sim-right-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .sim-tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--nv-green);
+      background: rgba(104, 166, 0, 0.09);
+      border: 1px solid rgba(104, 166, 0, 0.25);
+      padding: 0.35rem 0.9rem;
+      border-radius: 50px;
+      align-self: flex-start;
+      font-family: var(--font-code);
+    }
+    .sim-content-title {
+      font-size: clamp(1.8rem, 2.3vw, 2.2rem);
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.25;
+      font-family: var(--font-main);
+      letter-spacing: -0.02em;
+    }
+    .sim-content-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.65;
+      font-family: var(--font-main);
+    }
+    .sim-features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 0.5rem 0;
+    }
+    @media (max-width: 600px) {
+      .sim-features-grid {
         grid-template-columns: 1fr;
-        padding: 2.25rem 1.75rem;
-        gap: 2.5rem;
       }
-      .dli-course-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+    }
+    .sim-feature-item {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .sim-feature-item i {
+      font-size: 1.1rem;
+      color: var(--nv-green);
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+    .sim-feature-item strong {
+      display: block;
+      font-size: 0.88rem;
+      color: #0F172A;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+    .sim-feature-item span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+      display: block;
+    }
+    .sim-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 500px) {
+      .sim-cta-row {
+        flex-direction: column;
       }
+      .sim-cta-row a {
+        width: 100%;
+      }
+    }
+    .sim-primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: var(--nv-green);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none !important;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(104, 166, 0, 0.25);
+    }
+    .sim-primary-btn:hover {
+      background: var(--nv-green-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(104, 166, 0, 0.35);
+      color: #FFFFFF;
+    }
+    .sim-secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      color: #0F172A;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none !important;
+      transition: all 0.3s ease;
+    }
+    .sim-secondary-btn:hover {
+      border-color: #0F172A;
+      background: #F8FAFC;
+      transform: translateY(-2px);
     }
 
     /* ==========================================================================
@@ -531,7 +1159,7 @@
        ========================================================================== */
     .high-performance-section {
       padding: 5.5rem 0;
-      background: radial-gradient(circle at 50% 0%, rgba(141, 195, 31, 0.09) 0%, transparent 65%), radial-gradient(circle at 10% 80%, rgba(141, 195, 31, 0.04) 0%, transparent 50%), rgba(21, 25, 28, 0.65);
+      background: #FAFAFC;
       border-bottom: 1px solid var(--nv-border);
       position: relative;
     }
@@ -546,15 +1174,20 @@
       }
     }
     .video-card {
-      background-color: var(--nv-dark-bg);
+      background-color: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       position: relative;
       user-select: none;
       -webkit-user-select: none;
+    }
+    .video-card:hover {
+      border-color: var(--nv-green);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
     }
     .video-wrapper {
       position: relative;
@@ -606,7 +1239,7 @@
        ========================================================================== */
     .spec-section {
       padding: 5rem 0;
-      background: radial-gradient(circle at 15% 20%, rgba(141, 195, 31, 0.08) 0%, transparent 55%), radial-gradient(circle at 85% 75%, rgba(141, 195, 31, 0.04) 0%, transparent 55%), rgba(13, 16, 18, 0.65);
+      background: #FFFFFF;
       border-bottom: 1px solid var(--nv-border);
       position: relative;
     }
@@ -673,9 +1306,9 @@
       padding: 1.2px;
       background: radial-gradient(
         220px circle at var(--mouse-x) var(--mouse-y),
-        rgba(141, 195, 31, 0.65) 0%,
-        rgba(141, 195, 31, 0.25) 45%,
-        rgba(255, 255, 255, 0.06) 75%,
+        rgba(104, 166, 0, 0.45) 0%,
+        rgba(104, 166, 0, 0.15) 45%,
+        rgba(0, 0, 0, 0.04) 75%,
         transparent 100%
       );
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -706,8 +1339,8 @@
       transition: opacity 0.35s ease;
       background: radial-gradient(
         320px circle at var(--mouse-x) var(--mouse-y),
-        rgba(141, 195, 31, 0.16) 0%,
-        rgba(141, 195, 31, 0.05) 40%,
+        rgba(104, 166, 0, 0.1) 0%,
+        rgba(104, 166, 0, 0.03) 40%,
         transparent 70%
       );
     }
@@ -764,7 +1397,7 @@
     .cocreate-cards-grid .cocreate-card:nth-child(2) { transition-delay: 0.22s; }
 
     .product-summary-card {
-      background-color: var(--nv-surface-1);
+      background-color: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 16px;
       padding: 2.25rem;
@@ -775,11 +1408,12 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
     }
     .product-summary-card:hover {
       border-color: var(--nv-green);
       transform: translateY(-4px);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
     }
     .product-img-wrapper {
       width: 100%;
@@ -788,7 +1422,7 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 1.5rem;
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: #F8FAFC;
       border-radius: 12px;
       padding: 1rem;
     }
@@ -796,7 +1430,7 @@
       max-height: 100%;
       max-width: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.08));
     }
     .product-card-title {
       font-size: 1.75rem;
@@ -812,7 +1446,7 @@
       margin-top: 0.5rem;
     }
     .quick-spec-badge {
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: #F1F5F9;
       border: 1px solid var(--nv-border);
       padding: 0.4rem 0.85rem;
       border-radius: 20px;
@@ -822,9 +1456,9 @@
       font-family: var(--font-code);
     }
     .quick-spec-badge.highlight {
-      border-color: rgba(141, 195, 31, 0.4);
+      border-color: rgba(104, 166, 0, 0.4);
       color: var(--nv-green);
-      background-color: rgba(141, 195, 31, 0.08);
+      background-color: rgba(104, 166, 0, 0.08);
     }
 
     /* Expand / Collapse Control Button */
@@ -833,8 +1467,8 @@
       margin-bottom: 2rem;
     }
     .toggle-specs-btn {
-      background-color: var(--nv-surface-1);
-      border: 1px solid var(--nv-border);
+      background-color: #FFFFFF;
+      border: 1px solid #CBD5E1;
       color: var(--text-primary);
       font-family: var(--font-main);
       font-size: 0.95rem;
@@ -846,13 +1480,13 @@
       align-items: center;
       gap: 0.75rem;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
     .toggle-specs-btn:hover {
       border-color: var(--nv-green);
       color: var(--nv-green);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(141, 195, 31, 0.2);
+      box-shadow: 0 6px 20px rgba(104, 166, 0, 0.15);
     }
 
     /* Collapsible Specification Matrix Container */
@@ -867,13 +1501,13 @@
       opacity: 1;
     }
 
-    /* Dark Mode Spec Matrix Table Card */
+    /* Light Mode Spec Matrix Table Card */
     .spec-table-card {
-      background-color: #121619;
+      background-color: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 20px;
       padding: 2rem;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
     }
     .spec-table-header {
       display: grid;
@@ -897,7 +1531,7 @@
     .spec-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid #F1F5F9;
       padding: 1.1rem 0;
       align-items: center;
     }
@@ -922,7 +1556,7 @@
     .spec-value {
       font-size: 1.15rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-primary);
       font-family: var(--font-main);
       text-align: right;
     }
@@ -962,7 +1596,7 @@
       left: 0;
       right: 0;
       padding: 1rem 1.25rem;
-      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+      background: linear-gradient(0deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0) 100%);
       font-size: 1rem;
       font-weight: 700;
       color: #ffffff;
@@ -975,7 +1609,7 @@
        ========================================================================== */
     .accessories-section {
       padding: 5.5rem 0;
-      background: radial-gradient(circle at 50% 0%, rgba(141, 195, 31, 0.06) 0%, transparent 60%), radial-gradient(circle at 80% 90%, rgba(141, 195, 31, 0.06) 0%, transparent 50%), rgba(11, 14, 16, 0.65);
+      background: #FAFAFC;
       border-bottom: 1px solid var(--nv-border);
       position: relative;
     }
@@ -994,7 +1628,7 @@
       margin-bottom: 3rem;
     }
     .tab-pill-btn {
-      background-color: var(--nv-surface-1);
+      background-color: #FFFFFF;
       border: 1px solid var(--nv-border);
       color: var(--text-secondary);
       font-family: var(--font-main);
@@ -1010,18 +1644,18 @@
     }
     .tab-pill-btn:hover, .tab-pill-btn.active {
       border-color: var(--nv-green);
-      color: #ffffff;
-      background-color: var(--nv-surface-2);
-      box-shadow: 0 4px 16px rgba(141, 195, 31, 0.15);
+      color: var(--nv-green);
+      background-color: rgba(104, 166, 0, 0.08);
+      box-shadow: 0 4px 16px rgba(104, 166, 0, 0.1);
     }
     .tab-pill-btn.active {
-      background-color: rgba(141, 195, 31, 0.12);
+      background-color: rgba(104, 166, 0, 0.08);
       border-color: var(--nv-green);
       color: var(--nv-green);
       font-weight: 700;
     }
 
-    /* Accessories Product Grid (4 Columns Desktop, 2 Columns Tablet, 1 Column Mobile) */
+    /* Accessories Product Grid */
     .accessory-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1039,7 +1673,7 @@
     }
 
     .accessory-card {
-      background-color: var(--nv-surface-1);
+      background-color: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 16px;
       padding: 1.5rem;
@@ -1049,11 +1683,12 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
     }
     .accessory-card:hover {
       border-color: var(--nv-green);
       transform: translateY(-6px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
     }
 
     .accessory-img-box {
@@ -1062,7 +1697,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--nv-surface-2);
+      background-color: #F8FAFC;
       border-radius: 12px;
       padding: 0;
       margin-bottom: 1.2rem;
@@ -1115,7 +1750,7 @@
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      background-color: rgba(141, 195, 31, 0.12);
+      background-color: rgba(104, 166, 0, 0.08);
       border: 1px solid var(--nv-green);
       color: var(--nv-green);
       display: flex;
@@ -1128,15 +1763,15 @@
     }
     .accessory-cart-btn:hover {
       background-color: var(--nv-green);
-      color: #000000;
+      color: #ffffff;
       transform: scale(1.1);
-      box-shadow: 0 4px 14px rgba(141, 195, 31, 0.4);
+      box-shadow: 0 4px 14px rgba(104, 166, 0, 0.3);
     }
 
     /* Empty Tab Placeholder for RS Accessories */
     .rs-empty-placeholder {
       display: none;
-      background-color: var(--nv-surface-1);
+      background-color: #FFFFFF;
       border: 1px dashed var(--nv-border);
       border-radius: 20px;
       padding: 4rem 2rem;
@@ -1161,7 +1796,7 @@
        ========================================================================== */
     .developer-hub-section {
       padding: 5.5rem 0;
-      background: radial-gradient(circle at 50% 30%, rgba(141, 195, 31, 0.07) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(141, 195, 31, 0.04) 0%, transparent 50%), rgba(13, 16, 18, 0.65);
+      background: #FFFFFF;
       border-bottom: 1px solid var(--nv-border);
       position: relative;
     }
@@ -1201,7 +1836,7 @@
     }
 
     .hub-accordion-header:hover {
-      background-color: rgba(255, 255, 255, 0.02);
+      background-color: #F8FAFC;
     }
 
     .hub-accordion-title-group {
@@ -1234,8 +1869,8 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background-color: var(--nv-surface-2);
-      border: 1px solid var(--nv-border);
+      background-color: #F1F5F9;
+      border: 1px solid #E2E8F0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1248,7 +1883,7 @@
       transform: rotate(180deg);
       border-color: var(--nv-green);
       color: var(--nv-green);
-      background-color: rgba(141, 195, 31, 0.1);
+      background-color: rgba(104, 166, 0, 0.08);
     }
 
     .hub-accordion-content {
@@ -1293,22 +1928,23 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* Varied Sized Cards (尺寸不同图片卡片排列) */
+    /* Varied Sized Cards */
     .dev-project-card {
       position: relative;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--nv-border);
-      background-color: var(--nv-surface-2);
+      background-color: #FFFFFF;
       flex-shrink: 0;
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
       cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
     }
 
     .dev-project-card:hover {
       border-color: var(--nv-green);
       transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(141, 195, 31, 0.2);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 20px rgba(104, 166, 0, 0.15);
       z-index: 10;
     }
 
@@ -1327,14 +1963,14 @@
 
     .dev-project-card:hover .dev-card-img {
       transform: scale(1.1);
-      filter: brightness(0.75);
+      filter: brightness(0.85);
     }
 
-    /* Glassmorphism Hover Overlay displaying Author, Title, Description */
+    /* Glassmorphism Hover Overlay */
     .dev-card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(13, 16, 18, 0.15) 0%, rgba(13, 16, 18, 0.94) 100%);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%);
       backdrop-filter: blur(4px);
       padding: 1.25rem;
       display: flex;
@@ -1374,7 +2010,7 @@
 
     .dev-card-desc {
       font-size: 0.82rem;
-      color: rgba(240, 244, 247, 0.85);
+      color: rgba(240, 244, 247, 0.9);
       line-height: 1.4;
       font-family: var(--font-main);
       display: -webkit-box;
@@ -1383,7 +2019,7 @@
       overflow: hidden;
     }
 
-    /* 02 Getting Started 2-Column Layout (DM vs RS) */
+    /* 02 Getting Started 2-Column Layout */
     .getting-started-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1398,7 +2034,7 @@
     }
 
     .gs-column {
-      background-color: var(--nv-surface-2);
+      background-color: #FFFFFF;
       border-radius: 16px;
       border: 1px solid var(--nv-border);
       padding: 1.5rem;
@@ -1407,36 +2043,37 @@
       gap: 1.25rem;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
     }
 
-    /* DM Accent Theme (NVIDIA Neon Green) */
+    /* DM Accent Theme */
     .gs-column-dm {
       border-top: 4px solid var(--nv-green);
     }
     .gs-column-dm .gs-tag-accent {
-      background-color: rgba(141, 195, 31, 0.15);
+      background-color: rgba(104, 166, 0, 0.12);
       color: var(--nv-green);
-      border: 1px solid rgba(141, 195, 31, 0.3);
+      border: 1px solid rgba(104, 166, 0, 0.25);
     }
     .gs-column-dm .gs-step-num {
-      background-color: rgba(141, 195, 31, 0.15);
+      background-color: rgba(104, 166, 0, 0.12);
       color: var(--nv-green);
-      border: 1px solid rgba(141, 195, 31, 0.4);
+      border: 1px solid rgba(104, 166, 0, 0.3);
     }
 
-    /* RS Accent Theme (Cyber Cyan / Blue) */
+    /* RS Accent Theme */
     .gs-column-rs {
-      border-top: 4px solid #00D2FF;
+      border-top: 4px solid #0099C6;
     }
     .gs-column-rs .gs-tag-accent {
-      background-color: rgba(0, 210, 255, 0.15);
-      color: #00D2FF;
-      border: 1px solid rgba(0, 210, 255, 0.3);
+      background-color: rgba(0, 153, 198, 0.1);
+      color: #0088B2;
+      border: 1px solid rgba(0, 153, 198, 0.25);
     }
     .gs-column-rs .gs-step-num {
-      background-color: rgba(0, 210, 255, 0.15);
-      color: #00D2FF;
-      border: 1px solid rgba(0, 210, 255, 0.4);
+      background-color: rgba(0, 153, 198, 0.1);
+      color: #0088B2;
+      border: 1px solid rgba(0, 153, 198, 0.3);
     }
 
     .gs-header {
@@ -1455,7 +2092,7 @@
     .gs-model-title {
       font-size: 1.2rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #0F172A;
       font-family: var(--font-main);
       display: flex;
       align-items: center;
@@ -1482,8 +2119,8 @@
     }
 
     .gs-info-card {
-      background-color: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background-color: #F8FAFC;
+      border: 1px solid #E2E8F0;
       border-radius: 10px;
       padding: 0.85rem;
     }
@@ -1491,7 +2128,7 @@
     .gs-info-label {
       font-size: 0.75rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #0F172A;
       margin-bottom: 0.35rem;
       font-family: var(--font-main);
     }
@@ -1510,7 +2147,7 @@
     }
 
     .gs-step-item {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: #F8FAFC;
       border: 1px solid var(--nv-border);
       border-radius: 12px;
       padding: 0.9rem 1.1rem;
@@ -1523,17 +2160,18 @@
     }
 
     .gs-step-item:hover {
-      border-color: rgba(255, 255, 255, 0.25);
-      background-color: rgba(255, 255, 255, 0.04);
+      border-color: var(--nv-green);
+      background-color: #FFFFFF;
       transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
     }
 
     .gs-column-dm .gs-step-item:hover {
-      border-color: rgba(141, 195, 31, 0.5);
+      border-color: rgba(104, 166, 0, 0.5);
     }
 
     .gs-column-rs .gs-step-item:hover {
-      border-color: rgba(0, 210, 255, 0.5);
+      border-color: rgba(0, 153, 198, 0.5);
     }
 
     .gs-step-num {
@@ -1565,7 +2203,7 @@
     .gs-step-title {
       font-size: 0.95rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #0F172A;
       font-family: var(--font-main);
     }
 
@@ -1593,13 +2231,11 @@
     }
 
     .gs-step-item:hover .gs-step-link-icon {
-      color: #ffffff;
+      color: #0F172A;
       transform: translateX(3px);
     }
 
-    /* ==========================================================================
-       Co-Create with Seeed Section Styling
-       ========================================================================== */
+    /* Co-Create Section */
     .cocreate-wrapper {
       display: flex;
       flex-direction: column;
@@ -1618,7 +2254,7 @@
       }
     }
     .cocreate-card {
-      background-color: var(--nv-dark-bg);
+      background-color: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 16px;
       overflow: hidden;
@@ -1629,10 +2265,11 @@
       color: inherit;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
       transform: none !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
     }
     .cocreate-card:hover {
-      border-color: rgba(141, 195, 31, 0.4);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+      border-color: var(--nv-green);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
       transform: none !important;
     }
     .cocreate-img-box {
@@ -1640,7 +2277,7 @@
       height: 100%;
       flex: 1;
       overflow: hidden;
-      background-color: #0b0e10;
+      background-color: #F8FAFC;
       position: relative;
       display: flex;
     }
@@ -1661,7 +2298,7 @@
     .cocreate-card-title {
       font-size: 1.2rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: #0F172A;
       font-family: var(--font-main);
       display: flex;
       align-items: center;
@@ -1676,15 +2313,16 @@
 
     /* Community Channels Section */
     .community-channels-section {
-      background-color: var(--nv-dark-bg);
+      background-color: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 16px;
       padding: 1.75rem 2rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
     }
     .community-section-title {
       font-size: 1.2rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: #0F172A;
       margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
@@ -1702,7 +2340,7 @@
       }
     }
     .community-item-btn {
-      background-color: var(--nv-surface-1);
+      background-color: #F8FAFC;
       border: 1px solid var(--nv-border);
       border-radius: 14px;
       padding: 1.1rem 1.25rem;
@@ -1716,7 +2354,7 @@
     }
     .community-item-btn:hover {
       border-color: var(--nv-green);
-      background-color: rgba(141, 195, 31, 0.08);
+      background-color: rgba(104, 166, 0, 0.08);
       transform: translateY(-2px);
     }
     .community-qr-box {
@@ -1768,6 +2406,124 @@
       color: var(--text-muted);
       font-family: var(--font-main);
     }
+  
+    /* ==========================================================================
+       F & Q Section Styles (List Layout)
+       ========================================================================== */
+    .faq-section {
+      padding: 5rem 0 4.5rem;
+      background-color: #FAFAFA;
+      border-top: 1px solid #E2E8F0;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .faq-accordion-container {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid #E2E8F0;
+    }
+    .faq-item {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #E2E8F0;
+      border-radius: 0;
+      overflow: hidden;
+      transition: background-color 0.2s ease;
+      box-shadow: none;
+    }
+    .faq-item:hover {
+      border-color: #E2E8F0;
+      box-shadow: none;
+    }
+    .faq-header {
+      padding: 1.35rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s ease;
+    }
+    .faq-header:hover {
+      background-color: #F8FAFC;
+    }
+    .faq-header:hover .faq-question {
+      color: var(--nv-green);
+    }
+    .faq-num {
+      font-family: var(--font-code);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--nv-green);
+      background: rgba(104, 166, 0, 0.1);
+      padding: 0.25rem 0.65rem;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .faq-question {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0;
+      flex-grow: 1;
+      line-height: 1.45;
+      font-family: var(--font-main);
+      transition: color 0.2s ease;
+    }
+    .faq-item.active .faq-question {
+      color: var(--nv-green);
+    }
+    .faq-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748B;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+      background: var(--nv-green);
+      color: #FFFFFF;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0, 1, 0, 1), padding 0.35s ease;
+      padding: 0 0.75rem;
+      background: transparent;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 600px;
+      padding: 0 0.75rem 1.4rem 3.8rem;
+      transition: max-height 0.4s ease-in-out, padding 0.3s ease;
+    }
+    .faq-answer p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.65;
+      font-family: var(--font-main);
+    }
+    @media (max-width: 768px) {
+      .faq-item.active .faq-answer {
+        padding: 0 0.75rem 1.25rem 0.75rem;
+      }
+      .faq-header {
+        padding: 1.1rem 0.5rem;
+        gap: 0.85rem;
+      }
+      .faq-question {
+        font-size: 0.98rem;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1777,20 +2533,28 @@
        ========================================================================== -->
   <header class="dli-header">
     <div class="brand-container">
-      <img src="image/seeed_logo_w.svg" alt="Seeed Studio Logo" class="brand-logo-img">
+      <img src="image/seeed_logo_c.svg" alt="Seeed Studio Logo" class="brand-logo-img">
       <span class="brand-divider">|</span>
       <div class="brand-title">
         <span>reBot</span>
       </div>
     </div>
 
-    <!-- Navigation Links (Only External Resource Links) -->
+    <!-- Navigation Links -->
     <nav style="flex: 1; display: flex; justify-content: flex-end; margin: 0 1.5rem;">
       <ul class="hub-nav-menu">
         <li><a href="https://sensecraft.seeed.cc/en/robotics#download" class="hub-nav-link" target="_blank" rel="noopener">SenseCraft</a></li>
         <li><a href="https://wiki.seeedstudio.com/" class="hub-nav-link" target="_blank" rel="noopener">Wiki Tutorials</a></li>
         <li><a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" class="hub-nav-link" target="_blank" rel="noopener">User Demos & GitHub</a></li>
+        <li><a href="#sim-to-real" class="hub-nav-link">MuJoCo Sim-to-Real</a></li>
         <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener">Project Submissions</a></li>
+        <li><a href="#cocreate" class="hub-nav-link" onclick="openCocreateAccordion()">Customization</a></li>
+        <li>
+          <a id="nav-buy-now-btn" href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="buy-now-nav-btn">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Buy Now</span>
+          </a>
+        </li>
       </ul>
     </nav>
 
@@ -1807,39 +2571,50 @@
        ========================================================================== -->
   <main id="landing-view">
     
-    <!-- 720px Height Full-Bleed Video Banner Section (Top Black Strip Fixed via top: -220px) -->
-    <section class="hero-fullscreen-video-section" id="home">
-      <!-- Native 1080p Ultra HD Full-Length HTML5 Background Video (0 Controls, 0 Lag, 0 Popups) -->
-      <div class="fullscreen-video-wrapper">
-        <video 
-          class="fullscreen-video-element" 
-          autoplay 
-          loop 
-          muted 
-          playsinline 
-          preload="auto">
-          <source src="video/banner.mp4" type="video/mp4">
-        </video>
-        <!-- Interaction Interceptor Mask Layer -->
-        <div class="fullscreen-video-mask"></div>
+    <!-- Unitree-Style Clean Studio Hero Banner Section -->
+    <section class="unitree-hero-section" id="home">
+      <!-- 3D Robotic Arm Studio Canvas Viewport -->
+      <div class="unitree-hero-3d-viewport">
+        <canvas id="hero-arm-canvas"></canvas>
       </div>
 
-      <!-- Soft Vignette Overlay -->
-      <div class="video-light-vignette"></div>
-
-      <!-- Bottom-Aligned Glassmorphic Hero Bar -->
-      <div class="container" style="max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2;">
-        <div class="hero-bottom-bar">
-          <h1 class="hero-main-title">
-            Empowering Physical AI from <span>Sim-to-Real</span>
+      <!-- Left Hero Typography & Action Button -->
+      <div class="container unitree-hero-container">
+        <div class="unitree-hero-content">
+          <div class="hero-tag-badge">
+            <img src="image/Open_Source_Initiative.svg" alt="Open Source Initiative Logo" class="hero-tag-osi-icon">
+            <span>6+1 DoF Open-Source Arm</span>
+          </div>
+          <h1 class="unitree-hero-title">
+            The Developer's First Robotic Arm
           </h1>
-          <div class="hero-bottom-divider"></div>
-          <p class="hero-sub-text">
-            Fully Open-Source 6+1 DoF Robotic Arm Kit Built for Developers, Researchers, and AI Innovators
+          <p class="unitree-hero-subtitle">
+            Get started instantly. Explore without limits.
           </p>
+
+          <div class="unitree-hero-cta">
+            <button type="button" class="unitree-watch-video-btn" id="open-video-modal-btn">
+              <span>Watch Video</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Video Lightbox Modal Dialog -->
+    <div class="hero-video-modal" id="hero-video-modal" aria-hidden="true">
+      <div class="video-modal-backdrop" id="video-modal-backdrop"></div>
+      <div class="video-modal-dialog">
+        <button type="button" class="video-modal-close-btn" id="close-video-modal-btn" title="Close Video">&times;</button>
+        <div class="video-modal-body">
+          <video id="modal-banner-video" controls playsinline preload="metadata">
+            <source src="video/banner.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
 
     <!-- Partners Monochrome SVG Logo Marquee Carousel -->
     <section class="partners-marquee-section">
@@ -1868,7 +2643,7 @@
             <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters">
           </div>
           <div class="partner-logo-item" title="Solo">
-            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo">
+            <img src="image/logo/solo-full-original-white-text-.svg?v=2" alt="Solo Logo" class="logo-solo">
           </div>
 
           <!-- Track Set 2 -->
@@ -1891,7 +2666,7 @@
             <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters">
           </div>
           <div class="partner-logo-item" title="Solo">
-            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo">
+            <img src="image/logo/solo-full-original-white-text-.svg?v=2" alt="Solo Logo" class="logo-solo">
           </div>
 
           <!-- Track Set 3 -->
@@ -1914,7 +2689,7 @@
             <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters">
           </div>
           <div class="partner-logo-item" title="Solo">
-            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo">
+            <img src="image/logo/solo-full-original-white-text-.svg?v=2" alt="Solo Logo" class="logo-solo">
           </div>
 
           <!-- Track Set 4 -->
@@ -1937,64 +2712,7 @@
             <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters">
           </div>
           <div class="partner-logo-item" title="Solo">
-            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo">
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         NVIDIA DLI Series Course Showcase Section
-         ========================================================================== -->
-    <section class="dli-course-showcase-section" id="dli-course">
-      <div class="container" style="max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
-        <div class="dli-course-card">
-          <!-- Dynamic ASCII Breathing Field Background Canvas -->
-          <canvas class="dli-card-ascii-bg" id="dli-card-ascii-canvas" aria-hidden="true"></canvas>
-          
-          <!-- Left Column: Course Intro & Stats -->
-          <div class="dli-course-left">
-            <h2 class="dli-course-title">
-              Learning<br><span>Physical AI</span>
-            </h2>
-            <p class="dli-course-subtitle">
-              A Sim-to-Real VLA Pipeline with Seeed reBot Arm and NVIDIA Isaac
-            </p>
-
-            <!-- 2x2 Stats Grid -->
-            <div class="dli-course-stats-grid">
-              <div class="dli-stat-item">
-                <span class="dli-stat-val">19</span>
-                <span class="dli-stat-lbl">Detailed Modules</span>
-              </div>
-              <div class="dli-stat-item">
-                <span class="dli-stat-val">Sim-to-Real</span>
-                <span class="dli-stat-lbl">Full Pipeline</span>
-              </div>
-              <div class="dli-stat-item">
-                <span class="dli-stat-val">5</span>
-                <span class="dli-stat-lbl">Core Chapters</span>
-              </div>
-              <div class="dli-stat-item">
-                <span class="dli-stat-val">20+ Hours</span>
-                <span class="dli-stat-lbl">Intermediate Level</span>
-              </div>
-            </div>
-
-            <!-- CTA Button to Course Page -->
-            <div class="dli-course-cta-box">
-              <a href="https://www.seeedstudio.com/sim-to-real-with-seeed-rebot-and-nvidia-isaac" class="dli-course-btn" target="_blank" rel="noopener">
-                <i class="fas fa-play"></i> Start Learning Now
-              </a>
-            </div>
-          </div>
-
-          <!-- Right Column: Image DJIc.png -->
-          <div class="dli-course-right">
-            <div class="dli-course-img-wrapper">
-              <img src="image/DJIc.png" alt="Seeed reBot Physical AI DLI Course" class="dli-course-img">
-            </div>
+            <img src="image/logo/solo-full-original-white-text-.svg?v=2" alt="Solo Logo" class="logo-solo">
           </div>
 
         </div>
@@ -2040,6 +2758,475 @@
 
       </div>
     </section>
+
+    <!-- ==========================================================================
+         Application Scenarios Section (Research & Education & Industrial Clients)
+         ========================================================================== -->
+    <section class="app-scenarios-section" id="scenarios">
+      <div class="container" style="max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
+        
+        <!-- Section Header -->
+        <div class="section-title-group" style="text-align: center; margin-bottom: 3.5rem;">
+          <h2 class="section-main-title">Application Scenarios</h2>
+          <p class="section-subtitle">From Academic Embodied AI Education to Industrial Edge AI Deployment</p>
+        </div>
+
+        <!-- 2-Column Side-by-Side Scenarios Grid -->
+        <div class="app-scenarios-grid">
+          
+          <!-- Column 1: Research & Education Card -->
+          <div class="scenario-column-card">
+            <div class="scenario-card-header">
+              <span class="scenario-badge edu">
+                <i class="fas fa-graduation-cap"></i> Research & Education
+              </span>
+              <h3 class="scenario-title">Learning Physical AI</h3>
+              <p class="scenario-desc">
+                A Sim-to-Real VLA Pipeline with Seeed reBot Arm and NVIDIA Isaac. Official hands-on curriculum bridging academic research and higher education.
+              </p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="scenario-stats-grid">
+              <div class="scenario-stat-item">
+                <span class="scenario-stat-val">19</span>
+                <span class="scenario-stat-lbl">Detailed Modules</span>
+              </div>
+              <div class="scenario-stat-item">
+                <span class="scenario-stat-val">Sim-to-Real</span>
+                <span class="scenario-stat-lbl">Full Pipeline</span>
+              </div>
+              <div class="scenario-stat-item">
+                <span class="scenario-stat-val">5</span>
+                <span class="scenario-stat-lbl">Core Chapters</span>
+              </div>
+              <div class="scenario-stat-item">
+                <span class="scenario-stat-val">20+ Hours</span>
+                <span class="scenario-stat-lbl">Hands-on Lab</span>
+              </div>
+            </div>
+
+            <!-- Media Preview -->
+            <div class="scenario-media-wrapper">
+              <img src="image/DJIc.png" alt="Learning Physical AI NVIDIA DLI Course" class="scenario-img">
+            </div>
+
+            <!-- Action Button -->
+            <div class="scenario-action-box">
+              <a href="https://www.seeedstudio.com/sim-to-real-with-seeed-rebot-and-nvidia-isaac" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn">
+                <i class="fas fa-play"></i> Start Learning Course
+              </a>
+            </div>
+          </div>
+
+          <!-- Column 2: Industrial & Enterprise Card -->
+          <div class="scenario-column-card">
+            <div class="scenario-card-header">
+              <span class="scenario-badge industrial">
+                <i class="fas fa-industry"></i> Industrial & Enterprise
+              </span>
+              <h3 class="scenario-title">Industrial Data & Edge AI</h3>
+              <p class="scenario-desc">
+                Empowering high-frequency teleoperation trajectory collection, real-arm data logging, and low-latency local VLA edge deployment for reliable industrial automation.
+              </p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="scenario-stats-grid">
+              <div class="scenario-stat-item">
+                <span class="scenario-stat-val">Data Box</span>
+                <span class="scenario-stat-lbl">Teleop Trajectory Logging</span>
+              </div>
+              <div class="scenario-stat-item">
+                <span class="scenario-stat-val">Local Edge</span>
+                <span class="scenario-stat-lbl">Low-Latency VLA Model</span>
+              </div>
+              <div class="scenario-stat-item">
+                <span class="scenario-stat-val">100Hz+</span>
+                <span class="scenario-stat-lbl">High-Frequency Feedback</span>
+              </div>
+              <div class="scenario-stat-item">
+                <span class="scenario-stat-val">Offline</span>
+                <span class="scenario-stat-lbl">Industrial Security</span>
+              </div>
+            </div>
+
+            <!-- Media Preview -->
+            <div class="scenario-media-wrapper">
+              <img src="image/industrial_data_box.png" alt="Industrial Data Box & Local Edge Deployment Showcase" class="scenario-img">
+            </div>
+
+            <!-- Action Button -->
+            <div class="scenario-action-box">
+              <a href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn industrial-btn">
+                <i class="fas fa-box-open"></i> Apply for Data Box Trial
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Quick Experience: MuJoCo Sim-to-Real Simulation Sandbox Section
+         ========================================================================== -->
+    <section class="sim-experience-section" id="sim-to-real">
+      <div class="container" style="max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
+        
+        <!-- Section Header -->
+        <div class="section-title-group" style="text-align: center; margin-bottom: 3.5rem;">
+          <h2 class="section-main-title">Quick Sim-to-Real Experience</h2>
+          <p class="section-subtitle">Interactive 3D MuJoCo Simulation in Your Browser</p>
+        </div>
+
+        <div class="sim-experience-card">
+          
+          <!-- Left Column: Lightweight 3D Physics Simulation Canvas with 2 Buttons -->
+          <div class="sim-left-viewport">
+            <div class="sim-canvas-container" style="position: relative; width: 100%; height: 520px; border-radius: 16px; overflow: hidden; background: #0F172A;">
+              <iframe id="sim-mujoco-iframe" src="./sim_web/index.html" style="width: 100%; height: 100%; border: none; outline: none; background: #0F172A;" title="reBot Arm MuJoCo WASM Physics Simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+          </div>
+
+          <!-- Right Column: Info & Launch CTA -->
+          <div class="sim-right-content">
+            <h3 class="sim-content-title">MuJoCo 3D Simulation</h3>
+            <p class="sim-content-desc">
+              Test the reBot Arm B601-RS digital twin with real-time 3D physics, trajectory drag, and multi-camera feeds directly in your browser.
+            </p>
+
+            <!-- Feature Pills / Highlights Grid -->
+            <div class="sim-features-grid">
+              <div class="sim-feature-item">
+                <i class="fas fa-bolt"></i>
+                <div>
+                  <strong>100Hz Physics</strong>
+                  <span>Real-time MuJoCo WASM solver</span>
+                </div>
+              </div>
+              <div class="sim-feature-item">
+                <i class="fas fa-hand-pointer"></i>
+                <div>
+                  <strong>TCP Control</strong>
+                  <span>Drag end-effector & toggle gripper</span>
+                </div>
+              </div>
+              <div class="sim-feature-item">
+                <i class="fas fa-video"></i>
+                <div>
+                  <strong>Multi-Camera</strong>
+                  <span>Wrist & overhead camera feeds</span>
+                </div>
+              </div>
+              <div class="sim-feature-item">
+                <i class="fas fa-microchip"></i>
+                <div>
+                  <strong>Sim-to-Real</strong>
+                  <span>1:1 Kinematic model to hardware</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons Row -->
+            <div class="sim-cta-row">
+              <a href="https://yang-ci.github.io/ReBot_Arm_web_RS/" target="_blank" rel="noopener noreferrer" class="sim-primary-btn">
+                <i class="fas fa-play"></i> Try Online Demo
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Developer Hub Module Section (Collapsible Accordion List)
+         ========================================================================== -->
+    <section class="developer-hub-section" id="developer-hub">
+      <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem;">
+        
+        <!-- Section Header -->
+        <div class="section-title-group" style="text-align: center; margin: 0 auto 3rem;">
+          <h2 class="section-main-title">Developer Hub</h2>
+          <p class="section-subtitle">Explore projects, tutorials, and co-creation opportunities with global developers</p>
+        </div>
+
+        <!-- Accordion List -->
+        <div class="hub-accordion-container">
+          
+          <!-- Accordion Item 01: See What You Can Build -->
+          <div class="hub-accordion-item" id="hub-item-01">
+            <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-01')">
+              <div class="hub-accordion-title-group">
+                <h3 class="hub-accordion-title">
+                  <i class="fas fa-cubes" style="color: var(--nv-green); font-size: 1.1rem;"></i>
+                  01 See What You Can Build
+                </h3>
+                <p class="hub-accordion-subtitle">Explore real-world projects and creative builds from global developers</p>
+              </div>
+              <div class="hub-accordion-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            
+            <div class="hub-accordion-content">
+              <!-- Horizontal Auto-Scroll Marquee Carousel (15 Cards + Duplicated Set for Infinite Loop) -->
+              <div class="dev-marquee-wrapper">
+                <div class="dev-marquee-track">
+                  
+                  <!-- 1. GEM-4 (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/new-writeup-1778618527713', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/GEM-4.png" alt="GEM-4 Gemma Embodied AI" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-kaggle"></i> GEM-4 (Kaggle)</div>
+                      <h4 class="dev-card-title">Gemma Physical Assistance</h4>
+                      <p class="dev-card-desc">Gemma Embodied 4 Physical Assistance AI agent built for reBot Arm.</p>
+                    </div>
+                  </div>
+
+                  <!-- 2. Linyan Fu (Medium) -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/Linyan_Fu/status/2056383947341525180', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Linyan.png" alt="Linyan Fu Sim2Real Policy" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Linyan Fu</div>
+                      <h4 class="dev-card-title">Sim2Real Policy Deployment</h4>
+                      <p class="dev-card-desc">Zero-shot Sim2Real deployment and vision-guided control on reBot Arm.</p>
+                    </div>
+                  </div>
+
+                  <!-- 3. Apheth D Almeida (Portrait) -->
+                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://x.com/Apheth_DAlmeida/status/2053503164507476096', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Sameer.png" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Apheth D Almeida</div>
+                      <h4 class="dev-card-title">6 DoF Kinematic Teleop</h4>
+                      <p class="dev-card-desc">Real-time inverse kinematics and teleoperation pipeline for reBot.</p>
+                    </div>
+                  </div>
+
+                  <!-- 4. Dhruv Diddi (Square) -->
+                  <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/DhruvDiddi/status/2046605015008383284', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Diddi.png" alt="Dhruv Diddi Pick & Place" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Dhruv Diddi</div>
+                      <h4 class="dev-card-title">Autonomous Pick & Place</h4>
+                      <p class="dev-card-desc">3D vision-guided autonomous pick & place manipulation demo.</p>
+                    </div>
+                  </div>
+
+                  <!-- 5. Ed Henderson (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Henderson.jpg" alt="Ed Henderson LeRobot Policy" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
+                      <h4 class="dev-card-title">LeRobot Integration</h4>
+                      <p class="dev-card-desc">Hugging Face LeRobot policy training & deployment on reBot B601.</p>
+                    </div>
+                  </div>
+
+                  <!-- 6. Binh Pham (Medium) -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/pham_blnh/status/2061994096374505710', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Binh_Pham.png" alt="Binh Pham ROS 2 MoveIt" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Binh Pham</div>
+                      <h4 class="dev-card-title">ROS 2 MoveIt Pipeline</h4>
+                      <p class="dev-card-desc">High-precision ROS 2 motion planning and trajectory execution.</p>
+                    </div>
+                  </div>
+
+                  <!-- 7. FangTianChongHui (Portrait) -->
+                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://www.instagram.com/reel/DY7Ny8OPjVu/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_fangtianchonghui.png" alt="FangTianChongHui Actuator Joint Motor" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-instagram"></i> FangTianChongHui</div>
+                      <h4 class="dev-card-title">Precision Actuator Control</h4>
+                      <p class="dev-card-desc">High-torque joint motor response and precision manipulation demo.</p>
+                    </div>
+                  </div>
+
+                  <!-- 8. Xense YaoLin Dong (Square) -->
+                  <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/dong1505lin', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_xensedyl.png" alt="Xense YaoLin Dong Tactile Sensor" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Xense YaoLin Dong</div>
+                      <h4 class="dev-card-title">Tactile Sensing Integration</h4>
+                      <p class="dev-card-desc">Tactile sensor integration for adaptive force feedback grasping.</p>
+                    </div>
+                  </div>
+
+                  <!-- 9. yoshikai_man (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/yoshikai_man/status/2079938975398244705', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/YOR_Car.png" alt="yoshikai_man Desktop Automation Workbench" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> yoshikai_man</div>
+                      <h4 class="dev-card-title">Desktop Assembly Bot</h4>
+                      <p class="dev-card-desc">Custom desktop automation & assembly workflow using reBot RS.</p>
+                    </div>
+                  </div>
+
+                  <!-- 10. Li Pengdong (hei-rebot-lift) (Medium) -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://github.com/lipengdong/hei-rebot-lift', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/hei-robot-lift-play.gif" alt="Li Pengdong Vertical Lift" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-github"></i> Li Pengdong</div>
+                      <h4 class="dev-card-title">hei-rebot-lift System</h4>
+                      <p class="dev-card-desc">Open-source z-axis vertical lifting platform expansion for reBot.</p>
+                    </div>
+                  </div>
+
+                  <!-- 11. Martin Kemka (Square) -->
+                  <div class="dev-project-card dev-card-square" onclick="window.open('https://www.linkedin.com/posts/activity-7484390995862781952-TX4m', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/VR_with_reBot.png" alt="Martin Kemka Industrial Automation" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Martin Kemka</div>
+                      <h4 class="dev-card-title">Industrial Automation AI</h4>
+                      <p class="dev-card-desc">Integrating Physical AI models into industrial automation testbeds.</p>
+                    </div>
+                  </div>
+
+                  <!-- 12. Kamil Buczyński (Portrait) -->
+                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://www.linkedin.com/posts/kamil-buczy%C5%84ski-102843301_seeedstudio-rebotarm-seeedprojectofthemonth-ugcPost-7485297094715461633-RV_6', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/reBot_grasp_fruit.png" alt="Kamil Buczyński Full Stack Robotics Lab" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Kamil Buczyński</div>
+                      <h4 class="dev-card-title">Project of the Month</h4>
+                      <p class="dev-card-desc">Seeed Studio community project spotlight: full-stack arm control.</p>
+                    </div>
+                  </div>
+
+                  <!-- 13. Daniel Dorado (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.linkedin.com/posts/doradodaniel_computervision-spatialai-sim2real-share-7474727487374184448-NhwX', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/Daniel_Dorado.jpg" alt="Daniel Dorado Spatial AI Vision" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Daniel Dorado</div>
+                      <h4 class="dev-card-title">Spatial AI & Sim2Real</h4>
+                      <p class="dev-card-desc">Computer vision, spatial AI, and ROS 2 diagnostics integration.</p>
+                    </div>
+                  </div>
+
+                  <!-- 14. Asier Arranz (Medium) -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://www.linkedin.com/posts/asierarranz_nvidia-physicalai-isaaclab-ugcPost-7480271721942417408-YNwu', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/Groot_N1.7.png" alt="Asier Arranz NVIDIA Isaac Lab GPU AI" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Asier Arranz</div>
+                      <h4 class="dev-card-title">NVIDIA Isaac Lab Physical AI</h4>
+                      <p class="dev-card-desc">NVIDIA Isaac Lab reinforcement learning policy trained on reBot.</p>
+                    </div>
+                  </div>
+
+                  <!-- 15. Ed Henderson Demo 2 (Wide) -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Henderson_2.png" alt="Ed Henderson Dual Arm Teleop" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
+                      <h4 class="dev-card-title">Dual Arm Teleop Demo</h4>
+                      <p class="dev-card-desc">Dual reBot arm bilateral teleoperation & imitation learning.</p>
+                    </div>
+                  </div>
+
+                  <!-- Duplicated 15 Cards for Seamless Infinite Horizontal Loop -->
+                  <!-- 1 Dup -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/new-writeup-1778618527713', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/GEM-4.png" alt="GEM-4 Gemma Embodied AI" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-kaggle"></i> GEM-4 (Kaggle)</div>
+                      <h4 class="dev-card-title">Gemma Physical Assistance</h4>
+                      <p class="dev-card-desc">Gemma Embodied 4 Physical Assistance AI agent built for reBot Arm.</p>
+                    </div>
+                  </div>
+
+                  <!-- 2 Dup -->
+                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/Linyan_Fu/status/2056383947341525180', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Linyan.png" alt="Linyan Fu Sim2Real Policy" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Linyan Fu</div>
+                      <h4 class="dev-card-title">Sim2Real Policy Deployment</h4>
+                      <p class="dev-card-desc">Zero-shot Sim2Real deployment and vision-guided control on reBot Arm.</p>
+                    </div>
+                  </div>
+
+                  <!-- 3 Dup -->
+                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://x.com/Apheth_DAlmeida/status/2053503164507476096', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Sameer.png" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Apheth D Almeida</div>
+                      <h4 class="dev-card-title">6 DoF Kinematic Teleop</h4>
+                      <p class="dev-card-desc">Real-time inverse kinematics and teleoperation pipeline for reBot.</p>
+                    </div>
+                  </div>
+
+                  <!-- 4 Dup -->
+                  <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/DhruvDiddi/status/2046605015008383284', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Diddi.png" alt="Dhruv Diddi Pick & Place" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Dhruv Diddi</div>
+                      <h4 class="dev-card-title">Autonomous Pick & Place</h4>
+                      <p class="dev-card-desc">3D vision-guided autonomous pick & place manipulation demo.</p>
+                    </div>
+                  </div>
+
+                  <!-- 5 Dup -->
+                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
+                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Henderson.jpg" alt="Ed Henderson LeRobot Policy" class="dev-card-img">
+                    <div class="dev-card-overlay">
+                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
+                      <h4 class="dev-card-title">LeRobot Integration</h4>
+                      <p class="dev-card-desc">Hugging Face LeRobot policy training & deployment on reBot B601.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item 02: Co-Create with Seeed -->
+          <div class="hub-accordion-item" id="cocreate">
+            <div class="hub-accordion-header" onclick="toggleHubAccordion('cocreate')">
+              <div class="hub-accordion-title-group">
+                <h3 class="hub-accordion-title">
+                  <i class="fas fa-hands-helping" style="color: var(--nv-green); font-size: 1.1rem;"></i>
+                  02 Co-Create with Seeed
+                </h3>
+                <p class="hub-accordion-subtitle">Join Seeed's global community, project calls, and partnership programs</p>
+              </div>
+              <div class="hub-accordion-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            
+            <div class="hub-accordion-content">
+              <div class="cocreate-wrapper">
+                
+                <!-- 2 Co-Creation Event Cards -->
+                <div class="cocreate-cards-grid">
+                  
+                  <!-- Left Card: Physical AI Project of the Month -->
+                  <a href="image/75403608-03a0-42d4-b571-a07e64e6945a.png" target="_blank" rel="noopener noreferrer" class="cocreate-card">
+                    <div class="cocreate-img-box">
+                      <img src="image/75403608-03a0-42d4-b571-a07e64e6945a.png" alt="Physical AI Project of the Month">
+                    </div>
+                  </a>
+
+                  <!-- Right Card: Global Physical AI Workshop Partnership Program -->
+                  <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="cocreate-card">
+                    <div class="cocreate-img-box">
+                      <img src="image/20260819-180724.jpg" alt="Global Physical AI Workshop Partnership Program">
+                    </div>
+                  </a>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
 
     <!-- ==========================================================================
          Specification Module Section (Official Uploaded Assets)
@@ -2379,559 +3566,141 @@
       </div>
     </section>
 
+    
+
+    
     <!-- ==========================================================================
-         Developer Hub Module Section (Collapsible Accordion List)
+         F & Q Section
          ========================================================================== -->
-    <section class="developer-hub-section" id="developer-hub">
+    <section class="faq-section" id="faq">
       <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem;">
         
         <!-- Section Header -->
-        <div class="section-title-group" style="text-align: center; margin: 0 auto 3rem;">
-          <h2 class="section-main-title">Developer Hub</h2>
-          <p class="section-subtitle">Explore projects, tutorials, and co-creation opportunities with global developers</p>
+        <div class="section-title-group" style="text-align: center; margin: 0 auto 3.5rem;">
+          <h2 class="section-main-title">F & Q</h2>
+          <p class="section-subtitle">Everything you need to know about reBot Arm, open-source resources, and getting started</p>
         </div>
 
-        <!-- Accordion List -->
-        <div class="hub-accordion-container">
+        <!-- FAQ Accordion Container -->
+        <div class="faq-accordion-container">
           
-          <!-- Accordion Item 01: See What You Can Build -->
-          <div class="hub-accordion-item" id="hub-item-01">
-            <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-01')">
-              <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title">
-                  <i class="fas fa-cubes" style="color: var(--nv-green); font-size: 1.1rem;"></i>
-                  01 See What You Can Build
-                </h3>
-                <p class="hub-accordion-subtitle">Explore real-world projects and creative builds from global developers</p>
-              </div>
-              <div class="hub-accordion-icon">
-                <i class="fas fa-chevron-down"></i>
-              </div>
+          <!-- Q1 -->
+          <div class="faq-item" id="faq-01">
+            <div class="faq-header" onclick="toggleFaq('faq-01')">
+              <span class="faq-num">01</span>
+              <h3 class="faq-question">What's the difference between reBot Arm DM and RS? Which one should I choose?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
-            
-            <div class="hub-accordion-content">
-              <!-- Horizontal Auto-Scroll Marquee Carousel (15 Cards + Duplicated Set for Infinite Loop) -->
-              <div class="dev-marquee-wrapper">
-                <div class="dev-marquee-track">
-                  
-                  <!-- 1. GEM-4 (Wide) -->
-                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/new-writeup-1778618527713', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/GEM-4.png" alt="GEM-4 Gemma Embodied AI" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-kaggle"></i> GEM-4 (Kaggle)</div>
-                      <h4 class="dev-card-title">Gemma Physical Assistance</h4>
-                      <p class="dev-card-desc">Gemma Embodied 4 Physical Assistance AI agent built for reBot Arm.</p>
-                    </div>
-                  </div>
-
-                  <!-- 2. Linyan Fu (Medium) -->
-                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/Linyan_Fu/status/2056383947341525180', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Linyan.png" alt="Linyan Fu Sim2Real Policy" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Linyan Fu</div>
-                      <h4 class="dev-card-title">Sim2Real Policy Deployment</h4>
-                      <p class="dev-card-desc">Zero-shot Sim2Real deployment and vision-guided control on reBot Arm.</p>
-                    </div>
-                  </div>
-
-                  <!-- 3. Apheth D Almeida (Portrait) -->
-                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://x.com/Apheth_DAlmeida/status/2053503164507476096', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Sameer.png" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Apheth D Almeida</div>
-                      <h4 class="dev-card-title">6 DoF Kinematic Teleop</h4>
-                      <p class="dev-card-desc">Real-time inverse kinematics and teleoperation pipeline for reBot.</p>
-                    </div>
-                  </div>
-
-                  <!-- 4. Dhruv Diddi (Square) -->
-                  <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/DhruvDiddi/status/2046605015008383284', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Diddi.png" alt="Dhruv Diddi Pick & Place" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Dhruv Diddi</div>
-                      <h4 class="dev-card-title">Autonomous Pick & Place</h4>
-                      <p class="dev-card-desc">3D vision-guided autonomous pick & place manipulation demo.</p>
-                    </div>
-                  </div>
-
-                  <!-- 5. Ed Henderson (Wide) -->
-                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Henderson.jpg" alt="Ed Henderson LeRobot Policy" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
-                      <h4 class="dev-card-title">LeRobot Integration</h4>
-                      <p class="dev-card-desc">Hugging Face LeRobot policy training & deployment on reBot B601.</p>
-                    </div>
-                  </div>
-
-                  <!-- 6. Binh Pham (Medium) -->
-                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/pham_blnh/status/2061994096374505710', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Binh_Pham.png" alt="Binh Pham ROS 2 MoveIt" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Binh Pham</div>
-                      <h4 class="dev-card-title">ROS 2 MoveIt Pipeline</h4>
-                      <p class="dev-card-desc">High-precision ROS 2 motion planning and trajectory execution.</p>
-                    </div>
-                  </div>
-
-                  <!-- 7. FangTianChongHui (Portrait) -->
-                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://www.instagram.com/reel/DY7Ny8OPjVu/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_fangtianchonghui.png" alt="FangTianChongHui Actuator Joint Motor" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-instagram"></i> FangTianChongHui</div>
-                      <h4 class="dev-card-title">Precision Actuator Control</h4>
-                      <p class="dev-card-desc">High-torque joint motor response and precision manipulation demo.</p>
-                    </div>
-                  </div>
-
-                  <!-- 8. Xense YaoLin Dong (Square) -->
-                  <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/dong1505lin', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_xensedyl.png" alt="Xense YaoLin Dong Tactile Sensor" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Xense YaoLin Dong</div>
-                      <h4 class="dev-card-title">Tactile Sensing Integration</h4>
-                      <p class="dev-card-desc">Tactile sensor integration for adaptive force feedback grasping.</p>
-                    </div>
-                  </div>
-
-                  <!-- 9. yoshikai_man (Wide) -->
-                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/yoshikai_man/status/2079938975398244705', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/YOR_Car.png" alt="yoshikai_man Desktop Automation Workbench" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> yoshikai_man</div>
-                      <h4 class="dev-card-title">Desktop Assembly Bot</h4>
-                      <p class="dev-card-desc">Custom desktop automation & assembly workflow using reBot RS.</p>
-                    </div>
-                  </div>
-
-                  <!-- 10. Li Pengdong (hei-rebot-lift) (Medium) -->
-                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://github.com/lipengdong/hei-rebot-lift', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/hei-robot-lift-play.gif" alt="Li Pengdong Vertical Lift" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-github"></i> Li Pengdong</div>
-                      <h4 class="dev-card-title">hei-rebot-lift System</h4>
-                      <p class="dev-card-desc">Open-source z-axis vertical lifting platform expansion for reBot.</p>
-                    </div>
-                  </div>
-
-                  <!-- 11. Martin Kemka (Square) -->
-                  <div class="dev-project-card dev-card-square" onclick="window.open('https://www.linkedin.com/posts/activity-7484390995862781952-TX4m', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/VR_with_reBot.png" alt="Martin Kemka Industrial Automation" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Martin Kemka</div>
-                      <h4 class="dev-card-title">Industrial Automation AI</h4>
-                      <p class="dev-card-desc">Integrating Physical AI models into industrial automation testbeds.</p>
-                    </div>
-                  </div>
-
-                  <!-- 12. Kamil Buczyński (Portrait) -->
-                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://www.linkedin.com/posts/kamil-buczy%C5%84ski-102843301_seeedstudio-rebotarm-seeedprojectofthemonth-ugcPost-7485297094715461633-RV_6', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/reBot_grasp_fruit.png" alt="Kamil Buczyński Full Stack Robotics Lab" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Kamil Buczyński</div>
-                      <h4 class="dev-card-title">Project of the Month</h4>
-                      <p class="dev-card-desc">Seeed Studio community project spotlight: full-stack arm control.</p>
-                    </div>
-                  </div>
-
-                  <!-- 13. Daniel Dorado (Wide) -->
-                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.linkedin.com/posts/doradodaniel_computervision-spatialai-sim2real-share-7474727487374184448-NhwX', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/Daniel_Dorado.jpg" alt="Daniel Dorado Spatial AI Vision" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Daniel Dorado</div>
-                      <h4 class="dev-card-title">Spatial AI & Sim2Real</h4>
-                      <p class="dev-card-desc">Computer vision, spatial AI, and ROS 2 diagnostics integration.</p>
-                    </div>
-                  </div>
-
-                  <!-- 14. Asier Arranz (Medium) -->
-                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://www.linkedin.com/posts/asierarranz_nvidia-physicalai-isaaclab-ugcPost-7480271721942417408-YNwu', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/Groot_N1.7.png" alt="Asier Arranz NVIDIA Isaac Lab GPU AI" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-linkedin"></i> Asier Arranz</div>
-                      <h4 class="dev-card-title">NVIDIA Isaac Lab Physical AI</h4>
-                      <p class="dev-card-desc">NVIDIA Isaac Lab reinforcement learning policy trained on reBot.</p>
-                    </div>
-                  </div>
-
-                  <!-- 15. Ed Henderson Demo 2 (Wide) -->
-                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Henderson_2.png" alt="Ed Henderson Dual Arm Teleop" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
-                      <h4 class="dev-card-title">Dual Arm Teleop Demo</h4>
-                      <p class="dev-card-desc">Dual reBot arm bilateral teleoperation & imitation learning.</p>
-                    </div>
-                  </div>
-
-                  <!-- Duplicated 15 Cards for Seamless Infinite Horizontal Loop -->
-                  <!-- 1 Dup -->
-                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/new-writeup-1778618527713', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/GEM-4.png" alt="GEM-4 Gemma Embodied AI" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-kaggle"></i> GEM-4 (Kaggle)</div>
-                      <h4 class="dev-card-title">Gemma Physical Assistance</h4>
-                      <p class="dev-card-desc">Gemma Embodied 4 Physical Assistance AI agent built for reBot Arm.</p>
-                    </div>
-                  </div>
-
-                  <!-- 2 Dup -->
-                  <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/Linyan_Fu/status/2056383947341525180', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Linyan.png" alt="Linyan Fu Sim2Real Policy" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Linyan Fu</div>
-                      <h4 class="dev-card-title">Sim2Real Policy Deployment</h4>
-                      <p class="dev-card-desc">Zero-shot Sim2Real deployment and vision-guided control on reBot Arm.</p>
-                    </div>
-                  </div>
-
-                  <!-- 3 Dup -->
-                  <div class="dev-project-card dev-card-portrait" onclick="window.open('https://x.com/Apheth_DAlmeida/status/2053503164507476096', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Sameer.png" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Apheth D Almeida</div>
-                      <h4 class="dev-card-title">6 DoF Kinematic Teleop</h4>
-                      <p class="dev-card-desc">Real-time inverse kinematics and teleoperation pipeline for reBot.</p>
-                    </div>
-                  </div>
-
-                  <!-- 4 Dup -->
-                  <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/DhruvDiddi/status/2046605015008383284', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Diddi.png" alt="Dhruv Diddi Pick & Place" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Dhruv Diddi</div>
-                      <h4 class="dev-card-title">Autonomous Pick & Place</h4>
-                      <p class="dev-card-desc">3D vision-guided autonomous pick & place manipulation demo.</p>
-                    </div>
-                  </div>
-
-                  <!-- 5 Dup -->
-                  <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
-                    <img src="https://raw.githubusercontent.com/Seeed-Projects/reBot-DevArm/main/community/from_Henderson.jpg" alt="Ed Henderson LeRobot Policy" class="dev-card-img">
-                    <div class="dev-card-overlay">
-                      <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
-                      <h4 class="dev-card-title">LeRobot Integration</h4>
-                      <p class="dev-card-desc">Hugging Face LeRobot policy training & deployment on reBot B601.</p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+            <div class="faq-answer">
+              <p>The DM version uses Damiao actuators (DM4310 / DM4340P) with a 1.5 kg rated payload and &plusmn;0.2 mm repeatability &mdash; ideal for beginners, education, and lightweight projects. The RS version uses RobStride actuators (00 / 06) with a 2.5 kg rated payload, &plusmn;0.1 mm repeatability, and higher torque &mdash; built for research labs and lightweight industrial automation. Not sure? Start with DM if you're learning, go with RS if you need precision and payload. Check the spec comparison table above for details.</p>
             </div>
           </div>
 
-          <!-- Accordion Item 02: Getting Started now -->
-          <div class="hub-accordion-item" id="hub-item-02">
-            <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-02')">
-              <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title">
-                  <i class="fas fa-rocket" style="color: var(--nv-green); font-size: 1.1rem;"></i>
-                  02 Getting Started now
-                </h3>
-                <p class="hub-accordion-subtitle">Comprehensive getting-started guides for both DM and RS actuator editions</p>
-              </div>
-              <div class="hub-accordion-icon">
-                <i class="fas fa-chevron-down"></i>
-              </div>
+          <!-- Q2 -->
+          <div class="faq-item" id="faq-02">
+            <div class="faq-header" onclick="toggleFaq('faq-02')">
+              <span class="faq-num">02</span>
+              <h3 class="faq-question">Is reBot Arm fully open-source? What exactly is open?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
-            
-            <div class="hub-accordion-content">
-              <div class="getting-started-grid">
-                
-                <!-- Left Column: reBot B601-DM Robotic Arm -->
-                <div class="gs-column gs-column-dm">
-                  <div class="gs-header">
-                    <div class="gs-title-row">
-                      <div class="gs-model-title">
-                        <i class="fas fa-microchip" style="color: var(--nv-green);"></i>
-                        reBot B601-DM Robotic Arm
-                      </div>
-                      <span class="gs-step-badge gs-tag-accent">Damiao Actuator</span>
-                    </div>
-                    <p class="gs-model-subtitle">Ideal for Damiao motor edition users to learn arm control, LeRobot, Pinocchio, and ROS 2</p>
-                  </div>
-
-                  <!-- 3 Info Cards -->
-                  <div class="gs-info-grid">
-                    <div class="gs-info-card">
-                      <div class="gs-info-label"><i class="fas fa-users" style="color: var(--nv-green); margin-right: 4px;"></i> Target Audience</div>
-                      <div class="gs-info-text">Users of B601-DM arm who want to learn robotic arm control and AI data collection</div>
-                    </div>
-                    <div class="gs-info-card">
-                      <div class="gs-info-label"><i class="fas fa-bullseye" style="color: var(--nv-green); margin-right: 4px;"></i> Learning Goals</div>
-                      <div class="gs-info-text">Master driver setup, kinematics modeling, LeRobot data collection, and vision-guided grasping demos</div>
-                    </div>
-                    <div class="gs-info-card">
-                      <div class="gs-info-label"><i class="fas fa-route" style="color: var(--nv-green); margin-right: 4px;"></i> Recommended Order</div>
-                      <div class="gs-info-text">Quick Start → LeRobot → Pinocchio → Vision Grasping → ROS 2</div>
-                    </div>
-                  </div>
-
-                  <!-- Step List -->
-                  <div class="gs-step-list">
-                    
-                    <!-- Step 1 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_b601_dm_getting_started/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">1</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">Quick Start</div>
-                          <span class="gs-step-badge" style="background: rgba(141, 195, 31, 0.2); color: var(--nv-green);">Essential</span>
-                        </div>
-                        <p class="gs-step-desc">Check power supply, CAN communication, driver environment, and basic movement to verify arm hardware status.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 2 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_lerobot/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">2</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">LeRobot Data Collection</div>
-                          <span class="gs-step-badge" style="background: rgba(0, 210, 255, 0.15); color: #00D2FF;">AI Data</span>
-                        </div>
-                        <p class="gs-step-desc">Use LeRobot for teleoperation, data recording, and imitation learning dataset preparation.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 3 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_pinocchio_meshcat/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">3</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">Pinocchio & Meshcat</div>
-                          <span class="gs-step-badge" style="background: rgba(255, 170, 0, 0.15); color: #FFAA00;">Control Basics</span>
-                        </div>
-                        <p class="gs-step-desc">Learn arm model loading, visualization, forward/inverse kinematics, and joint space control basics.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 4 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_grasping_demo/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">4</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">Vision Grasping Demo</div>
-                          <span class="gs-step-badge" style="background: rgba(186, 85, 211, 0.15); color: #BA55D3;">Application</span>
-                        </div>
-                        <p class="gs-step-desc">Combine robotic arm with vision algorithms to perform object grasping in real-world scenarios.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 5 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_ros2_integration/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">5</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">ROS 2 Integration</div>
-                          <span class="gs-step-badge" style="background: rgba(50, 205, 50, 0.15); color: #32CD32;">System Integration</span>
-                        </div>
-                        <p class="gs-step-desc">Integrate the arm into ROS 2 for seamless combination with MoveIt, perception nodes, and system applications.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 6 -->
-                    <a href="https://rebot-devarm.w0x7ce.eu/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">6</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">Web Simulator Development</div>
-                          <span class="gs-step-badge" style="background: rgba(255, 99, 71, 0.15); color: #FF6347;">Simulation Dev</span>
-                        </div>
-                        <p class="gs-step-desc">Learn integrated development with Web Simulator and ROS 2/MuJoCo for synchronized virtual and physical control.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                  </div>
-                </div>
-
-                <!-- Right Column: reBot B601-RS Robotic Arm -->
-                <div class="gs-column gs-column-rs">
-                  <div class="gs-header">
-                    <div class="gs-title-row">
-                      <div class="gs-model-title">
-                        <i class="fas fa-cogs" style="color: #00D2FF;"></i>
-                        reBot B601-RS Robotic Arm
-                      </div>
-                      <span class="gs-step-badge gs-tag-accent">Robstride Actuator</span>
-                    </div>
-                    <p class="gs-model-subtitle">Ideal for beginner arm setup, teleoperation, vision grasping, ROS 2 integration, and AI data collection</p>
-                  </div>
-
-                  <!-- 3 Info Cards -->
-                  <div class="gs-info-grid">
-                    <div class="gs-info-card">
-                      <div class="gs-info-label"><i class="fas fa-users" style="color: #00D2FF; margin-right: 4px;"></i> Target Audience</div>
-                      <div class="gs-info-text">First-time reBot Arm users who want to quickly achieve real arm control</div>
-                    </div>
-                    <div class="gs-info-card">
-                      <div class="gs-info-label"><i class="fas fa-bullseye" style="color: #00D2FF; margin-right: 4px;"></i> Learning Goals</div>
-                      <div class="gs-info-text">From hardware power-on to LeRobot teleoperation, vision grasping, and ROS 2 integration</div>
-                    </div>
-                    <div class="gs-info-card">
-                      <div class="gs-info-label"><i class="fas fa-route" style="color: #00D2FF; margin-right: 4px;"></i> Recommended Order</div>
-                      <div class="gs-info-text">Quick Start → LeRobot → Pinocchio → Vision Grasping → ROS 2</div>
-                    </div>
-                  </div>
-
-                  <!-- Step List -->
-                  <div class="gs-step-list">
-                    
-                    <!-- Step 1 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">1</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">Quick Start</div>
-                          <span class="gs-step-badge" style="background: rgba(0, 210, 255, 0.2); color: #00D2FF;">Essential</span>
-                        </div>
-                        <p class="gs-step-desc">Complete unboxing, wiring, power supply, driver check, and basic motion tests to ensure normal operation.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 2 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_lerobot/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">2</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">LeRobot Teleop & Data Collection</div>
-                          <span class="gs-step-badge" style="background: rgba(141, 195, 31, 0.15); color: var(--nv-green);">Data Collection</span>
-                        </div>
-                        <p class="gs-step-desc">Learn teleoperation data collection via leader-follower arms for imitation learning and embodied AI tasks.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 3 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_pinocchio_meshcat/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">3</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">Pinocchio Kinematics Visualization</div>
-                          <span class="gs-step-badge" style="background: rgba(255, 170, 0, 0.15); color: #FFAA00;">Advanced Control</span>
-                        </div>
-                        <p class="gs-step-desc">Understand arm kinematics models, joints, coordinate frames, and forward/inverse kinematics for control algorithms.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 4 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_dm_grasping_demo/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">4</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">Vision Grasping Demo</div>
-                          <span class="gs-step-badge" style="background: rgba(186, 85, 211, 0.15); color: #BA55D3;">Application</span>
-                        </div>
-                        <p class="gs-step-desc">Combine camera perception, target recognition, and pose generation to perform real object grasping.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 5 -->
-                    <a href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_ros2_integration/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">5</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">ROS 2 Integration</div>
-                          <span class="gs-step-badge" style="background: rgba(50, 205, 50, 0.15); color: #32CD32;">System Integration</span>
-                        </div>
-                        <p class="gs-step-desc">Integrate arm into the ROS 2 ecosystem for seamless combination with perception, planning, and simulation.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 6 -->
-                    <a href="https://rebot-devarm.w0x7ce.eu/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">6</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">Web Simulator Development</div>
-                          <span class="gs-step-badge" style="background: rgba(255, 99, 71, 0.15); color: #FF6347;">Simulation Dev</span>
-                        </div>
-                        <p class="gs-step-desc">Learn integrated development with Web Simulator and ROS 2/MuJoCo for synchronized virtual and physical control.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 7 -->
-                    <a href="https://github.com/Seeed-Projects/reBot-Isaacsim" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">7</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">Isaac Sim Integration</div>
-                          <span class="gs-step-badge" style="background: rgba(141, 195, 31, 0.15); color: var(--nv-green);">Simulation</span>
-                        </div>
-                        <p class="gs-step-desc">Integrate the arm into Isaac Sim for advanced simulation and virtual-to-real synchronization.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                    <!-- Step 8 -->
-                    <a href="https://wiki.seeedstudio.com/cn/robstride_control/" target="_blank" rel="noopener noreferrer" class="gs-step-item">
-                      <div class="gs-step-num">8</div>
-                      <div class="gs-step-content">
-                        <div class="gs-step-title-row">
-                          <div class="gs-step-title">MIT Position Control</div>
-                          <span class="gs-step-badge" style="background: rgba(0, 210, 255, 0.15); color: #00D2FF;">Advanced Control</span>
-                        </div>
-                        <p class="gs-step-desc">Get started with MIT position control on reBot Arm B601-RS to master fundamental control algorithms.</p>
-                      </div>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </a>
-
-                  </div>
-                </div>
-
-              </div>
+            <div class="faq-answer">
+              <p>Yes &mdash; reBot Arm is fully open-source. This includes hardware design files, firmware, ROS2 drivers, MuJoCo / Isaac Sim simulation models, and all example code. Everything is hosted on our GitHub repository. You're free to modify, customize, and build on top of it for your own projects.</p>
             </div>
           </div>
 
-          <!-- Accordion Item 03: Co-Create with Seeed -->
-          <div class="hub-accordion-item" id="hub-item-03">
-            <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-03')">
-              <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title">
-                  <i class="fas fa-hands-helping" style="color: var(--nv-green); font-size: 1.1rem;"></i>
-                  03 Co-Create with Seeed
-                </h3>
-                <p class="hub-accordion-subtitle">Join Seeed's global community, project calls, and partnership programs</p>
-              </div>
-              <div class="hub-accordion-icon">
-                <i class="fas fa-chevron-down"></i>
-              </div>
+          <!-- Q3 -->
+          <div class="faq-item" id="faq-03">
+            <div class="faq-header" onclick="toggleFaq('faq-03')">
+              <span class="faq-num">03</span>
+              <h3 class="faq-question">Who is reBot Arm for? Can a beginner get started with it?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
-            
-            <div class="hub-accordion-content">
-              <div class="cocreate-wrapper">
-                
-                <!-- 2 Co-Creation Event Cards -->
-                <div class="cocreate-cards-grid">
-                  
-                  <!-- Left Card: Physical AI Project of the Month -->
-                  <a href="image/75403608-03a0-42d4-b571-a07e64e6945a.png" target="_blank" rel="noopener noreferrer" class="cocreate-card">
-                    <div class="cocreate-img-box">
-                      <img src="image/75403608-03a0-42d4-b571-a07e64e6945a.png" alt="Physical AI Project of the Month">
-                    </div>
-                  </a>
+            <div class="faq-answer">
+              <p>reBot Arm is designed for developers, researchers, students, and AI innovators &mdash; anyone who wants to explore physical AI and robotics. If you're new to robotics, absolutely: our Learning Physical AI course walks you from the very basics all the way to VLA model deployment, with 19 modules and 20+ hours of hands-on content.</p>
+            </div>
+          </div>
 
-                  <!-- Right Card: Global Physical AI Workshop Partnership Program -->
-                  <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="cocreate-card">
-                    <div class="cocreate-img-box">
-                      <img src="image/20260819-180724.jpg" alt="Global Physical AI Workshop Partnership Program">
-                    </div>
-                  </a>
+          <!-- Q4 -->
+          <div class="faq-item" id="faq-04">
+            <div class="faq-header" onclick="toggleFaq('faq-04')">
+              <span class="faq-num">04</span>
+              <h3 class="faq-question">What programming languages and frameworks does reBot Arm support?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>reBot Arm supports Python, ROS2 Humble, and the LeRobot framework out of the box. You can control it directly from your browser via SenseCraft, write custom Python scripts, or integrate with ROS2 for more advanced workflows. It's also compatible with MuJoCo and NVIDIA Isaac Sim for simulation-to-real pipelines.</p>
+            </div>
+          </div>
 
-                </div>
+          <!-- Q5 -->
+          <div class="faq-item" id="faq-05">
+            <div class="faq-header" onclick="toggleFaq('faq-05')">
+              <span class="faq-num">05</span>
+              <h3 class="faq-question">Which depth cameras are compatible? Do I need to buy one separately?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>reBot Arm is officially tested and validated with Orbbec Gemini 2, Orbbec Gemini 336, Intel RealSense D435i, and RealSense D405. All are available as add-on accessories &mdash; see our accessories section below. You can also use your own USB camera that supports standard video capture.</p>
+            </div>
+          </div>
 
-              </div>
+          <!-- Q6 -->
+          <div class="faq-item" id="faq-06">
+            <div class="faq-header" onclick="toggleFaq('faq-06')">
+              <span class="faq-num">06</span>
+              <h3 class="faq-question">What kind of computer do I need? Any GPU requirements?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>For basic control and learning, any modern laptop will do. For AI training and VLA model deployment, we recommend a machine with an NVIDIA GPU (8GB+ VRAM), or our reComputer J3011 edge AI box for on-device deployment. And if you just want to try things out first, our browser-based MuJoCo simulator runs entirely in your browser &mdash; no local setup needed.</p>
+            </div>
+          </div>
+
+          <!-- Q7 -->
+          <div class="faq-item" id="faq-07">
+            <div class="faq-header" onclick="toggleFaq('faq-07')">
+              <span class="faq-num">07</span>
+              <h3 class="faq-question">What's included in the Learning Physical AI course? Is it free with the arm?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>The Learning Physical AI course is a paid program with 19 detailed modules across 5 core chapters, totaling 20+ hours of content. It covers everything from basic machine vision to building a full Sim-to-Real VLA pipeline using reBot Arm and NVIDIA Isaac. You can purchase it separately, or grab the Arm + Course bundle for a discounted price &mdash; see the course section above.</p>
+            </div>
+          </div>
+
+          <!-- Q8 -->
+          <div class="faq-item" id="faq-08">
+            <div class="faq-header" onclick="toggleFaq('faq-08')">
+              <span class="faq-num">08</span>
+              <h3 class="faq-question">Are there tutorials and community support available?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Absolutely. We have comprehensive Wiki documentation with separate getting-started guides for both DM and RS editions. Our open-source community is active on GitHub, Discord, and WeChat groups. We also run a monthly project showcase and global workshop program &mdash; check out the Developer Hub to join.</p>
+            </div>
+          </div>
+
+          <!-- Q9 -->
+          <div class="faq-item" id="faq-09">
+            <div class="faq-header" onclick="toggleFaq('faq-09')">
+              <span class="faq-num">09</span>
+              <h3 class="faq-question">What is sim-to-real? Can I try reBot Arm without buying the hardware first?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Sim-to-real means you can train and test your algorithms in simulation first, then deploy them directly to the real robot with minimal changes. And yes &mdash; you can try our MuJoCo simulator right in your browser for free. It's a fully interactive virtual reBot Arm. Launch the simulator to start exploring.</p>
+            </div>
+          </div>
+
+          <!-- Q10 -->
+          <div class="faq-item" id="faq-10">
+            <div class="faq-header" onclick="toggleFaq('faq-10')">
+              <span class="faq-num">10</span>
+              <h3 class="faq-question">What's the shipping and warranty policy?</h3>
+              <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>We ship worldwide. Orders typically ship within 3&ndash;5 business days, and delivery time depends on your location (usually 7&ndash;14 days for most countries). reBot Arm comes with a 1-year limited warranty covering manufacturing defects. If you have any issues, our support team is here to help &mdash; reach us through GitHub Issues, Discord, or our support email.</p>
             </div>
           </div>
 
@@ -2939,6 +3708,7 @@
 
       </div>
     </section>
+
 
     <!-- Standalone Community & Developer Channels Section (Placed Directly Above Footer) -->
     <section class="standalone-community-section" style="padding: 3rem 0 2rem; background-color: var(--nv-dark-bg);">
@@ -3013,7 +3783,29 @@
     </div>
   </footer>
 
-  <!-- Main JavaScript File -->
-  <script src="js/app.js"></script>
+  <!-- Three.js Engine & STLLoader (Local + CDN Fallback) -->
+  <script src="js/lib/three.min.js"></script>
+  <script src="js/lib/STLLoader.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"><\/script>');
+    }
+  </script>
+
+  <!-- Main JavaScript File with Cache-Buster v55 -->
+  <script src="js/app.js?v=20260909_v55"></script>
+  <script>
+
+    function toggleFaq(id) {
+      const item = document.getElementById(id);
+      if (!item) return;
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    }
+  </script>
 </body>
 </html>

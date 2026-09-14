@@ -4,26 +4,26 @@
    ========================================================================== */
 
 :root {
-  /* Color Tokens */
-  --nv-green: #8DC31F;
-  --nv-green-hover: #9ce220;
-  --nv-green-glow: rgba(141, 195, 31, 0.25);
-  --nv-dark-bg: #0d1012;
-  --nv-surface-1: #15191c;
-  --nv-surface-2: #1e2327;
-  --nv-surface-3: #282f34;
-  --nv-border: #2d353b;
-  --nv-border-light: #3e4850;
+  /* Color Tokens - Minimalist White Theme */
+  --nv-green: #68A600;
+  --nv-green-hover: #578C00;
+  --nv-green-glow: rgba(104, 166, 0, 0.15);
+  --nv-dark-bg: #FFFFFF;
+  --nv-surface-1: #FFFFFF;
+  --nv-surface-2: #F8FAFC;
+  --nv-surface-3: #F1F5F9;
+  --nv-border: #E2E8F0;
+  --nv-border-light: #CBD5E1;
   
-  --text-primary: #f0f4f7;
-  --text-secondary: #a0acb5;
-  --text-muted: #677580;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
 
-  --alert-note-bg: rgba(33, 150, 243, 0.08);
+  --alert-note-bg: #eff6ff;
   --alert-note-border: #2196f3;
-  --alert-warn-bg: rgba(255, 152, 0, 0.08);
+  --alert-warn-bg: #fff7ed;
   --alert-warn-border: #ff9800;
-  --alert-caution-bg: rgba(244, 67, 54, 0.08);
+  --alert-caution-bg: #fef2f2;
   --alert-caution-border: #f44336;
 
   --sidebar-width: 300px;
@@ -36,15 +36,15 @@
 
 /* Light Theme Overrides */
 [data-theme="light"] {
-  --nv-dark-bg: #f8fafc;
+  --nv-dark-bg: #ffffff;
   --nv-surface-1: #ffffff;
-  --nv-surface-2: #f1f5f9;
-  --nv-surface-3: #e2e8f0;
+  --nv-surface-2: #f8fafc;
+  --nv-surface-3: #f1f5f9;
   --nv-border: #e2e8f0;
   --nv-border-light: #cbd5e1;
   
   --text-primary: #0f172a;
-  --text-secondary: #334155;
+  --text-secondary: #475569;
   --text-muted: #64748b;
 
   --alert-note-bg: #eff6ff;
