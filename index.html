@@ -7,9 +7,13 @@
   <meta name="description" content="Fully Open-Source 6+1 DoF Robotic Arm Kit Built for Developers, Researchers, and AI Innovators.">
   <meta name="theme-color" content="#ffffff">
 
-  <!-- Google Fonts & Icons -->
+  <!-- Resource Hints & Google Fonts / Icons -->
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -2808,7 +2812,7 @@
 
             <!-- Media Preview -->
             <div class="scenario-media-wrapper">
-              <img src="image/DJIc.png" alt="Learning Physical AI NVIDIA DLI Course" class="scenario-img">
+              <img src="image/DJIc.png" alt="Learning Physical AI NVIDIA DLI Course" class="scenario-img" loading="lazy" decoding="async">
             </div>
 
             <!-- Action Button -->
@@ -2853,7 +2857,7 @@
 
             <!-- Media Preview -->
             <div class="scenario-media-wrapper">
-              <img src="image/industrial_data_box.png" alt="Industrial Data Box & Local Edge Deployment Showcase" class="scenario-img">
+              <img src="image/industrial_data_box.png" alt="Industrial Data Box & Local Edge Deployment Showcase" class="scenario-img" loading="lazy" decoding="async">
             </div>
 
             <!-- Action Button -->
@@ -2885,7 +2889,7 @@
           <!-- Left Column: Lightweight 3D Physics Simulation Canvas with 2 Buttons -->
           <div class="sim-left-viewport">
             <div class="sim-canvas-container" style="position: relative; width: 100%; height: 520px; border-radius: 16px; overflow: hidden; background: #0F172A;">
-              <iframe id="sim-mujoco-iframe" src="./sim_web/index.html" style="width: 100%; height: 100%; border: none; outline: none; background: #0F172A;" title="reBot Arm MuJoCo WASM Physics Simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+              <iframe id="sim-mujoco-iframe" data-src="./sim_web/index.html" loading="lazy" style="width: 100%; height: 100%; border: none; outline: none; background: #0F172A;" title="reBot Arm MuJoCo WASM Physics Simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
           </div>
 

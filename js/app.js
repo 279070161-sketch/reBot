@@ -16,6 +16,7 @@ function initApp() {
   initHeroArmMouseTracker();
   initSimJengaArmAnimation();
   initVideoModalHandler();
+  initLazySimIframe();
 }
 
 if (document.readyState === 'loading') {
@@ -1672,4 +1673,34 @@ function initSimJengaArmAnimation() {
 
   handleResize();
   animatePhysicsSimulation();
+}
+
+/**
+ * Lazy load MuJoCo WASM Simulation iframe when scrolled into viewport
+ */
+function initLazySimIframe() {
+  const iframe = document.getElementById('sim-mujoco-iframe');
+  if (!iframe || !iframe.dataset.src) return;
+
+  const loadIframe = () => {
+    if (iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      delete iframe.dataset.src;
+    }
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadIframe();
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '300px 0px' });
+
+    observer.observe(iframe);
+  } else {
+    loadIframe();
+  }
 }
