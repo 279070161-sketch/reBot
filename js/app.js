@@ -17,6 +17,7 @@ function initApp() {
   initSimJengaArmAnimation();
   initVideoModalHandler();
   initLazySimIframe();
+  initVideoViewportController();
 }
 
 if (document.readyState === 'loading') {
@@ -999,8 +1000,24 @@ function initHeroArmMouseTracker() {
 
   // 7. Smooth Interactive Studio Arm Motion Loop
   let time = 0;
+  let isHeroArmVisible = true;
+
+  if ('IntersectionObserver' in window) {
+    const heroSection = document.querySelector('.unitree-hero-section') || canvas;
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const wasVisible = isHeroArmVisible;
+        isHeroArmVisible = entry.isIntersecting;
+        if (!wasVisible && isHeroArmVisible) {
+          requestAnimationFrame(animate);
+        }
+      });
+    }, { threshold: 0.05 });
+    heroObserver.observe(heroSection);
+  }
 
   function animate() {
+    if (!isHeroArmVisible) return;
     requestAnimationFrame(animate);
     time += 0.03;
 
@@ -1703,4 +1720,25 @@ function initLazySimIframe() {
   } else {
     loadIframe();
   }
+}
+
+/**
+ * Auto play/pause showcase videos based on viewport visibility
+ */
+function initVideoViewportController() {
+  const videos = document.querySelectorAll('.high-performance-section video, .video-card video');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.15 });
+
+  videos.forEach(v => videoObserver.observe(v));
 }
