@@ -851,46 +851,21 @@ function initHeroArmMouseTracker() {
       });
     }
 
-    // 1. Base Link (Black Anodized Metal Base)
+    // Outer Link Shell Mesh Models Only (Eliminates internal motor/gear sub-meshes for maximum load speed)
     loadSubMesh('models/meshes_rs/base_link.STL', baseBlackMat, baseLinkGroup);
-
-    // 2. Link 1 (Anodized Silver CNC Base Rotating Hub)
     loadSubMesh('models/meshes_rs/link1.STL', cncMetalMat, link1Group);
-
-    // 3. Link 2 (Shoulder Frame & Motors & Seeed Green Accent)
-    loadSubMesh('models/meshes_rs/motor_2_3.STL', motorMat, link2Group);
-    loadSubMesh('models/meshes_rs/cnc2.STL', cncMetalMat, link2Group);
-    loadSubMesh('models/meshes_rs/pla2_black.STL', motorMat, link2Group);
+    loadSubMesh('models/meshes_rs/link2.STL', cncMetalMat, link2Group);
     loadSubMesh('models/meshes_rs/pla2_green.STL', badgeYellowMat, link2Group, 10);
-
-    // 4. Link 3 (Upper Arm Frame & Motor & Seeed Yellow/Green Badge)
-    loadSubMesh('models/meshes_rs/cnc3.STL', cncMetalMat, link3Group);
-    loadSubMesh('models/meshes_rs/motor_4.STL', motorMat, link3Group);
-    loadSubMesh('models/meshes_rs/pla3_black_without_seeed_badge.STL', motorMat, link3Group);
-    loadSubMesh('models/meshes_rs/pla3_seeed_badge_with_counters.STL', badgeYellowMat, link3Group, 10);
-    loadSubMesh('models/meshes_rs/pla3_seeed_wordmark_backing.STL', motorMat, link3Group);
+    loadSubMesh('models/meshes_rs/link3.STL', cncMetalMat, link3Group);
     loadSubMesh('models/meshes_rs/pla3_green.STL', badgeYellowMat, link3Group, 10);
-
-    // 5. Link 4 (Forearm CNC Frame & Motor 5)
-    loadSubMesh('models/meshes_rs/cnc4.STL', cncMetalMat, link4Group);
-    loadSubMesh('models/meshes_rs/motor_5.STL', motorMat, link4Group);
-
-    // 6. Link 5 & 6 (Wrist & Gripper Head Yellow Accent)
-    loadSubMesh('models/meshes_rs/cnc5.STL', cncMetalMat, link5Group);
-    loadSubMesh('models/meshes_rs/motor_6.STL', motorMat, link5Group);
+    loadSubMesh('models/meshes_rs/link4.STL', cncMetalMat, link4Group);
+    loadSubMesh('models/meshes_rs/link5.STL', cncMetalMat, link5Group);
     loadSubMesh('models/meshes_rs/pla5_green.STL', badgeYellowMat, link5Group, 10);
     loadSubMesh('models/meshes_rs/link6.STL', motorMat, link6Group);
-
-    // 7. Gripper Head & End Effector
+    loadSubMesh('models/meshes_rs/gripper_end.STL', cncMetalMat, gripperEndGroup);
     loadSubMesh('models/meshes_rs/pla7_green.STL', badgeYellowMat, gripperEndGroup, 10);
-    loadSubMesh('models/meshes_rs/cnc7.STL', cncMetalMat, gripperEndGroup);
-    loadSubMesh('models/meshes_rs/motor_7.STL', motorMat, gripperEndGroup);
-
-    // 8. Gripper Parallel Claws
-    loadSubMesh('models/meshes_rs/cnc_left.STL', cncMetalMat, gripperLeftGroup);
-    loadSubMesh('models/meshes_rs/pla_left.STL', badgeYellowMat, gripperLeftGroup, 10);
-    loadSubMesh('models/meshes_rs/cnc_right.STL', cncMetalMat, gripperRightGroup);
-    loadSubMesh('models/meshes_rs/pla_right.STL', badgeYellowMat, gripperRightGroup, 10);
+    loadSubMesh('models/meshes_rs/gripper_left.STL', cncMetalMat, gripperLeftGroup);
+    loadSubMesh('models/meshes_rs/gripper_right.STL', cncMetalMat, gripperRightGroup);
   }
 
   // Sandbox Physics & FK Joint State Variables
