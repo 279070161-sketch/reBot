@@ -2888,10 +2888,13 @@
 
         <div class="sim-experience-card">
           
-          <!-- Left Column: Lightweight 3D Physics Simulation Canvas with 2 Buttons -->
+          <!-- Left Column: Auto-Looping 60fps Physics Simulation Video Showcase -->
           <div class="sim-left-viewport">
             <div class="sim-canvas-container" style="position: relative; width: 100%; height: 520px; border-radius: 16px; overflow: hidden; background: #0F172A;">
-              <iframe id="sim-mujoco-iframe" data-src="./sim_web/index.html" loading="lazy" style="width: 100%; height: 100%; border: none; outline: none; background: #0F172A;" title="reBot Arm MuJoCo WASM Physics Simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+              <video autoplay loop muted playsinline preload="metadata" style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="video/飞书20260818-111648.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
 
@@ -2899,7 +2902,7 @@
           <div class="sim-right-content">
             <h3 class="sim-content-title">MuJoCo 3D Simulation</h3>
             <p class="sim-content-desc">
-              Test the reBot Arm B601-RS digital twin with real-time 3D physics, trajectory drag, and multi-camera feeds directly in your browser.
+              Watch reBot Arm B601-RS digital twin executing real-time 3D physics trajectories, pick-and-place tasks, and multi-camera perception.
             </p>
 
             <!-- Feature Pills / Highlights Grid -->
@@ -2908,14 +2911,14 @@
                 <i class="fas fa-bolt"></i>
                 <div>
                   <strong>100Hz Physics</strong>
-                  <span>Real-time MuJoCo WASM solver</span>
+                  <span>Real-time MuJoCo dynamics solver</span>
                 </div>
               </div>
               <div class="sim-feature-item">
-                <i class="fas fa-hand-pointer"></i>
+                <i class="fas fa-cubes"></i>
                 <div>
-                  <strong>TCP Control</strong>
-                  <span>Drag end-effector & toggle gripper</span>
+                  <strong>Auto Trajectory</strong>
+                  <span>High-precision pick & place stacking</span>
                 </div>
               </div>
               <div class="sim-feature-item">
@@ -2937,7 +2940,7 @@
             <!-- Action Buttons Row -->
             <div class="sim-cta-row">
               <a href="https://yang-ci.github.io/Rebot_Arm_AGV/" target="_blank" rel="noopener noreferrer" class="sim-primary-btn">
-                <i class="fas fa-play"></i> Try Online Demo
+                <i class="fas fa-external-link-alt"></i> Open Full Web Simulator
               </a>
             </div>
           </div>
