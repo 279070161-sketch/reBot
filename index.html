@@ -2888,13 +2888,10 @@
 
         <div class="sim-experience-card">
           
-          <!-- Left Column: Auto-Looping 60fps Physics Simulation Video Showcase -->
+          <!-- Left Column: Interactive 3D Physics Simulation Canvas -->
           <div class="sim-left-viewport">
             <div class="sim-canvas-container" style="position: relative; width: 100%; height: 520px; border-radius: 16px; overflow: hidden; background: #0F172A;">
-              <video autoplay loop muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
-                <source src="video/mujoco_3d_loop.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+              <iframe id="sim-mujoco-iframe" src="./sim_web/index.html" style="width: 100%; height: 100%; border: none; outline: none; background: #0F172A;" title="reBot Arm MuJoCo WASM Physics Simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
           </div>
 
