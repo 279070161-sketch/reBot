@@ -820,7 +820,7 @@ function initHeroArmMouseTracker() {
   // 0. Procedural Instant Fallback Mesh (Guarantees arm is ALWAYS 100% visible)
   const fallbackGroup = new THREE.Group();
   fallbackGroup.scale.set(0.18, 0.18, 0.18);
-  armAssemblyGroup.add(fallbackGroup);
+  robotArmGroup.add(fallbackGroup);
 
   const fbBase = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.28, 0.08, 32), baseBlackMat);
   fbBase.rotation.x = Math.PI / 2;
@@ -830,25 +830,28 @@ function initHeroArmMouseTracker() {
   fbBody.position.set(0, 0.08, 0.25);
   fallbackGroup.add(fbBody);
 
-  let stlSuccessCount = 0;
-
   // Load Official Brand reBot B601-RS STL Composite Sub-Meshes into URDF Joint Groups
   if (typeof THREE.STLLoader !== 'undefined') {
     const stlLoader = new THREE.STLLoader();
+    const stlPromises = [];
+
+    // Hide arm assembly initially so parts do not pop in piece-by-piece
+    armAssemblyGroup.visible = false;
 
     function loadSubMesh(path, mat, targetGroup, renderOrder = 0) {
-      stlLoader.load(path, (geo) => {
-        geo.computeVertexNormals();
-        const mesh = new THREE.Mesh(geo, mat);
-        if (renderOrder) mesh.renderOrder = renderOrder;
-        targetGroup.add(mesh);
-        stlSuccessCount++;
-        if (stlSuccessCount > 3) {
-          fallbackGroup.visible = false;
-        }
-      }, undefined, (err) => {
-        console.warn('STL loading fallback active for path:', path, err);
+      const p = new Promise((resolve) => {
+        stlLoader.load(path, (geo) => {
+          geo.computeVertexNormals();
+          const mesh = new THREE.Mesh(geo, mat);
+          if (renderOrder) mesh.renderOrder = renderOrder;
+          targetGroup.add(mesh);
+          resolve(true);
+        }, undefined, (err) => {
+          console.warn('STL loading fallback active for path:', path, err);
+          resolve(false);
+        });
       });
+      stlPromises.push(p);
     }
 
     // 1. Base Link (Black Anodized Metal Base)
@@ -889,6 +892,12 @@ function initHeroArmMouseTracker() {
     loadSubMesh('models/meshes_rs/pla_left.STL', badgeYellowMat, gripperLeftGroup, 10);
     loadSubMesh('models/meshes_rs/cnc_right.STL', cncMetalMat, gripperRightGroup);
     loadSubMesh('models/meshes_rs/pla_right.STL', badgeYellowMat, gripperRightGroup, 10);
+
+    // Reveal the complete unified robotic arm atomically in 1 single frame when ALL STL files finish loading
+    Promise.all(stlPromises).then(() => {
+      fallbackGroup.visible = false;
+      armAssemblyGroup.visible = true;
+    });
   }
 
   // Sandbox Physics & FK Joint State Variables
