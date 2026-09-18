@@ -851,21 +851,44 @@ function initHeroArmMouseTracker() {
       });
     }
 
-    // Outer Link Shell Mesh Models Only (Eliminates internal motor/gear sub-meshes for maximum load speed)
+    // 1. Base Link (Black Anodized Metal Base)
     loadSubMesh('models/meshes_rs/base_link.STL', baseBlackMat, baseLinkGroup);
+
+    // 2. Link 1 (Anodized Silver CNC Base Rotating Hub)
     loadSubMesh('models/meshes_rs/link1.STL', cncMetalMat, link1Group);
-    loadSubMesh('models/meshes_rs/link2.STL', cncMetalMat, link2Group);
+
+    // 3. Link 2 (Shoulder Frame & Motors & Seeed Green Accent)
+    loadSubMesh('models/meshes_rs/motor_2_3.STL', motorMat, link2Group);
+    loadSubMesh('models/meshes_rs/cnc2.STL', cncMetalMat, link2Group);
+    loadSubMesh('models/meshes_rs/pla2_black.STL', motorMat, link2Group);
     loadSubMesh('models/meshes_rs/pla2_green.STL', badgeYellowMat, link2Group, 10);
-    loadSubMesh('models/meshes_rs/link3.STL', cncMetalMat, link3Group);
+
+    // 4. Link 3 (Upper Arm Frame & Motor & Seeed Yellow/Green Badge)
+    loadSubMesh('models/meshes_rs/cnc3.STL', cncMetalMat, link3Group);
+    loadSubMesh('models/meshes_rs/motor_4.STL', motorMat, link3Group);
+    loadSubMesh('models/meshes_rs/pla3_black_without_seeed_badge.STL', motorMat, link3Group);
     loadSubMesh('models/meshes_rs/pla3_green.STL', badgeYellowMat, link3Group, 10);
-    loadSubMesh('models/meshes_rs/link4.STL', cncMetalMat, link4Group);
-    loadSubMesh('models/meshes_rs/link5.STL', cncMetalMat, link5Group);
+
+    // 5. Link 4 (Forearm CNC Frame & Motor 5)
+    loadSubMesh('models/meshes_rs/cnc4.STL', cncMetalMat, link4Group);
+    loadSubMesh('models/meshes_rs/motor_5.STL', motorMat, link4Group);
+
+    // 6. Link 5 & 6 (Wrist & Gripper Head Yellow Accent)
+    loadSubMesh('models/meshes_rs/cnc5.STL', cncMetalMat, link5Group);
+    loadSubMesh('models/meshes_rs/motor_6.STL', motorMat, link5Group);
     loadSubMesh('models/meshes_rs/pla5_green.STL', badgeYellowMat, link5Group, 10);
     loadSubMesh('models/meshes_rs/link6.STL', motorMat, link6Group);
-    loadSubMesh('models/meshes_rs/gripper_end.STL', cncMetalMat, gripperEndGroup);
+
+    // 7. Gripper Head & End Effector
     loadSubMesh('models/meshes_rs/pla7_green.STL', badgeYellowMat, gripperEndGroup, 10);
-    loadSubMesh('models/meshes_rs/gripper_left.STL', cncMetalMat, gripperLeftGroup);
-    loadSubMesh('models/meshes_rs/gripper_right.STL', cncMetalMat, gripperRightGroup);
+    loadSubMesh('models/meshes_rs/cnc7.STL', cncMetalMat, gripperEndGroup);
+    loadSubMesh('models/meshes_rs/motor_7.STL', motorMat, gripperEndGroup);
+
+    // 8. Gripper Parallel Claws
+    loadSubMesh('models/meshes_rs/cnc_left.STL', cncMetalMat, gripperLeftGroup);
+    loadSubMesh('models/meshes_rs/pla_left.STL', badgeYellowMat, gripperLeftGroup, 10);
+    loadSubMesh('models/meshes_rs/cnc_right.STL', cncMetalMat, gripperRightGroup);
+    loadSubMesh('models/meshes_rs/pla_right.STL', badgeYellowMat, gripperRightGroup, 10);
   }
 
   // Sandbox Physics & FK Joint State Variables
@@ -918,19 +941,19 @@ function initHeroArmMouseTracker() {
 
       const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
 
-      currentTargetJ1 = clamp(dragStartJ1 - deltaX * 0.008, -2.8, 2.8);
-      currentTargetJ2 = clamp(dragStartJ2 - deltaY * 0.005, -0.2, 1.4);
-      currentTargetJ3 = clamp(dragStartJ3 + deltaY * 0.006, -1.95, 0.2);
-      currentTargetJ4 = clamp(dragStartJ4 - deltaY * 0.004, -1.2, 1.4);
+      currentTargetJ1 = clamp(dragStartJ1 - deltaX * 0.008, -2.5, 2.5);
+      currentTargetJ2 = clamp(dragStartJ2 - deltaY * 0.005, -0.15, 1.05);
+      currentTargetJ3 = clamp(dragStartJ3 + deltaY * 0.006, -1.35, 0.05);
+      currentTargetJ4 = clamp(dragStartJ4 - deltaY * 0.004, -0.75, 0.75);
     } else {
       canvas.style.cursor = 'grab';
       // Interactive Gaze Mouse-Tracking physics when not clicking:
       // Base yaw (J1): turn left/right with mouse X (-1 to +1)
-      currentTargetJ1 = -0.55 - mouseX_ndc * 1.25;
-      // Arm pitch (J2, J3, J4): reach up/down towards mouse Y
-      currentTargetJ2 = 0.50 + mouseY_ndc * 0.35;
-      currentTargetJ3 = -0.85 - mouseY_ndc * 0.30;
-      currentTargetJ4 = 0.35 + mouseY_ndc * 0.20;
+      currentTargetJ1 = -0.55 - mouseX_ndc * 1.1;
+      // Arm pitch (J2, J3, J4): reach up/down towards mouse Y with collision-free limits
+      currentTargetJ2 = 0.50 + mouseY_ndc * 0.28;
+      currentTargetJ3 = -0.85 - mouseY_ndc * 0.22;
+      currentTargetJ4 = 0.35 + mouseY_ndc * 0.15;
     }
   }
 
