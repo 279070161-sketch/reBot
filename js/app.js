@@ -830,9 +830,87 @@ function initHeroArmMouseTracker() {
   fbBody.position.set(0, 0.08, 0.25);
   fallbackGroup.add(fbBody);
 
+  // Preloader UI Controller & Drone-Riotters Style Smooth Progress Sync
+  const preloaderEl = document.getElementById('page-preloader');
+  const preloaderCounter = document.getElementById('preloader-counter');
+  const preloaderBar = document.getElementById('preloader-progress-bar');
+  const preloaderStatus = document.getElementById('preloader-status');
+
+  let currentPercent = 0;
+  let preloaderFinished = false;
+
+  function setPreloaderProgress(percent, statusMsg) {
+    if (percent > currentPercent) {
+      currentPercent = percent;
+      if (preloaderCounter) preloaderCounter.textContent = Math.min(100, Math.round(currentPercent));
+      if (preloaderBar) preloaderBar.style.width = `${Math.min(100, Math.round(currentPercent))}%`;
+    }
+    if (statusMsg && preloaderStatus) {
+      preloaderStatus.textContent = statusMsg;
+    }
+  }
+
+  function finishPreloader() {
+    if (preloaderFinished) return;
+    preloaderFinished = true;
+    setPreloaderProgress(100, 'READY');
+    
+    setTimeout(() => {
+      if (preloaderEl) {
+        preloaderEl.classList.add('preloader-hidden');
+        setTimeout(() => {
+          preloaderEl.style.display = 'none';
+        }, 850);
+      }
+      triggerCameraEntrance();
+    }, 350);
+  }
+
+  function triggerCameraEntrance() {
+    const startCamZ = 9.8;
+    const targetCamZ = 6.6;
+    const startCamY = 2.6;
+    const targetCamY = 1.5;
+    const startTime = performance.now();
+    const duration = 1100;
+
+    camera.position.set(0, startCamY, startCamZ);
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(1, elapsed / duration);
+      const ease = 1 - Math.pow(1 - progress, 3);
+
+      camera.position.z = startCamZ + (targetCamZ - startCamZ) * ease;
+      camera.position.y = startCamY + (targetCamY - startCamY) * ease;
+      camera.lookAt(0, 0.65, 0);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Safety Fallback Timeout for Preloader (Ensures preloader ALWAYS completes within 3.5s max)
+  const preloaderFallbackTimer = setTimeout(() => {
+    finishPreloader();
+  }, 3500);
+
   // Load Official Brand reBot B601-RS STL Composite Sub-Meshes into URDF Joint Groups
   if (typeof THREE.STLLoader !== 'undefined') {
-    const stlLoader = new THREE.STLLoader();
+    const loadingManager = new THREE.LoadingManager();
+    loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+      const pct = (itemsLoaded / itemsTotal) * 100;
+      const fileName = url ? url.split('/').pop() : '';
+      setPreloaderProgress(pct, `LOADING 3D MESHES (${itemsLoaded}/${itemsTotal}) ${fileName}`);
+    };
+    loadingManager.onLoad = () => {
+      clearTimeout(preloaderFallbackTimer);
+      finishPreloader();
+    };
+
+    const stlLoader = new THREE.STLLoader(loadingManager);
     const stlPromises = [];
 
     // Hide arm assembly initially so parts do not pop in piece-by-piece
@@ -899,6 +977,7 @@ function initHeroArmMouseTracker() {
       armAssemblyGroup.visible = true;
     });
   }
+
 
   // Sandbox Physics & FK Joint State Variables
   let isClawClosed = false;

@@ -1988,4 +1988,73 @@ canvas.ascii-bg {
   z-index: 105;
 }
 
+/* ==========================================================================
+   Full-Screen High-Tech Minimalist Preloader (Drone Riotters Inspired)
+   ========================================================================== */
+.page-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  color: #0f172a;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-family: var(--font-main, 'Inter', sans-serif);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  overflow: hidden;
+}
+
+.page-preloader.preloader-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.preloader-corner-tag,
+.preloader-progress-track,
+.preloader-status-text {
+  display: none !important;
+}
+
+.preloader-center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: auto;
+  max-width: none;
+  padding: 0;
+  text-align: center;
+}
+
+.preloader-counter-wrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-family: var(--font-code, 'JetBrains Mono', monospace);
+  line-height: 1;
+}
+
+.preloader-counter {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #475569;
+  text-shadow: none;
+}
+
+.preloader-percent {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+  margin-left: 1px;
+}
+
+
 
