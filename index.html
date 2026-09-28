@@ -2394,6 +2394,28 @@
       line-height: 1.5;
       font-family: var(--font-main);
     }
+    .cocreate-apply-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.5rem;
+      background: var(--nv-green);
+      color: #000000 !important;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border-radius: 30px;
+      text-decoration: none !important;
+      margin-top: 1.5rem;
+      transition: all 0.25s ease;
+      align-self: flex-start;
+      border: none;
+      cursor: pointer;
+    }
+    .cocreate-apply-btn:hover {
+      background: #85C200;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(114, 183, 0, 0.3);
+    }
 
     /* Community Channels Section */
     .community-channels-section {
@@ -3620,22 +3642,38 @@
             <div class="hub-accordion-content">
               <div class="cocreate-wrapper">
                 
-                <!-- 2 Co-Creation Event Cards -->
+                <!-- 2 Co-Creation Program Cards (Text Description & Sign-Up Buttons) -->
                 <div class="cocreate-cards-grid">
                   
                   <!-- Left Card: Physical AI Project of the Month -->
-                  <a href="image/75403608-03a0-42d4-b571-a07e64e6945a.png" target="_blank" rel="noopener noreferrer" class="cocreate-card">
-                    <div class="cocreate-img-box">
-                      <img src="image/75403608-03a0-42d4-b571-a07e64e6945a.png" alt="Physical AI Project of the Month">
+                  <div class="cocreate-card" style="padding: 2rem; justify-content: space-between;">
+                    <div>
+                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;">
+                        Physical AI Project of the Month
+                      </h4>
+                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;">
+                        Showcase your innovative robotics builds with Seeed reBot Arm. Win hardware grants, global community spotlights, and official co-marketing support from Seeed team.
+                      </p>
                     </div>
-                  </a>
+                    <a href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn">
+                      Submit Your Project
+                    </a>
+                  </div>
 
                   <!-- Right Card: Global Physical AI Workshop Partnership Program -->
-                  <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="cocreate-card">
-                    <div class="cocreate-img-box">
-                      <img src="image/20260819-180724.jpg" alt="Global Physical AI Workshop Partnership Program">
+                  <div class="cocreate-card" style="padding: 2rem; justify-content: space-between;">
+                    <div>
+                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;">
+                        Global Physical AI Workshop Partnership
+                      </h4>
+                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;">
+                        Host a hands-on Physical AI &amp; Embodied AI workshop at your university, lab, or hackerspace. Seeed provides reBot hardware grants, curriculum resources, and event support.
+                      </p>
                     </div>
-                  </a>
+                    <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn">
+                      Apply for Workshop Support
+                    </a>
+                  </div>
 
                 </div>
 
