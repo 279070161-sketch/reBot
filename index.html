@@ -866,6 +866,53 @@
       letter-spacing: 0.6px;
       font-weight: 600;
     }
+    /* Inner VLA Marquee inside Scientific Research stat card */
+    .vla-chips-marquee-container {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      margin-top: 0.45rem;
+      cursor: pointer;
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+    .vla-chips-marquee-track {
+      display: flex;
+      gap: 0.35rem;
+      width: max-content;
+      animation: vlaChipsScroll 16s linear infinite;
+      white-space: nowrap;
+    }
+    .vla-chips-marquee-container:hover {
+      overflow: visible;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+    .vla-chips-marquee-container:hover .vla-chips-marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      white-space: normal;
+      width: 100%;
+    }
+    .vla-chips-marquee-container:hover .vla-chip-dup {
+      display: none;
+    }
+    .vla-chip {
+      font-size: 0.68rem;
+      font-weight: 600;
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #E2E8F0;
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+    @keyframes vlaChipsScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
     .scenario-media-wrapper {
       position: relative;
       width: 100%;
@@ -3107,14 +3154,25 @@
               <div class="scenario-stat-item">
                 <span class="scenario-stat-val">7+</span>
                 <span class="scenario-stat-lbl">PRE-ADAPTED VLA MODELS</span>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.45rem;">
-                  <span style="font-size: 0.68rem; font-weight: 600; background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; padding: 0.15rem 0.45rem; border-radius: 6px;">ACT</span>
-                  <span style="font-size: 0.68rem; font-weight: 600; background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; padding: 0.15rem 0.45rem; border-radius: 6px;">Diffusion Policy</span>
-                  <span style="font-size: 0.68rem; font-weight: 600; background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; padding: 0.15rem 0.45rem; border-radius: 6px;">Pi0.5</span>
-                  <span style="font-size: 0.68rem; font-weight: 600; background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; padding: 0.15rem 0.45rem; border-radius: 6px;">NVIDIA GR00T N1.7</span>
-                  <span style="font-size: 0.68rem; font-weight: 600; background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; padding: 0.15rem 0.45rem; border-radius: 6px;">LingBot-VA</span>
-                  <span style="font-size: 0.68rem; font-weight: 600; background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; padding: 0.15rem 0.45rem; border-radius: 6px;">SmolVLA</span>
-                  <span style="font-size: 0.68rem; font-weight: 600; background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; padding: 0.15rem 0.45rem; border-radius: 6px;">WALL-OSS</span>
+                <div class="vla-chips-marquee-container" title="Hover to view all 7 VLA models">
+                  <div class="vla-chips-marquee-track">
+                    <!-- Original Set -->
+                    <span class="vla-chip">ACT</span>
+                    <span class="vla-chip">Diffusion Policy</span>
+                    <span class="vla-chip">Pi0.5</span>
+                    <span class="vla-chip">NVIDIA GR00T N1.7</span>
+                    <span class="vla-chip">LingBot-VA</span>
+                    <span class="vla-chip">SmolVLA</span>
+                    <span class="vla-chip">WALL-OSS</span>
+                    <!-- Duplicated Set for Infinite Loop -->
+                    <span class="vla-chip vla-chip-dup">ACT</span>
+                    <span class="vla-chip vla-chip-dup">Diffusion Policy</span>
+                    <span class="vla-chip vla-chip-dup">Pi0.5</span>
+                    <span class="vla-chip vla-chip-dup">NVIDIA GR00T N1.7</span>
+                    <span class="vla-chip vla-chip-dup">LingBot-VA</span>
+                    <span class="vla-chip vla-chip-dup">SmolVLA</span>
+                    <span class="vla-chip vla-chip-dup">WALL-OSS</span>
+                  </div>
                 </div>
               </div>
 
