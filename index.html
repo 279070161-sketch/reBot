@@ -883,19 +883,28 @@
       animation: vlaChipsScroll 16s linear infinite;
       white-space: nowrap;
     }
-    .vla-chips-marquee-container:hover {
-      overflow: visible;
-      mask-image: none;
-      -webkit-mask-image: none;
-    }
     .vla-chips-marquee-container:hover .vla-chips-marquee-track {
-      animation: none;
-      flex-wrap: wrap;
-      white-space: normal;
-      width: 100%;
+      animation-play-state: paused;
     }
-    .vla-chips-marquee-container:hover .vla-chip-dup {
+    /* Floating Popover on Hover */
+    .vla-popover-all {
       display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 250px;
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+      border-radius: 12px;
+      padding: 0.65rem;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      pointer-events: none;
+    }
+    .vla-chips-marquee-container:hover .vla-popover-all {
+      display: flex;
     }
     .vla-chip {
       font-size: 0.68rem;
@@ -3172,6 +3181,17 @@
                     <span class="vla-chip vla-chip-dup">LingBot-VA</span>
                     <span class="vla-chip vla-chip-dup">SmolVLA</span>
                     <span class="vla-chip vla-chip-dup">WALL-OSS</span>
+                  </div>
+                  <!-- Floating popover displaying all models on hover -->
+                  <div class="vla-popover-all">
+                    <span style="font-size: 0.65rem; font-weight: 700; color: #0F172A; width: 100%; margin-bottom: 0.15rem; text-transform: uppercase;">7 Pre-Adapted VLA Models:</span>
+                    <span class="vla-chip">ACT</span>
+                    <span class="vla-chip">Diffusion Policy</span>
+                    <span class="vla-chip">Pi0.5</span>
+                    <span class="vla-chip">NVIDIA GR00T N1.7</span>
+                    <span class="vla-chip">LingBot-VA</span>
+                    <span class="vla-chip">SmolVLA</span>
+                    <span class="vla-chip">WALL-OSS</span>
                   </div>
                 </div>
               </div>
