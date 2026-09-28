@@ -99,21 +99,21 @@ function setupAccessoriesTabs() {
   const dmBtn = document.getElementById('tab-btn-dm');
   const rsBtn = document.getElementById('tab-btn-rs');
   const dmGrid = document.getElementById('dm-accessories-grid');
-  const rsPlaceholder = document.getElementById('rs-empty-placeholder');
+  const rsGrid = document.getElementById('rs-accessories-grid');
 
-  if (dmBtn && rsBtn && dmGrid && rsPlaceholder) {
+  if (dmBtn && rsBtn && dmGrid) {
     dmBtn.addEventListener('click', () => {
       dmBtn.classList.add('active');
       rsBtn.classList.remove('active');
       dmGrid.style.display = 'grid';
-      rsPlaceholder.style.display = 'none';
+      if (rsGrid) rsGrid.style.display = 'none';
     });
 
     rsBtn.addEventListener('click', () => {
       rsBtn.classList.add('active');
       dmBtn.classList.remove('active');
       dmGrid.style.display = 'none';
-      rsPlaceholder.style.display = 'block';
+      if (rsGrid) rsGrid.style.display = 'grid';
     });
   }
 }
