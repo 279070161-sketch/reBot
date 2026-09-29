@@ -214,6 +214,101 @@
       margin: 0.3rem 0;
     }
 
+    /* Language Selector Component */
+    .lang-dropdown-wrapper {
+      position: relative;
+      display: inline-block;
+      list-style: none;
+    }
+    .lang-selector-btn {
+      background: #f1f5f9;
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      font-size: 0.86rem;
+      font-weight: 600;
+      padding: 0.42rem 0.85rem;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.25s ease;
+      line-height: 1.2;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+    .lang-selector-btn:hover {
+      background: #e2e8f0;
+      border-color: rgba(104, 166, 0, 0.4);
+      color: var(--nv-green);
+      transform: translateY(-1px);
+    }
+    .lang-selector-btn .lang-arrow {
+      font-size: 0.7rem;
+      transition: transform 0.25s ease;
+      opacity: 0.7;
+    }
+    .lang-dropdown-wrapper:hover .lang-arrow,
+    .lang-dropdown-wrapper.open .lang-arrow {
+      transform: rotate(180deg);
+    }
+    .lang-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 140px;
+      background: #FFFFFF;
+      border: 1px solid var(--nv-border);
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      padding: 0.4rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1060;
+      list-style: none;
+      pointer-events: none;
+    }
+    .lang-dropdown-wrapper:hover .lang-dropdown-menu,
+    .lang-dropdown-wrapper.open .lang-dropdown-menu,
+    .lang-dropdown-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .lang-option-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-main);
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: #334155;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .lang-option-btn:hover {
+      background: rgba(104, 166, 0, 0.08);
+      color: var(--nv-green);
+    }
+    .lang-option-btn.active {
+      background: rgba(104, 166, 0, 0.12);
+      color: var(--nv-green);
+      font-weight: 700;
+    }
+    .lang-flag {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
     .brand-title span {
       font-size: 1.2rem;
       font-weight: 700;
@@ -282,7 +377,7 @@
     }
     @media (max-width: 768px) {
       .hero-fullscreen-video-section {
-        background-image: url('image/MOBILEBANENR@2x.png');
+        background-image: url('image/MOBILEBANENR@2x.webp');
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
@@ -1247,75 +1342,210 @@
       border-bottom: 1px solid var(--nv-border);
       position: relative;
     }
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    @media (max-width: 992px) {
-      .video-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .video-card {
-      background-color: #FFFFFF;
-      border: 1px solid var(--nv-border);
-      border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-      overflow: hidden;
+
+    /* ==========================================
+       Squeeze Carousel Section Styles
+       ========================================== */
+    .squeeze-header-row {
       display: flex;
-      flex-direction: column;
-      position: relative;
-      user-select: none;
-      -webkit-user-select: none;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
     }
-    .video-card:hover {
-      border-color: var(--nv-green);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    .squeeze-header-row .section-title-group {
+      margin-bottom: 0;
     }
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
-      background-color: #000000;
-      overflow: hidden;
-      user-select: none;
-      -webkit-user-select: none;
-      pointer-events: none;
-    }
-    .video-wrapper video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border: none;
-      pointer-events: none;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-    .video-info {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex-grow: 1;
-    }
-    .video-card-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      font-family: var(--font-main);
+    .squeeze-controls {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
-    .video-card-desc {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      font-family: var(--font-main);
+    .squeeze-counter {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin-right: 0.5rem;
+    }
+    .squeeze-arrow-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--nv-border);
+      background: #FFFFFF;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .squeeze-arrow-btn:hover {
+      background: var(--nv-green);
+      border-color: var(--nv-green);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(104, 166, 0, 0.3);
+    }
+    .squeeze-arrow-btn:active {
+      transform: translateY(0);
+    }
+
+    .squeeze-track-wrapper {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+    }
+    .squeeze-track {
+      display: flex;
+      gap: 0.85rem;
+      width: 100%;
+      height: 440px;
+      position: relative;
+    }
+    @media (max-width: 992px) {
+      .squeeze-track {
+        height: 360px;
+      }
+    }
+    @media (max-width: 640px) {
+      .squeeze-track {
+        height: 480px;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    .squeeze-panel {
+      position: relative;
+      flex: 0 0 11.5%;
+      height: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--nv-border);
+      padding: 0;
+      background: #F1F5F9;
+      cursor: pointer;
+      outline: none;
+      transition: flex 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      text-align: left;
+    }
+    .squeeze-panel:hover:not(.active) {
+      flex: 0 0 16%;
+      border-color: rgba(104, 166, 0, 0.4);
+    }
+    .squeeze-panel.active {
+      flex: 0 0 60.5%;
+      cursor: default;
+      border-color: var(--nv-green);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    @media (max-width: 640px) {
+      .squeeze-panel {
+        flex: 0 0 16% !important;
+        width: 100%;
+      }
+      .squeeze-panel.active {
+        flex: 0 0 52% !important;
+      }
+    }
+
+    .squeeze-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: filter 0.5s ease;
+    }
+    .squeeze-panel:not(.active) .squeeze-video {
+      filter: brightness(0.92) contrast(1.02);
+    }
+    .squeeze-panel.active .squeeze-video {
+      filter: brightness(1) contrast(1);
+    }
+
+    .squeeze-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.15) 50%, transparent 100%);
+      pointer-events: none;
+    }
+    .squeeze-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .squeeze-panel.active .squeeze-badge {
+      background: rgba(104, 166, 0, 0.35);
+      border-color: var(--nv-green);
+      box-shadow: 0 0 12px rgba(104, 166, 0, 0.4);
+      color: #FFFFFF;
+    }
+    @media (max-width: 768px) {
+      .squeeze-overlay {
+        padding: 0.75rem;
+      }
+      .squeeze-badge {
+        font-size: 0.72rem;
+        padding: 0.25rem 0.6rem;
+      }
+    }
+
+    .squeeze-info-panel {
+      margin-top: 1.75rem;
+      padding: 1.25rem 1.5rem;
+      background: #FFFFFF;
+      border-radius: 14px;
+      border: 1px solid var(--nv-border);
+      border-left: 4px solid var(--nv-green);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .squeeze-info-panel.fading {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    .squeeze-info-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 0 0 0.35rem 0;
+      line-height: 1.3;
+    }
+    .squeeze-info-desc {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
     }
 
     /* ==========================================================================
@@ -1467,6 +1697,7 @@
     .video-grid .video-card:nth-child(1) { transition-delay: 0.05s; }
     .video-grid .video-card:nth-child(2) { transition-delay: 0.18s; }
     .video-grid .video-card:nth-child(3) { transition-delay: 0.31s; }
+    .video-grid .video-card:nth-child(4) { transition-delay: 0.44s; }
 
     .accessory-grid .accessory-card:nth-child(1) { transition-delay: 0.05s; }
     .accessory-grid .accessory-card:nth-child(2) { transition-delay: 0.12s; }
@@ -1506,9 +1737,11 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 1.5rem;
-      background-color: #F8FAFC;
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
       border-radius: 12px;
-      padding: 1rem;
+      padding: 0;
     }
     .product-img-wrapper img {
       max-height: 100%;
@@ -1573,16 +1806,12 @@
       box-shadow: 0 6px 20px rgba(104, 166, 0, 0.15);
     }
 
-    /* Collapsible Specification Matrix Container */
+    /* Specification Matrix Container (Fully Expanded by Default) */
     .spec-comparison-content {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-    }
-    .spec-comparison-content.expanded {
-      max-height: 2500px;
+      max-height: none;
       opacity: 1;
+      overflow: visible;
+      margin-top: 2.5rem;
     }
 
     /* Light Mode Spec Matrix Table Card */
@@ -2681,17 +2910,40 @@
     <!-- Navigation Links -->
     <nav style="flex: 1; display: flex; justify-content: flex-end; margin: 0 1.5rem;">
       <ul class="hub-nav-menu">
-        <li><a href="https://sensecraft.seeed.cc/en/robotics#download" class="hub-nav-link" target="_blank" rel="noopener">SenseCraft</a></li>
-        <li><a href="https://wiki.seeedstudio.com/" class="hub-nav-link" target="_blank" rel="noopener">Wiki Tutorials</a></li>
-        <li><a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" class="hub-nav-link" target="_blank" rel="noopener">User Demos & GitHub</a></li>
-        <li><a href="#sim-to-real" class="hub-nav-link">MuJoCo Sim-to-Real</a></li>
-        <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener">Project Submissions</a></li>
-        <li><a href="#cocreate" class="hub-nav-link" onclick="openCocreateAccordion()">Customization</a></li>
+        <li><a href="https://sensecraft.seeed.cc/en/robotics#download" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_sensecraft">SenseCraft</a></li>
+        <li><a href="https://wiki.seeedstudio.com/" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_wiki">Wiki Tutorials</a></li>
+        <li><a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_demos">User Demos & GitHub</a></li>
+        <li><a href="#sim-to-real" class="hub-nav-link" data-i18n="nav_sim">MuJoCo Sim-to-Real</a></li>
+        <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_projects">Project Submissions</a></li>
+        <li><a href="#cocreate" class="hub-nav-link" onclick="openCocreateAccordion()" data-i18n="nav_customization">Customization</a></li>
         <li>
           <a id="nav-buy-now-btn" href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="buy-now-nav-btn">
             <i class="fas fa-shopping-bag"></i>
-            <span>Buy Now</span>
+            <span data-i18n="nav_buynow">Buy Now</span>
           </a>
+        </li>
+
+        <!-- Language Selector Dropdown -->
+        <li class="lang-dropdown-wrapper" id="lang-dropdown-wrapper">
+          <button class="lang-selector-btn" id="lang-selector-btn" aria-label="Select Language" title="Select Language / 选择语言">
+            <i class="fas fa-globe"></i>
+            <span id="current-lang-code">EN</span>
+            <i class="fas fa-chevron-down lang-arrow"></i>
+          </button>
+          <ul class="lang-dropdown-menu" id="lang-dropdown-menu">
+            <li>
+              <button type="button" class="lang-option-btn active" data-lang="en">
+                <span class="lang-flag">🇺🇸</span>
+                <span class="lang-name">English</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="lang-option-btn" data-lang="zh">
+                <span class="lang-flag">🇨🇳</span>
+                <span class="lang-name">中文</span>
+              </button>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
@@ -2721,21 +2973,21 @@
         <div class="unitree-hero-content">
           <div class="hero-tag-badge">
             <img src="image/Open_Source_Initiative.svg" alt="Open Source Initiative Logo" class="hero-tag-osi-icon">
-            <span>6+1 DoF Open-Source Arm</span>
+            <span data-i18n="hero_badge">6+1 DoF Open-Source Arm</span>
           </div>
-          <h1 class="unitree-hero-title">
+          <h1 class="unitree-hero-title" data-i18n="hero_title">
             Build with reBot
           </h1>
-          <h2 class="unitree-hero-subtitle">
+          <h2 class="unitree-hero-subtitle" data-i18n="hero_subtitle">
             Your First Robotics Arm
           </h2>
-          <p class="unitree-hero-description">
+          <p class="unitree-hero-description" data-i18n="hero_desc">
             Accelerate Physical AI Deployment in Real World
           </p>
 
           <div class="unitree-hero-cta">
             <button type="button" class="unitree-watch-video-btn" id="open-video-modal-btn">
-              <span>Watch Video</span>
+              <span data-i18n="hero_watch_video">Watch Video</span>
               <i class="fas fa-arrow-right"></i>
             </button>
           </div>
@@ -2760,40 +3012,41 @@
     
 
     <!-- ==========================================================================
-         High Performance & Extensive Application Section (Video Showcase)
+         High Performance & Extensive Application Section (Squeeze Carousel)
          ========================================================================== -->
     <section class="high-performance-section" id="performance">
       <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem;">
         
         <!-- Section Header -->
-        <div class="section-title-group">
-          <h2 class="section-main-title">High Performance & Extensive Application</h2>
+        <div class="section-title-group" style="margin-bottom: 2rem;">
+          <h2 class="section-main-title" data-i18n="perf_title">High Performance & Extensive Application</h2>
         </div>
 
-        <!-- Video Grid (3 Videos) -->
-        <div class="video-grid">
-          
-          <!-- Video 1 -->
-          <div class="video-card">
-            <div class="video-wrapper">
-              <video src="video/飞书20260818-111648.mp4" autoplay loop muted playsinline preload="metadata"></video>
-            </div>
-          </div>
+        <!-- Squeeze Carousel Accordion Track -->
+        <div class="squeeze-track-wrapper">
+          <div class="squeeze-track" id="squeeze-track" role="tablist" aria-label="Performance Showcase">
+            
+            <!-- Panel 1 -->
+            <button type="button" class="squeeze-panel active" data-index="0" role="tab" aria-selected="true" aria-label="Multi-Axis Motion & Dexterous Control">
+              <video src="video/飞书20260818-111648.mp4" autoplay loop muted playsinline preload="metadata" class="squeeze-video"></video>
+            </button>
 
-          <!-- Video 2 -->
-          <div class="video-card">
-            <div class="video-wrapper">
-              <video src="video/飞书20260818-111657.mp4" autoplay loop muted playsinline preload="metadata"></video>
-            </div>
-          </div>
+            <!-- Panel 2 -->
+            <button type="button" class="squeeze-panel" data-index="1" role="tab" aria-selected="false" aria-label="High Dynamic Performance">
+              <video src="video/High Dynamic performance.mp4" autoplay loop muted playsinline preload="metadata" class="squeeze-video"></video>
+            </button>
 
-          <!-- Video 3 -->
-          <div class="video-card">
-            <div class="video-wrapper">
-              <video src="video/飞书20260818-111703.mp4" autoplay loop muted playsinline preload="metadata"></video>
-            </div>
-          </div>
+            <!-- Panel 3 -->
+            <button type="button" class="squeeze-panel" data-index="2" role="tab" aria-selected="false" aria-label="Powerful Payload Capacity">
+              <video src="video/payload.mp4" autoplay loop muted playsinline preload="metadata" class="squeeze-video"></video>
+            </button>
 
+            <!-- Panel 4 -->
+            <button type="button" class="squeeze-panel" data-index="3" role="tab" aria-selected="false" aria-label="Sub-Millimeter ±0.1mm Repeatability">
+              <video src="video/0.1mm.mp4" autoplay loop muted playsinline preload="metadata" class="squeeze-video"></video>
+            </button>
+
+          </div>
         </div>
 
       </div>
@@ -2805,79 +3058,67 @@
     <section class="spec-section" id="specification">
       <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem;">
         
-        <!-- Section Header -->
-        <div class="section-title-group">
-          <h2 class="section-main-title">Specification</h2>
-          <p class="section-subtitle">Find the Right Configuration for You</p>
+        <!-- Section Header (Single Unified Title) -->
+        <div class="section-title-group" style="text-align: center; margin-bottom: 2.5rem;">
+          <h2 class="section-main-title" data-i18n="spec_title">Specification</h2>
+          <p class="section-subtitle" data-i18n="spec_subtitle">Find the Right Configuration for You</p>
         </div>
 
-        <!-- Product Summary Cards Grid (Always Visible, Official dm.png & rs.png) -->
-        <div class="spec-cards-grid">
-          <!-- Card 1: reBot Arm DM -->
-          <div class="product-summary-card">
-            <div class="product-img-wrapper">
-              <img src="image/dm.png" alt="reBot Arm DM Robotic Arm">
-            </div>
-            <h3 class="product-card-title">reBot Arm DM</h3>
-            <div class="product-quick-specs">
-              <span class="quick-spec-badge">6 Joints + 1 Gripper</span>
-              <span class="quick-spec-badge">1.5kg Payload</span>
-              <span class="quick-spec-badge">DAMIAO Motors</span>
-            </div>
-          </div>
-
-          <!-- Card 2: reBot Arm RS -->
-          <div class="product-summary-card">
-            <div class="product-img-wrapper">
-              <img src="image/rs.png?v=2" alt="reBot Arm RS Robotic Arm">
-            </div>
-            <h3 class="product-card-title">reBot Arm RS</h3>
-            <div class="product-quick-specs">
-              <span class="quick-spec-badge highlight">6 Joints + 1 Gripper</span>
-              <span class="quick-spec-badge highlight">2.5kg Payload</span>
-              <span class="quick-spec-badge highlight">RobStride Dynamics Motors</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Collapsible Toggle Control Button -->
-        <div class="toggle-specs-container">
-          <button class="toggle-specs-btn" id="toggle-specs-btn" aria-label="Toggle Detailed Specification Matrix">
-            <span class="toggle-label">Expand Detailed Specification</span>
-            <i class="fas fa-chevron-down"></i>
-          </button>
-        </div>
-
-        <!-- Collapsible Specification Comparison Content Matrix (Collapsed by Default) -->
+        <!-- Specification Comparison Content Matrix (Fully Visible Table) -->
         <div class="spec-comparison-content" id="spec-comparison-content">
           <div class="spec-table-card">
             
-            <!-- Table Header -->
-            <div class="spec-table-header">
-              <div class="spec-header-col">reBot Arm DM</div>
-              <div class="spec-header-col">reBot Arm RS</div>
+            <!-- Table Header with Product Image + Title + Feature Badges -->
+            <div class="spec-table-header" style="align-items: flex-end; padding-bottom: 1.5rem;">
+              
+              <!-- Column 1: reBot Arm DM -->
+              <div class="spec-header-col" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <div class="product-img-wrapper" style="max-width: 240px; margin: 0 auto 0.75rem; background: transparent; border: none; padding: 0.5rem; width: 100%;">
+                  <img src="image/dm.png?v=4" alt="reBot Arm DM Robotic Arm" style="max-height: 150px; width: auto; object-fit: contain;">
+                </div>
+                <h3 class="product-card-title" style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.6rem;">reBot Arm DM</h3>
+                <div class="product-quick-specs" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem;">
+                  <span class="quick-spec-badge" data-i18n="spec_badge_dof">6 Joints + 1 Gripper</span>
+                  <span class="quick-spec-badge" data-i18n="spec_badge_dm_payload">1.5kg Payload</span>
+                  <span class="quick-spec-badge" data-i18n="spec_badge_dm_motor">DAMIAO Motors</span>
+                </div>
+              </div>
+
+              <!-- Column 2: reBot Arm RS -->
+              <div class="spec-header-col" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <div class="product-img-wrapper" style="max-width: 240px; margin: 0 auto 0.75rem; background: transparent; border: none; padding: 0.5rem; width: 100%;">
+                  <img src="image/rs.png?v=4" alt="reBot Arm RS Robotic Arm" style="max-height: 150px; width: auto; object-fit: contain;">
+                </div>
+                <h3 class="product-card-title" style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.6rem;">reBot Arm RS</h3>
+                <div class="product-quick-specs" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem;">
+                  <span class="quick-spec-badge highlight" data-i18n="spec_badge_dof">6 Joints + 1 Gripper</span>
+                  <span class="quick-spec-badge highlight" data-i18n="spec_badge_rs_payload">2.5kg Payload</span>
+                  <span class="quick-spec-badge highlight" data-i18n="spec_badge_rs_motor">RobStride Dynamics Motors</span>
+                </div>
+              </div>
+
             </div>
 
             <!-- Row 1: DoF -->
             <div class="spec-row">
               <div class="spec-cell">
-                <span class="spec-label">Degrees of Freedom</span>
-                <span class="spec-value">6 Joints + 1 Gripper</span>
+                <span class="spec-label" data-i18n="spec_lbl_dof">Degrees of Freedom</span>
+                <span class="spec-value" data-i18n="spec_badge_dof">6 Joints + 1 Gripper</span>
               </div>
               <div class="spec-cell">
-                <span class="spec-label">Degrees of Freedom</span>
-                <span class="spec-value">6 Joints + 1 Gripper</span>
+                <span class="spec-label" data-i18n="spec_lbl_dof">Degrees of Freedom</span>
+                <span class="spec-value" data-i18n="spec_badge_dof">6 Joints + 1 Gripper</span>
               </div>
             </div>
 
             <!-- Row 2: Rated Payload -->
             <div class="spec-row">
               <div class="spec-cell">
-                <span class="spec-label">Rated Payload</span>
+                <span class="spec-label" data-i18n="spec_lbl_rated_payload">Rated Payload</span>
                 <span class="spec-value">1.5kg</span>
               </div>
               <div class="spec-cell">
-                <span class="spec-label">Rated Payload</span>
+                <span class="spec-label" data-i18n="spec_lbl_rated_payload">Rated Payload</span>
                 <span class="spec-value green-highlight">2.5kg</span>
               </div>
             </div>
@@ -2885,11 +3126,11 @@
             <!-- Row 3: Max Payload -->
             <div class="spec-row">
               <div class="spec-cell">
-                <span class="spec-label">Max Payload</span>
+                <span class="spec-label" data-i18n="spec_lbl_max_payload">Max Payload</span>
                 <span class="spec-value">2.5kg</span>
               </div>
               <div class="spec-cell">
-                <span class="spec-label">Max Payload</span>
+                <span class="spec-label" data-i18n="spec_lbl_max_payload">Max Payload</span>
                 <span class="spec-value">5kg</span>
               </div>
             </div>
@@ -2897,11 +3138,11 @@
             <!-- Row 4: Precision -->
             <div class="spec-row">
               <div class="spec-cell">
-                <span class="spec-label">Precision</span>
+                <span class="spec-label" data-i18n="spec_lbl_precision">Precision</span>
                 <span class="spec-value">±0.2mm</span>
               </div>
               <div class="spec-cell">
-                <span class="spec-label">Precision</span>
+                <span class="spec-label" data-i18n="spec_lbl_precision">Precision</span>
                 <span class="spec-value green-highlight">±0.1mm</span>
               </div>
             </div>
@@ -2909,11 +3150,11 @@
             <!-- Row 5: Reach -->
             <div class="spec-row">
               <div class="spec-cell">
-                <span class="spec-label">Reach</span>
+                <span class="spec-label" data-i18n="spec_lbl_reach">Reach</span>
                 <span class="spec-value">767mm</span>
               </div>
               <div class="spec-cell">
-                <span class="spec-label">Reach</span>
+                <span class="spec-label" data-i18n="spec_lbl_reach">Reach</span>
                 <span class="spec-value">754mm</span>
               </div>
             </div>
@@ -2921,11 +3162,11 @@
             <!-- Row 6: Motor Specs -->
             <div class="spec-row">
               <div class="spec-cell">
-                <span class="spec-label">Motor Specs</span>
+                <span class="spec-label" data-i18n="spec_lbl_motors">Motor Specs</span>
                 <span class="spec-value">DAMIAO 4310 / 4340P</span>
               </div>
               <div class="spec-cell">
-                <span class="spec-label">Motor Specs</span>
+                <span class="spec-label" data-i18n="spec_lbl_motors">Motor Specs</span>
                 <span class="spec-value green-highlight">RobStride Dynamics 00 / 06</span>
               </div>
             </div>
@@ -2933,11 +3174,11 @@
             <!-- Row 7: Construction & Finish -->
             <div class="spec-row">
               <div class="spec-cell">
-                <span class="spec-label">Construction & Finish</span>
+                <span class="spec-label" data-i18n="spec_lbl_finish">Construction & Finish</span>
                 <span class="spec-value">Industrial CNC</span>
               </div>
               <div class="spec-cell">
-                <span class="spec-label">Construction & Finish</span>
+                <span class="spec-label" data-i18n="spec_lbl_finish">Construction & Finish</span>
                 <span class="spec-value">Industrial CNC</span>
               </div>
             </div>
@@ -2945,24 +3186,24 @@
             <!-- Row 8: Target Application Scenarios -->
             <div class="spec-row">
               <div class="spec-cell">
-                <span class="spec-label">Application Scenarios</span>
-                <span class="spec-value">Home & Domestic</span>
+                <span class="spec-label" data-i18n="spec_lbl_scenarios">Application Scenarios</span>
+                <span class="spec-value" data-i18n="spec_val_dmapp">Home & Domestic</span>
               </div>
               <div class="spec-cell">
-                <span class="spec-label">Application Scenarios</span>
-                <span class="spec-value">Lab & Light Industrial</span>
+                <span class="spec-label" data-i18n="spec_lbl_scenarios">Application Scenarios</span>
+                <span class="spec-value" data-i18n="spec_val_rsapp">Lab & Light Industrial</span>
               </div>
             </div>
 
             <!-- Row 9: Official Application Showcase Images Grid (dmapp.png & rsapp.png) -->
             <div class="scenario-grid">
               <div class="scenario-card">
-                <img src="image/dmapp.png" alt="reBot Arm Dm Home Domestic Scenario">
-                <div class="scenario-overlay">Home & Domestic Automation</div>
+                <img src="image/dmapp.webp" alt="reBot Arm Dm Home Domestic Scenario">
+                <div class="scenario-overlay" data-i18n="spec_val_dmapp">Home & Domestic Automation</div>
               </div>
               <div class="scenario-card">
-                <img src="image/rsapp.png" alt="reBot Arm RS Lab Micro-Soldering Scenario">
-                <div class="scenario-overlay">Lab / Light Industrial Scenarios</div>
+                <img src="image/rsapp.webp" alt="reBot Arm RS Lab Micro-Soldering Scenario">
+                <div class="scenario-overlay" data-i18n="spec_val_rsapp">Lab / Light Industrial Scenarios</div>
               </div>
             </div>
 
@@ -2980,8 +3221,8 @@
         
         <!-- Section Header -->
         <div class="section-title-group" style="text-align: center; margin-bottom: 3.5rem;">
-          <h2 class="section-main-title">From Learning to Deployment</h2>
-          <p class="section-subtitle">From Academic Embodied AI Education to Industrial Edge AI Deployment</p>
+          <h2 class="section-main-title" data-i18n="scenarios_main_title">From Learning to Deployment</h2>
+          <p class="section-subtitle" data-i18n="scenarios_main_subtitle">From Academic Embodied AI Education to Industrial Edge AI Deployment</p>
         </div>
 
         <!-- 2-Column Side-by-Side Scenarios Grid -->
@@ -2990,11 +3231,11 @@
           <!-- Column 1: Research & Education Card -->
           <div class="scenario-column-card">
             <div class="scenario-card-header">
-              <span class="scenario-badge edu">
+              <span class="scenario-badge edu" data-i18n="scenarios_edu_badge">
                 <i class="fas fa-graduation-cap"></i> Education
               </span>
-              <h3 class="scenario-title">Learning Physical AI</h3>
-              <p class="scenario-desc">
+              <h3 class="scenario-title" data-i18n="scenarios_edu_title">Learning Physical AI</h3>
+              <p class="scenario-desc" data-i18n="scenarios_edu_desc">
                 Collaborating with NVIDIA, Seeed provides a Sim-to-Real VLA Pipeline with Seeed reBot Arm and NVIDIA Isaac. Official hands-on curriculum bridging academic research and higher education.
               </p>
             </div>
@@ -3002,31 +3243,31 @@
             <!-- Stats Grid -->
             <div class="scenario-stats-grid">
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">19</span>
-                <span class="scenario-stat-lbl">Detailed Modules</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_edu_stat1_val">19</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat1_lbl">Detailed Modules</span>
               </div>
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">Sim-to-Real</span>
-                <span class="scenario-stat-lbl">Full Pipeline</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_edu_stat2_val">Sim-to-Real</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat2_lbl">Full Pipeline</span>
               </div>
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">5</span>
-                <span class="scenario-stat-lbl">Core Chapters</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_edu_stat3_val">5</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat3_lbl">Core Chapters</span>
               </div>
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">20+ Hours</span>
-                <span class="scenario-stat-lbl">Hands-on Lab</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_edu_stat4_val">20+ Hours</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat4_lbl">Hands-on Lab</span>
               </div>
             </div>
 
             <!-- Media Preview -->
             <div class="scenario-media-wrapper">
-              <img src="image/DJIc.png" alt="Learning Physical AI NVIDIA DLI Course" class="scenario-img" loading="lazy" decoding="async">
+              <img src="image/DJIc.webp" alt="Learning Physical AI NVIDIA DLI Course" class="scenario-img" loading="lazy" decoding="async">
             </div>
 
             <!-- Action Button -->
             <div class="scenario-action-box">
-              <a href="https://www.seeedstudio.com/sim-to-real-with-seeed-rebot-and-nvidia-isaac" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn">
+              <a href="https://www.seeedstudio.com/sim-to-real-with-seeed-rebot-and-nvidia-isaac" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn" data-i18n="scenarios_edu_btn">
                 Start Learning Course
               </a>
             </div>
@@ -3035,11 +3276,11 @@
           <!-- Column 2: Scientific Research Card -->
           <div class="scenario-column-card">
             <div class="scenario-card-header">
-              <span class="scenario-badge industrial">
+              <span class="scenario-badge industrial" data-i18n="scenarios_sci_badge">
                 <i class="fas fa-flask"></i> Scientific Research
               </span>
-              <h3 class="scenario-title">Accelerate VLA Research</h3>
-              <p class="scenario-desc">
+              <h3 class="scenario-title" data-i18n="scenarios_sci_title">Accelerate VLA Research</h3>
+              <p class="scenario-desc" data-i18n="scenarios_sci_desc">
                 A ready-to-run experiment platform for cutting-edge Vision-Language-Action models. Seeed reBot Arm comes with compatibility and verification of today's most popular VLA baselines — so you can go from paper to real-robot evaluation in hours, not weeks.
               </p>
             </div>
@@ -3048,8 +3289,8 @@
             <div class="scenario-stats-grid">
               <!-- 1. 7+ PRE-ADAPTED VLA MODELS -->
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">7+</span>
-                <span class="scenario-stat-lbl">PRE-ADAPTED VLA MODELS</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_sci_stat1_val">7+</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat1_lbl">PRE-ADAPTED VLA MODELS</span>
                 <div class="vla-chips-marquee-container" title="Hover to view all 7 VLA models">
                   <div class="vla-chips-marquee-track">
                     <!-- Original Set -->
@@ -3085,20 +3326,20 @@
 
               <!-- 2. LeRobot -->
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">LeRobot</span>
-                <span class="scenario-stat-lbl">NATIVE DATA &amp; TRAINING PIPELINE</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_sci_stat2_val">LeRobot</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat2_lbl">NATIVE DATA &amp; TRAINING PIPELINE</span>
               </div>
 
               <!-- 3. Sim-to-Real -->
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">Sim-to-Real</span>
-                <span class="scenario-stat-lbl">ISAAC SIM READY</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_sci_stat3_val">Sim-to-Real</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat3_lbl">ISAAC SIM READY</span>
               </div>
 
               <!-- 4. Jetson -->
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">Jetson</span>
-                <span class="scenario-stat-lbl">EDGE SEAMLESS INFERENCE</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_sci_stat4_val">Jetson</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat4_lbl">EDGE SEAMLESS INFERENCE</span>
               </div>
             </div>
 
@@ -3109,7 +3350,7 @@
 
             <!-- Action Button -->
             <div class="scenario-action-box">
-              <a href="javascript:void(0)" class="scenario-primary-btn industrial-btn" style="cursor: default;">
+              <a href="javascript:void(0)" class="scenario-primary-btn industrial-btn" style="cursor: default;" data-i18n="scenarios_sci_btn">
                 Stay Tuned for Series Video Courses
               </a>
             </div>
@@ -3118,11 +3359,11 @@
           <!-- Column 3: Enterprise Card -->
           <div class="scenario-column-card">
             <div class="scenario-card-header">
-              <span class="scenario-badge industrial">
+              <span class="scenario-badge industrial" data-i18n="scenarios_ent_badge">
                 <i class="fas fa-building"></i> Enterprise
               </span>
-              <h3 class="scenario-title">Massive Support for Robot Data Acquisition</h3>
-              <p class="scenario-desc">
+              <h3 class="scenario-title" data-i18n="scenarios_ent_title">Massive Support for Robot Data Acquisition</h3>
+              <p class="scenario-desc" data-i18n="scenarios_ent_desc">
                 Scale up your embodied AI data engine. Seeed reBot Arm turns teleoperation into training-ready datasets — native LeRobot Dataset format, multi-camera capture, checkpoint-and-resume recording, and one-click sync to Hugging Face Hub — ready to deploy across fleets, sites, and annotation teams.
               </p>
             </div>
@@ -3131,37 +3372,37 @@
             <div class="scenario-stats-grid">
               <!-- 1. LeRobot -->
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">LeRobot</span>
-                <span class="scenario-stat-lbl">PARQUET DATASET FORMAT</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_ent_stat1_val">LeRobot</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat1_lbl">PARQUET DATASET FORMAT</span>
               </div>
 
               <!-- 2. 3× 1080p -->
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">3× 1080p</span>
-                <span class="scenario-stat-lbl">MULTI-CAM @ 30FPS</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_ent_stat2_val">3× 1080p</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat2_lbl">MULTI-CAM @ 30FPS</span>
               </div>
 
               <!-- 3. HF Hub -->
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">HF Hub</span>
-                <span class="scenario-stat-lbl">ONE-CLICK SYNC</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_ent_stat3_val">HF Hub</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat3_lbl">ONE-CLICK SYNC</span>
               </div>
 
               <!-- 4. VR Teleop -->
               <div class="scenario-stat-item">
-                <span class="scenario-stat-val">VR Teleop</span>
-                <span class="scenario-stat-lbl">QUEST 3 &amp; LEADER ARM</span>
+                <span class="scenario-stat-val" data-i18n="scenarios_ent_stat4_val">VR Teleop</span>
+                <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat4_lbl">QUEST 3 &amp; LEADER ARM</span>
               </div>
             </div>
 
             <!-- Media Preview -->
             <div class="scenario-media-wrapper">
-              <img src="image/industrial_data_box.png" alt="Massive Support for Robot Data Acquisition" class="scenario-img" loading="lazy" decoding="async">
+              <img src="image/twitter2.webp" alt="Massive Support for Robot Data Acquisition" class="scenario-img" loading="lazy" decoding="async">
             </div>
 
             <!-- Action Button -->
             <div class="scenario-action-box">
-              <a href="https://huggingface.co/Seeed-Projects" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn industrial-btn">
+              <a href="https://huggingface.co/Seeed-Projects" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn industrial-btn" data-i18n="scenarios_ent_btn">
                 Get Dataset to Train Your reBot Now
               </a>
             </div>
@@ -3179,8 +3420,8 @@
         
         <!-- Section Header -->
         <div class="section-title-group" style="text-align: center; margin-bottom: 3.5rem;">
-          <h2 class="section-main-title">Quick Sim-to-Real Experience</h2>
-          <p class="section-subtitle">Interactive 3D MuJoCo Simulation in Your Browser</p>
+          <h2 class="section-main-title" data-i18n="sim_main_title">Quick Sim-to-Real Experience</h2>
+          <p class="section-subtitle" data-i18n="sim_main_subtitle">Interactive 3D MuJoCo Simulation in Your Browser</p>
         </div>
 
         <div class="sim-experience-card">
@@ -3194,8 +3435,8 @@
 
           <!-- Right Column: Info & Launch CTA -->
           <div class="sim-right-content">
-            <h3 class="sim-content-title">MuJoCo 3D Simulation</h3>
-            <p class="sim-content-desc">
+            <h3 class="sim-content-title" data-i18n="sim_card_title">MuJoCo 3D Simulation</h3>
+            <p class="sim-content-desc" data-i18n="sim_card_desc">
               Watch reBot Arm B601-RS digital twin executing real-time 3D physics trajectories, pick-and-place tasks, and multi-camera perception.
             </p>
 
@@ -3204,36 +3445,36 @@
               <div class="sim-feature-item">
                 <i class="fas fa-bolt"></i>
                 <div>
-                  <strong>100Hz Physics</strong>
-                  <span>Real-time MuJoCo dynamics solver</span>
+                  <strong data-i18n="sim_feat1_title">100Hz Physics</strong>
+                  <span data-i18n="sim_feat1_desc">Real-time MuJoCo dynamics solver</span>
                 </div>
               </div>
               <div class="sim-feature-item">
                 <i class="fas fa-cubes"></i>
                 <div>
-                  <strong>Auto Trajectory</strong>
-                  <span>High-precision pick & place stacking</span>
+                  <strong data-i18n="sim_feat2_title">Auto Trajectory</strong>
+                  <span data-i18n="sim_feat2_desc">High-precision pick & place stacking</span>
                 </div>
               </div>
               <div class="sim-feature-item">
                 <i class="fas fa-video"></i>
                 <div>
-                  <strong>Multi-Camera</strong>
-                  <span>Wrist & overhead camera feeds</span>
+                  <strong data-i18n="sim_feat3_title">Multi-Camera</strong>
+                  <span data-i18n="sim_feat3_desc">Wrist & overhead camera feeds</span>
                 </div>
               </div>
               <div class="sim-feature-item">
                 <i class="fas fa-microchip"></i>
                 <div>
-                  <strong>Sim-to-Real</strong>
-                  <span>1:1 Kinematic model to hardware</span>
+                  <strong data-i18n="sim_feat4_title">Sim-to-Real</strong>
+                  <span data-i18n="sim_feat4_desc">1:1 Kinematic model to hardware</span>
                 </div>
               </div>
             </div>
 
             <!-- Action Buttons Row -->
             <div class="sim-cta-row">
-              <a href="https://yang-ci.github.io/Rebot_Arm_AGV/" target="_blank" rel="noopener noreferrer" class="sim-primary-btn">
+              <a href="https://yang-ci.github.io/Rebot_Arm_AGV/" target="_blank" rel="noopener noreferrer" class="sim-primary-btn" data-i18n="sim_btn">
                 <i class="fas fa-external-link-alt"></i> Open Full Web Simulator
               </a>
             </div>
@@ -3251,8 +3492,8 @@
         
         <!-- Section Header -->
         <div class="section-title-group" style="text-align: center; margin: 0 auto 3rem;">
-          <h2 class="section-main-title">Developer Hub</h2>
-          <p class="section-subtitle">Explore projects, tutorials, and co-creation opportunities with global developers</p>
+          <h2 class="section-main-title" data-i18n="dev_main_title">Developer Hub</h2>
+          <p class="section-subtitle" data-i18n="dev_main_subtitle">Explore projects, tutorials, and co-creation opportunities with global developers</p>
         </div>
 
         <!-- Accordion List -->
@@ -3262,11 +3503,11 @@
           <div class="hub-accordion-item" id="hub-item-01">
             <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-01')">
               <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title">
+                <h3 class="hub-accordion-title" data-i18n="dev_item01_title">
                   <i class="fas fa-cubes" style="color: var(--nv-green); font-size: 1.1rem;"></i>
                   01 See What You Can Build
                 </h3>
-                <p class="hub-accordion-subtitle">Explore real-world projects and creative builds from global developers</p>
+                <p class="hub-accordion-subtitle" data-i18n="dev_item01_subtitle">Explore real-world projects and creative builds from global developers</p>
               </div>
               <div class="hub-accordion-icon">
                 <i class="fas fa-chevron-down"></i>
@@ -3280,7 +3521,7 @@
                   
                   <!-- 1. GEM-4 (Wide) -->
                   <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/new-writeup-1778618527713', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/GEM-4.png" alt="GEM-4 Gemma Embodied AI" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/GEM-4.webp" alt="GEM-4 Gemma Embodied AI" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-kaggle"></i> GEM-4 (Kaggle)</div>
                       <h4 class="dev-card-title">Gemma Physical Assistance</h4>
@@ -3290,7 +3531,7 @@
 
                   <!-- 2. Linyan Fu (Medium) -->
                   <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/Linyan_Fu/status/2056383947341525180', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Linyan.png" alt="Linyan Fu Sim2Real Policy" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Linyan.webp" alt="Linyan Fu Sim2Real Policy" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Linyan Fu</div>
                       <h4 class="dev-card-title">Sim2Real Policy Deployment</h4>
@@ -3300,7 +3541,7 @@
 
                   <!-- 3. Apheth D Almeida (Portrait) -->
                   <div class="dev-project-card dev-card-portrait" onclick="window.open('https://x.com/Apheth_DAlmeida/status/2053503164507476096', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Sameer.png" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Sameer.webp" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Apheth D Almeida</div>
                       <h4 class="dev-card-title">6 DoF Kinematic Teleop</h4>
@@ -3310,7 +3551,7 @@
 
                   <!-- 4. Dhruv Diddi (Square) -->
                   <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/DhruvDiddi/status/2046605015008383284', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Diddi.png" alt="Dhruv Diddi Pick & Place" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Diddi.webp" alt="Dhruv Diddi Pick & Place" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Dhruv Diddi</div>
                       <h4 class="dev-card-title">Autonomous Pick & Place</h4>
@@ -3320,7 +3561,7 @@
 
                   <!-- 5. Ed Henderson (Wide) -->
                   <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Henderson.jpg" alt="Ed Henderson LeRobot Policy" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Henderson.webp" alt="Ed Henderson LeRobot Policy" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
                       <h4 class="dev-card-title">LeRobot Integration</h4>
@@ -3330,7 +3571,7 @@
 
                   <!-- 6. Binh Pham (Medium) -->
                   <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/pham_blnh/status/2061994096374505710', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Binh_Pham.png" alt="Binh Pham ROS 2 MoveIt" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Binh_Pham.webp" alt="Binh Pham ROS 2 MoveIt" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Binh Pham</div>
                       <h4 class="dev-card-title">ROS 2 MoveIt Pipeline</h4>
@@ -3340,7 +3581,7 @@
 
                   <!-- 7. FangTianChongHui (Portrait) -->
                   <div class="dev-project-card dev-card-portrait" onclick="window.open('https://www.instagram.com/reel/DY7Ny8OPjVu/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_fangtianchonghui.png" alt="FangTianChongHui Actuator Joint Motor" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_fangtianchonghui.webp" alt="FangTianChongHui Actuator Joint Motor" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-instagram"></i> FangTianChongHui</div>
                       <h4 class="dev-card-title">Precision Actuator Control</h4>
@@ -3350,7 +3591,7 @@
 
                   <!-- 8. Xense YaoLin Dong (Square) -->
                   <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/dong1505lin', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_xensedyl.png" alt="Xense YaoLin Dong Tactile Sensor" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_xensedyl.webp" alt="Xense YaoLin Dong Tactile Sensor" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Xense YaoLin Dong</div>
                       <h4 class="dev-card-title">Tactile Sensing Integration</h4>
@@ -3360,7 +3601,7 @@
 
                   <!-- 9. yoshikai_man (Wide) -->
                   <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/yoshikai_man/status/2079938975398244705', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/YOR_Car.png" alt="yoshikai_man Desktop Automation Workbench" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/YOR_Car.webp" alt="yoshikai_man Desktop Automation Workbench" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> yoshikai_man</div>
                       <h4 class="dev-card-title">Desktop Assembly Bot</h4>
@@ -3370,7 +3611,7 @@
 
                   <!-- 10. Li Pengdong (hei-rebot-lift) (Medium) -->
                   <div class="dev-project-card dev-card-medium" onclick="window.open('https://github.com/lipengdong/hei-rebot-lift', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/hei-robot-lift-play.gif" alt="Li Pengdong Vertical Lift" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/hei-robot-lift-play.webp" alt="Li Pengdong Vertical Lift" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-github"></i> Li Pengdong</div>
                       <h4 class="dev-card-title">hei-rebot-lift System</h4>
@@ -3380,7 +3621,7 @@
 
                   <!-- 11. Martin Kemka (Square) -->
                   <div class="dev-project-card dev-card-square" onclick="window.open('https://www.linkedin.com/posts/activity-7484390995862781952-TX4m', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/VR_with_reBot.png" alt="Martin Kemka Industrial Automation" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/VR_with_reBot.webp" alt="Martin Kemka Industrial Automation" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-linkedin"></i> Martin Kemka</div>
                       <h4 class="dev-card-title">Industrial Automation AI</h4>
@@ -3390,7 +3631,7 @@
 
                   <!-- 12. Kamil Buczyński (Portrait) -->
                   <div class="dev-project-card dev-card-portrait" onclick="window.open('https://www.linkedin.com/posts/kamil-buczy%C5%84ski-102843301_seeedstudio-rebotarm-seeedprojectofthemonth-ugcPost-7485297094715461633-RV_6', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/reBot_grasp_fruit.png" alt="Kamil Buczyński Full Stack Robotics Lab" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/reBot_grasp_fruit.webp" alt="Kamil Buczyński Full Stack Robotics Lab" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-linkedin"></i> Kamil Buczyński</div>
                       <h4 class="dev-card-title">Project of the Month</h4>
@@ -3400,7 +3641,7 @@
 
                   <!-- 13. Daniel Dorado (Wide) -->
                   <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.linkedin.com/posts/doradodaniel_computervision-spatialai-sim2real-share-7474727487374184448-NhwX', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/Daniel_Dorado.jpg" alt="Daniel Dorado Spatial AI Vision" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/Daniel_Dorado.webp" alt="Daniel Dorado Spatial AI Vision" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-linkedin"></i> Daniel Dorado</div>
                       <h4 class="dev-card-title">Spatial AI & Sim2Real</h4>
@@ -3410,7 +3651,7 @@
 
                   <!-- 14. Asier Arranz (Medium) -->
                   <div class="dev-project-card dev-card-medium" onclick="window.open('https://www.linkedin.com/posts/asierarranz_nvidia-physicalai-isaaclab-ugcPost-7480271721942417408-YNwu', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/Groot_N1.7.png" alt="Asier Arranz NVIDIA Isaac Lab GPU AI" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/Groot_N1.7.webp" alt="Asier Arranz NVIDIA Isaac Lab GPU AI" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-linkedin"></i> Asier Arranz</div>
                       <h4 class="dev-card-title">NVIDIA Isaac Lab Physical AI</h4>
@@ -3420,7 +3661,7 @@
 
                   <!-- 15. Ed Henderson Demo 2 (Wide) -->
                   <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Henderson_2.png" alt="Ed Henderson Dual Arm Teleop" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Henderson_2.webp" alt="Ed Henderson Dual Arm Teleop" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
                       <h4 class="dev-card-title">Dual Arm Teleop Demo</h4>
@@ -3431,7 +3672,7 @@
                   <!-- Duplicated 15 Cards for Seamless Infinite Horizontal Loop -->
                   <!-- 1 Dup -->
                   <div class="dev-project-card dev-card-wide" onclick="window.open('https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/new-writeup-1778618527713', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/GEM-4.png" alt="GEM-4 Gemma Embodied AI" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/GEM-4.webp" alt="GEM-4 Gemma Embodied AI" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-kaggle"></i> GEM-4 (Kaggle)</div>
                       <h4 class="dev-card-title">Gemma Physical Assistance</h4>
@@ -3441,7 +3682,7 @@
 
                   <!-- 2 Dup -->
                   <div class="dev-project-card dev-card-medium" onclick="window.open('https://x.com/Linyan_Fu/status/2056383947341525180', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Linyan.png" alt="Linyan Fu Sim2Real Policy" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Linyan.webp" alt="Linyan Fu Sim2Real Policy" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Linyan Fu</div>
                       <h4 class="dev-card-title">Sim2Real Policy Deployment</h4>
@@ -3451,7 +3692,7 @@
 
                   <!-- 3 Dup -->
                   <div class="dev-project-card dev-card-portrait" onclick="window.open('https://x.com/Apheth_DAlmeida/status/2053503164507476096', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Sameer.png" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Sameer.webp" alt="Apheth D Almeida Kinematic Teleop" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Apheth D Almeida</div>
                       <h4 class="dev-card-title">6 DoF Kinematic Teleop</h4>
@@ -3461,7 +3702,7 @@
 
                   <!-- 4 Dup -->
                   <div class="dev-project-card dev-card-square" onclick="window.open('https://x.com/DhruvDiddi/status/2046605015008383284', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Diddi.png" alt="Dhruv Diddi Pick & Place" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Diddi.webp" alt="Dhruv Diddi Pick & Place" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Dhruv Diddi</div>
                       <h4 class="dev-card-title">Autonomous Pick & Place</h4>
@@ -3471,7 +3712,7 @@
 
                   <!-- 5 Dup -->
                   <div class="dev-project-card dev-card-wide" onclick="window.open('https://x.com/ed0henderson/status/2055076839002095743', '_blank')">
-                    <img src="https://cdn.jsdelivr.net/gh/Seeed-Projects/reBot-DevArm@main/community/from_Henderson.jpg" alt="Ed Henderson LeRobot Policy" class="dev-card-img" loading="lazy" decoding="async">
+                    <img src="image/community/from_Henderson.webp" alt="Ed Henderson LeRobot Policy" class="dev-card-img" loading="lazy" decoding="async">
                     <div class="dev-card-overlay">
                       <div class="dev-card-author"><i class="fab fa-x-twitter"></i> Ed Henderson</div>
                       <h4 class="dev-card-title">LeRobot Integration</h4>
@@ -3488,11 +3729,11 @@
           <div class="hub-accordion-item" id="cocreate">
             <div class="hub-accordion-header" onclick="toggleHubAccordion('cocreate')">
               <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title">
+                <h3 class="hub-accordion-title" data-i18n="dev_item02_title">
                   <i class="fas fa-hands-helping" style="color: var(--nv-green); font-size: 1.1rem;"></i>
                   02 Co-Create with Seeed
                 </h3>
-                <p class="hub-accordion-subtitle">Join Seeed's global community, project calls, and partnership programs</p>
+                <p class="hub-accordion-subtitle" data-i18n="dev_item02_subtitle">Join Seeed's global community, project calls, and partnership programs</p>
               </div>
               <div class="hub-accordion-icon">
                 <i class="fas fa-chevron-down"></i>
@@ -3508,14 +3749,14 @@
                   <!-- Left Card: Physical AI Project of the Month -->
                   <div class="cocreate-card" style="padding: 2rem; justify-content: space-between;">
                     <div>
-                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;">
+                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;" data-i18n="cocreate_card1_title">
                         Physical AI Project of the Month
                       </h4>
-                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;">
+                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;" data-i18n="cocreate_card1_desc">
                         Showcase your innovative robotics builds with Seeed reBot Arm. Win hardware grants, global community spotlights, and official co-marketing support from Seeed team.
                       </p>
                     </div>
-                    <a href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn">
+                    <a href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn" data-i18n="cocreate_card1_btn">
                       Submit Your Project
                     </a>
                   </div>
@@ -3523,14 +3764,14 @@
                   <!-- Card 2: Global Physical AI Workshop Partnership Program -->
                   <div class="cocreate-card" style="padding: 2rem; justify-content: space-between;">
                     <div>
-                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;">
+                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;" data-i18n="cocreate_card2_title">
                         Global Physical AI Workshop Partnership
                       </h4>
-                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;">
+                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;" data-i18n="cocreate_card2_desc">
                         Host a hands-on Physical AI &amp; Embodied AI workshop at your university, lab, or hackerspace. Seeed provides reBot hardware grants, curriculum resources, and event support.
                       </p>
                     </div>
-                    <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn">
+                    <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn" data-i18n="cocreate_card2_btn">
                       Apply for Workshop Support
                     </a>
                   </div>
@@ -3538,14 +3779,14 @@
                   <!-- Card 3: Embodied AI Hackathon & Events -->
                   <div class="cocreate-card" style="padding: 2rem; justify-content: space-between;">
                     <div>
-                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;">
+                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;" data-i18n="cocreate_card3_title">
                         Embodied AI Hackathon &amp; Events
                       </h4>
-                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;">
+                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;" data-i18n="cocreate_card3_desc">
                         Join Seeed global hackathons and developer events. Explore upcoming competition calendars, challenge tracks, hardware sponsorships, and past event recaps.
                       </p>
                     </div>
-                    <a href="https://www.seeedstudio.com/embodied-ai-hackathon" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn">
+                    <a href="https://www.seeedstudio.com/embodied-ai-hackathon" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn" data-i18n="cocreate_card3_btn">
                       Check Upcoming Events
                     </a>
                   </div>
@@ -3554,7 +3795,7 @@
 
                 <!-- Partners Monochrome SVG Logo Marquee Carousel (Full Width) -->
                 <section class="partners-marquee-section" style="width: 100%; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--nv-border);">
-                  <div class="partners-header">Supported Platforms &amp; Developer Tools</div>
+                  <div class="partners-header" data-i18n="partners_title">Supported Platforms &amp; Developer Tools</div>
       
       <div class="marquee-container">
         <div class="marquee-track">
@@ -3573,13 +3814,13 @@
             <img src="image/logo/hugging-face.png" alt="Hugging Face Logo" class="logo-huggingface">
           </div>
           <div class="partner-logo-item" title="LeRobot">
-            <img src="image/logo/LeRobot@1x.png" alt="LeRobot Logo" class="logo-lerobot">
+            <img src="image/logo/LeRobot@1x.webp" alt="LeRobot Logo" class="logo-lerobot">
           </div>
           <div class="partner-logo-item" title="MuJoCo">
             <img src="image/logo/mujoco.png" alt="MuJoCo Logo" class="logo-mujoco">
           </div>
           <div class="partner-logo-item" title="MoveIt 2">
-            <img src="image/logo/moveit-2-logo-dark.png" alt="MoveIt 2 Logo" class="logo-moveit2">
+            <img src="image/logo/moveit-2-logo-dark.webp" alt="MoveIt 2 Logo" class="logo-moveit2">
           </div>
           <div class="partner-logo-item" title="Pinocchio">
             <img src="image/logo/pinocchio.png" alt="Pinocchio Logo" class="logo-pinocchio">
@@ -3617,13 +3858,13 @@
             <img src="image/logo/hugging-face.png" alt="Hugging Face Logo" class="logo-huggingface">
           </div>
           <div class="partner-logo-item" title="LeRobot">
-            <img src="image/logo/LeRobot@1x.png" alt="LeRobot Logo" class="logo-lerobot">
+            <img src="image/logo/LeRobot@1x.webp" alt="LeRobot Logo" class="logo-lerobot">
           </div>
           <div class="partner-logo-item" title="MuJoCo">
             <img src="image/logo/mujoco.png" alt="MuJoCo Logo" class="logo-mujoco">
           </div>
           <div class="partner-logo-item" title="MoveIt 2">
-            <img src="image/logo/moveit-2-logo-dark.png" alt="MoveIt 2 Logo" class="logo-moveit2">
+            <img src="image/logo/moveit-2-logo-dark.webp" alt="MoveIt 2 Logo" class="logo-moveit2">
           </div>
           <div class="partner-logo-item" title="Pinocchio">
             <img src="image/logo/pinocchio.png" alt="Pinocchio Logo" class="logo-pinocchio">
@@ -3661,13 +3902,13 @@
             <img src="image/logo/hugging-face.png" alt="Hugging Face Logo" class="logo-huggingface">
           </div>
           <div class="partner-logo-item" title="LeRobot">
-            <img src="image/logo/LeRobot@1x.png" alt="LeRobot Logo" class="logo-lerobot">
+            <img src="image/logo/LeRobot@1x.webp" alt="LeRobot Logo" class="logo-lerobot">
           </div>
           <div class="partner-logo-item" title="MuJoCo">
             <img src="image/logo/mujoco.png" alt="MuJoCo Logo" class="logo-mujoco">
           </div>
           <div class="partner-logo-item" title="MoveIt 2">
-            <img src="image/logo/moveit-2-logo-dark.png" alt="MoveIt 2 Logo" class="logo-moveit2">
+            <img src="image/logo/moveit-2-logo-dark.webp" alt="MoveIt 2 Logo" class="logo-moveit2">
           </div>
           <div class="partner-logo-item" title="Pinocchio">
             <img src="image/logo/pinocchio.png" alt="Pinocchio Logo" class="logo-pinocchio">
@@ -3715,16 +3956,16 @@
         
         <!-- Section Header -->
         <div class="section-title-group" style="text-align: center; margin: 0 auto 3.5rem;">
-          <h2 class="section-main-title">Complete Your AI Robotics Station</h2>
-          <p class="section-subtitle">Plug-and-play accessories verified by Seeed team</p>
+          <h2 class="section-main-title" data-i18n="acc_title">Complete Your AI Robotics Station</h2>
+          <p class="section-subtitle" data-i18n="acc_subtitle">Plug-and-play accessories verified by Seeed team</p>
         </div>
 
         <!-- Filter Pills Tabs -->
         <div class="accessories-tabs">
-          <button class="tab-pill-btn active" id="tab-btn-dm" data-target="dm">
+          <button class="tab-pill-btn active" id="tab-btn-dm" data-target="dm" data-i18n="acc_tab_dm">
             reBot Arm Dm Accessories
           </button>
-          <button class="tab-pill-btn" id="tab-btn-rs" data-target="rs">
+          <button class="tab-pill-btn" id="tab-btn-rs" data-target="rs" data-i18n="acc_tab_rs">
             reBot Arm RS Accessories
           </button>
         </div>
@@ -3751,7 +3992,7 @@
           <!-- Product 2: Orbbec Gemini 336 Depth Camera -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/orbbec_gemini_336.png" alt="Orbbec Gemini 336 Depth Camera">
+              <img src="image/orbbec_gemini_336.webp" alt="Orbbec Gemini 336 Depth Camera">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">Orbbec Gemini 336 Depth Camera</h3>
@@ -3767,7 +4008,7 @@
           <!-- Product 3: Intel RealSense Depth Camera D435i -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/realsense_d435i.png" alt="Intel RealSense Depth Camera D435i">
+              <img src="image/realsense_d435i.jpg?v=real1" alt="Intel RealSense Depth Camera D435i">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">Intel RealSense Depth Camera D435i</h3>
@@ -3783,7 +4024,7 @@
           <!-- Product 4: RealSense Depth Camera D405 -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/realsense_d405.png" alt="RealSense Depth Camera D405">
+              <img src="image/realsense_d405.jpg?v=real1" alt="RealSense Depth Camera D405">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">RealSense Depth Camera D405</h3>
@@ -3799,7 +4040,7 @@
           <!-- Product 5: ET-S231 Megapixel 90° Wide-Angle 1080P USB Camera Module -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/usb_camera_s231.png" alt="ET-S231 Megapixel 90° Wide-Angle 1080P USB Camera Module">
+              <img src="image/usb_camera_s231.jpg?v=real1" alt="ET-S231 Megapixel 90° Wide-Angle 1080P USB Camera Module">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">ET-S231 Megapixel 90° Wide-Angle 1080P USB Camera Module</h3>
@@ -3815,7 +4056,7 @@
           <!-- Product 6: Star Arm-102 -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/star_arm_102.jpg" alt="Star Arm-102">
+              <img src="image/star_arm_102.jpg?v=real1" alt="Star Arm-102">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">Star Arm-102</h3>
@@ -3831,7 +4072,7 @@
           <!-- Product 7: AC/DC Power Adapter DC5521 Male 12V 2A 1500mm -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/power_adapter_12v2a.jpg" alt="AC/DC Power Adapter DC5521 Male 12V 2A 1500mm">
+              <img src="image/power_adapter_12v2a.jpg?v=real1" alt="AC/DC Power Adapter DC5521 Male 12V 2A 1500mm">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">AC/DC Power Adapter DC5521 Male 12V 2A 1500mm</h3>
@@ -3847,7 +4088,7 @@
           <!-- Product 8: DM4340P Actuator -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/dm4340p_actuator.png" alt="DM4340P Actuator">
+              <img src="image/dm4340p_actuator.jpg?v=real1" alt="DM4340P Actuator">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">DM4340P High Torque Actuator</h3>
@@ -3863,7 +4104,7 @@
           <!-- Product 9: Damiao 4310 Motor -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/damiao_4310_motor.png" alt="Damiao 4310 Actuator Motor">
+              <img src="image/damiao_4310_motor.jpg" alt="Damiao 4310 Actuator Motor">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">Damiao 4310 Actuator Motor</h3>
@@ -3884,7 +4125,7 @@
           <!-- Product 1: RobStride 00 QDD 14N.m integrated actuator module -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/rs_00_actuator.png" alt="RobStride 00 QDD 14N.m integrated actuator module">
+              <img src="image/rs_00_actuator.webp" alt="RobStride 00 QDD 14N.m integrated actuator module">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">RobStride 00 QDD 14N.m integrated actuator module</h3>
@@ -3932,7 +4173,7 @@
           <!-- Product 4: 6-Inch G-Clamp for reBot Arm -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/rs_g_clamp.png" alt="6-Inch G-Clamp for reBot Arm">
+              <img src="image/rs_g_clamp.webp" alt="6-Inch G-Clamp for reBot Arm">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">6-Inch G-Clamp for reBot Arm</h3>
@@ -3948,7 +4189,7 @@
           <!-- Product 5: Power Cable-F R/A to F R/A-200mm - for reBot Arm B601-RS -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/rs_cable_200mm.png" alt="Power Cable-F R/A to F R/A-200mm - for reBot Arm B601-RS">
+              <img src="image/rs_cable_200mm.webp" alt="Power Cable-F R/A to F R/A-200mm - for reBot Arm B601-RS">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">Power Cable-F R/A to F R/A-200mm - for reBot Arm B601-RS</h3>
@@ -3964,7 +4205,7 @@
           <!-- Product 6: Power Cable-F R/A to F R/A-320mm - for reBot Arm B601-RS -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/rs_cable_320mm.png" alt="Power Cable-F R/A to F R/A-320mm - for reBot Arm B601-RS">
+              <img src="image/rs_cable_320mm.webp" alt="Power Cable-F R/A to F R/A-320mm - for reBot Arm B601-RS">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">Power Cable-F R/A to F R/A-320mm - for reBot Arm B601-RS</h3>
@@ -3980,7 +4221,7 @@
           <!-- Product 7: Power Cable-F to F-R/A-300mm - for reBot Arm B601-RS -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/rs_cable_300mm_ra.png" alt="Power Cable-F to F-R/A-300mm - for reBot Arm B601-RS">
+              <img src="image/rs_cable_300mm_ra.webp" alt="Power Cable-F to F-R/A-300mm - for reBot Arm B601-RS">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">Power Cable-F to F-R/A-300mm - for reBot Arm B601-RS</h3>
@@ -3996,7 +4237,7 @@
           <!-- Product 8: Power Cable-F to F-300mm - for reBot Arm B601-RS -->
           <div class="accessory-card">
             <div class="accessory-img-box">
-              <img src="image/rs_cable_300mm.png" alt="Power Cable-F to F-300mm - for reBot Arm B601-RS">
+              <img src="image/rs_cable_300mm.webp" alt="Power Cable-F to F-300mm - for reBot Arm B601-RS">
             </div>
             <div class="accessory-info">
               <h3 class="accessory-title">Power Cable-F to F-300mm - for reBot Arm B601-RS</h3>
@@ -4041,8 +4282,8 @@
         
         <!-- Section Header -->
         <div class="section-title-group" style="text-align: center; margin: 0 auto 3.5rem;">
-          <h2 class="section-main-title">F & Q</h2>
-          <p class="section-subtitle">Everything you need to know about reBot Arm, open-source resources, and getting started</p>
+          <h2 class="section-main-title" data-i18n="faq_title">F & Q</h2>
+          <p class="section-subtitle" data-i18n="faq_subtitle">Everything you need to know about reBot Arm, open-source resources, and getting started</p>
         </div>
 
         <!-- FAQ Accordion Container -->
@@ -4052,11 +4293,11 @@
           <div class="faq-item" id="faq-01">
             <div class="faq-header" onclick="toggleFaq('faq-01')">
               <span class="faq-num">01</span>
-              <h3 class="faq-question">What's the difference between reBot Arm DM and RS? Which one should I choose?</h3>
+              <h3 class="faq-question" data-i18n="faq_q1">What's the difference between reBot Arm DM and RS? Which one should I choose?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>The DM version uses Damiao actuators (DM4310 / DM4340P) with a 1.5 kg rated payload and &plusmn;0.2 mm repeatability &mdash; ideal for beginners, education, and lightweight projects. The RS version uses RobStride actuators (00 / 06) with a 2.5 kg rated payload, &plusmn;0.1 mm repeatability, and higher torque &mdash; built for research labs and lightweight industrial automation. Not sure? Start with DM if you're learning, go with RS if you need precision and payload. Check the spec comparison table above for details.</p>
+              <p data-i18n="faq_a1">The DM version uses Damiao actuators (DM4310 / DM4340P) with a 1.5 kg rated payload and &plusmn;0.2 mm repeatability &mdash; ideal for beginners, education, and lightweight projects. The RS version uses RobStride actuators (00 / 06) with a 2.5 kg rated payload, &plusmn;0.1 mm repeatability, and higher torque &mdash; built for research labs and lightweight industrial automation. Not sure? Start with DM if you're learning, go with RS if you need precision and payload. Check the spec comparison table above for details.</p>
             </div>
           </div>
 
@@ -4064,11 +4305,11 @@
           <div class="faq-item" id="faq-02">
             <div class="faq-header" onclick="toggleFaq('faq-02')">
               <span class="faq-num">02</span>
-              <h3 class="faq-question">Is reBot Arm fully open-source? What exactly is open?</h3>
+              <h3 class="faq-question" data-i18n="faq_q2">Is reBot Arm fully open-source? What exactly is open?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>Yes &mdash; reBot Arm is fully open-source. This includes hardware design files, firmware, ROS2 drivers, MuJoCo / Isaac Sim simulation models, and all example code. Everything is hosted on our GitHub repository. You're free to modify, customize, and build on top of it for your own projects.</p>
+              <p data-i18n="faq_a2">Yes &mdash; reBot Arm is fully open-source. This includes hardware design files, firmware, ROS2 drivers, MuJoCo / Isaac Sim simulation models, and all example code. Everything is hosted on our GitHub repository. You're free to modify, customize, and build on top of it for your own projects.</p>
             </div>
           </div>
 
@@ -4076,11 +4317,11 @@
           <div class="faq-item" id="faq-03">
             <div class="faq-header" onclick="toggleFaq('faq-03')">
               <span class="faq-num">03</span>
-              <h3 class="faq-question">Who is reBot Arm for? Can a beginner get started with it?</h3>
+              <h3 class="faq-question" data-i18n="faq_q3">Who is reBot Arm for? Can a beginner get started with it?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>reBot Arm is designed for developers, researchers, students, and AI innovators &mdash; anyone who wants to explore physical AI and robotics. If you're new to robotics, absolutely: our Learning Physical AI course walks you from the very basics all the way to VLA model deployment, with 19 modules and 20+ hours of hands-on content.</p>
+              <p data-i18n="faq_a3">reBot Arm is designed for developers, researchers, students, and AI innovators &mdash; anyone who wants to explore physical AI and robotics. If you're new to robotics, absolutely: our Learning Physical AI course walks you from the very basics all the way to VLA model deployment, with 19 modules and 20+ hours of hands-on content.</p>
             </div>
           </div>
 
@@ -4088,11 +4329,11 @@
           <div class="faq-item" id="faq-04">
             <div class="faq-header" onclick="toggleFaq('faq-04')">
               <span class="faq-num">04</span>
-              <h3 class="faq-question">What programming languages and frameworks does reBot Arm support?</h3>
+              <h3 class="faq-question" data-i18n="faq_q4">What programming languages and frameworks does reBot Arm support?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>reBot Arm supports Python, ROS2 Humble, and the LeRobot framework out of the box. You can control it directly from your browser via SenseCraft, write custom Python scripts, or integrate with ROS2 for more advanced workflows. It's also compatible with MuJoCo and NVIDIA Isaac Sim for simulation-to-real pipelines.</p>
+              <p data-i18n="faq_a4">reBot Arm supports Python, ROS2 Humble, and the LeRobot framework out of the box. You can control it directly from your browser via SenseCraft, write custom Python scripts, or integrate with ROS2 for more advanced workflows. It's also compatible with MuJoCo and NVIDIA Isaac Sim for simulation-to-real pipelines.</p>
             </div>
           </div>
 
@@ -4100,11 +4341,11 @@
           <div class="faq-item" id="faq-05">
             <div class="faq-header" onclick="toggleFaq('faq-05')">
               <span class="faq-num">05</span>
-              <h3 class="faq-question">Which depth cameras are compatible? Do I need to buy one separately?</h3>
+              <h3 class="faq-question" data-i18n="faq_q5">Which depth cameras are compatible? Do I need to buy one separately?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>reBot Arm is officially tested and validated with Orbbec Gemini 2, Orbbec Gemini 336, Intel RealSense D435i, and RealSense D405. All are available as add-on accessories &mdash; see our accessories section below. You can also use your own USB camera that supports standard video capture.</p>
+              <p data-i18n="faq_a5">reBot Arm is officially tested and validated with Orbbec Gemini 2, Orbbec Gemini 336, Intel RealSense D435i, and RealSense D405. All are available as add-on accessories &mdash; see our accessories section below. You can also use your own USB camera that supports standard video capture.</p>
             </div>
           </div>
 
@@ -4112,11 +4353,11 @@
           <div class="faq-item" id="faq-06">
             <div class="faq-header" onclick="toggleFaq('faq-06')">
               <span class="faq-num">06</span>
-              <h3 class="faq-question">What kind of computer do I need? Any GPU requirements?</h3>
+              <h3 class="faq-question" data-i18n="faq_q6">What kind of computer do I need? Any GPU requirements?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>For basic control and learning, any modern laptop will do. For AI training and VLA model deployment, we recommend a machine with an NVIDIA GPU (8GB+ VRAM), or our reComputer J3011 edge AI box for on-device deployment. And if you just want to try things out first, our browser-based MuJoCo simulator runs entirely in your browser &mdash; no local setup needed.</p>
+              <p data-i18n="faq_a6">For basic control and learning, any modern laptop will do. For AI training and VLA model deployment, we recommend a machine with an NVIDIA GPU (8GB+ VRAM), or our reComputer J3011 edge AI box for on-device deployment. And if you just want to try things out first, our browser-based MuJoCo simulator runs entirely in your browser &mdash; no local setup needed.</p>
             </div>
           </div>
 
@@ -4124,11 +4365,11 @@
           <div class="faq-item" id="faq-07">
             <div class="faq-header" onclick="toggleFaq('faq-07')">
               <span class="faq-num">07</span>
-              <h3 class="faq-question">What's included in the Learning Physical AI course? Is it free with the arm?</h3>
+              <h3 class="faq-question" data-i18n="faq_q7">What's included in the Learning Physical AI course? Is it free with the arm?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>The Learning Physical AI course is a paid program with 19 detailed modules across 5 core chapters, totaling 20+ hours of content. It covers everything from basic machine vision to building a full Sim-to-Real VLA pipeline using reBot Arm and NVIDIA Isaac. You can purchase it separately, or grab the Arm + Course bundle for a discounted price &mdash; see the course section above.</p>
+              <p data-i18n="faq_a7">The Learning Physical AI course is a paid program with 19 detailed modules across 5 core chapters, totaling 20+ hours of content. It covers everything from basic machine vision to building a full Sim-to-Real VLA pipeline using reBot Arm and NVIDIA Isaac. You can purchase it separately, or grab the Arm + Course bundle for a discounted price &mdash; see the course section above.</p>
             </div>
           </div>
 
@@ -4136,11 +4377,11 @@
           <div class="faq-item" id="faq-08">
             <div class="faq-header" onclick="toggleFaq('faq-08')">
               <span class="faq-num">08</span>
-              <h3 class="faq-question">Are there tutorials and community support available?</h3>
+              <h3 class="faq-question" data-i18n="faq_q8">Are there tutorials and community support available?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>Absolutely. We have comprehensive Wiki documentation with separate getting-started guides for both DM and RS editions. Our open-source community is active on GitHub, Discord, and WeChat groups. We also run a monthly project showcase and global workshop program &mdash; check out the Developer Hub to join.</p>
+              <p data-i18n="faq_a8">Absolutely. We have comprehensive Wiki documentation with separate getting-started guides for both DM and RS editions. Our open-source community is active on GitHub, Discord, and WeChat groups. We also run a monthly project showcase and global workshop program &mdash; check out the Developer Hub to join.</p>
             </div>
           </div>
 
@@ -4148,11 +4389,11 @@
           <div class="faq-item" id="faq-09">
             <div class="faq-header" onclick="toggleFaq('faq-09')">
               <span class="faq-num">09</span>
-              <h3 class="faq-question">What is sim-to-real? Can I try reBot Arm without buying the hardware first?</h3>
+              <h3 class="faq-question" data-i18n="faq_q9">What is sim-to-real? Can I try reBot Arm without buying the hardware first?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>Sim-to-real means you can train and test your algorithms in simulation first, then deploy them directly to the real robot with minimal changes. And yes &mdash; you can try our MuJoCo simulator right in your browser for free. It's a fully interactive virtual reBot Arm. Launch the simulator to start exploring.</p>
+              <p data-i18n="faq_a9">Sim-to-real means you can train and test your algorithms in simulation first, then deploy them directly to the real robot with minimal changes. And yes &mdash; you can try our MuJoCo simulator right in your browser for free. It's a fully interactive virtual reBot Arm. Launch the simulator to start exploring.</p>
             </div>
           </div>
 
@@ -4160,11 +4401,11 @@
           <div class="faq-item" id="faq-10">
             <div class="faq-header" onclick="toggleFaq('faq-10')">
               <span class="faq-num">10</span>
-              <h3 class="faq-question">What's the shipping and warranty policy?</h3>
+              <h3 class="faq-question" data-i18n="faq_q10">What's the shipping and warranty policy?</h3>
               <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="faq-answer">
-              <p>We ship worldwide. Orders typically ship within 3&ndash;5 business days, and delivery time depends on your location (usually 7&ndash;14 days for most countries). reBot Arm comes with a 1-year limited warranty covering manufacturing defects. If you have any issues, our support team is here to help &mdash; reach us through GitHub Issues, Discord, or our support email.</p>
+              <p data-i18n="faq_a10">We ship worldwide. Orders typically ship within 3&ndash;5 business days, and delivery time depends on your location (usually 7&ndash;14 days for most countries). reBot Arm comes with a 1-year limited warranty covering manufacturing defects. If you have any issues, our support team is here to help &mdash; reach us through GitHub Issues, Discord, or our support email.</p>
             </div>
           </div>
 
@@ -4178,7 +4419,7 @@
     <section class="standalone-community-section" style="padding: 3rem 0 2rem; background-color: var(--nv-dark-bg);">
       <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem;">
         <div class="community-channels-section">
-          <h4 class="community-section-title">
+          <h4 class="community-section-title" data-i18n="community_title">
             <i class="fas fa-users" style="color: var(--nv-green);"></i>
             Community & Developer Channels
           </h4>
@@ -4243,22 +4484,24 @@
   <!-- Footer -->
   <footer style="background-color: var(--nv-surface-1); border-top: 1px solid var(--nv-border); padding: 2rem 0; margin-top: 2rem;">
     <div class="container" style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted); white-space: nowrap;">
-      <div>© 2026 Seeed Studio & NVIDIA DLI | reBot Arm Project</div>
+      <div data-i18n="footer_copyright">© 2026 Seeed Studio & NVIDIA DLI | reBot Arm Project</div>
     </div>
   </footer>
 
-  <!-- Three.js Engine & STLLoader (Local + CDN Fallback) -->
+  <!-- Three.js Engine & Loaders (Local + CDN Fallback) -->
   <script src="js/lib/three.min.js"></script>
   <script src="js/lib/STLLoader.js"></script>
+  <script src="js/lib/GLTFLoader.js?v=20260929_v1"></script>
   <script>
     if (typeof THREE === 'undefined') {
       document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
       document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"><\/script>');
+      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"><\/script>');
     }
   </script>
 
-  <!-- Main JavaScript File with Cache-Buster v55 -->
-  <script src="js/app.js?v=20260909_v55"></script>
+  <!-- Main JavaScript File with Cache-Buster v59 (fixed GLB model loading and joint hierarchy) -->
+  <script src="js/app.js?v=20260929_v59"></script>
   <script>
 
     function toggleFaq(id) {
