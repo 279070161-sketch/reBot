@@ -2504,3 +2504,48 @@ function switchScenarioItem(index) {
 
 window.switchScenarioItem = switchScenarioItem;
 
+/**
+ * Lazy Load MuJoCo Simulation iframe when user scrolls near #sim-to-real section
+ */
+function initSimIframeLazyLoad() {
+  const iframe = document.getElementById('sim-mujoco-iframe');
+  const placeholder = document.getElementById('sim-iframe-placeholder');
+  const section = document.getElementById('sim-to-real') || iframe;
+
+  if (!iframe) return;
+
+  function loadIframe() {
+    if (iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      delete iframe.dataset.src;
+      iframe.addEventListener('load', () => {
+        if (placeholder) {
+          placeholder.style.opacity = '0';
+          setTimeout(() => { placeholder.style.display = 'none'; }, 450);
+        }
+      });
+    }
+  }
+
+  if ('IntersectionObserver' in window && section) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadIframe();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '300px 0px' });
+    observer.observe(section);
+  } else {
+    loadIframe();
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSimIframeLazyLoad);
+} else {
+  initSimIframeLazyLoad();
+}
+
+
