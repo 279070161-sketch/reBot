@@ -7,6 +7,10 @@
   <meta name="description" content="Fully Open-Source 6+1 DoF Robotic Arm Kit Built for Developers, Researchers, and AI Innovators.">
   <meta name="theme-color" content="#ffffff">
 
+  <!-- Start downloading the hero 3D model in parallel with HTML parsing,
+       so the full-screen preloader finishes sooner. -->
+  <link rel="preload" as="fetch" href="models/rebot_arm_simple.glb">
+
   <!-- Resource Hints & Google Fonts / Icons -->
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
@@ -16,8 +20,14 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Non-blocking external styles: media="print" -> onload swaps to "all",
+       so slow third-party CDNs can't delay DOMContentLoaded / first paint -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  </noscript>
 
   <!-- Local DLI Course Design System Stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
@@ -4492,16 +4502,18 @@
   <script src="js/lib/three.min.js"></script>
   <script src="js/lib/STLLoader.js"></script>
   <script src="js/lib/GLTFLoader.js?v=20260929_v1"></script>
+  <script src="js/lib/DRACOLoader.js?v=20260929_v1"></script>
   <script>
     if (typeof THREE === 'undefined') {
       document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
       document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"><\/script>');
       document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"><\/script>');
+      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"><\/script>');
     }
   </script>
 
-  <!-- Main JavaScript File with Cache-Buster v59 (fixed GLB model loading and joint hierarchy) -->
-  <script src="js/app.js?v=20260929_v59"></script>
+  <!-- Main JavaScript File with Cache-Buster v63 (reverted to plain GLTFLoader load) -->
+  <script src="js/app.js?v=20260929_v63"></script>
   <script>
 
     function toggleFaq(id) {

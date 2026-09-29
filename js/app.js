@@ -410,6 +410,13 @@ if (document.readyState === 'loading') {
   initApp();
 }
 
+// Boot the Hero 3D arm IMMEDIATELY (script sits at end of <body>):
+// render-blocking third-party stylesheets (e.g. Google Fonts) can delay
+// DOMContentLoaded by seconds, which would leave the banner empty.
+if (typeof THREE !== 'undefined' && document.getElementById('hero-arm-canvas')) {
+  initHeroArmMouseTracker();
+}
+
 function setupLanguageSelector() {
   const langWrapper = document.getElementById('lang-dropdown-wrapper');
   const langBtn = document.getElementById('lang-selector-btn');
@@ -1036,6 +1043,7 @@ function initVideoModalHandler() {
  * Renders a sleek 6-DoF silver-grey metallic reBot Arm standing in a clean studio environment.
  */
 function initHeroArmMouseTracker() {
+  if (window._heroArmTrackerInitialized) return;
   const canvas = document.getElementById('hero-arm-canvas');
   if (!canvas || typeof THREE === 'undefined') {
     if (!window._heroArmRetryCount) window._heroArmRetryCount = 0;
@@ -1045,6 +1053,7 @@ function initHeroArmMouseTracker() {
     }
     return;
   }
+  window._heroArmTrackerInitialized = true;
 
   const container = canvas.parentElement || document.body;
   const scene = new THREE.Scene();
@@ -1275,7 +1284,7 @@ function initHeroArmMouseTracker() {
 
   // 0. Procedural Instant Fallback Mesh (Guarantees arm is ALWAYS 100% visible)
   const fallbackGroup = new THREE.Group();
-  fallbackGroup.scale.set(0.18, 0.18, 0.18);
+  fallbackGroup.scale.set(0.18, 0.18, 0.18); // intentionally near-invisible emergency mesh — never a visible placeholder
   robotArmGroup.add(fallbackGroup);
 
   const fbBase = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.28, 0.08, 32), baseBlackMat);
@@ -1308,21 +1317,22 @@ function initHeroArmMouseTracker() {
     if (preloaderFinished) return;
     preloaderFinished = true;
     setPreloaderProgress(100, 'READY');
-    try { renderer.compile(scene, camera); } catch (_) {}
+    // No blocking shader compile here — materials compile lazily on the first
+    // rendered frame (the GLB success path already compiled right after attach).
     setTimeout(() => {
       if (preloaderEl) {
         preloaderEl.classList.add('preloader-hidden');
-        setTimeout(() => { preloaderEl.style.display = 'none'; }, 850);
+        setTimeout(() => { preloaderEl.style.display = 'none'; }, 450);
       }
       triggerCameraEntrance();
-    }, 150);
+    }, 60);
   }
 
   function triggerCameraEntrance() {
-    const startCamZ = 9.8, targetCamZ = 6.6;
-    const startCamY = 2.6, targetCamY = 1.5;
+    const startCamZ = 7.6, targetCamZ = 6.6;
+    const startCamY = 1.75, targetCamY = 1.5;
     const startTime = performance.now();
-    const duration = 1100;
+    const duration = 700;
     camera.position.set(0, startCamY, startCamZ);
     function step(now) {
       const ease = 1 - Math.pow(1 - Math.min(1, (now - startTime) / duration), 3);
@@ -1334,8 +1344,13 @@ function initHeroArmMouseTracker() {
     requestAnimationFrame(step);
   }
 
-  // Safety fallback: if GLB load takes > 8s, dismiss preloader anyway
-  const preloaderFallbackTimer = setTimeout(() => finishPreloader(), 8000);
+  // Never reveal a placeholder while the real GLB is still loading: keep the
+  // branded preloader up (8s: extend wait with status message; 16s: last resort).
+  const preloaderFallbackTimer = setTimeout(() => {
+    if (preloaderFinished) return;
+    setPreloaderProgress(99, 'STILL LOADING 3D MODEL...');
+    setTimeout(() => finishPreloader(), 8000);
+  }, 8000);
 
   // GLB joint nodes for FK animation (populated after GLB loads)
   let glbJ1Axis = null, glbJ2Axis = null, glbJ3Axis = null;
@@ -1343,7 +1358,7 @@ function initHeroArmMouseTracker() {
   let glbGripperLeft = null, glbGripperRight = null;
   let useGLBJoints = false;
 
-  // Load GLB model — meshes attached to URDF joint groups inside GLB hierarchy
+  // Load GLB model — plain single-file load (reverted from the draco pipeline)
   if (typeof THREE.GLTFLoader !== 'undefined') {
     setPreloaderProgress(5, 'LOADING 3D MODEL...');
 
@@ -1364,6 +1379,9 @@ function initHeroArmMouseTracker() {
         modelRoot.traverse((child) => {
           if (child.isMesh && child.material && matOverrides[child.material.name]) {
             child.material = matOverrides[child.material.name];
+          }
+          if (child.isMesh && !child.geometry.getAttribute('normal')) {
+            child.geometry.computeVertexNormals(); // safety: shading always has normals
           }
         });
 
