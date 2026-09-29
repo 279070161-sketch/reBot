@@ -2362,8 +2362,10 @@ function initSqueezeCarousel() {
       p.setAttribute("tabindex", isCurrent ? "0" : "-1");
       const video = p.querySelector("video");
       if (video) {
-        if (isCurrent && video.paused) {
-          video.play().catch(() => {});
+        if (isCurrent) {
+          if (video.paused) video.play().catch(() => {});
+        } else {
+          if (!video.paused) video.pause();
         }
       }
     });
