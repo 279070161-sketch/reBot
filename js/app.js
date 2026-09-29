@@ -142,8 +142,10 @@ const i18nDict = {
     // Accessories
     acc_title: "Complete Your AI Robotics Station",
     acc_subtitle: "Plug-and-play accessories verified by Seeed team",
-    acc_tab_dm: "reBot Arm Dm Accessories",
-    acc_tab_rs: "reBot Arm RS Accessories",
+    acc_tab_data_acq: "Data acquisition accessories",
+    acc_tab_edge: "Edge computing solution",
+    acc_tab_rs: "rebot arm RS accessories",
+    acc_tab_dm: "rebot arm DM accessories",
     acc_dm_p1: "Orbbec Gemini 2 3D Camera",
     acc_dm_p2: "Orbbec Gemini 336 Depth Camera",
     acc_dm_p3: "Intel RealSense Depth Camera D435i",
@@ -329,8 +331,10 @@ const i18nDict = {
     // Accessories
     acc_title: "打造你的具身智能机器人工作站",
     acc_subtitle: "经过 Seeed 团队验证的即插即用配件",
-    acc_tab_dm: "reBot Arm Dm 配件",
+    acc_tab_data_acq: "数采配件",
+    acc_tab_edge: "边缘计算方案",
     acc_tab_rs: "reBot Arm RS 配件",
+    acc_tab_dm: "reBot Arm DM 配件",
     acc_dm_p1: "奥比中光 Gemini 2 3D 深度相机",
     acc_dm_p2: "奥比中光 Gemini 336 深度相机",
     acc_dm_p3: "英特尔 RealSense 深度相机 D435i",
@@ -559,26 +563,24 @@ function setupSpecToggle() {
 }
 
 function setupAccessoriesTabs() {
-  const dmBtn = document.getElementById('tab-btn-dm');
-  const rsBtn = document.getElementById('tab-btn-rs');
-  const dmGrid = document.getElementById('dm-accessories-grid');
-  const rsGrid = document.getElementById('rs-accessories-grid');
+  const tabBtns = document.querySelectorAll('.accessories-tabs .tab-pill-btn');
+  const grids = document.querySelectorAll('.accessory-grid');
 
-  if (dmBtn && rsBtn && dmGrid) {
-    dmBtn.addEventListener('click', () => {
-      dmBtn.classList.add('active');
-      rsBtn.classList.remove('active');
-      dmGrid.style.display = 'grid';
-      if (rsGrid) rsGrid.style.display = 'none';
-    });
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-target');
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    rsBtn.addEventListener('click', () => {
-      rsBtn.classList.add('active');
-      dmBtn.classList.remove('active');
-      dmGrid.style.display = 'none';
-      if (rsGrid) rsGrid.style.display = 'grid';
+      grids.forEach(grid => {
+        if (grid.id === target + '-accessories-grid') {
+          grid.style.display = 'grid';
+        } else {
+          grid.style.display = 'none';
+        }
+      });
     });
-  }
+  });
 }
 
 /**
