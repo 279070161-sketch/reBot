@@ -2467,3 +2467,40 @@ function initSqueezeCarousel() {
   setActiveSlide(0, false);
   startAutoplay();
 }
+
+/**
+ * Interactive Tabs: switches the 'From Learning to Deployment' content panel
+ * and the right-side preview image (Education / Scientific Research / Enterprise).
+ */
+function switchScenarioItem(index) {
+  const panels = document.querySelectorAll('.scenarios-panel');
+  const tabs = document.querySelectorAll('.scenarios-tab');
+  const imgCards = document.querySelectorAll('.scenarios-image-card');
+
+  panels.forEach((panel, i) => {
+    if (i === index) {
+      panel.classList.add('active');
+    } else {
+      panel.classList.remove('active');
+    }
+  });
+
+  tabs.forEach((tab, i) => {
+    if (i === index) {
+      tab.classList.add('active');
+    } else {
+      tab.classList.remove('active');
+    }
+  });
+
+  imgCards.forEach((card, i) => {
+    if (i === index) {
+      card.classList.add('active');
+    } else {
+      card.classList.remove('active');
+    }
+  });
+}
+
+window.switchScenarioItem = switchScenarioItem;
+

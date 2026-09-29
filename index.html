@@ -867,6 +867,131 @@
       border-bottom: 1px solid var(--nv-border);
       position: relative;
     }
+    
+    /* Interactive Split Layout: Left Accordion List, Right Dynamic Image Display */
+    .scenarios-split-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+    @media (max-width: 1024px) {
+      .scenarios-split-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    /* Tab Bar: Education / Scientific Research / Enterprise */
+    .scenarios-tabbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+    .scenarios-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.7rem 1.6rem;
+      border-radius: 50px;
+      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      color: #475569;
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .scenarios-tab i {
+      font-size: 0.9rem;
+    }
+    .scenarios-tab:hover {
+      border-color: rgba(104, 166, 0, 0.45);
+      color: var(--nv-green);
+    }
+    .scenarios-tab.active {
+      background: var(--nv-green);
+      border-color: var(--nv-green);
+      color: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(104, 166, 0, 0.3);
+    }
+
+    /* Left Content Panels (only active panel visible, subtle fade-in) */
+    .scenarios-panel {
+      display: none;
+    }
+    .scenarios-panel.active {
+      display: block;
+      animation: scenariosPanelIn 0.4s ease both;
+    }
+    @keyframes scenariosPanelIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .scenarios-panel-content .scenario-title {
+      font-size: clamp(1.5rem, 2vw, 1.9rem);
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.25;
+      margin-bottom: 0.85rem;
+      font-family: var(--font-main);
+      letter-spacing: -0.02em;
+    }
+    .scenarios-panel-content .scenario-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+      font-family: var(--font-main);
+      min-height: 52px;
+    }
+
+    /* Right Side Dynamic Preview Box */
+    .scenarios-preview-box {
+      position: sticky;
+      top: 100px;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      background: #0F172A;
+      border: 1px solid var(--nv-border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+    }
+    @media (max-width: 1024px) {
+      .scenarios-preview-box {
+        position: relative;
+        top: 0;
+        aspect-ratio: 16 / 9;
+      }
+    }
+    .scenarios-image-card {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .scenarios-image-card.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .scenarios-preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .app-scenarios-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -910,18 +1035,9 @@
       border-radius: 50px;
       font-family: var(--font-code);
       letter-spacing: 0.5px;
-    }
-    .scenario-badge.edu,
-    .scenario-badge.edu-badge {
       color: var(--nv-green);
       background: rgba(104, 166, 0, 0.09);
       border: 1px solid rgba(104, 166, 0, 0.25);
-    }
-    .scenario-badge.industrial,
-    .scenario-badge.ind-badge {
-      color: #0088B2;
-      background: rgba(0, 153, 198, 0.09);
-      border: 1px solid rgba(0, 153, 198, 0.25);
     }
     .scenario-title {
       font-size: clamp(1.8rem, 2.3vw, 2.3rem);
@@ -1079,19 +1195,6 @@
       background: var(--nv-green-hover);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(104, 166, 0, 0.35);
-      color: #ffffff;
-    }
-    .scenario-primary-btn.industrial-btn,
-    .scenario-primary-btn.ind-btn {
-      background: #0F172A;
-      color: #ffffff;
-      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.2);
-    }
-    .scenario-primary-btn.industrial-btn:hover,
-    .scenario-primary-btn.ind-btn:hover {
-      background: #0088B2;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 153, 198, 0.35);
       color: #ffffff;
     }
 
@@ -3235,189 +3338,189 @@
           <p class="section-subtitle" data-i18n="scenarios_main_subtitle">From Academic Embodied AI Education to Industrial Edge AI Deployment</p>
         </div>
 
-        <!-- 2-Column Side-by-Side Scenarios Grid -->
-        <div class="app-scenarios-grid">
-          
-          <!-- Column 1: Research & Education Card -->
-          <div class="scenario-column-card">
-            <div class="scenario-card-header">
-              <span class="scenario-badge edu" data-i18n="scenarios_edu_badge">
-                <i class="fas fa-graduation-cap"></i> Education
-              </span>
-              <h3 class="scenario-title" data-i18n="scenarios_edu_title">Learning Physical AI</h3>
-              <p class="scenario-desc" data-i18n="scenarios_edu_desc">
-                Collaborating with NVIDIA, Seeed provides a Sim-to-Real VLA Pipeline with Seeed reBot Arm and NVIDIA Isaac. Official hands-on curriculum bridging academic research and higher education.
-              </p>
-            </div>
+        <!-- Tabbed Layout: Tab Bar + Left Content Panel + Right Image Showcase -->
+        <div class="scenarios-tabs-container">
 
-            <!-- Stats Grid -->
-            <div class="scenario-stats-grid">
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_edu_stat1_val">19</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat1_lbl">Detailed Modules</span>
-              </div>
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_edu_stat2_val">Sim-to-Real</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat2_lbl">Full Pipeline</span>
-              </div>
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_edu_stat3_val">5</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat3_lbl">Core Chapters</span>
-              </div>
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_edu_stat4_val">20+ Hours</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat4_lbl">Hands-on Lab</span>
-              </div>
-            </div>
-
-            <!-- Media Preview -->
-            <div class="scenario-media-wrapper">
-              <img src="image/DJIc.webp" alt="Learning Physical AI NVIDIA DLI Course" class="scenario-img" loading="lazy" decoding="async">
-            </div>
-
-            <!-- Action Button -->
-            <div class="scenario-action-box">
-              <a href="https://www.seeedstudio.com/sim-to-real-with-seeed-rebot-and-nvidia-isaac" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn" data-i18n="scenarios_edu_btn">
-                Start Learning Course
-              </a>
-            </div>
+          <!-- Tab Bar: Education / Scientific Research / Enterprise -->
+          <div class="scenarios-tabbar" role="tablist">
+            <button type="button" role="tab" class="scenarios-tab active" data-index="0" onclick="switchScenarioItem(0)">
+              <i class="fas fa-graduation-cap"></i><span data-i18n="scenarios_edu_badge">Education</span>
+            </button>
+            <button type="button" role="tab" class="scenarios-tab" data-index="1" onclick="switchScenarioItem(1)">
+              <i class="fas fa-flask"></i><span data-i18n="scenarios_sci_badge">Scientific Research</span>
+            </button>
+            <button type="button" role="tab" class="scenarios-tab" data-index="2" onclick="switchScenarioItem(2)">
+              <i class="fas fa-building"></i><span data-i18n="scenarios_ent_badge">Enterprise</span>
+            </button>
           </div>
 
-          <!-- Column 2: Scientific Research Card -->
-          <div class="scenario-column-card">
-            <div class="scenario-card-header">
-              <span class="scenario-badge industrial" data-i18n="scenarios_sci_badge">
-                <i class="fas fa-flask"></i> Scientific Research
-              </span>
-              <h3 class="scenario-title" data-i18n="scenarios_sci_title">Accelerate VLA Research</h3>
-              <p class="scenario-desc" data-i18n="scenarios_sci_desc">
-                A ready-to-run experiment platform for cutting-edge Vision-Language-Action models. Seeed reBot Arm comes with compatibility and verification of today's most popular VLA baselines — so you can go from paper to real-robot evaluation in hours, not weeks.
-              </p>
-            </div>
+          <!-- Split Layout: Left Content Panel + Right Image Showcase -->
+          <div class="scenarios-split-container">
 
-            <!-- Stats Grid -->
-            <div class="scenario-stats-grid">
-              <!-- 1. 7+ PRE-ADAPTED VLA MODELS -->
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_sci_stat1_val">7+</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat1_lbl">PRE-ADAPTED VLA MODELS</span>
-                <div class="vla-chips-marquee-container" title="Hover to view all 7 VLA models">
-                  <div class="vla-chips-marquee-track">
-                    <!-- Original Set -->
-                    <span class="vla-chip">ACT</span>
-                    <span class="vla-chip">Diffusion Policy</span>
-                    <span class="vla-chip">Pi0.5</span>
-                    <span class="vla-chip">NVIDIA GR00T N1.7</span>
-                    <span class="vla-chip">LingBot-VA</span>
-                    <span class="vla-chip">SmolVLA</span>
-                    <span class="vla-chip">WALL-OSS</span>
-                    <!-- Duplicated Set for Infinite Loop -->
-                    <span class="vla-chip vla-chip-dup">ACT</span>
-                    <span class="vla-chip vla-chip-dup">Diffusion Policy</span>
-                    <span class="vla-chip vla-chip-dup">Pi0.5</span>
-                    <span class="vla-chip vla-chip-dup">NVIDIA GR00T N1.7</span>
-                    <span class="vla-chip vla-chip-dup">LingBot-VA</span>
-                    <span class="vla-chip vla-chip-dup">SmolVLA</span>
-                    <span class="vla-chip vla-chip-dup">WALL-OSS</span>
+            <!-- Left Column: Content Panels -->
+            <div class="scenarios-panel-list">
+
+            <!-- Panel 1: Education -->
+            <div class="scenarios-panel active" data-panel="0">
+              <div class="scenarios-panel-content">
+                <h3 class="scenario-title" data-i18n="scenarios_edu_title">Learning Physical AI</h3>
+                <p class="scenario-desc" data-i18n="scenarios_edu_desc">
+                  Collaborating with NVIDIA, Seeed provides a Sim-to-Real VLA Pipeline with Seeed reBot Arm and NVIDIA Isaac. Official hands-on curriculum bridging academic research and higher education.
+                </p>
+
+                <!-- Stats Grid -->
+                <div class="scenario-stats-grid">
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_edu_stat1_val">19</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat1_lbl">Detailed Modules</span>
                   </div>
-                  <!-- Floating popover displaying all models on hover -->
-                  <div class="vla-popover-all">
-                    <span style="font-size: 0.65rem; font-weight: 700; color: #0F172A; width: 100%; margin-bottom: 0.15rem; text-transform: uppercase;">7 Pre-Adapted VLA Models:</span>
-                    <span class="vla-chip">ACT</span>
-                    <span class="vla-chip">Diffusion Policy</span>
-                    <span class="vla-chip">Pi0.5</span>
-                    <span class="vla-chip">NVIDIA GR00T N1.7</span>
-                    <span class="vla-chip">LingBot-VA</span>
-                    <span class="vla-chip">SmolVLA</span>
-                    <span class="vla-chip">WALL-OSS</span>
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_edu_stat2_val">Sim-to-Real</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat2_lbl">Full Pipeline</span>
+                  </div>
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_edu_stat3_val">5</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat3_lbl">Core Chapters</span>
+                  </div>
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_edu_stat4_val">20+ Hours</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_edu_stat4_lbl">Hands-on Lab</span>
                   </div>
                 </div>
-              </div>
 
-              <!-- 2. LeRobot -->
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_sci_stat2_val">LeRobot</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat2_lbl">NATIVE DATA &amp; TRAINING PIPELINE</span>
-              </div>
-
-              <!-- 3. Sim-to-Real -->
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_sci_stat3_val">Sim-to-Real</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat3_lbl">ISAAC SIM READY</span>
-              </div>
-
-              <!-- 4. Jetson -->
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_sci_stat4_val">Jetson</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat4_lbl">EDGE SEAMLESS INFERENCE</span>
+                <!-- Action Button -->
+                <div class="scenario-action-box">
+                  <a href="https://www.seeedstudio.com/sim-to-real-with-seeed-rebot-and-nvidia-isaac" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn" data-i18n="scenarios_edu_btn">
+                    Start Learning Course
+                  </a>
+                </div>
               </div>
             </div>
 
-            <!-- Media Preview -->
-            <div class="scenario-media-wrapper">
-              <img src="image/20260928-134909_compressed.webp" alt="Accelerate VLA Research Seeed reBot Arm" class="scenario-img" loading="lazy" decoding="async">
+            <!-- Panel 2: Scientific Research -->
+            <div class="scenarios-panel" data-panel="1">
+              <div class="scenarios-panel-content">
+                <h3 class="scenario-title" data-i18n="scenarios_sci_title">Accelerate VLA Research</h3>
+                <p class="scenario-desc" data-i18n="scenarios_sci_desc">
+                  A ready-to-run experiment platform for cutting-edge Vision-Language-Action models. Seeed reBot Arm comes with compatibility and verification of today's most popular VLA baselines — so you can go from paper to real-robot evaluation in hours, not weeks.
+                </p>
+
+                <!-- Stats Grid -->
+                <div class="scenario-stats-grid">
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_sci_stat1_val">7+</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat1_lbl">PRE-ADAPTED VLA MODELS</span>
+                    <div class="vla-chips-marquee-container" title="Hover to view all 7 VLA models">
+                      <div class="vla-chips-marquee-track">
+                        <span class="vla-chip">ACT</span>
+                        <span class="vla-chip">Diffusion Policy</span>
+                        <span class="vla-chip">Pi0.5</span>
+                        <span class="vla-chip">NVIDIA GR00T N1.7</span>
+                        <span class="vla-chip">LingBot-VA</span>
+                        <span class="vla-chip">SmolVLA</span>
+                        <span class="vla-chip">WALL-OSS</span>
+                        <span class="vla-chip vla-chip-dup">ACT</span>
+                        <span class="vla-chip vla-chip-dup">Diffusion Policy</span>
+                        <span class="vla-chip vla-chip-dup">Pi0.5</span>
+                        <span class="vla-chip vla-chip-dup">NVIDIA GR00T N1.7</span>
+                        <span class="vla-chip vla-chip-dup">LingBot-VA</span>
+                        <span class="vla-chip vla-chip-dup">SmolVLA</span>
+                        <span class="vla-chip vla-chip-dup">WALL-OSS</span>
+                      </div>
+                      <div class="vla-popover-all">
+                        <span style="font-size: 0.65rem; font-weight: 700; color: #0F172A; width: 100%; margin-bottom: 0.15rem; text-transform: uppercase;">7 Pre-Adapted VLA Models:</span>
+                        <span class="vla-chip">ACT</span>
+                        <span class="vla-chip">Diffusion Policy</span>
+                        <span class="vla-chip">Pi0.5</span>
+                        <span class="vla-chip">NVIDIA GR00T N1.7</span>
+                        <span class="vla-chip">LingBot-VA</span>
+                        <span class="vla-chip">SmolVLA</span>
+                        <span class="vla-chip">WALL-OSS</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_sci_stat2_val">LeRobot</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat2_lbl">NATIVE DATA &amp; TRAINING PIPELINE</span>
+                  </div>
+
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_sci_stat3_val">Sim-to-Real</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat3_lbl">ISAAC SIM READY</span>
+                  </div>
+
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_sci_stat4_val">Jetson</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_sci_stat4_lbl">EDGE SEAMLESS INFERENCE</span>
+                  </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="scenario-action-box">
+                  <a href="javascript:void(0)" class="scenario-primary-btn" style="cursor: default;" data-i18n="scenarios_sci_btn">
+                    Stay Tuned for Series Video Courses
+                  </a>
+                </div>
+              </div>
             </div>
 
-            <!-- Action Button -->
-            <div class="scenario-action-box">
-              <a href="javascript:void(0)" class="scenario-primary-btn industrial-btn" style="cursor: default;" data-i18n="scenarios_sci_btn">
-                Stay Tuned for Series Video Courses
-              </a>
+            <!-- Panel 3: Enterprise -->
+            <div class="scenarios-panel" data-panel="2">
+              <div class="scenarios-panel-content">
+                <h3 class="scenario-title" data-i18n="scenarios_ent_title">Massive Support for Robot Data Acquisition</h3>
+                <p class="scenario-desc" data-i18n="scenarios_ent_desc">
+                  Scale up your embodied AI data engine. Seeed reBot Arm turns teleoperation into training-ready datasets — native LeRobot Dataset format, multi-camera capture, checkpoint-and-resume recording, and one-click sync to Hugging Face Hub — ready to deploy across fleets, sites, and annotation teams.
+                </p>
+
+                <!-- Stats Grid -->
+                <div class="scenario-stats-grid">
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_ent_stat1_val">LeRobot</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat1_lbl">PARQUET DATASET FORMAT</span>
+                  </div>
+
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_ent_stat2_val">3× 1080p</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat2_lbl">MULTI-CAM @ 30FPS</span>
+                  </div>
+
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_ent_stat3_val">HF Hub</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat3_lbl">ONE-CLICK SYNC</span>
+                  </div>
+
+                  <div class="scenario-stat-item">
+                    <span class="scenario-stat-val" data-i18n="scenarios_ent_stat4_val">VR Teleop</span>
+                    <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat4_lbl">QUEST 3 &amp; LEADER ARM</span>
+                  </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="scenario-action-box">
+                  <a href="https://huggingface.co/Seeed-Projects" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn" data-i18n="scenarios_ent_btn">
+                    Get Dataset to Train Your reBot Now
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Dynamic Image Display Box -->
+          <div class="scenarios-preview-box">
+            <div class="scenarios-image-card active" data-image-index="0">
+              <img src="image/DJIc.webp" alt="Learning Physical AI NVIDIA DLI Course" class="scenarios-preview-img" loading="lazy" decoding="async">
+            </div>
+            <div class="scenarios-image-card" data-image-index="1">
+              <img src="image/20260928-134909_compressed.webp" alt="Accelerate VLA Research Seeed reBot Arm" class="scenarios-preview-img" loading="lazy" decoding="async">
+            </div>
+            <div class="scenarios-image-card" data-image-index="2">
+              <img src="image/twitter2.webp" alt="Massive Support for Robot Data Acquisition" class="scenarios-preview-img" loading="lazy" decoding="async">
             </div>
           </div>
 
-          <!-- Column 3: Enterprise Card -->
-          <div class="scenario-column-card">
-            <div class="scenario-card-header">
-              <span class="scenario-badge industrial" data-i18n="scenarios_ent_badge">
-                <i class="fas fa-building"></i> Enterprise
-              </span>
-              <h3 class="scenario-title" data-i18n="scenarios_ent_title">Massive Support for Robot Data Acquisition</h3>
-              <p class="scenario-desc" data-i18n="scenarios_ent_desc">
-                Scale up your embodied AI data engine. Seeed reBot Arm turns teleoperation into training-ready datasets — native LeRobot Dataset format, multi-camera capture, checkpoint-and-resume recording, and one-click sync to Hugging Face Hub — ready to deploy across fleets, sites, and annotation teams.
-              </p>
-            </div>
-
-            <!-- Stats Grid -->
-            <div class="scenario-stats-grid">
-              <!-- 1. LeRobot -->
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_ent_stat1_val">LeRobot</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat1_lbl">PARQUET DATASET FORMAT</span>
-              </div>
-
-              <!-- 2. 3× 1080p -->
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_ent_stat2_val">3× 1080p</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat2_lbl">MULTI-CAM @ 30FPS</span>
-              </div>
-
-              <!-- 3. HF Hub -->
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_ent_stat3_val">HF Hub</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat3_lbl">ONE-CLICK SYNC</span>
-              </div>
-
-              <!-- 4. VR Teleop -->
-              <div class="scenario-stat-item">
-                <span class="scenario-stat-val" data-i18n="scenarios_ent_stat4_val">VR Teleop</span>
-                <span class="scenario-stat-lbl" data-i18n="scenarios_ent_stat4_lbl">QUEST 3 &amp; LEADER ARM</span>
-              </div>
-            </div>
-
-            <!-- Media Preview -->
-            <div class="scenario-media-wrapper">
-              <img src="image/twitter2.webp" alt="Massive Support for Robot Data Acquisition" class="scenario-img" loading="lazy" decoding="async">
-            </div>
-
-            <!-- Action Button -->
-            <div class="scenario-action-box">
-              <a href="https://huggingface.co/Seeed-Projects" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn industrial-btn" data-i18n="scenarios_ent_btn">
-                Get Dataset to Train Your reBot Now
-              </a>
-            </div>
-          </div>
-
+        </div>
         </div>
       </div>
     </section>
@@ -4512,8 +4615,8 @@
     }
   </script>
 
-  <!-- Main JavaScript File with Cache-Buster v63 (reverted to plain GLTFLoader load) -->
-  <script src="js/app.js?v=20260929_v63"></script>
+  <!-- Main JavaScript File with Cache-Buster v64 (scenarios tabbed switcher) -->
+  <script src="js/app.js?v=20260929_v64"></script>
   <script>
 
     function toggleFaq(id) {
