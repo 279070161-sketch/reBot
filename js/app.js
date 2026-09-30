@@ -1416,6 +1416,10 @@ function initHeroArmMouseTracker() {
 
         if (glbJ1Axis && glbJ2Axis && glbJ3Axis) {
           useGLBJoints = true;
+          if (glbJ1Axis) glbJ1Axis.rotation.z = currentTargetJ1;
+          if (glbJ2Axis) glbJ2Axis.rotation.z = currentTargetJ2;
+          if (glbJ3Axis) glbJ3Axis.rotation.z = currentTargetJ3;
+          if (glbJ4Axis) glbJ4Axis.rotation.z = currentTargetJ4;
         }
 
         fallbackGroup.visible = false;
@@ -1455,6 +1459,9 @@ function initHeroArmMouseTracker() {
     setPreloaderProgress(100);
     finishPreloader();
   }
+
+  // Dismiss preloader as soon as procedural arm is rendered
+  finishPreloader();
 
 
   // Sandbox Physics & FK Joint State Variables
@@ -1513,13 +1520,11 @@ function initHeroArmMouseTracker() {
       currentTargetJ4 = clamp(dragStartJ4 - deltaY * 0.004, -0.75, 0.75);
     } else {
       canvas.style.cursor = 'grab';
-      // Interactive Gaze Mouse-Tracking physics when not clicking:
-      // Base yaw (J1): turn left/right with mouse X (-1 to +1)
-      currentTargetJ1 = -0.55 - mouseX_ndc * 1.1;
-      // Arm pitch (J2, J3, J4): reach up/down towards mouse Y with collision-free limits
-      currentTargetJ2 = 0.50 + mouseY_ndc * 0.28;
-      currentTargetJ3 = -0.85 - mouseY_ndc * 0.22;
-      currentTargetJ4 = 0.35 + mouseY_ndc * 0.15;
+      // Interactive Full-Amplitude Gaze Mouse-Tracking:
+      currentTargetJ1 = -0.55 - mouseX_ndc * 1.15;
+      currentTargetJ2 = 0.50 + mouseY_ndc * 0.32;
+      currentTargetJ3 = -0.85 - mouseY_ndc * 0.25;
+      currentTargetJ4 = 0.35 + mouseY_ndc * 0.18;
     }
   }
 
@@ -1562,11 +1567,9 @@ function initHeroArmMouseTracker() {
     ro.observe(container);
   }
 
-  // 7. Smooth Interactive Studio Arm Motion Loop (Frame-rate Independent & Jitter-Free)
+  // 7. Smooth Interactive Studio Arm Motion Loop (Full Amplitude & High Response)
   let time = 0;
   let isHeroArmVisible = true;
-  let smoothMouseX = 0;
-  let smoothMouseY = 0;
   const clock = new THREE.Clock();
 
   if ('IntersectionObserver' in window) {
@@ -1591,21 +1594,9 @@ function initHeroArmMouseTracker() {
     const dt = Math.min(clock.getDelta(), 0.05);
     time += dt;
 
-    // Low-pass filter on mouse inputs to eliminate startup input spikes
-    smoothMouseX += (mouseX_ndc - smoothMouseX) * 0.12;
-    smoothMouseY += (mouseY_ndc - smoothMouseY) * 0.12;
-
-    if (!isDragging) {
-      currentTargetJ1 = -0.55 - smoothMouseX * 1.1;
-      currentTargetJ2 = 0.50 + smoothMouseY * 0.28;
-      currentTargetJ3 = -0.85 - smoothMouseY * 0.22;
-      currentTargetJ4 = 0.35 + smoothMouseY * 0.15;
-    }
-
     const baseX = window.innerWidth > 992 ? 1.35 : 0.0;
-    // Guaranteed silky smooth joint rotation lerp (0.14) without startup jitter
-    const lerpFactor = 0.14;
-    const clawLerp = 0.12;
+    const lerpFactor = 1 - Math.exp(-12 * dt);
+    const clawLerp = 1 - Math.exp(-10 * dt);
 
     if (useGLBJoints) {
       // Drive live FK on the GLB joint nodes
