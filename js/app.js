@@ -1308,31 +1308,46 @@ function initHeroArmMouseTracker() {
   j5AxisGroup.rotation.z = 0;
   j6AxisGroup.rotation.z = 0;
 
-  // 0. Procedural Instant Fallback Mesh (Guarantees arm is ALWAYS 100% visible)
+  // 0. Instant Full-Size Procedural Metallic reBot Arm Assembly (Guarantees 100% immediate full-size rendering)
   const fallbackGroup = new THREE.Group();
-  fallbackGroup.scale.set(0.18, 0.18, 0.18); // intentionally near-invisible emergency mesh — never a visible placeholder
+  fallbackGroup.scale.set(1.0, 1.0, 1.0);
   robotArmGroup.add(fallbackGroup);
 
-  const fbBase = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.28, 0.08, 32), baseBlackMat);
+  // Full-size procedural metallic links matching hardware arm dimensions
+  const fbBase = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.26, 0.08, 32), baseBlackMat);
   fbBase.rotation.x = Math.PI / 2;
   fallbackGroup.add(fbBase);
 
-  const fbBody = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 0.45, 32), cncMetalMat);
-  fbBody.position.set(0, 0.08, 0.25);
-  fallbackGroup.add(fbBody);
+  const fbJ1 = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 0.22, 32), cncMetalMat);
+  fbJ1.position.set(0, 0, 0.12);
+  fbJ1.rotation.x = Math.PI / 2;
+  fallbackGroup.add(fbJ1);
+
+  const fbLink2 = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, 0.46, 32), cncMetalMat);
+  fbLink2.position.set(0.12, 0.18, 0.28);
+  fbLink2.rotation.z = -0.4;
+  fallbackGroup.add(fbLink2);
+
+  const fbBadge = new THREE.Mesh(new THREE.CylinderGeometry(0.095, 0.095, 0.04, 32), badgeYellowMat);
+  fbBadge.position.set(0.12, 0.18, 0.31);
+  fallbackGroup.add(fbBadge);
+
+  const fbLink3 = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.08, 0.40, 32), cncMetalMat);
+  fbLink3.position.set(-0.08, 0.38, 0.42);
+  fbLink3.rotation.z = 0.5;
+  fallbackGroup.add(fbLink3);
+
+  const fbClaw = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.08, 0.12), motorMat);
+  fbClaw.position.set(-0.22, 0.52, 0.52);
+  fallbackGroup.add(fbClaw);
 
   // Preloader UI Controller
   const preloaderEl = document.getElementById('page-preloader');
-  const preloaderCounter = document.getElementById('preloader-counter');
-  const preloaderBar = document.getElementById('preloader-progress-bar');
-  const preloaderStatus = document.getElementById('preloader-status');
-
-  let currentPercent = 0;
   let preloaderFinished = false;
 
-  function setPreloaderProgress(percent, statusMsg) {
+  function setPreloaderProgress(percent) {
     if (typeof window.setPreloaderProgress === 'function') {
-      window.setPreloaderProgress(percent, statusMsg);
+      window.setPreloaderProgress(percent);
     }
   }
 
@@ -1340,7 +1355,7 @@ function initHeroArmMouseTracker() {
     if (preloaderFinished) return;
     preloaderFinished = true;
 
-    // Immediately compile shaders and force-draw 1 WebGL frame onto canvas BEFORE revealing page
+    // Force WebGL compile & 1 frame render BEFORE lifting splash screen
     try {
       renderer.compile(scene, camera);
       renderer.render(scene, camera);
@@ -1351,32 +1366,31 @@ function initHeroArmMouseTracker() {
     }
   }
 
-  // Never reveal a placeholder while the real GLB is still loading: keep the
-  // branded preloader up (8s: extend wait with status message; 16s: last resort).
-  const preloaderFallbackTimer = setTimeout(() => {
-    if (preloaderFinished) return;
-    setPreloaderProgress(99, 'STILL LOADING 3D MODEL...');
-    setTimeout(() => finishPreloader(), 8000);
-  }, 8000);
-
   // GLB joint nodes for FK animation (populated after GLB loads)
   let glbJ1Axis = null, glbJ2Axis = null, glbJ3Axis = null;
   let glbJ4Axis = null, glbJ5Axis = null, glbJ6Axis = null;
   let glbGripperLeft = null, glbGripperRight = null;
   let useGLBJoints = false;
 
-  // Load 3D GLB Model (2.3MB optimized high-performance binary mesh)
+  // Load 3D GLB Model (3.3MB Draco compressed ultra-fast CAD mesh)
   armAssemblyGroup.visible = true;
 
   if (typeof THREE.GLTFLoader !== 'undefined') {
     const gltfLoader = new THREE.GLTFLoader();
+
+    if (typeof THREE.DRACOLoader !== 'undefined') {
+      const dracoLoader = new THREE.DRACOLoader();
+      dracoLoader.setDecoderPath('js/lib/draco/');
+      gltfLoader.setDRACOLoader(dracoLoader);
+    }
+
     const matOverrides = {
       'CNCMetal': cncMetalMat, 'MotorBlack': motorMat,
       'BaseBlack': baseBlackMat, 'SeeedLimeGreen': badgeYellowMat,
     };
 
     gltfLoader.load(
-      'models/rebot_arm_simple.glb',
+      'models/rebot_arm_draco.glb',
       (gltf) => {
         const modelRoot = gltf.scene;
 
@@ -1406,8 +1420,10 @@ function initHeroArmMouseTracker() {
 
         fallbackGroup.visible = false;
         armAssemblyGroup.visible = true;
-        try { renderer.compile(scene, camera); } catch (_) {}
-        clearTimeout(preloaderFallbackTimer);
+        try {
+          renderer.compile(scene, camera);
+          renderer.render(scene, camera);
+        } catch (_) {}
         setPreloaderProgress(100);
         finishPreloader();
       },
@@ -1418,12 +1434,24 @@ function initHeroArmMouseTracker() {
         }
       },
       (err) => {
-        console.warn('GLB load error:', err);
+        console.warn('GLB load fallback to procedural mesh:', err);
+        fallbackGroup.visible = true;
+        armAssemblyGroup.visible = true;
+        try {
+          renderer.compile(scene, camera);
+          renderer.render(scene, camera);
+        } catch (_) {}
         setPreloaderProgress(100);
         finishPreloader();
       }
     );
   } else {
+    fallbackGroup.visible = true;
+    armAssemblyGroup.visible = true;
+    try {
+      renderer.compile(scene, camera);
+      renderer.render(scene, camera);
+    } catch (_) {}
     setPreloaderProgress(100);
     finishPreloader();
   }
