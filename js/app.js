@@ -953,23 +953,34 @@ function initDliCardAsciiBg() {
   }, { passive: true });
 
   let t0 = performance.now();
+  let isCanvasVisible = false;
   setup();
 
-  function tick(now) {
-    const rect = canvas.getBoundingClientRect();
-    if (rect.width >= 4 && rect.height >= 4) {
-      if (!ctx || Math.abs(w - rect.width) > 2 || Math.abs(h - rect.height) > 2) {
-        setup();
-      }
-      if (rect.bottom > 0 && rect.top < window.innerHeight) {
-        const t = (now - t0) / 1000 * 0.55;
-        draw(t);
-      }
-    }
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const wasVisible = isCanvasVisible;
+        isCanvasVisible = entry.isIntersecting;
+        if (!wasVisible && isCanvasVisible) {
+          requestAnimationFrame(tick);
+        }
+      });
+    }, { threshold: 0.05 });
+    observer.observe(canvas);
+  } else {
+    isCanvasVisible = true;
     requestAnimationFrame(tick);
   }
 
-  requestAnimationFrame(tick);
+  function tick(now) {
+    if (!isCanvasVisible) return;
+    requestAnimationFrame(tick);
+
+    if (w >= 4 && h >= 4) {
+      const t = (now - t0) / 1000 * 0.55;
+      draw(t);
+    }
+  }
 }
 
 /**
@@ -1960,9 +1971,27 @@ function initSimJengaArmAnimation() {
   window.addEventListener('resize', handleResize, { passive: true });
 
   const gripperWorldPos = new THREE.Vector3();
-  let lastTime = performance.now();
+  let isJengaCanvasVisible = false;
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const wasVisible = isJengaCanvasVisible;
+        isJengaCanvasVisible = entry.isIntersecting;
+        if (!wasVisible && isJengaCanvasVisible) {
+          lastTime = performance.now();
+          requestAnimationFrame(animatePhysicsSimulation);
+        }
+      });
+    }, { threshold: 0.05 });
+    observer.observe(canvas);
+  } else {
+    isJengaCanvasVisible = true;
+    requestAnimationFrame(animatePhysicsSimulation);
+  }
 
   function animatePhysicsSimulation() {
+    if (!isJengaCanvasVisible) return;
     requestAnimationFrame(animatePhysicsSimulation);
 
     const now = performance.now();
