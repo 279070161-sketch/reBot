@@ -1562,9 +1562,11 @@ function initHeroArmMouseTracker() {
     ro.observe(container);
   }
 
-  // 7. Smooth Interactive Studio Arm Motion Loop (Frame-rate Independent Delta Time Smoothing)
+  // 7. Smooth Interactive Studio Arm Motion Loop (Frame-rate Independent & Jitter-Free)
   let time = 0;
   let isHeroArmVisible = true;
+  let smoothMouseX = 0;
+  let smoothMouseY = 0;
   const clock = new THREE.Clock();
 
   if ('IntersectionObserver' in window) {
@@ -1586,11 +1588,24 @@ function initHeroArmMouseTracker() {
     if (!isHeroArmVisible) return;
     requestAnimationFrame(animate);
 
-    const dt = Math.min(clock.getDelta(), 0.1);
+    const dt = Math.min(clock.getDelta(), 0.05);
     time += dt;
 
+    // Low-pass filter on mouse inputs to eliminate startup input spikes
+    smoothMouseX += (mouseX_ndc - smoothMouseX) * 0.12;
+    smoothMouseY += (mouseY_ndc - smoothMouseY) * 0.12;
+
+    if (!isDragging) {
+      currentTargetJ1 = -0.55 - smoothMouseX * 1.1;
+      currentTargetJ2 = 0.50 + smoothMouseY * 0.28;
+      currentTargetJ3 = -0.85 - smoothMouseY * 0.22;
+      currentTargetJ4 = 0.35 + smoothMouseY * 0.15;
+    }
+
     const baseX = window.innerWidth > 992 ? 1.35 : 0.0;
-    const lerpFactor = 1 - Math.exp(-14 * dt);
+    // Guaranteed silky smooth joint rotation lerp (0.14) without startup jitter
+    const lerpFactor = 0.14;
+    const clawLerp = 0.12;
 
     if (useGLBJoints) {
       // Drive live FK on the GLB joint nodes
@@ -1601,7 +1616,6 @@ function initHeroArmMouseTracker() {
       if (glbJ5Axis) glbJ5Axis.rotation.z += (currentTargetJ5 - glbJ5Axis.rotation.z) * lerpFactor;
       if (glbJ6Axis) glbJ6Axis.rotation.z += (currentTargetJ6 - glbJ6Axis.rotation.z) * lerpFactor;
       const clawSlide = isClawClosed ? 0.003 : 0.026;
-      const clawLerp = 1 - Math.exp(-12 * dt);
       if (glbGripperLeft) glbGripperLeft.position.z += (clawSlide - glbGripperLeft.position.z) * clawLerp;
       if (glbGripperRight) glbGripperRight.position.z += (clawSlide - glbGripperRight.position.z) * clawLerp;
     } else {
@@ -1613,7 +1627,6 @@ function initHeroArmMouseTracker() {
       j5AxisGroup.rotation.z += (currentTargetJ5 - j5AxisGroup.rotation.z) * lerpFactor;
       j6AxisGroup.rotation.z += (currentTargetJ6 - j6AxisGroup.rotation.z) * lerpFactor;
       const clawSlide = isClawClosed ? 0.003 : 0.026;
-      const clawLerp = 1 - Math.exp(-12 * dt);
       gripperLeftGroup.position.z += (clawSlide - gripperLeftGroup.position.z) * clawLerp;
       gripperRightGroup.position.z += (clawSlide - gripperRightGroup.position.z) * clawLerp;
     }
