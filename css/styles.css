@@ -30,8 +30,9 @@
   --toc-width: 260px;
   --header-height: 64px;
   
-  --font-main: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-code: 'JetBrains Mono', Consolas, Monaco, monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', sans-serif;
+  --font-main: var(--font-sans);
+  --font-code: 'JetBrains Mono', Consolas, Monaco, 'PingFang SC', 'Microsoft YaHei', monospace;
 }
 
 /* Light Theme Overrides */
@@ -481,7 +482,7 @@ canvas.ascii-bg {
   margin-bottom: 1.25rem;
   letter-spacing: -0.02em;
   color: #9BE531;
-  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-family: var(--font-main);
 }
 
 .hero-desc {
@@ -489,7 +490,7 @@ canvas.ascii-bg {
   color: rgba(240, 244, 247, 0.85);
   line-height: 1.55;
   margin-bottom: 2.25rem;
-  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-family: var(--font-main);
   text-align: left;
   max-width: 100%;
 }
@@ -512,7 +513,7 @@ canvas.ascii-bg {
   font-size: 1.55rem;
   font-weight: 800;
   color: #9BE531;
-  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-family: var(--font-code);
   line-height: 1.2;
 }
 
@@ -522,7 +523,7 @@ canvas.ascii-bg {
   text-transform: uppercase;
   letter-spacing: 0.8px;
   margin-top: 0.25rem;
-  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-family: var(--font-main);
 }
 
 .cta-group {
@@ -2047,6 +2048,29 @@ canvas.ascii-bg {
   color: var(--nv-green, #68A600);
   margin-left: 2px;
 }
+
+/* Chinese Language Typography Enforcement: Eliminate Songti/SimSun fallback across all Chinese elements */
+html[lang^="zh"],
+body.lang-zh,
+[data-lang="zh"],
+:lang(zh) {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', sans-serif !important;
+}
+
+html[lang^="zh"] *,
+body.lang-zh * {
+  font-family: inherit;
+}
+
+html[lang^="zh"] code,
+html[lang^="zh"] pre,
+html[lang^="zh"] kbd,
+body.lang-zh code,
+body.lang-zh pre,
+body.lang-zh kbd {
+  font-family: 'JetBrains Mono', Consolas, Monaco, 'PingFang SC', 'Microsoft YaHei', monospace !important;
+}
+
 
 
 

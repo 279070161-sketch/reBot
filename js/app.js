@@ -476,6 +476,10 @@ function setupLanguageSelector() {
   function setLanguage(lang) {
     if (!i18nDict[lang]) return;
     window.currentLang = lang;
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    if (document.body) {
+      document.body.classList.toggle('lang-zh', lang === 'zh');
+    }
     try {
       if (typeof updateSqueezeLanguage === 'function') updateSqueezeLanguage();
     } catch (_) { /* not initialized yet (TDZ) — harmless */ }
@@ -1319,39 +1323,6 @@ function initHeroArmMouseTracker() {
   j5AxisGroup.rotation.z = 0;
   j6AxisGroup.rotation.z = 0;
 
-  // 0. Instant Full-Size Procedural Metallic reBot Arm Assembly (Guarantees 100% immediate full-size rendering)
-  const fallbackGroup = new THREE.Group();
-  fallbackGroup.scale.set(1.0, 1.0, 1.0);
-  robotArmGroup.add(fallbackGroup);
-
-  // Full-size procedural metallic links matching hardware arm dimensions
-  const fbBase = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.26, 0.08, 32), baseBlackMat);
-  fbBase.rotation.x = Math.PI / 2;
-  fallbackGroup.add(fbBase);
-
-  const fbJ1 = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 0.22, 32), cncMetalMat);
-  fbJ1.position.set(0, 0, 0.12);
-  fbJ1.rotation.x = Math.PI / 2;
-  fallbackGroup.add(fbJ1);
-
-  const fbLink2 = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, 0.46, 32), cncMetalMat);
-  fbLink2.position.set(0.12, 0.18, 0.28);
-  fbLink2.rotation.z = -0.4;
-  fallbackGroup.add(fbLink2);
-
-  const fbBadge = new THREE.Mesh(new THREE.CylinderGeometry(0.095, 0.095, 0.04, 32), badgeYellowMat);
-  fbBadge.position.set(0.12, 0.18, 0.31);
-  fallbackGroup.add(fbBadge);
-
-  const fbLink3 = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.08, 0.40, 32), cncMetalMat);
-  fbLink3.position.set(-0.08, 0.38, 0.42);
-  fbLink3.rotation.z = 0.5;
-  fallbackGroup.add(fbLink3);
-
-  const fbClaw = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.08, 0.12), motorMat);
-  fbClaw.position.set(-0.22, 0.52, 0.52);
-  fallbackGroup.add(fbClaw);
-
   // Preloader UI Controller
   const preloaderEl = document.getElementById('page-preloader');
   let preloaderFinished = false;
@@ -1377,7 +1348,7 @@ function initHeroArmMouseTracker() {
     }
   }
 
-  // GLB joint nodes for FK animation (populated after GLB loads)
+  // GLB joint nodes for FK animation (populated on single unified GLB load)
   let glbJ1Axis = null, glbJ2Axis = null, glbJ3Axis = null;
   let glbJ4Axis = null, glbJ5Axis = null, glbJ6Axis = null;
   let glbGripperLeft = null, glbGripperRight = null;
@@ -1427,13 +1398,12 @@ function initHeroArmMouseTracker() {
 
         if (glbJ1Axis && glbJ2Axis && glbJ3Axis) {
           useGLBJoints = true;
-          if (glbJ1Axis) glbJ1Axis.rotation.z = currentTargetJ1;
-          if (glbJ2Axis) glbJ2Axis.rotation.z = currentTargetJ2;
-          if (glbJ3Axis) glbJ3Axis.rotation.z = currentTargetJ3;
-          if (glbJ4Axis) glbJ4Axis.rotation.z = currentTargetJ4;
+          glbJ1Axis.rotation.z = currentTargetJ1;
+          glbJ2Axis.rotation.z = currentTargetJ2;
+          glbJ3Axis.rotation.z = currentTargetJ3;
+          glbJ4Axis.rotation.z = currentTargetJ4;
         }
 
-        fallbackGroup.visible = false;
         armAssemblyGroup.visible = true;
         try {
           renderer.compile(scene, camera);
@@ -1449,8 +1419,7 @@ function initHeroArmMouseTracker() {
         }
       },
       (err) => {
-        console.warn('GLB load fallback to procedural mesh:', err);
-        fallbackGroup.visible = true;
+        console.warn('GLB load error:', err);
         armAssemblyGroup.visible = true;
         try {
           renderer.compile(scene, camera);
@@ -1461,7 +1430,6 @@ function initHeroArmMouseTracker() {
       }
     );
   } else {
-    fallbackGroup.visible = true;
     armAssemblyGroup.visible = true;
     try {
       renderer.compile(scene, camera);
