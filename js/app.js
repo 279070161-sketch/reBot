@@ -1339,36 +1339,16 @@ function initHeroArmMouseTracker() {
   function finishPreloader() {
     if (preloaderFinished) return;
     preloaderFinished = true;
-    try { setPreloaderProgress(100, 'READY'); } catch (_) {}
 
-    // Warm-up: render several frames behind the splash so shaders compile and
-    // buffers upload BEFORE the reveal — when the splash lifts, the scene runs
-    // at full frame rate with zero first-frame hitch.
-    let warmupFrames = 8;
-    function warmupStep() {
-      try { renderer.render(scene, camera); } catch (_) {}
-      warmupFrames -= 1;
-      if (warmupFrames > 0) { requestAnimationFrame(warmupStep); return; }
-      if (typeof window.dismissPreloader === 'function') window.dismissPreloader();
-      triggerCameraEntrance();
-    }
-    requestAnimationFrame(warmupStep);
-  }
+    // Immediately compile shaders and force-draw 1 WebGL frame onto canvas BEFORE revealing page
+    try {
+      renderer.compile(scene, camera);
+      renderer.render(scene, camera);
+    } catch (_) {}
 
-  function triggerCameraEntrance() {
-    const startCamZ = 7.6, targetCamZ = 6.6;
-    const startCamY = 1.75, targetCamY = 1.5;
-    const startTime = performance.now();
-    const duration = 700;
-    camera.position.set(0, startCamY, startCamZ);
-    function step(now) {
-      const ease = 1 - Math.pow(1 - Math.min(1, (now - startTime) / duration), 3);
-      camera.position.z = startCamZ + (targetCamZ - startCamZ) * ease;
-      camera.position.y = startCamY + (targetCamY - startCamY) * ease;
-      camera.lookAt(0, 0.65, 0);
-      if (ease < 1) requestAnimationFrame(step);
+    if (typeof window.dismissPreloader === 'function') {
+      window.dismissPreloader();
     }
-    requestAnimationFrame(step);
   }
 
   // Never reveal a placeholder while the real GLB is still loading: keep the

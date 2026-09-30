@@ -2995,7 +2995,7 @@
 
       function stepCounter() {
         if (currentProgress < targetProgress) {
-          currentProgress += Math.max(1, Math.ceil((targetProgress - currentProgress) * 0.18));
+          currentProgress += Math.max(1, Math.ceil((targetProgress - currentProgress) * 0.25));
           if (currentProgress > targetProgress) currentProgress = targetProgress;
           if (counterEl) counterEl.textContent = String(currentProgress);
         }
@@ -3003,7 +3003,7 @@
           isDismissed = true;
           if (preloaderEl) {
             preloaderEl.classList.add('preloader-hidden');
-            setTimeout(function() { preloaderEl.style.display = 'none'; }, 400);
+            setTimeout(function() { preloaderEl.style.display = 'none'; }, 350);
           }
           return;
         }
@@ -3022,20 +3022,10 @@
         targetProgress = 100;
       };
 
-      // Smooth simulated tick up to 90% while assets load
-      var simInterval = setInterval(function() {
-        if (targetProgress < 90) {
-          targetProgress += Math.floor(Math.random() * 8) + 5;
-          if (targetProgress > 90) targetProgress = 90;
-        } else {
-          clearInterval(simInterval);
-        }
-      }, 100);
-
-      // Watchdog fallback
+      // Watchdog fallback if GLB or script encounters error
       setTimeout(function() {
         targetProgress = 100;
-      }, 5000);
+      }, 7000);
     })();
   </script>
 
