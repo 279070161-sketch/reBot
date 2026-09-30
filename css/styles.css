@@ -236,7 +236,7 @@
 }
 
 button, input, select, textarea, kbd {
-  font-family: var(--font-main) !important;
+  font-family: var(--font-main);
 }
 
 body {
@@ -2065,7 +2065,11 @@ body.lang-zh kbd {
   font-family: 'JetBrains Mono', Consolas, Monaco, 'PingFang SC', 'Microsoft YaHei', monospace;
 }
 
-/* Protect FontAwesome Icons from being overridden by language font-family rules */
+/* Protect FontAwesome Icons from being overridden by button !important or language font-family rules */
+button i, button [class*="fa-"],
+a i, a [class*="fa-"],
+body.lang-zh i, html[lang^="zh"] i,
+body.lang-zh [class*="fa-"], html[lang^="zh"] [class*="fa-"],
 .fa, .fas, .far, .fal, .fab, .fa-solid, .fa-regular, .fa-brands,
 i[class*="fa-"], span[class*="fa-"], [class^="fa-"], [class*=" fa-"] {
   font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "FontAwesome" !important;
@@ -2075,16 +2079,17 @@ i[class*="fa-"], span[class*="fa-"], [class^="fa-"], [class*=" fa-"] {
   line-height: 1 !important;
 }
 
-.fab, .fa-brands {
+button i.fab, a i.fab, body.lang-zh i.fab, .fab, .fa-brands {
   font-family: "Font Awesome 6 Brands" !important;
+  font-weight: 400 !important;
 }
 
-.fas, .fa-solid {
+button i.fas, a i.fas, body.lang-zh i.fas, .fas, .fa-solid {
   font-family: "Font Awesome 6 Free" !important;
   font-weight: 900 !important;
 }
 
-.far, .fa-regular {
+button i.far, a i.far, body.lang-zh i.far, .far, .fa-regular {
   font-family: "Font Awesome 6 Free" !important;
   font-weight: 400 !important;
 }
