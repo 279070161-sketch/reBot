@@ -1374,7 +1374,7 @@ function initHeroArmMouseTracker() {
     };
 
     gltfLoader.load(
-      'models/rebot_arm_simple.glb',
+      'models/rebot_arm_lite.glb',
       (gltf) => {
         const modelRoot = gltf.scene;
 
@@ -1409,7 +1409,10 @@ function initHeroArmMouseTracker() {
         finishPreloader();
       },
       (xhr) => {
-        if (xhr.total > 0) setPreloaderProgress(5 + (xhr.loaded / xhr.total) * 90, 'LOADING 3D MODEL...');
+        const totalBytes = (xhr.total && xhr.total > 0) ? xhr.total : 2390000;
+        const loadedBytes = xhr.loaded || 0;
+        const ratio = Math.min(1, loadedBytes / totalBytes);
+        setPreloaderProgress(5 + ratio * 90, 'LOADING 3D MODEL...');
       },
       (err) => {
         console.warn('GLB load failed, using fallback mesh:', err);
