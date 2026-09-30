@@ -30,8 +30,7 @@
   --toc-width: 260px;
   --header-height: 64px;
   
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', sans-serif;
-  --font-main: var(--font-sans);
+  --font-main: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', sans-serif;
   --font-code: 'JetBrains Mono', Consolas, Monaco, 'PingFang SC', 'Microsoft YaHei', monospace;
 }
 
@@ -482,7 +481,7 @@ canvas.ascii-bg {
   margin-bottom: 1.25rem;
   letter-spacing: -0.02em;
   color: #9BE531;
-  font-family: var(--font-main);
+  font-family: 'JetBrains Mono', Consolas, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 .hero-desc {
@@ -490,7 +489,7 @@ canvas.ascii-bg {
   color: rgba(240, 244, 247, 0.85);
   line-height: 1.55;
   margin-bottom: 2.25rem;
-  font-family: var(--font-main);
+  font-family: 'JetBrains Mono', Consolas, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   text-align: left;
   max-width: 100%;
 }
@@ -513,7 +512,7 @@ canvas.ascii-bg {
   font-size: 1.55rem;
   font-weight: 800;
   color: #9BE531;
-  font-family: var(--font-code);
+  font-family: 'JetBrains Mono', Consolas, 'PingFang SC', 'Microsoft YaHei', monospace;
   line-height: 1.2;
 }
 
@@ -523,7 +522,7 @@ canvas.ascii-bg {
   text-transform: uppercase;
   letter-spacing: 0.8px;
   margin-top: 0.25rem;
-  font-family: var(--font-main);
+  font-family: 'JetBrains Mono', Consolas, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 .cta-group {
@@ -2049,17 +2048,12 @@ canvas.ascii-bg {
   margin-left: 2px;
 }
 
-/* Chinese Language Typography Enforcement: Eliminate Songti/SimSun fallback across all Chinese elements */
+/* Chinese Language Typography Enforcement: Ensure fallback Chinese characters use Sans-Serif (PingFang / Microsoft YaHei), never Songti/SimSun, while retaining JetBrains Mono for English text */
 html[lang^="zh"],
 body.lang-zh,
 [data-lang="zh"],
 :lang(zh) {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', sans-serif !important;
-}
-
-html[lang^="zh"] *,
-body.lang-zh * {
-  font-family: inherit;
+  font-family: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', sans-serif;
 }
 
 html[lang^="zh"] code,
@@ -2068,7 +2062,7 @@ html[lang^="zh"] kbd,
 body.lang-zh code,
 body.lang-zh pre,
 body.lang-zh kbd {
-  font-family: 'JetBrains Mono', Consolas, Monaco, 'PingFang SC', 'Microsoft YaHei', monospace !important;
+  font-family: 'JetBrains Mono', Consolas, Monaco, 'PingFang SC', 'Microsoft YaHei', monospace;
 }
 
 
