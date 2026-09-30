@@ -1460,9 +1460,6 @@ function initHeroArmMouseTracker() {
     finishPreloader();
   }
 
-  // Dismiss preloader as soon as procedural arm is rendered
-  finishPreloader();
-
 
   // Sandbox Physics & FK Joint State Variables
   let isClawClosed = false;
