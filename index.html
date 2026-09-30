@@ -2977,60 +2977,65 @@
        Full-Screen Minimalist 3D Preloader (Drone Riotters Style)
        ========================================================================== -->
   <div id="page-preloader" class="page-preloader">
-    <div class="preloader-corner-tag top-left">
-      <span class="preloader-dot"></span> reBot B601-RS | 6-DoF Arm Stream
-    </div>
-    <div class="preloader-corner-tag top-right">
-      <span class="preloader-mono-label">[ ENGINE: THREE.JS WASM ]</span>
-    </div>
-
     <div class="preloader-center-content">
-      <div class="preloader-splash-art" aria-hidden="true">
-        <div class="preloader-splash-ring"></div>
-        <div class="preloader-splash-ring preloader-splash-ring2"></div>
-        <div class="preloader-splash-core">R</div>
-      </div>
-      <div class="preloader-sweep-track" aria-hidden="true">
-        <div class="preloader-sweep-bar"></div>
-      </div>
       <div class="preloader-counter-wrapper">
         <span id="preloader-counter" class="preloader-counter">0</span>
         <span class="preloader-percent">%</span>
       </div>
-      <div class="preloader-progress-track">
-        <div id="preloader-progress-bar" class="preloader-progress-bar"></div>
-      </div>
-      <div id="preloader-status" class="preloader-status-text">INITIALIZING 3D KINEMATICS...</div>
-    </div>
-
-    <div class="preloader-corner-tag bottom-left">
-      SIM-TO-REAL EMBODIED AI
     </div>
   </div>
 
   <script>
-    /* Global Preloader Controller: the splash stays up until the 3D scene is
-       truly ready — app.js dismisses it after GLB load + render warm-up. */
     (function() {
-      window.setPreloaderProgress = function(percent, statusMsg) {
-        var c = document.getElementById('preloader-counter');
-        if (c && typeof percent === 'number' && !isNaN(percent)) {
-          c.textContent = String(Math.min(100, Math.round(Math.max(0, percent))));
+      var currentProgress = 0;
+      var targetProgress = 0;
+      var counterEl = document.getElementById('preloader-counter');
+      var preloaderEl = document.getElementById('page-preloader');
+      var isDismissed = false;
+
+      function stepCounter() {
+        if (currentProgress < targetProgress) {
+          currentProgress += Math.max(1, Math.ceil((targetProgress - currentProgress) * 0.18));
+          if (currentProgress > targetProgress) currentProgress = targetProgress;
+          if (counterEl) counterEl.textContent = String(currentProgress);
         }
-        if (statusMsg) {
-          var s = document.getElementById('preloader-status');
-          if (s) s.textContent = statusMsg;
+        if (currentProgress >= 100 && !isDismissed) {
+          isDismissed = true;
+          if (preloaderEl) {
+            preloaderEl.classList.add('preloader-hidden');
+            setTimeout(function() { preloaderEl.style.display = 'none'; }, 400);
+          }
+          return;
+        }
+        requestAnimationFrame(stepCounter);
+      }
+      requestAnimationFrame(stepCounter);
+
+      window.setPreloaderProgress = function(percent) {
+        if (typeof percent === 'number' && !isNaN(percent)) {
+          var p = Math.min(100, Math.max(0, Math.round(percent)));
+          if (p > targetProgress) targetProgress = p;
         }
       };
+
       window.dismissPreloader = function() {
-        var p = document.getElementById('page-preloader');
-        if (p) {
-          p.classList.add('preloader-hidden');
-          setTimeout(function() { p.style.display = 'none'; }, 400);
-        }
+        targetProgress = 100;
       };
-      // Last-resort watchdog only: hides the splash if app.js failed entirely.
-      setTimeout(window.dismissPreloader, 20000);
+
+      // Smooth simulated tick up to 90% while assets load
+      var simInterval = setInterval(function() {
+        if (targetProgress < 90) {
+          targetProgress += Math.floor(Math.random() * 8) + 5;
+          if (targetProgress > 90) targetProgress = 90;
+        } else {
+          clearInterval(simInterval);
+        }
+      }, 100);
+
+      // Watchdog fallback
+      setTimeout(function() {
+        targetProgress = 100;
+      }, 5000);
     })();
   </script>
 

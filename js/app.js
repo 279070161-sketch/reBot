@@ -1385,64 +1385,66 @@ function initHeroArmMouseTracker() {
   let glbGripperLeft = null, glbGripperRight = null;
   let useGLBJoints = false;
 
-  // Load 3D model — Official STL Composite Sub-Meshes (matches hardware URDF)
+  // Load 3D GLB Model (2.3MB optimized high-performance binary mesh)
   armAssemblyGroup.visible = true;
 
-  if (typeof THREE.STLLoader !== 'undefined') {
-    const stlLoader = new THREE.STLLoader();
-    let loadedCount = 0;
-    const totalSubMeshes = 25;
-
-    const loadSubMesh = (path, mat, targetGroup, renderOrder = 0) => {
-      stlLoader.load(path, (geo) => {
-        geo.computeVertexNormals();
-        const mesh = new THREE.Mesh(geo, mat);
-        if (renderOrder) mesh.renderOrder = renderOrder;
-        targetGroup.add(mesh);
-        loadedCount++;
-        if (loadedCount === 1 || loadedCount >= totalSubMeshes) {
-          fallbackGroup.visible = false;
-          clearTimeout(preloaderFallbackTimer);
-          finishPreloader();
-        }
-        try { renderer.compile(scene, camera); } catch (_) {}
-      });
+  if (typeof THREE.GLTFLoader !== 'undefined') {
+    const gltfLoader = new THREE.GLTFLoader();
+    const matOverrides = {
+      'CNCMetal': cncMetalMat, 'MotorBlack': motorMat,
+      'BaseBlack': baseBlackMat, 'SeeedLimeGreen': badgeYellowMat,
     };
 
-    loadSubMesh('models/meshes_rs/base_link.STL', baseBlackMat, baseLinkGroup);
-    loadSubMesh('models/meshes_rs/link1.STL', cncMetalMat, link1Group);
-    loadSubMesh('models/meshes_rs/motor_2_3.STL', motorMat, link2Group);
-    loadSubMesh('models/meshes_rs/cnc2.STL', cncMetalMat, link2Group);
-    loadSubMesh('models/meshes_rs/pla2_black.STL', baseBlackMat, link2Group);
-    loadSubMesh('models/meshes_rs/pla2_green.STL', badgeYellowMat, link2Group, 10);
-    loadSubMesh('models/meshes_rs/cnc3.STL', cncMetalMat, link3Group);
-    loadSubMesh('models/meshes_rs/motor_4.STL', motorMat, link3Group);
-    loadSubMesh('models/meshes_rs/pla3_black_without_seeed_badge.STL', baseBlackMat, link3Group);
-    loadSubMesh('models/meshes_rs/pla3_seeed_badge_with_counters.STL', badgeYellowMat, link3Group, 10);
-    loadSubMesh('models/meshes_rs/pla3_seeed_wordmark_backing.STL', baseBlackMat, link3Group);
-    loadSubMesh('models/meshes_rs/pla3_green.STL', badgeYellowMat, link3Group, 10);
-    loadSubMesh('models/meshes_rs/cnc4.STL', cncMetalMat, link4Group);
-    loadSubMesh('models/meshes_rs/motor_5.STL', motorMat, link4Group);
-    loadSubMesh('models/meshes_rs/cnc5.STL', cncMetalMat, link5Group);
-    loadSubMesh('models/meshes_rs/motor_6.STL', motorMat, link5Group);
-    loadSubMesh('models/meshes_rs/pla5_green.STL', badgeYellowMat, link5Group, 10);
-    loadSubMesh('models/meshes_rs/link6.STL', baseBlackMat, link6Group);
-    loadSubMesh('models/meshes_rs/pla7_green.STL', badgeYellowMat, gripperEndGroup, 10);
-    loadSubMesh('models/meshes_rs/cnc7.STL', cncMetalMat, gripperEndGroup);
-    loadSubMesh('models/meshes_rs/motor_7.STL', motorMat, gripperEndGroup);
-    loadSubMesh('models/meshes_rs/cnc_left.STL', cncMetalMat, gripperLeftGroup);
-    loadSubMesh('models/meshes_rs/pla_left.STL', badgeYellowMat, gripperLeftGroup, 10);
-    loadSubMesh('models/meshes_rs/cnc_right.STL', cncMetalMat, gripperRightGroup);
-    loadSubMesh('models/meshes_rs/pla_right.STL', badgeYellowMat, gripperRightGroup, 10);
-  } else {
-    finishPreloader();
-  }
+    gltfLoader.load(
+      'models/rebot_arm_simple.glb',
+      (gltf) => {
+        const modelRoot = gltf.scene;
+
+        modelRoot.traverse((child) => {
+          if (child.isMesh && child.material && matOverrides[child.material.name]) {
+            child.material = matOverrides[child.material.name];
+          }
+          if (child.isMesh && !child.geometry.getAttribute('normal')) {
+            child.geometry.computeVertexNormals();
+          }
+        });
+
+        armAssemblyGroup.add(modelRoot);
+
+        glbJ1Axis = modelRoot.getObjectByName('joint1_axis');
+        glbJ2Axis = modelRoot.getObjectByName('joint2_axis');
+        glbJ3Axis = modelRoot.getObjectByName('joint3_axis');
+        glbJ4Axis = modelRoot.getObjectByName('joint4_axis');
+        glbJ5Axis = modelRoot.getObjectByName('joint5_axis');
+        glbJ6Axis = modelRoot.getObjectByName('joint6_axis');
+        glbGripperLeft = modelRoot.getObjectByName('gripper_left');
+        glbGripperRight = modelRoot.getObjectByName('gripper_right');
+
+        if (glbJ1Axis && glbJ2Axis && glbJ3Axis) {
+          useGLBJoints = true;
+        }
+
+        fallbackGroup.visible = false;
+        armAssemblyGroup.visible = true;
+        try { renderer.compile(scene, camera); } catch (_) {}
+        clearTimeout(preloaderFallbackTimer);
+        setPreloaderProgress(100);
+        finishPreloader();
+      },
+      (xhr) => {
+        if (xhr.total && xhr.total > 0) {
+          const p = Math.round((xhr.loaded / xhr.total) * 100);
+          setPreloaderProgress(p);
+        }
+      },
+      (err) => {
+        console.warn('GLB load error:', err);
+        setPreloaderProgress(100);
+        finishPreloader();
+      }
     );
   } else {
-    // Fallback if GLTFLoader not available
-    fallbackGroup.visible = true;
-    armAssemblyGroup.visible = true;
-    clearTimeout(preloaderFallbackTimer);
+    setPreloaderProgress(100);
     finishPreloader();
   }
 
