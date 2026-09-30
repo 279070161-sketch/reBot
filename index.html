@@ -7,10 +7,6 @@
   <meta name="description" content="Fully Open-Source 6+1 DoF Robotic Arm Kit Built for Developers, Researchers, and AI Innovators.">
   <meta name="theme-color" content="#ffffff">
 
-  <!-- Start downloading the hero 3D model in parallel with HTML parsing,
-       so the full-screen preloader finishes sooner. -->
-  <link rel="preload" as="fetch" href="models/rebot_arm_lite.glb">
-
   <!-- Resource Hints & Google Fonts / Icons -->
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
@@ -2980,7 +2976,7 @@
   <!-- ==========================================================================
        Full-Screen Minimalist 3D Preloader (Drone Riotters Style)
        ========================================================================== -->
-  <div id="page-preloader" class="page-preloader" style="display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;">
+  <div id="page-preloader" class="page-preloader">
     <div class="preloader-corner-tag top-left">
       <span class="preloader-dot"></span> reBot B601-RS | 6-DoF Arm Stream
     </div>
@@ -2989,6 +2985,14 @@
     </div>
 
     <div class="preloader-center-content">
+      <div class="preloader-splash-art" aria-hidden="true">
+        <div class="preloader-splash-ring"></div>
+        <div class="preloader-splash-ring preloader-splash-ring2"></div>
+        <div class="preloader-splash-core">R</div>
+      </div>
+      <div class="preloader-sweep-track" aria-hidden="true">
+        <div class="preloader-sweep-bar"></div>
+      </div>
       <div class="preloader-counter-wrapper">
         <span id="preloader-counter" class="preloader-counter">0</span>
         <span class="preloader-percent">%</span>
@@ -3005,20 +3009,28 @@
   </div>
 
   <script>
-    /* Global Preloader Inline Watchdog */
+    /* Global Preloader Controller: the splash stays up until the 3D scene is
+       truly ready — app.js dismisses it after GLB load + render warm-up. */
     (function() {
-      window.setPreloaderProgress = function(percent, statusMsg) {};
+      window.setPreloaderProgress = function(percent, statusMsg) {
+        var c = document.getElementById('preloader-counter');
+        if (c && typeof percent === 'number' && !isNaN(percent)) {
+          c.textContent = String(Math.min(100, Math.round(Math.max(0, percent))));
+        }
+        if (statusMsg) {
+          var s = document.getElementById('preloader-status');
+          if (s) s.textContent = statusMsg;
+        }
+      };
       window.dismissPreloader = function() {
         var p = document.getElementById('page-preloader');
         if (p) {
-          p.style.display = 'none';
           p.classList.add('preloader-hidden');
+          setTimeout(function() { p.style.display = 'none'; }, 400);
         }
       };
-      window.dismissPreloader();
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', window.dismissPreloader);
-      }
+      // Last-resort watchdog only: hides the splash if app.js failed entirely.
+      setTimeout(window.dismissPreloader, 20000);
     })();
   </script>
 
@@ -3156,22 +3168,22 @@
             
             <!-- Panel 1 -->
             <button type="button" class="squeeze-panel active" data-index="0" role="tab" aria-selected="true" aria-label="Multi-Axis Motion & Dexterous Control">
-              <video src="video/飞书20260818-111648.mp4" autoplay loop muted playsinline preload="metadata" class="squeeze-video"></video>
+              <video src="video/multi_axis_motion.mp4" autoplay loop muted playsinline preload="auto" class="squeeze-video"></video>
             </button>
 
             <!-- Panel 2 -->
             <button type="button" class="squeeze-panel" data-index="1" role="tab" aria-selected="false" aria-label="High Dynamic Performance">
-              <video src="video/High Dynamic performance.mp4" loop muted playsinline preload="none" class="squeeze-video"></video>
+              <video src="video/High Dynamic performance.mp4" autoplay loop muted playsinline preload="auto" class="squeeze-video"></video>
             </button>
 
             <!-- Panel 3 -->
             <button type="button" class="squeeze-panel" data-index="2" role="tab" aria-selected="false" aria-label="Powerful Payload Capacity">
-              <video src="video/payload.mp4" loop muted playsinline preload="none" class="squeeze-video"></video>
+              <video src="video/payload.mp4" autoplay loop muted playsinline preload="auto" class="squeeze-video"></video>
             </button>
 
             <!-- Panel 4 -->
             <button type="button" class="squeeze-panel" data-index="3" role="tab" aria-selected="false" aria-label="Sub-Millimeter ±0.1mm Repeatability">
-              <video src="video/0.1mm.mp4" loop muted playsinline preload="none" class="squeeze-video"></video>
+              <video src="video/0.1mm.mp4" autoplay loop muted playsinline preload="auto" class="squeeze-video"></video>
             </button>
 
           </div>
@@ -3561,7 +3573,7 @@
                 <div style="width: 42px; height: 42px; border: 3px solid rgba(141, 195, 31, 0.2); border-top-color: var(--nv-green); border-radius: 50%; animation: simSpin 1s linear infinite;"></div>
                 <span>INITIALIZING MUJOCO 3D PHYSICS...</span>
               </div>
-              <iframe id="sim-mujoco-iframe" data-src="./sim_web/index.html" loading="lazy" style="width: 100%; height: 100%; border: none; outline: none; background: #0F172A;" title="reBot Arm MuJoCo WASM Physics Simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+              <iframe id="sim-mujoco-iframe" src="./sim_web/index.html" onload="const p=document.getElementById('sim-iframe-placeholder'); if(p) p.style.opacity='0';" style="width: 100%; height: 100%; border: none; outline: none; background: #0F172A;" title="reBot Arm MuJoCo WASM Physics Simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
           </div>
 
@@ -4872,7 +4884,7 @@
   <script src="js/lib/DRACOLoader.js?v=20260929_v1"></script>
 
   <!-- Main JavaScript File with Cache-Buster v66 (pause inactive squeeze videos + video optimization) -->
-  <script src="js/app.js?v=20260929_v66" defer></script>
+  <script src="js/app.js?v=20260929_v69" defer></script>
   <script>
 
     function toggleFaq(id) {

@@ -398,20 +398,29 @@ function initApp() {
   initVideoViewportController();
   initSqueezeCarousel();
 
-  // Defer non-critical background scripts (particle canvas, IP geo fetch, iframe setup)
-  // so the Hero 3D interactive model receives 100% CPU thread priority on startup.
-  setTimeout(() => {
+  // Defer non-critical background scripts until the browser is idle, so the
+  // Hero 3D entrance animation gets 100% CPU/GPU headroom on startup.
+  const deferredInits = () => {
     setupNeuralParticleCanvas();
     initSmartBuyButton();
     initLazySimIframe();
     initSimJengaArmAnimation();
-  }, 1200);
+  };
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(deferredInits, { timeout: 5000 });
+  } else {
+    setTimeout(deferredInits, 2500);
+  }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
+// Bootstraps initApp at the right moment for both sync and `defer` scripts.
+// NOTE: with `defer`, readyState is 'interactive' during script evaluation,
+// so initApp must NOT run synchronously here — top-level `let` bindings below
+// (e.g. updateSqueezeLanguage) would still be in TDZ and throw ReferenceError.
+if (document.readyState === 'complete') {
   initApp();
+} else {
+  document.addEventListener('DOMContentLoaded', initApp);
 }
 
 // Global Safety Preloader Timer: Ensures the preloader is always dismissed even under network stalls
@@ -467,7 +476,9 @@ function setupLanguageSelector() {
   function setLanguage(lang) {
     if (!i18nDict[lang]) return;
     window.currentLang = lang;
-    if (typeof updateSqueezeLanguage === 'function') updateSqueezeLanguage();
+    try {
+      if (typeof updateSqueezeLanguage === 'function') updateSqueezeLanguage();
+    } catch (_) { /* not initialized yet (TDZ) — harmless */ }
     
     if (currentLangText) {
       currentLangText.textContent = lang === 'zh' ? '中文' : 'EN';
@@ -1328,14 +1339,21 @@ function initHeroArmMouseTracker() {
   function finishPreloader() {
     if (preloaderFinished) return;
     preloaderFinished = true;
-    if (typeof window.dismissPreloader === 'function') {
-      window.dismissPreloader();
-    }
-    triggerCameraEntrance();
-  }
+    try { setPreloaderProgress(100, 'READY'); } catch (_) {}
 
-  // Dismiss preloader instantly to prevent any UI blocking
-  finishPreloader();
+    // Warm-up: render several frames behind the splash so shaders compile and
+    // buffers upload BEFORE the reveal — when the splash lifts, the scene runs
+    // at full frame rate with zero first-frame hitch.
+    let warmupFrames = 8;
+    function warmupStep() {
+      try { renderer.render(scene, camera); } catch (_) {}
+      warmupFrames -= 1;
+      if (warmupFrames > 0) { requestAnimationFrame(warmupStep); return; }
+      if (typeof window.dismissPreloader === 'function') window.dismissPreloader();
+      triggerCameraEntrance();
+    }
+    requestAnimationFrame(warmupStep);
+  }
 
   function triggerCameraEntrance() {
     const startCamZ = 7.6, targetCamZ = 6.6;
@@ -1367,12 +1385,52 @@ function initHeroArmMouseTracker() {
   let glbGripperLeft = null, glbGripperRight = null;
   let useGLBJoints = false;
 
-  // Load GLB model — plain single-file load (reverted from the draco pipeline)
+  // Load 3D model — STL Composite Sub-Meshes & GLB Loader
+  armAssemblyGroup.visible = true;
+
+  if (typeof THREE.STLLoader !== 'undefined') {
+    const stlLoader = new THREE.STLLoader();
+    const loadSubMesh = (path, mat, targetGroup, renderOrder = 0) => {
+      stlLoader.load(path, (geo) => {
+        geo.computeVertexNormals();
+        const mesh = new THREE.Mesh(geo, mat);
+        if (renderOrder) mesh.renderOrder = renderOrder;
+        targetGroup.add(mesh);
+        try { renderer.compile(scene, camera); } catch (_) {}
+      });
+    };
+
+    loadSubMesh('models/meshes_rs/base_link.STL', baseBlackMat, baseLinkGroup);
+    loadSubMesh('models/meshes_rs/link1.STL', cncMetalMat, link1Group);
+    loadSubMesh('models/meshes_rs/motor_2_3.STL', motorMat, link2Group);
+    loadSubMesh('models/meshes_rs/cnc2.STL', cncMetalMat, link2Group);
+    loadSubMesh('models/meshes_rs/pla2_black.STL', baseBlackMat, link2Group);
+    loadSubMesh('models/meshes_rs/pla2_green.STL', badgeYellowMat, link2Group, 10);
+    loadSubMesh('models/meshes_rs/cnc3.STL', cncMetalMat, link3Group);
+    loadSubMesh('models/meshes_rs/motor_4.STL', motorMat, link3Group);
+    loadSubMesh('models/meshes_rs/pla3_black_without_seeed_badge.STL', baseBlackMat, link3Group);
+    loadSubMesh('models/meshes_rs/pla3_seeed_badge_with_counters.STL', badgeYellowMat, link3Group, 10);
+    loadSubMesh('models/meshes_rs/pla3_seeed_wordmark_backing.STL', baseBlackMat, link3Group);
+    loadSubMesh('models/meshes_rs/pla3_green.STL', badgeYellowMat, link3Group, 10);
+    loadSubMesh('models/meshes_rs/cnc4.STL', cncMetalMat, link4Group);
+    loadSubMesh('models/meshes_rs/motor_5.STL', motorMat, link4Group);
+    loadSubMesh('models/meshes_rs/cnc5.STL', cncMetalMat, link5Group);
+    loadSubMesh('models/meshes_rs/motor_6.STL', motorMat, link5Group);
+    loadSubMesh('models/meshes_rs/pla5_green.STL', badgeYellowMat, link5Group, 10);
+    loadSubMesh('models/meshes_rs/link6.STL', baseBlackMat, link6Group);
+    loadSubMesh('models/meshes_rs/pla7_green.STL', badgeYellowMat, gripperEndGroup, 10);
+    loadSubMesh('models/meshes_rs/cnc7.STL', cncMetalMat, gripperEndGroup);
+    loadSubMesh('models/meshes_rs/motor_7.STL', motorMat, gripperEndGroup);
+    loadSubMesh('models/meshes_rs/cnc_left.STL', cncMetalMat, gripperLeftGroup);
+    loadSubMesh('models/meshes_rs/pla_left.STL', badgeYellowMat, gripperLeftGroup, 10);
+    loadSubMesh('models/meshes_rs/cnc_right.STL', cncMetalMat, gripperRightGroup);
+    loadSubMesh('models/meshes_rs/pla_right.STL', badgeYellowMat, gripperRightGroup, 10);
+  }
+
   if (typeof THREE.GLTFLoader !== 'undefined') {
     setPreloaderProgress(5, 'LOADING 3D MODEL...');
 
     const gltfLoader = new THREE.GLTFLoader();
-    armAssemblyGroup.visible = false;
 
     // Material overrides matching exported material names
     const matOverrides = {
@@ -1381,7 +1439,7 @@ function initHeroArmMouseTracker() {
     };
 
     gltfLoader.load(
-      'models/rebot_arm_lite.glb',
+      'models/rebot_arm_simple.glb',
       (gltf) => {
         const modelRoot = gltf.scene;
 
@@ -1394,8 +1452,6 @@ function initHeroArmMouseTracker() {
           }
         });
 
-        armAssemblyGroup.add(modelRoot);
-
         glbJ1Axis = modelRoot.getObjectByName('joint1_axis');
         glbJ2Axis = modelRoot.getObjectByName('joint2_axis');
         glbJ3Axis = modelRoot.getObjectByName('joint3_axis');
@@ -1407,6 +1463,7 @@ function initHeroArmMouseTracker() {
 
         if (glbJ1Axis && glbJ2Axis && glbJ3Axis) {
           useGLBJoints = true;
+          armAssemblyGroup.add(modelRoot);
         }
 
         fallbackGroup.visible = false;
@@ -1422,9 +1479,19 @@ function initHeroArmMouseTracker() {
         setPreloaderProgress(5 + ratio * 90, 'LOADING 3D MODEL...');
       },
       (err) => {
-        console.warn('GLB load failed, using fallback mesh:', err);
-        fallbackGroup.visible = true;
+        console.warn('GLB load fallback to STL:', err);
+        fallbackGroup.visible = false;
         armAssemblyGroup.visible = true;
+        clearTimeout(preloaderFallbackTimer);
+        finishPreloader();
+      }
+    );
+  } else {
+    fallbackGroup.visible = false;
+    armAssemblyGroup.visible = true;
+    clearTimeout(preloaderFallbackTimer);
+    finishPreloader();
+  }
         clearTimeout(preloaderFallbackTimer);
         finishPreloader();
       }
@@ -2556,10 +2623,10 @@ function initSimIframeLazyLoad() {
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initSimIframeLazyLoad);
-} else {
+if (document.readyState === 'complete') {
   initSimIframeLazyLoad();
+} else {
+  document.addEventListener('DOMContentLoaded', initSimIframeLazyLoad);
 }
 
 
