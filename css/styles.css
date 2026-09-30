@@ -2065,6 +2065,31 @@ body.lang-zh kbd {
   font-family: 'JetBrains Mono', Consolas, Monaco, 'PingFang SC', 'Microsoft YaHei', monospace;
 }
 
+/* Protect FontAwesome Icons from being overridden by language font-family rules */
+.fa, .fas, .far, .fal, .fab, .fa-solid, .fa-regular, .fa-brands,
+i[class*="fa-"], span[class*="fa-"], [class^="fa-"], [class*=" fa-"] {
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "FontAwesome" !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-rendering: auto !important;
+  line-height: 1 !important;
+}
+
+.fab, .fa-brands {
+  font-family: "Font Awesome 6 Brands" !important;
+}
+
+.fas, .fa-solid {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
+
+.far, .fa-regular {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 400 !important;
+}
+
+
 
 
 
