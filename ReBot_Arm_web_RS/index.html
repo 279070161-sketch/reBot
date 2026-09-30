@@ -12,13 +12,13 @@
 <body>
   <main class="app">
     <section class="viewport" id="viewport">
-      <div class="loading-overlay" id="loading-overlay" role="status" aria-live="polite">
+      <div class="loading-overlay" id="loading-overlay" role="status" aria-live="polite" style="display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;">
         <p class="loading-title" data-i18n="loading.title">Loading...</p>
         <div class="loading-progress" id="loading-progress" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           <div class="loading-progress-track" aria-hidden="true">
             <div class="loading-progress-fill" id="loading-progress-fill"></div>
           </div>
-          <span class="loading-progress-value" id="loading-progress-value">0%</span>
+          <span class="loading-progress-value" id="loading-progress-value" style="display: none !important;"></span>
         </div>
       </div>
       <div class="callouts" id="callouts"></div>

@@ -414,9 +414,16 @@ if (document.readyState === 'loading') {
   initApp();
 }
 
-// Boot the Hero 3D arm IMMEDIATELY (script sits at end of <body>):
-// render-blocking third-party stylesheets (e.g. Google Fonts) can delay
-// DOMContentLoaded by seconds, which would leave the banner empty.
+// Global Safety Preloader Timer: Ensures the preloader is always dismissed even under network stalls
+setTimeout(() => {
+  const pEl = document.getElementById('page-preloader');
+  if (pEl && pEl.style.display !== 'none' && !pEl.classList.contains('preloader-hidden')) {
+    pEl.classList.add('preloader-hidden');
+    setTimeout(() => { pEl.style.display = 'none'; }, 450);
+  }
+}, 4500);
+
+// Boot the Hero 3D arm IMMEDIATELY (script sits at end of <body>)
 if (typeof THREE !== 'undefined' && document.getElementById('hero-arm-canvas')) {
   initHeroArmMouseTracker();
 }
@@ -1049,9 +1056,15 @@ function initHeroArmMouseTracker() {
   const canvas = document.getElementById('hero-arm-canvas');
   if (!canvas || typeof THREE === 'undefined') {
     if (!window._heroArmRetryCount) window._heroArmRetryCount = 0;
-    if (window._heroArmRetryCount < 20) {
+    if (window._heroArmRetryCount < 30) {
       window._heroArmRetryCount++;
       setTimeout(initHeroArmMouseTracker, 100);
+    } else {
+      const pEl = document.getElementById('page-preloader');
+      if (pEl) {
+        pEl.classList.add('preloader-hidden');
+        setTimeout(() => { pEl.style.display = 'none'; }, 450);
+      }
     }
     return;
   }
@@ -1307,28 +1320,22 @@ function initHeroArmMouseTracker() {
   let preloaderFinished = false;
 
   function setPreloaderProgress(percent, statusMsg) {
-    if (percent > currentPercent) {
-      currentPercent = percent;
-      if (preloaderCounter) preloaderCounter.textContent = Math.min(100, Math.round(currentPercent));
-      if (preloaderBar) preloaderBar.style.width = `${Math.min(100, Math.round(currentPercent))}%`;
+    if (typeof window.setPreloaderProgress === 'function') {
+      window.setPreloaderProgress(percent, statusMsg);
     }
-    if (statusMsg && preloaderStatus) preloaderStatus.textContent = statusMsg;
   }
 
   function finishPreloader() {
     if (preloaderFinished) return;
     preloaderFinished = true;
-    setPreloaderProgress(100, 'READY');
-    // No blocking shader compile here — materials compile lazily on the first
-    // rendered frame (the GLB success path already compiled right after attach).
-    setTimeout(() => {
-      if (preloaderEl) {
-        preloaderEl.classList.add('preloader-hidden');
-        setTimeout(() => { preloaderEl.style.display = 'none'; }, 450);
-      }
-      triggerCameraEntrance();
-    }, 60);
+    if (typeof window.dismissPreloader === 'function') {
+      window.dismissPreloader();
+    }
+    triggerCameraEntrance();
   }
+
+  // Dismiss preloader instantly to prevent any UI blocking
+  finishPreloader();
 
   function triggerCameraEntrance() {
     const startCamZ = 7.6, targetCamZ = 6.6;

@@ -2980,7 +2980,7 @@
   <!-- ==========================================================================
        Full-Screen Minimalist 3D Preloader (Drone Riotters Style)
        ========================================================================== -->
-  <div id="page-preloader" class="page-preloader">
+  <div id="page-preloader" class="page-preloader" style="display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;">
     <div class="preloader-corner-tag top-left">
       <span class="preloader-dot"></span> reBot B601-RS | 6-DoF Arm Stream
     </div>
@@ -3002,10 +3002,25 @@
     <div class="preloader-corner-tag bottom-left">
       SIM-TO-REAL EMBODIED AI
     </div>
-    <div class="preloader-corner-tag bottom-right">
-      <span class="preloader-mono-label">SEEED STUDIO x Isaac</span>
-    </div>
   </div>
+
+  <script>
+    /* Global Preloader Inline Watchdog */
+    (function() {
+      window.setPreloaderProgress = function(percent, statusMsg) {};
+      window.dismissPreloader = function() {
+        var p = document.getElementById('page-preloader');
+        if (p) {
+          p.style.display = 'none';
+          p.classList.add('preloader-hidden');
+        }
+      };
+      window.dismissPreloader();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.dismissPreloader);
+      }
+    })();
+  </script>
 
 
   <!-- ==========================================================================
@@ -4850,19 +4865,11 @@
     </div>
   </footer>
 
-  <!-- Three.js Engine & Loaders (Local + CDN Fallback) -->
-  <script src="js/lib/three.min.js" defer></script>
-  <script src="js/lib/STLLoader.js" defer></script>
-  <script src="js/lib/GLTFLoader.js?v=20260929_v1" defer></script>
-  <script src="js/lib/DRACOLoader.js?v=20260929_v1" defer></script>
-  <script>
-    if (typeof THREE === 'undefined') {
-      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
-      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"><\/script>');
-      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"><\/script>');
-      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"><\/script>');
-    }
-  </script>
+  <!-- Three.js Engine & Loaders (Local Engine) -->
+  <script src="js/lib/three.min.js"></script>
+  <script src="js/lib/STLLoader.js"></script>
+  <script src="js/lib/GLTFLoader.js?v=20260929_v1"></script>
+  <script src="js/lib/DRACOLoader.js?v=20260929_v1"></script>
 
   <!-- Main JavaScript File with Cache-Buster v66 (pause inactive squeeze videos + video optimization) -->
   <script src="js/app.js?v=20260929_v66" defer></script>
