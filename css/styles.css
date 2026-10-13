@@ -1988,66 +1988,6 @@ canvas.ascii-bg {
   z-index: 105;
 }
 
-/* ==========================================================================
-   Full-Screen High-Tech Minimalist Preloader (Drone Riotters Inspired)
-   ========================================================================== */
-.page-preloader {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #ffffff;
-  color: #0f172a;
-  z-index: 99999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  user-select: none;
-  overflow: hidden;
-  font-family: var(--font-main, 'Inter', sans-serif);
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.page-preloader.preloader-hidden {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-}
-
-.preloader-center-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.preloader-counter-wrapper {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  font-family: var(--font-code, 'JetBrains Mono', -apple-system, monospace);
-  line-height: 1;
-}
-
-.preloader-counter {
-  font-size: 3.5rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: #0F172A;
-}
-
-.preloader-percent {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--nv-green, #68A600);
-  margin-left: 2px;
-}
-
 /* Chinese Language Typography Enforcement: Ensure fallback Chinese characters use Sans-Serif (PingFang / Microsoft YaHei), never Songti/SimSun, while retaining JetBrains Mono for English text */
 html[lang^="zh"],
 body.lang-zh,

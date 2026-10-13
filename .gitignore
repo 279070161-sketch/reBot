@@ -1,5 +1,5 @@
 node_modules/
 rebot_arm_temp/
-backup_v1/
+backup_v*/
 .DS_Store
 *.log

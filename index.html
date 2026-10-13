@@ -452,14 +452,14 @@
       height: clamp(760px, 92vh, 980px);
       margin-top: -64px;
       padding-top: 64px;
-      background: radial-gradient(circle at 75% 45%, #FFFFFF 0%, #F8FAFC 55%, #EDF2F7 100%);
+      background: #0B1220;
       border-bottom: 1px solid var(--nv-border);
       overflow: hidden;
       display: flex;
       align-items: center;
       user-select: none;
     }
-    .unitree-hero-3d-viewport {
+    .unitree-hero-video-viewport {
       position: absolute;
       top: 0;
       left: 0;
@@ -468,22 +468,24 @@
       height: 100%;
       z-index: 1;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    #hero-arm-canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: block !important;
-      outline: none;
-      pointer-events: auto;
-    }
-    .unitree-hero-3d-iframe {
+    .hero-bg-video {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
-      border: none;
-      background: transparent;
+      object-fit: cover;
+      display: block;
+      background: #0B1220;
+    }
+    .hero-bg-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,
+        rgba(8, 13, 24, 0.88) 0%,
+        rgba(8, 13, 24, 0.62) 28%,
+        rgba(8, 13, 24, 0.18) 60%,
+        rgba(8, 13, 24, 0.40) 100%);
     }
     .unitree-hero-container {
       max-width: 1440px;
@@ -510,14 +512,16 @@
       gap: 0.55rem;
       font-size: 0.85rem;
       font-weight: 700;
-      color: var(--nv-green);
-      background: rgba(104, 166, 0, 0.08);
-      border: 1px solid rgba(104, 166, 0, 0.22);
+      color: #B9F227;
+      background: rgba(8, 13, 24, 0.55);
+      border: 1px solid rgba(153, 218, 0, 0.45);
       padding: 0.4rem 0.95rem 0.4rem 0.75rem;
       border-radius: 50px;
       margin-bottom: 1.75rem;
       font-family: var(--font-code);
       letter-spacing: 0.5px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
     .hero-tag-osi-icon {
       height: 22px;
@@ -530,56 +534,30 @@
       font-size: clamp(2.8rem, 5.2vw, 4.6rem);
       font-weight: 900;
       line-height: 1.1;
-      color: #0F172A;
+      color: #F8FAFC;
       margin-bottom: 0.6rem;
       letter-spacing: -0.03em;
       font-family: var(--font-main);
+      text-shadow: 0 2px 24px rgba(8, 13, 24, 0.55);
     }
     .unitree-hero-subtitle {
       font-size: clamp(1.4rem, 2.2vw, 2.1rem);
       font-weight: 700;
       line-height: 1.25;
-      color: var(--nv-green);
+      color: #99DA00;
       margin-bottom: 1.25rem;
       letter-spacing: -0.01em;
       font-family: var(--font-main);
+      text-shadow: 0 2px 18px rgba(8, 13, 24, 0.6);
     }
     .unitree-hero-description {
       font-size: clamp(1.05rem, 1.35vw, 1.25rem);
-      color: #475569;
+      color: #CBD5E1;
       line-height: 1.55;
-      margin-bottom: 2.5rem;
+      margin-bottom: 0;
       font-family: var(--font-main);
       font-weight: 400;
-    }
-    .unitree-watch-video-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.85rem;
-      background: #0F172A;
-      color: #FFFFFF;
-      font-family: var(--font-main);
-      font-size: 1.05rem;
-      font-weight: 700;
-      padding: 0.95rem 2.4rem;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 6px 22px rgba(15, 23, 42, 0.2);
-    }
-    .unitree-watch-video-btn:hover {
-      background: var(--nv-green);
-      color: #FFFFFF;
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 10px 30px rgba(104, 166, 0, 0.38);
-    }
-    .unitree-watch-video-btn i {
-      font-size: 0.9rem;
-      transition: transform 0.25s ease;
-    }
-    .unitree-watch-video-btn:hover i {
-      transform: translateX(4px);
+      text-shadow: 0 1px 14px rgba(8, 13, 24, 0.5);
     }
     @media (max-width: 992px) {
       .unitree-hero-section {
@@ -588,7 +566,7 @@
         min-height: 720px;
         padding: 100px 1.5rem 3.5rem;
       }
-      .unitree-hero-3d-viewport {
+      .unitree-hero-video-viewport {
         position: relative;
         width: 100%;
         height: 380px;
@@ -603,114 +581,6 @@
       }
     }
 
-    /* 3D Pick & Place Floating Hints */
-    .arm-pick-hint {
-      position: absolute;
-      z-index: 20;
-      padding: 0.45rem 1rem;
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: #FFFFFF;
-      font-family: var(--font-main);
-      font-size: 0.82rem;
-      font-weight: 700;
-      border-radius: 50px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-      pointer-events: auto;
-      cursor: pointer;
-      transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-      white-space: nowrap;
-      transform: translate(-50%, -100%);
-      opacity: 0;
-      visibility: hidden;
-      user-select: none;
-    }
-    .arm-pick-hint:hover {
-      background: #0F172A;
-      border-color: var(--nv-green);
-      color: var(--nv-green);
-      transform: translate(-50%, -105%) scale(1.06);
-    }
-    .arm-pick-hint.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Video Lightbox Modal */
-    .hero-video-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hero-video-modal.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    .video-modal-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-    .video-modal-dialog {
-      position: relative;
-      width: min(1040px, 92vw);
-      background: #000000;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      z-index: 2001;
-      transform: scale(0.92);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hero-video-modal.active .video-modal-dialog {
-      transform: scale(1);
-    }
-    .video-modal-close-btn {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #FFFFFF;
-      font-size: 1.8rem;
-      line-height: 1;
-      cursor: pointer;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.25s ease;
-    }
-    .video-modal-close-btn:hover {
-      background: var(--nv-green);
-      transform: scale(1.1);
-      border-color: var(--nv-green);
-    }
-    .video-modal-body {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000000;
-    }
-    .video-modal-body video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
     .hero-main-title {
       font-size: clamp(1.35rem, 2.1vw, 2rem);
       font-weight: 800;
@@ -1169,6 +1039,9 @@
     }
     .scenario-action-box {
       margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
     }
     .scenario-primary-btn {
       display: inline-flex;
@@ -1192,6 +1065,29 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(104, 166, 0, 0.35);
       color: #ffffff;
+    }
+    .scenario-secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+      font-weight: 700;
+      font-size: 0.98rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: var(--font-main);
+      background: #FFFFFF;
+      color: #0F172A;
+      border: 1px solid #CBD5E1;
+    }
+    .scenario-secondary-btn:hover {
+      border-color: var(--nv-green);
+      color: var(--nv-green);
+      background: #F8FAFC;
+      transform: translateY(-2px);
     }
 
     /* ==========================================================================
@@ -1440,6 +1336,145 @@
       border-color: #0F172A;
       background: #F8FAFC;
       transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       SenseCraft Robotics: No-Code Platform Section Styling
+       ========================================================================== */
+    .sensecraft-section {
+      padding: 5.5rem 0;
+      background: #FAFAFC;
+      border-bottom: 1px solid var(--nv-border);
+      position: relative;
+    }
+    .sensecraft-card {
+      background: #FFFFFF;
+      border: 1px solid var(--nv-border);
+      border-radius: 24px;
+      padding: 2.5rem 2.75rem;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
+    }
+    @media (max-width: 768px) {
+      .sensecraft-card {
+        padding: 1.75rem 1.25rem;
+      }
+    }
+    .sensecraft-banner {
+      position: relative;
+      aspect-ratio: 1872 / 480;
+      margin: -2.5rem -2.75rem 2.5rem;
+      border-radius: 24px 24px 0 0;
+      overflow: hidden;
+      border-bottom: 1px solid var(--nv-border);
+      background: #0F172A;
+    }
+    @media (max-width: 768px) {
+      .sensecraft-banner {
+        aspect-ratio: auto;
+        min-height: 320px;
+        margin: -1.75rem -1.25rem 1.75rem;
+        border-radius: 24px 24px 0 0;
+      }
+    }
+    .sensecraft-banner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .sensecraft-banner-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(90deg,
+        rgba(8, 13, 24, 0.82) 0%,
+        rgba(8, 13, 24, 0.55) 50%,
+        rgba(8, 13, 24, 0.72) 100%);
+    }
+    .sensecraft-desc {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      margin: 0;
+      padding: 1.5rem 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #F8FAFC;
+      font-family: var(--font-main);
+      text-shadow: 0 2px 18px rgba(8, 13, 24, 0.85);
+    }
+    @media (max-width: 768px) {
+      .sensecraft-desc {
+        padding: 1.25rem 1.4rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+    }
+    .sensecraft-features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 768px) {
+      .sensecraft-features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .sensecraft-feature-item {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 1.15rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .sensecraft-feature-item:hover {
+      border-color: rgba(104, 166, 0, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+    .sensecraft-feature-item i {
+      font-size: 1.25rem;
+      color: var(--nv-green);
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+      width: 28px;
+      text-align: center;
+    }
+    .sensecraft-feature-item strong {
+      display: block;
+      font-size: 1rem;
+      color: #0F172A;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      font-family: var(--font-main);
+    }
+    .sensecraft-feature-item span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      display: block;
+      font-family: var(--font-main);
+    }
+    .sensecraft-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .sensecraft-cta-row .sim-primary-btn {
+      text-align: center;
+      line-height: 1.4;
     }
 
     /* ==========================================================================
@@ -2657,6 +2692,45 @@
       transform: translateX(3px);
     }
 
+    /* How to Get Started Wiki Links Grid */
+    .getstarted-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 1.5rem 1rem 2rem;
+    }
+    @media (max-width: 992px) {
+      .getstarted-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .getstarted-grid {
+        grid-template-columns: 1fr;
+        padding: 1.25rem 0.75rem 1.5rem;
+      }
+    }
+    .getstarted-group-label {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .getstarted-group-label::before,
+    .getstarted-group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--nv-border);
+    }
+
     /* Co-Create Section */
     .cocreate-wrapper {
       display: flex;
@@ -2973,62 +3047,6 @@
 </head>
 <body>
 
-  <!-- ==========================================================================
-       Full-Screen Minimalist 3D Preloader (Drone Riotters Style)
-       ========================================================================== -->
-  <div id="page-preloader" class="page-preloader">
-    <div class="preloader-center-content">
-      <div class="preloader-counter-wrapper">
-        <span id="preloader-counter" class="preloader-counter">0</span>
-        <span class="preloader-percent">%</span>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    (function() {
-      var currentProgress = 0;
-      var targetProgress = 0;
-      var counterEl = document.getElementById('preloader-counter');
-      var preloaderEl = document.getElementById('page-preloader');
-      var isDismissed = false;
-
-      function stepCounter() {
-        if (currentProgress < targetProgress) {
-          currentProgress += Math.max(1, Math.ceil((targetProgress - currentProgress) * 0.25));
-          if (currentProgress > targetProgress) currentProgress = targetProgress;
-          if (counterEl) counterEl.textContent = String(currentProgress);
-        }
-        if (currentProgress >= 100 && !isDismissed) {
-          isDismissed = true;
-          if (preloaderEl) {
-            preloaderEl.classList.add('preloader-hidden');
-            setTimeout(function() { preloaderEl.style.display = 'none'; }, 350);
-          }
-          return;
-        }
-        requestAnimationFrame(stepCounter);
-      }
-      requestAnimationFrame(stepCounter);
-
-      window.setPreloaderProgress = function(percent) {
-        if (typeof percent === 'number' && !isNaN(percent)) {
-          var p = Math.min(100, Math.max(0, Math.round(percent)));
-          if (p > targetProgress) targetProgress = p;
-        }
-      };
-
-      window.dismissPreloader = function() {
-        targetProgress = 100;
-      };
-
-      // Watchdog fallback if GLB or script encounters error
-      setTimeout(function() {
-        targetProgress = 100;
-      }, 7000);
-    })();
-  </script>
-
 
   <!-- ==========================================================================
        Header Navbar (Logo + | + reBot, Responsive Hamburger Menu)
@@ -3049,7 +3067,7 @@
         <li><a href="https://wiki.seeedstudio.com/" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_wiki">Wiki Tutorials</a></li>
         <li><a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_demos">User Demos & GitHub</a></li>
         <li><a href="#sim-to-real" class="hub-nav-link" data-i18n="nav_sim">MuJoCo Sim-to-Real</a></li>
-        <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_projects">Project Submissions</a></li>
+        <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_projects">Host Your Workshop</a></li>
         <li><a href="#cocreate" class="hub-nav-link" onclick="openCocreateAccordion()" data-i18n="nav_customization">Customization</a></li>
         <li>
           <a id="nav-buy-now-btn" href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="buy-now-nav-btn">
@@ -3098,9 +3116,13 @@
     
     <!-- Unitree-Style Clean Studio Hero Banner Section -->
     <section class="unitree-hero-section" id="home">
-      <!-- 3D Robotic Arm Studio Canvas Viewport -->
-      <div class="unitree-hero-3d-viewport">
-        <canvas id="hero-arm-canvas"></canvas>
+      <!-- Dark Studio Video Background Viewport -->
+      <div class="unitree-hero-video-viewport" aria-hidden="true">
+        <video id="hero-bg-video" class="hero-bg-video" autoplay muted loop playsinline preload="auto"
+               poster="video/banner_poster.jpg">
+          <source src="video/banner_hd.mp4" type="video/mp4">
+        </video>
+        <div class="hero-bg-scrim"></div>
       </div>
 
       <!-- Left Hero Typography & Action Button -->
@@ -3119,32 +3141,11 @@
           <p class="unitree-hero-description" data-i18n="hero_desc">
             Accelerate Physical AI Deployment in Real World
           </p>
-
-          <div class="unitree-hero-cta">
-            <button type="button" class="unitree-watch-video-btn" id="open-video-modal-btn">
-              <span data-i18n="hero_watch_video">Watch Video</span>
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- Video Lightbox Modal Dialog -->
-    <div class="hero-video-modal" id="hero-video-modal" aria-hidden="true">
-      <div class="video-modal-backdrop" id="video-modal-backdrop"></div>
-      <div class="video-modal-dialog">
-        <button type="button" class="video-modal-close-btn" id="close-video-modal-btn" title="Close Video">&times;</button>
-        <div class="video-modal-body">
-          <video id="modal-banner-video" controls playsinline preload="metadata">
-            <source src="video/banner.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
 
-    
 
     <!-- ==========================================================================
          High Performance & Extensive Application Section (Squeeze Carousel)
@@ -3410,10 +3411,13 @@
                   </div>
                 </div>
 
-                <!-- Action Button -->
+                <!-- Action Buttons -->
                 <div class="scenario-action-box">
                   <a href="https://www.seeedstudio.com/sim-to-real-with-seeed-rebot-and-nvidia-isaac" target="_blank" rel="noopener noreferrer" class="scenario-primary-btn" data-i18n="scenarios_edu_btn">
                     Start Learning Course
+                  </a>
+                  <a href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="scenario-secondary-btn" data-i18n="scenarios_edu_buy_btn">
+                    Buy reBot Whole Kit for the Course
                   </a>
                 </div>
               </div>
@@ -3624,6 +3628,70 @@
     </section>
 
     <!-- ==========================================================================
+         SenseCraft Robotics: No-Code Platform Section
+         ========================================================================== -->
+    <section class="sensecraft-section" id="sensecraft">
+      <div class="container" style="max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
+
+        <!-- Section Header -->
+        <div class="section-title-group" style="text-align: center; margin-bottom: 2.5rem;">
+          <h2 class="section-main-title" data-i18n="sensecraft_title">SenseCraft Robotics</h2>
+          <p class="section-subtitle" data-i18n="sensecraft_subtitle">No-Code Platform From Data to Deployment, All in One Place</p>
+        </div>
+
+        <div class="sensecraft-card">
+          <!-- SenseCraft Robotics Banner Visual with Description Overlay -->
+          <div class="sensecraft-banner">
+            <img src="image/sensecraft/rearm.webp" alt="SenseCraft Robotics No-Code Platform: From Data to Deployment" loading="lazy" decoding="async">
+            <div class="sensecraft-banner-overlay" aria-hidden="true"></div>
+            <p class="sensecraft-desc" data-i18n="sensecraft_desc">
+              SenseCraft Robotics unifies robotic arm calibration, data collection, model training, and inference validation into one seamless workflow — prepare data on desktop, train in the cloud, and validate results without any high-end hardware.
+            </p>
+          </div>
+
+          <!-- Feature Highlights Grid -->
+          <div class="sensecraft-features-grid">
+            <div class="sensecraft-feature-item">
+              <i class="fas fa-compass"></i>
+              <div>
+                <strong data-i18n="sensecraft_hl1_t">Guided Onboarding</strong>
+                <span data-i18n="sensecraft_hl1_d">Step-by-step workflows for device setup and data collection — get started easily, even as a beginner</span>
+              </div>
+            </div>
+            <div class="sensecraft-feature-item">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <div>
+                <strong data-i18n="sensecraft_hl2_t">Cloud Training</strong>
+                <span data-i18n="sensecraft_hl2_d">Upload your data and train in the cloud — no local high-performance hardware required, saving compute and ops costs</span>
+              </div>
+            </div>
+            <div class="sensecraft-feature-item">
+              <i class="fas fa-tachometer-alt"></i>
+              <div>
+                <strong data-i18n="sensecraft_hl3_t">Faster Iteration</strong>
+                <span data-i18n="sensecraft_hl3_d">Cut data prep time from 5–7 days down to 1–2 days</span>
+              </div>
+            </div>
+            <div class="sensecraft-feature-item">
+              <i class="fas fa-clipboard-check"></i>
+              <div>
+                <strong data-i18n="sensecraft_hl4_t">Closed-Loop Validation</strong>
+                <span data-i18n="sensecraft_hl4_d">Review training results anytime on desktop, with full traceability and reproducibility</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Row -->
+          <div class="sensecraft-cta-row">
+            <a href="https://sensecraft.seeed.cc/en/robotics" target="_blank" rel="noopener noreferrer" class="sim-primary-btn" data-i18n="sensecraft_cta">
+              <i class="fas fa-sign-in-alt"></i> Sign in to get 1,000 FREE credits for cloud training and inference
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
          Developer Hub Module Section (Collapsible Accordion List)
          ========================================================================== -->
     <section class="developer-hub-section" id="developer-hub">
@@ -3638,15 +3706,220 @@
         <!-- Accordion List -->
         <div class="hub-accordion-container">
           
-          <!-- Accordion Item 01: See What You Can Build -->
+          <!-- Accordion Item 01: How to Get Started -->
+          <div class="hub-accordion-item" id="get-started">
+            <div class="hub-accordion-header" onclick="toggleHubAccordion('get-started')">
+              <div class="hub-accordion-title-group">
+                <h3 class="hub-accordion-title" data-i18n="dev_item01_title">
+                  <i class="fas fa-rocket" style="color: var(--nv-green); font-size: 1.1rem;"></i>
+                  01 How to Get Started
+                </h3>
+                <p class="hub-accordion-subtitle" data-i18n="dev_item01_subtitle">Official guides for the reBot-RS robotic arm — from first boot to advanced applications</p>
+              </div>
+              <div class="hub-accordion-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+
+            <div class="hub-accordion-content">
+              <!-- Wiki Entry Links Grid -->
+              <div class="getstarted-grid">
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">1</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link1">Quick Start</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_lerobot/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">2</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link2">with LeRobot</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_pinocchio_meshcat/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">3</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link3">with Pinocchio</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_mit_control/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">4</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link4">Motor SDK</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_grasping_demo/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">5</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link5">with Visual Grasping</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_ros2_integration/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">6</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link6">with ROS2</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_isaacsim/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">7</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link7">with Isaac Sim</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_web_simulator_developer_guide/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">8</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link8">Web Control System</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/wrc_demo_tutorial/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">9</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link9">with Agent Claw</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_physical_ai_course_introduction/" target="_blank" rel="noopener noreferrer">
+                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">10</span>
+                  <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link10">Beginner Course</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+
+                <div class="getstarted-group-label" data-i18n="gs_group_resources">
+                  <i class="fab fa-github"></i> Open-Source Resources
+                </div>
+
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/reBot-DevArm/tree/main/hardware/reBot_B601_RS" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link11">Hardware Collection</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/reBot-DevArm/tree/main/Rebot_Arm_description/RS" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link12">Description Package (URDF / Mesh)</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Yang-Ci/ReBot_Arm_DigitalTwin_RS" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link13">Digital Twin / Web Control System</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/reBot-DevArm" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link14">Main Repository</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/reBotArm_control_py" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link15">Python SDK</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/reBotArmController_ROS2" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link16">ROS2 Controller</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/lerobot-robot-seeed-b601" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link17">LeRobot Robot Adapter</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/lerobot-teleoperator-rebot-arm-102" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link18">LeRobot Teleoperator Adapter</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/reBot-Isaacsim" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link19">Isaac Sim</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/reBot-DevArm-Grasp" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link20">Visual Grasping Demo</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+                <a class="gs-step-item" href="https://github.com/Seeed-Projects/reBot-DevArm/tree/main/hardware/camera-mounts" target="_blank" rel="noopener noreferrer">
+                                    <div class="gs-step-content">
+                    <div class="gs-step-title-row">
+                      <span class="gs-step-title" data-i18n="gs_link21">Camera Mounts Collection</span>
+                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item 02: Contribution & Gather with Global Community -->
           <div class="hub-accordion-item" id="hub-item-01">
             <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-01')">
               <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title" data-i18n="dev_item01_title">
+                <h3 class="hub-accordion-title" data-i18n="dev_item02_title">
                   <i class="fas fa-cubes" style="color: var(--nv-green); font-size: 1.1rem;"></i>
-                  01 See What You Can Build
+                  02 Contribution & Gather with Global Community
                 </h3>
-                <p class="hub-accordion-subtitle" data-i18n="dev_item01_subtitle">Explore real-world projects and creative builds from global developers</p>
+                <p class="hub-accordion-subtitle" data-i18n="dev_item02_subtitle">Explore real-world projects and creative builds from global developers</p>
               </div>
               <div class="hub-accordion-icon">
                 <i class="fas fa-chevron-down"></i>
@@ -3864,15 +4137,15 @@
             </div>
           </div>
 
-          <!-- Accordion Item 02: Co-Create with Seeed -->
+          <!-- Accordion Item 03: Co-Create with Seeed -->
           <div class="hub-accordion-item" id="cocreate">
             <div class="hub-accordion-header" onclick="toggleHubAccordion('cocreate')">
               <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title" data-i18n="dev_item02_title">
+                <h3 class="hub-accordion-title" data-i18n="dev_item03_title">
                   <i class="fas fa-hands-helping" style="color: var(--nv-green); font-size: 1.1rem;"></i>
-                  02 Co-Create with Seeed
+                  03 Co-Create with Seeed
                 </h3>
-                <p class="hub-accordion-subtitle" data-i18n="dev_item02_subtitle">Join Seeed's global community, project calls, and partnership programs</p>
+                <p class="hub-accordion-subtitle" data-i18n="dev_item03_subtitle">Join Seeed's global community, project calls, and partnership programs</p>
               </div>
               <div class="hub-accordion-icon">
                 <i class="fas fa-chevron-down"></i>
@@ -3895,7 +4168,7 @@
                         Showcase your innovative robotics builds with Seeed reBot Arm. Win hardware grants, global community spotlights, and official co-marketing support from Seeed team.
                       </p>
                     </div>
-                    <a href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn" data-i18n="cocreate_card1_btn">
+                    <a href="https://forms.gle/arTTnAJ1UW2CeRWBA" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn" data-i18n="cocreate_card1_btn">
                       Submit Your Project
                     </a>
                   </div>
@@ -3911,7 +4184,7 @@
                       </p>
                     </div>
                     <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn" data-i18n="cocreate_card2_btn">
-                      Apply for Workshop Support
+                      Apply for Workshop Host
                     </a>
                   </div>
 
@@ -4875,11 +5148,9 @@
   <!-- Three.js Engine & Loaders (Local Engine) -->
   <script src="js/lib/three.min.js"></script>
   <script src="js/lib/STLLoader.js"></script>
-  <script src="js/lib/GLTFLoader.js?v=20260929_v1"></script>
-  <script src="js/lib/DRACOLoader.js?v=20260929_v1"></script>
 
   <!-- Main JavaScript File with Cache-Buster v66 (pause inactive squeeze videos + video optimization) -->
-  <script src="js/app.js?v=20260929_v69" defer></script>
+  <script src="js/app.js?v=20261013_v82" defer></script>
   <script>
 
     function toggleFaq(id) {

@@ -10,7 +10,7 @@ const i18nDict = {
     nav_wiki: "Wiki Tutorials",
     nav_demos: "User Demos & GitHub",
     nav_sim: "MuJoCo Sim-to-Real",
-    nav_projects: "Project Submissions",
+    nav_projects: "Host Your Workshop",
     nav_customization: "Customization",
     nav_buynow: "Buy Now",
 
@@ -77,6 +77,7 @@ const i18nDict = {
     scenarios_edu_stat4_val: "20+ Hours",
     scenarios_edu_stat4_lbl: "Hands-on Lab",
     scenarios_edu_btn: "Start Learning Course",
+    scenarios_edu_buy_btn: "Buy reBot Whole Kit for the Course",
 
     // Column 2: Scientific Research
     scenarios_sci_badge: "Scientific Research",
@@ -121,19 +122,57 @@ const i18nDict = {
     sim_feat4_desc: "1:1 Kinematic model to hardware",
     sim_btn: "Open Full Web Simulator",
 
+    // SenseCraft Robotics
+    sensecraft_title: "SenseCraft Robotics",
+    sensecraft_subtitle: "No-Code Platform From Data to Deployment, All in One Place",
+    sensecraft_desc: "SenseCraft Robotics unifies robotic arm calibration, data collection, model training, and inference validation into one seamless workflow — prepare data on desktop, train in the cloud, and validate results without any high-end hardware.",
+    sensecraft_hl1_t: "Guided Onboarding",
+    sensecraft_hl1_d: "Step-by-step workflows for device setup and data collection — get started easily, even as a beginner",
+    sensecraft_hl2_t: "Cloud Training",
+    sensecraft_hl2_d: "Upload your data and train in the cloud — no local high-performance hardware required, saving compute and ops costs",
+    sensecraft_hl3_t: "Faster Iteration",
+    sensecraft_hl3_d: "Cut data prep time from 5–7 days down to 1–2 days",
+    sensecraft_hl4_t: "Closed-Loop Validation",
+    sensecraft_hl4_d: "Review training results anytime on desktop, with full traceability and reproducibility",
+    sensecraft_cta: "Sign in to get 1,000 FREE credits for cloud training and inference",
+
     // Developer Hub
     dev_main_title: "Developer Hub",
     dev_main_subtitle: "Explore projects, tutorials, and co-creation opportunities with global developers",
-    dev_item01_title: "01 See What You Can Build",
-    dev_item01_subtitle: "Explore real-world projects and creative builds from global developers",
-    dev_item02_title: "02 Co-Create with Seeed",
-    dev_item02_subtitle: "Join Seeed's global community, project calls, and partnership programs",
+    dev_item01_title: "01 How to Get Started",
+    dev_item01_subtitle: "Official guides for the reBot-RS robotic arm — from first boot to advanced applications",
+    dev_item02_title: "02 Contribution & Gather with Global Community",
+    dev_item02_subtitle: "Explore real-world projects and creative builds from global developers",
+    dev_item03_title: "03 Co-Create with Seeed",
+    dev_item03_subtitle: "Join Seeed's global community, project calls, and partnership programs",
+    gs_link1: "Quick Start",
+    gs_link2: "with LeRobot",
+    gs_link3: "with Pinocchio",
+    gs_link4: "Motor SDK",
+    gs_link5: "with Visual Grasping",
+    gs_link6: "with ROS2",
+    gs_link7: "with Isaac Sim",
+    gs_link8: "Web Control System",
+    gs_link9: "with Agent Claw",
+    gs_link10: "Beginner Course",
+    gs_group_resources: "Open-Source Resources",
+    gs_link11: "Hardware Collection",
+    gs_link12: "Description Package (URDF / Mesh)",
+    gs_link13: "Digital Twin / Web Control System",
+    gs_link14: "Main Repository",
+    gs_link15: "Python SDK",
+    gs_link16: "ROS2 Controller",
+    gs_link17: "LeRobot Robot Adapter",
+    gs_link18: "LeRobot Teleoperator Adapter",
+    gs_link19: "Isaac Sim",
+    gs_link20: "Visual Grasping Demo",
+    gs_link21: "Camera Mounts Collection",
     cocreate_card1_title: "Physical AI Project of the Month",
     cocreate_card1_desc: "Showcase your innovative robotics builds with Seeed reBot Arm. Win hardware grants, global community spotlights, and official co-marketing support from Seeed team.",
     cocreate_card1_btn: "Submit Your Project",
     cocreate_card2_title: "Global Physical AI Workshop Partnership",
     cocreate_card2_desc: "Host a hands-on Physical AI & Embodied AI workshop at your university, lab, or hackerspace. Seeed provides reBot hardware grants, curriculum resources, and event support.",
-    cocreate_card2_btn: "Apply for Workshop Support",
+    cocreate_card2_btn: "Apply for Workshop Host",
     cocreate_card3_title: "Embodied AI Hackathon & Events",
     cocreate_card3_desc: "Join Seeed global hackathons and developer events. Explore upcoming competition calendars, challenge tracks, hardware sponsorships, and past event recaps.",
     cocreate_card3_btn: "Check Upcoming Events",
@@ -199,7 +238,7 @@ const i18nDict = {
     nav_wiki: "Wiki 教程",
     nav_demos: "案例演示 & GitHub",
     nav_sim: "MuJoCo 仿真到现实",
-    nav_projects: "项目成果提交",
+    nav_projects: "举办你的工作坊",
     nav_customization: "定制服务",
     nav_buynow: "立即购买",
 
@@ -266,6 +305,7 @@ const i18nDict = {
     scenarios_edu_stat4_val: "20+ 小时",
     scenarios_edu_stat4_lbl: "动手实验时长",
     scenarios_edu_btn: "开始学习课程",
+    scenarios_edu_buy_btn: "购买 reBot 课程整机套装",
 
     // Column 2: Scientific Research
     scenarios_sci_badge: "前沿科学研究",
@@ -310,19 +350,57 @@ const i18nDict = {
     sim_feat4_desc: "1:1 仿真模型与真实硬件映射",
     sim_btn: "打开完整网页仿真器",
 
+    // SenseCraft Robotics
+    sensecraft_title: "SenseCraft Robotics",
+    sensecraft_subtitle: "无代码平台:从数据到部署,一站式搞定",
+    sensecraft_desc: "SenseCraft Robotics 将机械臂标定、数据采集、模型训练与推理验证整合为一条无缝工作流——桌面端准备数据、云端训练、无需高端硬件即可完成验证。",
+    sensecraft_hl1_t: "引导式上手",
+    sensecraft_hl1_d: "设备设置与数据采集的分步引导工作流——即使零基础也能轻松开始",
+    sensecraft_hl2_t: "云端训练",
+    sensecraft_hl2_d: "上传数据,在云端完成训练——无需本地高性能硬件,节省算力与运维成本",
+    sensecraft_hl3_t: "更快迭代",
+    sensecraft_hl3_d: "数据准备时间从 5–7 天缩短至 1–2 天",
+    sensecraft_hl4_t: "闭环验证",
+    sensecraft_hl4_d: "随时在桌面端查看训练结果,全程可追溯、可复现",
+    sensecraft_cta: "登录即领 1,000 免费积分,用于云端训练与推理",
+
     // Developer Hub
     dev_main_title: "开发者中心",
     dev_main_subtitle: "探索全球开发者优秀项目、教程与共创合作机会",
-    dev_item01_title: "01 看看你能构建什么",
-    dev_item01_subtitle: "探索全球开发者基于 reBot 打造的真实应用与创意项目",
-    dev_item02_title: "02 与 Seeed 联合共创",
-    dev_item02_subtitle: "加入 Seeed 全球社区、项目征集与合作伙伴计划",
+    dev_item01_title: "01 如何快速入门",
+    dev_item01_subtitle: "reBot-RS 机械臂官方指南——从首次开机到进阶应用",
+    dev_item02_title: "02 参与贡献,汇聚全球社区",
+    dev_item02_subtitle: "探索全球开发者基于 reBot 打造的真实应用与创意项目",
+    dev_item03_title: "03 与 Seeed 联合共创",
+    dev_item03_subtitle: "加入 Seeed 全球社区、项目征集与合作伙伴计划",
+    gs_link1: "快速入门",
+    gs_link2: "LeRobot 集成",
+    gs_link3: "Pinocchio 仿真",
+    gs_link4: "电机 SDK",
+    gs_link5: "视觉抓取",
+    gs_link6: "ROS2 集成",
+    gs_link7: "Isaac Sim 仿真",
+    gs_link8: "网页控制系统",
+    gs_link9: "Agent Claw 夹爪",
+    gs_link10: "入门课程",
+    gs_group_resources: "开源资源",
+    gs_link11: "硬件资料合集",
+    gs_link12: "模型描述包 (URDF / Mesh)",
+    gs_link13: "数字孪生 / 网页控制系统",
+    gs_link14: "主代码仓库",
+    gs_link15: "Python SDK",
+    gs_link16: "ROS2 控制器",
+    gs_link17: "LeRobot 机械臂适配器",
+    gs_link18: "LeRobot 遥操作适配器",
+    gs_link19: "Isaac Sim",
+    gs_link20: "视觉抓取 Demo",
+    gs_link21: "相机支架合集",
     cocreate_card1_title: "物理 AI 月度项目征集",
     cocreate_card1_desc: "展示你基于 Seeed reBot Arm 创作的创新机器人项目，赢取硬件赞助、全球社区聚光灯展示及 Seeed 官方联合推广支持。",
     cocreate_card1_btn: "提交你的项目",
     cocreate_card2_title: "全球物理 AI 工作坊合作伙伴计划",
     cocreate_card2_desc: "在你的大学、实验室或创客空间举办物理 AI 与具身智能动手工作坊，Seeed 提供 reBot 硬件支持、课程资源及活动赞助。",
-    cocreate_card2_btn: "申请工作坊支持",
+    cocreate_card2_btn: "申请举办工作坊",
     cocreate_card3_title: "具身智能黑客松与开发者活动",
     cocreate_card3_desc: "参与 Seeed 全球黑客松与开发者社区活动，查看最新赛事日程、挑战赛道、硬件赞助及往期活动回顾。",
     cocreate_card3_btn: "查看近期活动",
@@ -393,8 +471,7 @@ function initApp() {
   setup3DCardSpotlight();
   setupScrollAndEntranceAnimations();
   initDliCardAsciiBg();
-  initHeroArmMouseTracker();
-  initVideoModalHandler();
+  initHeroVideoBackground();
   initVideoViewportController();
   initSqueezeCarousel();
 
@@ -421,20 +498,6 @@ if (document.readyState === 'complete') {
   initApp();
 } else {
   document.addEventListener('DOMContentLoaded', initApp);
-}
-
-// Global Safety Preloader Timer: Ensures the preloader is always dismissed even under network stalls
-setTimeout(() => {
-  const pEl = document.getElementById('page-preloader');
-  if (pEl && pEl.style.display !== 'none' && !pEl.classList.contains('preloader-hidden')) {
-    pEl.classList.add('preloader-hidden');
-    setTimeout(() => { pEl.style.display = 'none'; }, 450);
-  }
-}, 4500);
-
-// Boot the Hero 3D arm IMMEDIATELY (script sits at end of <body>)
-if (typeof THREE !== 'undefined' && document.getElementById('hero-arm-canvas')) {
-  initHeroArmMouseTracker();
 }
 
 function setupLanguageSelector() {
@@ -1032,582 +1095,42 @@ function initSmartBuyButton() {
 }
 
 /**
- * Video Lightbox Modal Controller
- * Plays banner video on demand when clicking 'Watch Video' button
+ * Hero Background Video Manager
+ * Controls the muted looping banner video playback lifecycle: pause/resume
+ * when scrolled off-screen and on tab visibility changes (CPU/battery).
  */
-function initVideoModalHandler() {
-  const modal = document.getElementById('hero-video-modal');
-  const openBtn = document.getElementById('open-video-modal-btn');
-  const closeBtn = document.getElementById('close-video-modal-btn');
-  const backdrop = document.getElementById('video-modal-backdrop');
-  const video = document.getElementById('modal-banner-video');
-
-  if (!modal || !openBtn) return;
-
-  function openModal() {
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    if (video) {
-      video.currentTime = 0;
-      video.play().catch(() => {});
-    }
-  }
-
-  function closeModal() {
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
-    if (video) {
-      video.pause();
-    }
-  }
-
-  openBtn.addEventListener('click', openModal);
-
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (backdrop) backdrop.addEventListener('click', closeModal);
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-      closeModal();
-    }
-  });
-}
-
-/**
- * Unitree-Style Studio 3D Robotic Arm Interactive Mouse Tracker (Three.js Engine)
- * Renders a sleek 6-DoF silver-grey metallic reBot Arm standing in a clean studio environment.
- */
-function initHeroArmMouseTracker() {
-  if (window._heroArmTrackerInitialized) return;
-  const canvas = document.getElementById('hero-arm-canvas');
-  if (!canvas || typeof THREE === 'undefined') {
-    if (!window._heroArmRetryCount) window._heroArmRetryCount = 0;
-    if (window._heroArmRetryCount < 30) {
-      window._heroArmRetryCount++;
-      setTimeout(initHeroArmMouseTracker, 100);
-    } else {
-      const pEl = document.getElementById('page-preloader');
-      if (pEl) {
-        pEl.classList.add('preloader-hidden');
-        setTimeout(() => { pEl.style.display = 'none'; }, 450);
-      }
-    }
-    return;
-  }
-  window._heroArmTrackerInitialized = true;
-
-  const container = canvas.parentElement || document.body;
-  const scene = new THREE.Scene();
-
-  // 1. Camera Setup with Safe Non-Zero Aspect Ratio Fallbacks
-  const getContainerWidth = () => container.clientWidth || Math.min(window.innerWidth * 0.55, 900);
-  const getContainerHeight = () => container.clientHeight || Math.min(window.innerHeight, 800);
-
-  const initW = getContainerWidth();
-  const initH = getContainerHeight();
-
-  const camera = new THREE.PerspectiveCamera(36, initW / initH, 0.1, 1000);
-  camera.position.set(0, 1.5, 6.6);
-  camera.lookAt(0, 0.65, 0);
-
-  // 2. WebGL Renderer with Alpha Transparency
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(initW, initH);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
-
-  // 3. Ultra-Clean Studio Lighting Setup (Clean Studio Key & Fill)
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
-  scene.add(ambientLight);
-
-  const mainStudioLight = new THREE.DirectionalLight(0xffffff, 2.0);
-  mainStudioLight.position.set(7, 12, 9);
-  scene.add(mainStudioLight);
-
-  const softFillLight = new THREE.DirectionalLight(0xF1F5F9, 0.9);
-  softFillLight.position.set(-7, 7, -4);
-  scene.add(softFillLight);
-
-  const studioRimLight = new THREE.PointLight(0xFFFFFF, 1.4, 12);
-  studioRimLight.position.set(0, 5, 4);
-  scene.add(studioRimLight);
-
-  // 4. Official Brand Materials (High-Brightness CNC Silver & Premium Space Black Metal)
-  const cncMetalMat = new THREE.MeshStandardMaterial({
-    color: 0xE2E8F0,
-    roughness: 0.25,
-    metalness: 0.72
-  });
-  const motorMat = new THREE.MeshStandardMaterial({
-    color: 0x232323,
-    roughness: 0.32,
-    metalness: 0.75
-  });
-  const baseBlackMat = new THREE.MeshStandardMaterial({
-    color: 0x232323,
-    roughness: 0.32,
-    metalness: 0.75
-  });
-  // Official Brand Seeed Studio Lime Yellow-Green Accent (#99DA00)
-  const badgeYellowMat = new THREE.MeshStandardMaterial({
-    color: 0x99DA00,
-    roughness: 0.35,
-    metalness: 0.0,
-    emissive: 0x000000,
-    emissiveIntensity: 0.0,
-    polygonOffset: true,
-    polygonOffsetFactor: -10,
-    polygonOffsetUnits: -10
-  });
-
-  // Studio Ground Soft Radial Contact Shadow (100% Pure Neutral Black/Grey Shadow, Zero Blue Tint)
-  function createSoftRadialShadowTexture() {
-    const shadowCanvas = document.createElement('canvas');
-    shadowCanvas.width = 512;
-    shadowCanvas.height = 512;
-    const ctx = shadowCanvas.getContext('2d');
-
-    const grad = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
-    grad.addColorStop(0.0, 'rgba(0, 0, 0, 0.85)');      // Pure dark black core directly under base
-    grad.addColorStop(0.20, 'rgba(15, 15, 15, 0.58)');   // Pure neutral contact shadow
-    grad.addColorStop(0.48, 'rgba(40, 40, 40, 0.22)');   // Pure neutral ambient soft spread
-    grad.addColorStop(0.78, 'rgba(80, 80, 80, 0.05)');   // Pure neutral edge blur
-    grad.addColorStop(1.0, 'rgba(0, 0, 0, 0.0)');       // Transparent edge
-
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 512, 512);
-
-    return new THREE.CanvasTexture(shadowCanvas);
-  }
-
-  const softShadowTex = createSoftRadialShadowTexture();
-
-  // Primary Soft Ambient Shadow Plane (size 2.4 x 2.4 - clearly visible soft spread around base)
-  const shadowGeo = new THREE.PlaneGeometry(2.4, 2.4);
-  const shadowMat = new THREE.MeshBasicMaterial({
-    map: softShadowTex,
-    transparent: true,
-    depthWrite: false,
-    opacity: 0.9
-  });
-  const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
-  shadowMesh.rotation.x = -Math.PI / 2;
-  shadowMesh.position.set(0, -0.908, 0);
-  shadowMesh.renderOrder = -1;
-  scene.add(shadowMesh);
-
-  // Secondary Dark Core Contact Shadow (size 1.4 x 1.4 - intense contact right at base edge)
-  const coreShadowGeo = new THREE.PlaneGeometry(1.4, 1.4);
-  const coreShadowMat = new THREE.MeshBasicMaterial({
-    map: softShadowTex,
-    transparent: true,
-    depthWrite: false,
-    opacity: 0.95
-  });
-  const coreShadowMesh = new THREE.Mesh(coreShadowGeo, coreShadowMat);
-  coreShadowMesh.rotation.x = -Math.PI / 2;
-  coreShadowMesh.position.set(0, -0.906, 0);
-  coreShadowMesh.renderOrder = 0;
-  scene.add(coreShadowMesh);
-
-  // 5. High-Precision 3D reBot Arm B601-RS Model Assembly (Official URDF Kinematic Joint Tree)
-  const robotArmGroup = new THREE.Group();
-  robotArmGroup.position.set(0, -0.9, 0);
-  scene.add(robotArmGroup);
-
-  const URDF_SCALE = 5.5; // Scale URDF meters into Three.js studio canvas units
-
-  const armAssemblyGroup = new THREE.Group();
-  armAssemblyGroup.scale.set(URDF_SCALE, URDF_SCALE, URDF_SCALE);
-  armAssemblyGroup.rotation.x = -Math.PI / 2; // Convert Z-up URDF to Y-up Three.js studio
-  robotArmGroup.add(armAssemblyGroup);
-
-  // 10-Node URDF Kinematic Joint Tree Hierarchy based on rs_arm.xml & ReBot_Arm_RS.urdf
-  const baseLinkGroup = new THREE.Group();
-  armAssemblyGroup.add(baseLinkGroup);
-
-  // Joint 1 (Base Yaw, axis="0 0 -1")
-  const j1Node = new THREE.Group();
-  j1Node.position.set(-0.0003428, -0.0009868, 0.075);
-  baseLinkGroup.add(j1Node);
-  const j1AxisGroup = new THREE.Group();
-  j1Node.add(j1AxisGroup);
-  const link1Group = new THREE.Group();
-  j1AxisGroup.add(link1Group);
-
-  // Joint 2 (Shoulder Pitch, quat="0.7071055 -0.7071081 0 0", axis="0 0 1")
-  const j2Node = new THREE.Group();
-  j2Node.position.set(0.020343, 0.027237, 0.07);
-  j2Node.quaternion.set(-0.7071081, 0, 0, 0.7071055);
-  link1Group.add(j2Node);
-  const j2AxisGroup = new THREE.Group();
-  j2Node.add(j2AxisGroup);
-  const link2Group = new THREE.Group();
-  j2AxisGroup.add(link2Group);
-
-  // Joint 3 (Elbow Pitch, axis="0 0 -1")
-  const j3Node = new THREE.Group();
-  j3Node.position.set(-0.236, 0, 0);
-  link2Group.add(j3Node);
-  const j3AxisGroup = new THREE.Group();
-  j3Node.add(j3AxisGroup);
-  const link3Group = new THREE.Group();
-  j3AxisGroup.add(link3Group);
-
-  // Joint 4 (Wrist Pitch, axis="0 0 -1")
-  const j4Node = new THREE.Group();
-  j4Node.position.set(0.228, -0.072746, 0.0045);
-  link3Group.add(j4Node);
-  const j4AxisGroup = new THREE.Group();
-  j4Node.add(j4AxisGroup);
-  const link4Group = new THREE.Group();
-  j4AxisGroup.add(link4Group);
-
-  // Joint 5 (Wrist Roll, quat="0.7071055 -0.7071081 0 0", axis="0 0 -1")
-  const j5Node = new THREE.Group();
-  j5Node.position.set(0.087, -0.048, -0.03075);
-  j5Node.quaternion.set(-0.7071081, 0, 0, 0.7071055);
-  link4Group.add(j5Node);
-  const j5AxisGroup = new THREE.Group();
-  j5Node.add(j5AxisGroup);
-  const link5Group = new THREE.Group();
-  j5AxisGroup.add(link5Group);
-
-  // Joint 6 (Flange Roll, quat="0.7071055 0 0.7071081 0", axis="0 0 -1")
-  const j6Node = new THREE.Group();
-  j6Node.position.set(0.0365, 0, 0.048);
-  j6Node.quaternion.set(0, 0.7071081, 0, 0.7071055);
-  link5Group.add(j6Node);
-  const j6AxisGroup = new THREE.Group();
-  j6Node.add(j6AxisGroup);
-  const link6Group = new THREE.Group();
-  j6AxisGroup.add(link6Group);
-
-  // Gripper End Joint (quat="-0.0000026 0.7071055 0.0000026 0.7071081")
-  const gripperEndNode = new THREE.Group();
-  gripperEndNode.position.set(0, 0, 0.16621);
-  gripperEndNode.quaternion.set(0.7071055, 0.0000026, 0.7071081, -0.0000026);
-  link6Group.add(gripperEndNode);
-  const gripperEndGroup = new THREE.Group();
-  gripperEndNode.add(gripperEndGroup);
-
-  // Invisible 360-degree Large Hit Target Sphere for 100% Easy Dragging from Any Distance/Angle
-  const hitAreaGeo = new THREE.SphereGeometry(0.35, 16, 16);
-  const hitAreaMat = new THREE.MeshBasicMaterial({ visible: false });
-  const gripperHitSphere = new THREE.Mesh(hitAreaGeo, hitAreaMat);
-  gripperHitSphere.position.set(-0.02, 0, 0);
-  gripperEndGroup.add(gripperHitSphere);
-
-  // Gripper Left Joint (quat="0.4999982 0.5 -0.5 0.5000018")
-  const gripperLeftNode = new THREE.Group();
-  gripperLeftNode.position.set(-0.041939, -0.0000734, 0);
-  gripperLeftNode.quaternion.set(0.5, -0.5, 0.5000018, 0.4999982);
-  gripperEndGroup.add(gripperLeftNode);
-  const gripperLeftGroup = new THREE.Group();
-  gripperLeftNode.add(gripperLeftGroup);
-
-  // Gripper Right Joint (quat="0.4999982 -0.5 -0.5 -0.5000018")
-  const gripperRightNode = new THREE.Group();
-  gripperRightNode.position.set(-0.041939, 0.0000734, 0);
-  gripperRightNode.quaternion.set(-0.5, -0.5, -0.5000018, 0.4999982);
-  gripperEndGroup.add(gripperRightNode);
-  const gripperRightGroup = new THREE.Group();
-  gripperRightNode.add(gripperRightGroup);
-
-  // Initial Studio Hero Pose Joint Angles
-  j1AxisGroup.rotation.z = -0.55;
-  j2AxisGroup.rotation.z = 0.5;   // Shoulder pitch
-  j3AxisGroup.rotation.z = -0.85; // Elbow pitch
-  j4AxisGroup.rotation.z = 0.35;  // Wrist pitch
-  j5AxisGroup.rotation.z = 0;
-  j6AxisGroup.rotation.z = 0;
-
-  // Preloader UI Controller
-  const preloaderEl = document.getElementById('page-preloader');
-  let preloaderFinished = false;
-
-  function setPreloaderProgress(percent) {
-    if (typeof window.setPreloaderProgress === 'function') {
-      window.setPreloaderProgress(percent);
-    }
-  }
-
-  function finishPreloader() {
-    if (preloaderFinished) return;
-    preloaderFinished = true;
-
-    // Force WebGL compile & 1 frame render BEFORE lifting splash screen
-    try {
-      renderer.compile(scene, camera);
-      renderer.render(scene, camera);
-    } catch (_) {}
-
-    if (typeof window.dismissPreloader === 'function') {
-      window.dismissPreloader();
-    }
-  }
-
-  // GLB joint nodes for FK animation (populated on single unified GLB load)
-  let glbJ1Axis = null, glbJ2Axis = null, glbJ3Axis = null;
-  let glbJ4Axis = null, glbJ5Axis = null, glbJ6Axis = null;
-  let glbGripperLeft = null, glbGripperRight = null;
-  let useGLBJoints = false;
-
-  // Load 3D GLB Model (3.3MB Draco compressed ultra-fast CAD mesh)
-  armAssemblyGroup.visible = true;
-
-  if (typeof THREE.GLTFLoader !== 'undefined') {
-    const gltfLoader = new THREE.GLTFLoader();
-
-    if (typeof THREE.DRACOLoader !== 'undefined') {
-      const dracoLoader = new THREE.DRACOLoader();
-      dracoLoader.setDecoderPath('js/lib/draco/');
-      gltfLoader.setDRACOLoader(dracoLoader);
-    }
-
-    const matOverrides = {
-      'CNCMetal': cncMetalMat, 'MotorBlack': motorMat,
-      'BaseBlack': baseBlackMat, 'SeeedLimeGreen': badgeYellowMat,
-    };
-
-    gltfLoader.load(
-      'models/rebot_arm_draco.glb',
-      (gltf) => {
-        const modelRoot = gltf.scene;
-
-        modelRoot.traverse((child) => {
-          if (child.isMesh && child.material && matOverrides[child.material.name]) {
-            child.material = matOverrides[child.material.name];
-          }
-          if (child.isMesh && !child.geometry.getAttribute('normal')) {
-            child.geometry.computeVertexNormals();
-          }
-        });
-
-        armAssemblyGroup.add(modelRoot);
-
-        glbJ1Axis = modelRoot.getObjectByName('joint1_axis');
-        glbJ2Axis = modelRoot.getObjectByName('joint2_axis');
-        glbJ3Axis = modelRoot.getObjectByName('joint3_axis');
-        glbJ4Axis = modelRoot.getObjectByName('joint4_axis');
-        glbJ5Axis = modelRoot.getObjectByName('joint5_axis');
-        glbJ6Axis = modelRoot.getObjectByName('joint6_axis');
-        glbGripperLeft = modelRoot.getObjectByName('gripper_left');
-        glbGripperRight = modelRoot.getObjectByName('gripper_right');
-
-        if (glbJ1Axis && glbJ2Axis && glbJ3Axis) {
-          useGLBJoints = true;
-          glbJ1Axis.rotation.z = currentTargetJ1;
-          glbJ2Axis.rotation.z = currentTargetJ2;
-          glbJ3Axis.rotation.z = currentTargetJ3;
-          glbJ4Axis.rotation.z = currentTargetJ4;
-        }
-
-        armAssemblyGroup.visible = true;
-        try {
-          renderer.compile(scene, camera);
-          renderer.render(scene, camera);
-        } catch (_) {}
-        setPreloaderProgress(100);
-        finishPreloader();
-      },
-      (xhr) => {
-        if (xhr.total && xhr.total > 0) {
-          const p = Math.round((xhr.loaded / xhr.total) * 100);
-          setPreloaderProgress(p);
-        }
-      },
-      (err) => {
-        console.warn('GLB load error:', err);
-        armAssemblyGroup.visible = true;
-        try {
-          renderer.compile(scene, camera);
-          renderer.render(scene, camera);
-        } catch (_) {}
-        setPreloaderProgress(100);
-        finishPreloader();
-      }
-    );
-  } else {
-    armAssemblyGroup.visible = true;
-    try {
-      renderer.compile(scene, camera);
-      renderer.render(scene, camera);
-    } catch (_) {}
-    setPreloaderProgress(100);
-    finishPreloader();
-  }
-
-
-  // Sandbox Physics & FK Joint State Variables
-  let isClawClosed = false;
-
-  const raycaster = new THREE.Raycaster();
-  let mouseX_ndc = 0;
-  let mouseY_ndc = 0;
-
-  let isDragging = false;
-  let dragStartPointerX = 0;
-  let dragStartPointerY = 0;
-  let dragStartJ1 = 0;
-  let dragStartJ2 = 0;
-  let dragStartJ3 = 0;
-  let dragStartJ4 = 0;
-
-  let currentTargetJ1 = -0.55;
-  let currentTargetJ2 = 0.50;
-  let currentTargetJ3 = -0.85;
-  let currentTargetJ4 = 0.35;
-  let currentTargetJ5 = 0.0;
-  let currentTargetJ6 = 0.0;
-
-  function handlePointerDown(e) {
-    if (e.button !== 0) return;
-    isDragging = true;
-    dragStartPointerX = e.clientX;
-    dragStartPointerY = e.clientY;
-    dragStartJ1 = currentTargetJ1;
-    dragStartJ2 = currentTargetJ2;
-    dragStartJ3 = currentTargetJ3;
-    dragStartJ4 = currentTargetJ4;
-    canvas.style.cursor = 'grabbing';
-    document.body.style.userSelect = 'none';
-
-    if (canvas.setPointerCapture) {
-      try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
-    }
-  }
-
-  function handlePointerMove(e) {
-    mouseX_ndc = (e.clientX / window.innerWidth) * 2 - 1;
-    mouseY_ndc = -(e.clientY / window.innerHeight) * 2 + 1;
-
-    if (isDragging) {
-      canvas.style.cursor = 'grabbing';
-      const deltaX = e.clientX - dragStartPointerX;
-      const deltaY = e.clientY - dragStartPointerY;
-
-      const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
-
-      currentTargetJ1 = clamp(dragStartJ1 - deltaX * 0.008, -2.5, 2.5);
-      currentTargetJ2 = clamp(dragStartJ2 - deltaY * 0.005, -0.15, 1.05);
-      currentTargetJ3 = clamp(dragStartJ3 + deltaY * 0.006, -1.35, 0.05);
-      currentTargetJ4 = clamp(dragStartJ4 - deltaY * 0.004, -0.75, 0.75);
-    } else {
-      canvas.style.cursor = 'grab';
-      // Interactive Full-Amplitude Gaze Mouse-Tracking:
-      currentTargetJ1 = -0.55 - mouseX_ndc * 1.15;
-      currentTargetJ2 = 0.50 + mouseY_ndc * 0.32;
-      currentTargetJ3 = -0.85 - mouseY_ndc * 0.25;
-      currentTargetJ4 = 0.35 + mouseY_ndc * 0.18;
-    }
-  }
-
-  function handlePointerUp(e) {
-    if (isDragging) {
-      isDragging = false;
-      canvas.style.cursor = 'grab';
-      document.body.style.userSelect = '';
-      if (canvas.releasePointerCapture) {
-        try { canvas.releasePointerCapture(e.pointerId); } catch (_) {}
-      }
-    }
-  }
-
-  function handleDblClick(e) {
-    isClawClosed = !isClawClosed;
-  }
-
-  canvas.addEventListener('pointerdown', handlePointerDown);
-  window.addEventListener('pointermove', handlePointerMove);
-  window.addEventListener('pointerup', handlePointerUp);
-  window.addEventListener('pointercancel', handlePointerUp);
-  canvas.addEventListener('dblclick', handleDblClick);
-
-  // Handle Container Resizing & Dynamic Reflow
-  function handleResize() {
-    if (!container) return;
-    const w = getContainerWidth();
-    const h = getContainerHeight();
-    if (w <= 0 || h <= 0) return;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-  }
-
-  window.addEventListener('resize', handleResize, { passive: true });
-
-  if (typeof ResizeObserver !== 'undefined' && container) {
-    const ro = new ResizeObserver(handleResize);
-    ro.observe(container);
-  }
-
-  // 7. Smooth Interactive Studio Arm Motion Loop (Full Amplitude & High Response)
-  let time = 0;
-  let isHeroArmVisible = true;
-  const clock = new THREE.Clock();
-
+function initHeroVideoBackground() {
+  const vid = document.getElementById('hero-bg-video');
+  if (!vid) return;
+
+  // Pause when the hero scrolls out of view, resume when it returns.
   if ('IntersectionObserver' in window) {
-    const heroSection = document.querySelector('.unitree-hero-section') || canvas;
     const heroObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const wasVisible = isHeroArmVisible;
-        isHeroArmVisible = entry.isIntersecting;
-        if (!wasVisible && isHeroArmVisible) {
-          clock.getDelta(); // reset delta timer
-          requestAnimationFrame(animate);
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const p = vid.play();
+          if (p && typeof p.catch === 'function') p.catch(() => {});
+        } else {
+          vid.pause();
         }
       });
-    }, { threshold: 0.05 });
-    heroObserver.observe(heroSection);
+    }, { rootMargin: '20% 0px' });
+    heroObserver.observe(vid);
   }
 
-  function animate() {
-    if (!isHeroArmVisible) return;
-    requestAnimationFrame(animate);
+  // Some mobile browsers block autoplay until the first user gesture.
+  const tryPlay = () => {
+    const p = vid.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  };
+  if (vid.paused) tryPlay();
+  window.addEventListener('touchstart', tryPlay, { once: true, passive: true });
 
-    const dt = Math.min(clock.getDelta(), 0.05);
-    time += dt;
-
-    const baseX = window.innerWidth > 992 ? 1.35 : 0.0;
-    const lerpFactor = 1 - Math.exp(-12 * dt);
-    const clawLerp = 1 - Math.exp(-10 * dt);
-
-    if (useGLBJoints) {
-      // Drive live FK on the GLB joint nodes
-      if (glbJ1Axis) glbJ1Axis.rotation.z += (currentTargetJ1 - glbJ1Axis.rotation.z) * lerpFactor;
-      if (glbJ2Axis) glbJ2Axis.rotation.z += (currentTargetJ2 - glbJ2Axis.rotation.z) * lerpFactor;
-      if (glbJ3Axis) glbJ3Axis.rotation.z += (currentTargetJ3 - glbJ3Axis.rotation.z) * lerpFactor;
-      if (glbJ4Axis) glbJ4Axis.rotation.z += (currentTargetJ4 - glbJ4Axis.rotation.z) * lerpFactor;
-      if (glbJ5Axis) glbJ5Axis.rotation.z += (currentTargetJ5 - glbJ5Axis.rotation.z) * lerpFactor;
-      if (glbJ6Axis) glbJ6Axis.rotation.z += (currentTargetJ6 - glbJ6Axis.rotation.z) * lerpFactor;
-      const clawSlide = isClawClosed ? 0.003 : 0.026;
-      if (glbGripperLeft) glbGripperLeft.position.z += (clawSlide - glbGripperLeft.position.z) * clawLerp;
-      if (glbGripperRight) glbGripperRight.position.z += (clawSlide - glbGripperRight.position.z) * clawLerp;
-    } else {
-      // Fallback: drive procedural joint groups
-      j1AxisGroup.rotation.z += (currentTargetJ1 - j1AxisGroup.rotation.z) * lerpFactor;
-      j2AxisGroup.rotation.z += (currentTargetJ2 - j2AxisGroup.rotation.z) * lerpFactor;
-      j3AxisGroup.rotation.z += (currentTargetJ3 - j3AxisGroup.rotation.z) * lerpFactor;
-      j4AxisGroup.rotation.z += (currentTargetJ4 - j4AxisGroup.rotation.z) * lerpFactor;
-      j5AxisGroup.rotation.z += (currentTargetJ5 - j5AxisGroup.rotation.z) * lerpFactor;
-      j6AxisGroup.rotation.z += (currentTargetJ6 - j6AxisGroup.rotation.z) * lerpFactor;
-      const clawSlide = isClawClosed ? 0.003 : 0.026;
-      gripperLeftGroup.position.z += (clawSlide - gripperLeftGroup.position.z) * clawLerp;
-      gripperRightGroup.position.z += (clawSlide - gripperRightGroup.position.z) * clawLerp;
-    }
-
-    robotArmGroup.position.set(baseX, -0.9, 0);
-    shadowMesh.position.set(baseX, -0.908, 0);
-    coreShadowMesh.position.set(baseX, -0.906, 0);
-
-    renderer.render(scene, camera);
-  }
-
-  handleResize();
-  animate();
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) vid.pause();
+  });
 }
+
 
 /**
  * Lightweight Three.js + Physics Dynamics Engine for Quick Sim-to-Real Sandbox
