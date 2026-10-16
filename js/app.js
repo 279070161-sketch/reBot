@@ -8,7 +8,7 @@ const i18nDict = {
     // Nav
     nav_sensecraft: "SenseCraft",
     nav_wiki: "Wiki Tutorials",
-    nav_demos: "User Demos & GitHub",
+    nav_demos: "GitHub",
     nav_sim: "MuJoCo Sim-to-Real",
     nav_projects: "Host Your Workshop",
     nav_customization: "Customization",
@@ -236,7 +236,7 @@ const i18nDict = {
     // Nav
     nav_sensecraft: "SenseCraft 软件",
     nav_wiki: "Wiki 教程",
-    nav_demos: "案例演示 & GitHub",
+    nav_demos: "GitHub",
     nav_sim: "MuJoCo 仿真到现实",
     nav_projects: "举办你的工作坊",
     nav_customization: "定制服务",
@@ -511,6 +511,12 @@ function setupLanguageSelector() {
 
   langBtn.addEventListener('click', (e) => {
     e.stopPropagation();
+    // Close buy dropdown if open
+    const buyWrapper = document.getElementById('buy-dropdown-wrapper');
+    const buyMenu = document.getElementById('buy-dropdown-menu');
+    if (buyMenu) buyMenu.classList.remove('active');
+    if (buyWrapper) buyWrapper.classList.remove('open');
+
     langMenu.classList.toggle('active');
     langWrapper.classList.toggle('open');
   });
@@ -543,6 +549,10 @@ function setupLanguageSelector() {
     if (document.body) {
       document.body.classList.toggle('lang-zh', lang === 'zh');
     }
+    const buyWrapper = document.getElementById('buy-dropdown-wrapper');
+    const buyMenu = document.getElementById('buy-dropdown-menu');
+    if (buyWrapper) buyWrapper.classList.remove('open');
+    if (buyMenu) buyMenu.classList.remove('active');
     try {
       if (typeof updateSqueezeLanguage === 'function') updateSqueezeLanguage();
     } catch (_) { /* not initialized yet (TDZ) — harmless */ }
@@ -669,63 +679,31 @@ function setupAccessoriesTabs() {
 }
 
 /**
- * Developer Hub Silky Accordion Toggle Handler with Dynamic Height Calculation
+ * Developer Hub Navigation & Interaction Handlers
  */
 function toggleHubAccordion(itemId) {
+  // Developer Hub is permanently expanded
   const targetItem = document.getElementById(itemId);
-  if (!targetItem) return;
-
-  const content = targetItem.querySelector('.hub-accordion-content');
-  if (!content) return;
-
-  const isActive = targetItem.classList.contains('active');
-
-  if (isActive) {
-    // Closing: Set explicit height first, then animate smoothly to 0
-    const currentHeight = content.scrollHeight;
-    content.style.maxHeight = currentHeight + 'px';
-    content.offsetHeight; // Force reflow
-    requestAnimationFrame(() => {
-      content.style.maxHeight = '0px';
-      targetItem.classList.remove('active');
-    });
-  } else {
-    // Opening: Calculate exact scrollHeight and animate smoothly
-    targetItem.classList.add('active');
-    const targetHeight = content.scrollHeight;
-    content.style.maxHeight = targetHeight + 30 + 'px';
-
-    const handleTransitionEnd = (e) => {
-      if (e.propertyName === 'max-height' && targetItem.classList.contains('active')) {
-        content.style.maxHeight = 'none';
-      }
-      content.removeEventListener('transitionend', handleTransitionEnd);
-    };
-    content.addEventListener('transitionend', handleTransitionEnd);
+  if (targetItem) {
+    targetItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
 /**
- * Open Co-Create / Custom Service Accordion & Scroll Smoothly
+ * Open Co-Create / Custom Service Section & Scroll Smoothly
  */
 function openCocreateAccordion() {
   const targetItem = document.getElementById('cocreate');
   if (!targetItem) return;
 
-  if (!targetItem.classList.contains('active')) {
-    toggleHubAccordion('cocreate');
-  }
-
-  setTimeout(() => {
-    targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 100);
+  targetItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /**
  * 3D Tilt & Cursor Spotlight Glow Tracking Handler for Product & Showcase Cards
  */
 function setup3DCardSpotlight() {
-  const cards = document.querySelectorAll('.product-summary-card, .accessory-card, .dev-project-card, .gs-info-card');
+  const cards = document.querySelectorAll('.product-summary-card, .accessory-card, .gs-info-card');
 
   cards.forEach(card => {
     // Add spotlight overlay element if not present
@@ -1051,47 +1029,61 @@ function initDliCardAsciiBg() {
 }
 
 /**
- * IP & Location-based Smart Redirect for 'Buy Now' Button
- * Automatically matches domestic Chinese IP (Taobao Tmall Store) vs Global IP (Seeed Bazaar)
+ * Navigation Buy Button & Dropdown Handler
+ * English mode: Provides dropdown selection for: 1. Bazaar, 2. Amazon, 3. AliExpress
+ * Chinese mode: Directly jumps to Bazaar (https://www.seeedstudio.com/)
  */
 function initSmartBuyButton() {
+  const buyWrapper = document.getElementById('buy-dropdown-wrapper');
   const buyBtn = document.getElementById('nav-buy-now-btn');
+  const buyMenu = document.getElementById('buy-dropdown-menu');
   if (!buyBtn) return;
 
-  const TAOBAO_URL = "https://seeedstudio.world.tmall.com/shop/view_shop.htm?spm=a21xtw.29978516.0.0";
   const BAZAAR_URL = "https://www.seeedstudio.com/";
 
-  // 1. Instant local detection via Timezone & Language Locale
-  const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '').toLowerCase();
-  const lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-  
-  let isChina = tz.includes('shanghai') || tz.includes('chongqing') || tz.includes('urumqi') || tz.includes('harbin') || tz.includes('kashgar') || lang.includes('zh-cn');
-
-  buyBtn.href = isChina ? TAOBAO_URL : BAZAAR_URL;
-
-  // 2. Fetch IP Geo location asynchronously to verify country code
-  fetch('https://get.geojs.io/v1/ip/country.json')
-    .then(res => res.json())
-    .then(data => {
-      if (data && data.country) {
-        if (data.country === 'CN') {
-          buyBtn.href = TAOBAO_URL;
-        } else {
-          buyBtn.href = BAZAAR_URL;
-        }
-      }
-    })
-    .catch(() => {
-      // Keep timezone/language result on error/network block
-    });
-
-  // 3. Click Handler to ensure target store opens reliably in new tab
+  // Click handler on the Buy Now button: toggle dropdown on click (no hover)
   buyBtn.addEventListener('click', (e) => {
+    const isZh = (window.currentLang === 'zh') || document.body.classList.contains('lang-zh');
+    if (isZh) {
+      // In Chinese mode: directly navigate to Bazaar
+      e.preventDefault();
+      window.open(BAZAAR_URL, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    // In English mode: toggle dropdown on click
     e.preventDefault();
-    if (buyBtn.href) {
-      window.open(buyBtn.href, '_blank', 'noopener,noreferrer');
+    e.stopPropagation();
+
+    // Close language dropdown if open
+    const langWrapper = document.getElementById('lang-dropdown-wrapper');
+    const langMenu = document.getElementById('lang-dropdown-menu');
+    if (langMenu) langMenu.classList.remove('active');
+    if (langWrapper) langWrapper.classList.remove('open');
+
+    if (buyMenu && buyWrapper) {
+      buyMenu.classList.toggle('active');
+      buyWrapper.classList.toggle('open');
     }
   });
+
+  // Close dropdown menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (buyWrapper && !buyWrapper.contains(e.target)) {
+      if (buyMenu) buyMenu.classList.remove('active');
+      buyWrapper.classList.remove('open');
+    }
+  });
+
+  // Close dropdown menu after choosing an option
+  if (buyMenu) {
+    buyMenu.querySelectorAll('.buy-dropdown-item').forEach(item => {
+      item.addEventListener('click', () => {
+        buyMenu.classList.remove('active');
+        if (buyWrapper) buyWrapper.classList.remove('open');
+      });
+    });
+  }
 }
 
 /**

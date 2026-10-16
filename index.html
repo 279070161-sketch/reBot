@@ -127,22 +127,22 @@
       box-shadow: 0 6px 18px rgba(104, 166, 0, 0.35);
     }
     .buy-now-nav-btn .dropdown-arrow {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       transition: transform 0.25s ease;
     }
-    .buy-dropdown-wrapper:hover .dropdown-arrow {
+    .buy-dropdown-wrapper.open .dropdown-arrow {
       transform: rotate(180deg);
     }
     .buy-dropdown-menu {
       position: absolute;
       top: calc(100% + 8px);
       right: 0;
-      width: 260px;
+      width: 170px;
       background: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 14px;
       box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
-      padding: 0.5rem;
+      padding: 0.45rem;
       opacity: 0;
       visibility: hidden;
       transform: translateY(8px);
@@ -150,18 +150,30 @@
       z-index: 1050;
       pointer-events: none;
     }
-    .buy-dropdown-wrapper:hover .buy-dropdown-menu,
+    .buy-dropdown-wrapper.open .buy-dropdown-menu,
     .buy-dropdown-menu.active {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
       pointer-events: auto;
     }
+    /* Chinese mode: hide dropdown arrow and menu entirely */
+    body.lang-zh .buy-now-nav-btn .dropdown-arrow,
+    .lang-zh .buy-now-nav-btn .dropdown-arrow {
+      display: none !important;
+    }
+    body.lang-zh .buy-dropdown-menu,
+    .lang-zh .buy-dropdown-menu {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
     .buy-dropdown-item {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.65rem 0.85rem;
+      gap: 0.7rem;
+      padding: 0.55rem 0.75rem;
       border-radius: 10px;
       text-decoration: none !important;
       color: var(--text-primary);
@@ -172,13 +184,13 @@
       transform: translateX(2px);
     }
     .buy-item-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 0.92rem;
       flex-shrink: 0;
     }
     .buy-item-icon.taobao-icon {
@@ -189,35 +201,16 @@
       background-color: rgba(104, 166, 0, 0.1);
       color: var(--nv-green);
     }
-    .buy-item-info {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
     .buy-item-title {
       font-size: 0.88rem;
       font-weight: 700;
       color: #0F172A;
-      line-height: 1.3;
-    }
-    .buy-item-sub {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-    .buy-item-ext {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      opacity: 0.6;
-      transition: opacity 0.2s ease;
-    }
-    .buy-dropdown-item:hover .buy-item-ext {
-      opacity: 1;
-      color: var(--nv-green);
+      line-height: 1.2;
     }
     .buy-dropdown-divider {
       height: 1px;
       background-color: #F1F5F9;
-      margin: 0.3rem 0;
+      margin: 0.25rem 0;
     }
 
     /* Language Selector Component */
@@ -254,7 +247,6 @@
       transition: transform 0.25s ease;
       opacity: 0.7;
     }
-    .lang-dropdown-wrapper:hover .lang-arrow,
     .lang-dropdown-wrapper.open .lang-arrow {
       transform: rotate(180deg);
     }
@@ -276,7 +268,6 @@
       list-style: none;
       pointer-events: none;
     }
-    .lang-dropdown-wrapper:hover .lang-dropdown-menu,
     .lang-dropdown-wrapper.open .lang-dropdown-menu,
     .lang-dropdown-menu.active {
       opacity: 1;
@@ -1736,7 +1727,6 @@
     /* 3D Tilt & Cursor Following Spotlight Light Glow System */
     .product-summary-card,
     .accessory-card,
-    .dev-project-card,
     .gs-info-card,
     .cocreate-card,
     .video-card,
@@ -1754,7 +1744,6 @@
     /* Dynamic Cursor-Responsive Border Edge Lighting (Subtle & Refined) */
     .product-summary-card::before,
     .accessory-card::before,
-    .dev-project-card::before,
     .gs-info-card::before,
     .cocreate-card::before {
       content: '';
@@ -1781,7 +1770,6 @@
 
     .product-summary-card:hover::before,
     .accessory-card:hover::before,
-    .dev-project-card:hover::before,
     .gs-info-card:hover::before,
     .cocreate-card:hover::before {
       opacity: 1;
@@ -1805,7 +1793,6 @@
 
     .product-summary-card:hover .card-spotlight-glow,
     .accessory-card:hover .card-spotlight-glow,
-    .dev-project-card:hover .card-spotlight-glow,
     .gs-info-card:hover .card-spotlight-glow,
     .cocreate-card:hover .card-spotlight-glow {
       opacity: 1;
@@ -1963,7 +1950,7 @@
       background-color: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 20px;
-      padding: 2rem;
+      padding: 1.5rem 2rem 2rem 2rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.04);
     }
     .spec-table-header {
@@ -1982,6 +1969,44 @@
     }
     .spec-header-col:first-child {
       border-right: 1px solid var(--nv-border);
+    }
+    .spec-header-col .product-img-wrapper {
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 0 !important;
+      margin: 0 auto 0.35rem !important;
+      max-width: 240px;
+    }
+    .spec-header-col .product-img-wrapper img {
+      max-height: 135px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+    .spec-product-buy-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.1rem;
+      background: var(--nv-green);
+      color: #ffffff !important;
+      font-family: var(--font-main);
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.45rem 1.35rem;
+      border-radius: 20px;
+      text-decoration: none !important;
+      box-shadow: 0 4px 14px rgba(104, 166, 0, 0.25);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .spec-product-buy-btn:hover {
+      background-color: var(--nv-green-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(104, 166, 0, 0.35);
     }
 
     /* Spec Row Pairs */
@@ -2261,50 +2286,54 @@
     .hub-accordion-container {
       display: flex;
       flex-direction: column;
-      gap: 0;
+      gap: 4.5rem;
       max-width: 1440px;
       margin: 0 auto;
-      border-top: 1px solid var(--nv-border);
     }
 
     .hub-accordion-item {
-      background-color: transparent;
+      background: transparent;
       border: none;
-      border-bottom: 1px solid var(--nv-border);
       border-radius: 0;
-      overflow: hidden;
-      transition: background-color 0.3s ease;
+      padding: 0;
+      box-shadow: none;
+      overflow: visible;
     }
 
-    .hub-accordion-item.active {
-      border-bottom-color: var(--nv-border);
+    .hub-accordion-item:not(:first-child) {
+      border-top: 1px solid var(--nv-border);
+      padding-top: 4.5rem;
+    }
+
+    .hub-accordion-item:hover {
       box-shadow: none;
     }
 
     .hub-accordion-header {
-      padding: 1.75rem 1rem;
+      padding: 0;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      cursor: pointer;
-      user-select: none;
-      background-color: transparent;
-      transition: background-color 0.25s ease;
+      cursor: default;
+      user-select: text;
+      background: transparent;
+      border: none;
+      margin-bottom: 2rem;
     }
 
     .hub-accordion-header:hover {
-      background-color: #F8FAFC;
+      background: transparent;
     }
 
     .hub-accordion-title-group {
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.4rem;
     }
 
     .hub-accordion-title {
       font-family: var(--font-main);
-      font-size: 1.35rem;
+      font-size: 1.45rem;
       font-weight: 800;
       color: var(--text-primary);
       display: flex;
@@ -2312,49 +2341,23 @@
       gap: 0.75rem;
     }
 
-    .hub-accordion-item.active .hub-accordion-title {
-      color: var(--nv-green);
-    }
-
     .hub-accordion-subtitle {
-      font-size: 0.95rem;
+      font-size: 0.96rem;
       color: var(--text-secondary);
       font-weight: 400;
+      line-height: 1.5;
     }
 
     .hub-accordion-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: #F1F5F9;
-      border: 1px solid #E2E8F0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-secondary);
-      transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
-      flex-shrink: 0;
-    }
-
-    .hub-accordion-item.active .hub-accordion-icon {
-      transform: rotate(180deg);
-      border-color: var(--nv-green);
-      color: var(--nv-green);
-      background-color: rgba(104, 166, 0, 0.08);
+      display: none;
     }
 
     .hub-accordion-content {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, padding 0.35s ease;
-      padding: 0 1rem;
-      will-change: max-height, opacity;
-    }
-
-    .hub-accordion-item.active .hub-accordion-content {
-      opacity: 1;
-      padding: 0.5rem 1rem 2.5rem 1rem;
+      max-height: none !important;
+      opacity: 1 !important;
+      overflow: visible !important;
+      padding: 0 !important;
+      transition: none;
     }
 
     /* Horizontal Auto-Scroll Marquee Carousel */
@@ -2393,15 +2396,19 @@
       border: 1px solid var(--nv-border);
       background-color: #FFFFFF;
       flex-shrink: 0;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      box-shadow: none !important;
     }
 
-    .dev-project-card:hover {
+    .dev-project-card:hover,
+    .dev-project-card:focus,
+    .dev-project-card:active,
+    .dev-project-card.active {
       border-color: var(--nv-green);
       transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 20px rgba(104, 166, 0, 0.15);
+      box-shadow: none !important;
+      outline: none;
       z-index: 10;
     }
 
@@ -3065,15 +3072,46 @@
       <ul class="hub-nav-menu">
         <li><a href="https://sensecraft.seeed.cc/en/robotics#download" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_sensecraft">SenseCraft</a></li>
         <li><a href="https://wiki.seeedstudio.com/" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_wiki">Wiki Tutorials</a></li>
-        <li><a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_demos">User Demos & GitHub</a></li>
+        <li><a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_demos">GitHub</a></li>
         <li><a href="#sim-to-real" class="hub-nav-link" data-i18n="nav_sim">MuJoCo Sim-to-Real</a></li>
         <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_projects">Host Your Workshop</a></li>
         <li><a href="#cocreate" class="hub-nav-link" onclick="openCocreateAccordion()" data-i18n="nav_customization">Customization</a></li>
-        <li>
+        <!-- Buy Dropdown Button & Menu -->
+        <li class="buy-dropdown-wrapper" id="buy-dropdown-wrapper">
           <a id="nav-buy-now-btn" href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="buy-now-nav-btn">
             <i class="fas fa-shopping-bag"></i>
             <span data-i18n="nav_buynow">Buy Now</span>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
           </a>
+          <div class="buy-dropdown-menu" id="buy-dropdown-menu">
+            <!-- 1. Bazaar -->
+            <a href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="buy-dropdown-item" id="buy-opt-bazaar">
+              <div class="buy-item-icon" style="background-color: rgba(104, 166, 0, 0.1); color: var(--nv-green);">
+                <i class="fas fa-store"></i>
+              </div>
+              <span class="buy-item-title">Bazaar</span>
+            </a>
+
+            <div class="buy-dropdown-divider"></div>
+
+            <!-- 2. Amazon -->
+            <a href="https://www.amazon.com/seeedstudio" target="_blank" rel="noopener noreferrer" class="buy-dropdown-item" id="buy-opt-amazon">
+              <div class="buy-item-icon" style="background-color: rgba(255, 153, 0, 0.12); color: #FF9900;">
+                <i class="fab fa-amazon"></i>
+              </div>
+              <span class="buy-item-title">Amazon</span>
+            </a>
+
+            <div class="buy-dropdown-divider"></div>
+
+            <!-- 3. AliExpress -->
+            <a href="https://seeed.aliexpress.com/" target="_blank" rel="noopener noreferrer" class="buy-dropdown-item" id="buy-opt-aliexpress">
+              <div class="buy-item-icon" style="background-color: rgba(255, 71, 71, 0.12); color: #FF4747;">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <span class="buy-item-title">AliExpress</span>
+            </a>
+          </div>
         </li>
 
         <!-- Language Selector Dropdown -->
@@ -3209,28 +3247,36 @@
               
               <!-- Column 1: reBot Arm DM -->
               <div class="spec-header-col" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                <div class="product-img-wrapper" style="max-width: 240px; margin: 0 auto 0.75rem; background: transparent; border: none; padding: 0.5rem; width: 100%;">
-                  <img src="image/dm.webp?v=4" alt="reBot Arm DM Robotic Arm" style="max-height: 150px; width: auto; object-fit: contain;" loading="lazy" decoding="async">
+                <div class="product-img-wrapper" style="max-width: 240px; margin: 0 auto 0.35rem; background: transparent; border: none; padding: 0; width: 100%; height: auto;">
+                  <img src="image/dm.webp?v=4" alt="reBot Arm DM Robotic Arm" style="max-height: 135px; width: auto; object-fit: contain; display: block;" loading="lazy" decoding="async">
                 </div>
-                <h3 class="product-card-title" style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.6rem;">reBot Arm DM</h3>
+                <h3 class="product-card-title" style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.45rem;">reBot Arm DM</h3>
                 <div class="product-quick-specs" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem;">
                   <span class="quick-spec-badge" data-i18n="spec_badge_dof">6 Joints + 1 Gripper</span>
                   <span class="quick-spec-badge" data-i18n="spec_badge_dm_payload">1.5kg Payload</span>
                   <span class="quick-spec-badge" data-i18n="spec_badge_dm_motor">DAMIAO Motors</span>
                 </div>
+                <a href="https://www.seeedstudio.com/reBot-Arm-B601-DM-p-6740.html" target="_blank" rel="noopener noreferrer" class="spec-product-buy-btn">
+                  <i class="fas fa-shopping-bag"></i>
+                  <span data-i18n="nav_buynow">Buy Now</span>
+                </a>
               </div>
 
               <!-- Column 2: reBot Arm RS -->
               <div class="spec-header-col" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                <div class="product-img-wrapper" style="max-width: 240px; margin: 0 auto 0.75rem; background: transparent; border: none; padding: 0.5rem; width: 100%;">
-                  <img src="image/rs.webp?v=4" alt="reBot Arm RS Robotic Arm" style="max-height: 150px; width: auto; object-fit: contain;" loading="lazy" decoding="async">
+                <div class="product-img-wrapper" style="max-width: 240px; margin: 0 auto 0.35rem; background: transparent; border: none; padding: 0; width: 100%; height: auto;">
+                  <img src="image/rs.webp?v=4" alt="reBot Arm RS Robotic Arm" style="max-height: 135px; width: auto; object-fit: contain; display: block;" loading="lazy" decoding="async">
                 </div>
-                <h3 class="product-card-title" style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.6rem;">reBot Arm RS</h3>
+                <h3 class="product-card-title" style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.45rem;">reBot Arm RS</h3>
                 <div class="product-quick-specs" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem;">
                   <span class="quick-spec-badge highlight" data-i18n="spec_badge_dof">6 Joints + 1 Gripper</span>
                   <span class="quick-spec-badge highlight" data-i18n="spec_badge_rs_payload">2.5kg Payload</span>
                   <span class="quick-spec-badge highlight" data-i18n="spec_badge_rs_motor">RobStride Dynamics Motors</span>
                 </div>
+                <a href="https://www.seeedstudio.com/reBot-Arm-B601-RS-Assembled-Kit-with-Gripper-p-6865.html" target="_blank" rel="noopener noreferrer" class="spec-product-buy-btn">
+                  <i class="fas fa-shopping-bag"></i>
+                  <span data-i18n="nav_buynow">Buy Now</span>
+                </a>
               </div>
 
             </div>
@@ -3708,16 +3754,13 @@
           
           <!-- Accordion Item 01: How to Get Started -->
           <div class="hub-accordion-item" id="get-started">
-            <div class="hub-accordion-header" onclick="toggleHubAccordion('get-started')">
+            <div class="hub-accordion-header">
               <div class="hub-accordion-title-group">
                 <h3 class="hub-accordion-title" data-i18n="dev_item01_title">
                   <i class="fas fa-rocket" style="color: var(--nv-green); font-size: 1.1rem;"></i>
                   01 How to Get Started
                 </h3>
                 <p class="hub-accordion-subtitle" data-i18n="dev_item01_subtitle">Official guides for the reBot-RS robotic arm — from first boot to advanced applications</p>
-              </div>
-              <div class="hub-accordion-icon">
-                <i class="fas fa-chevron-down"></i>
               </div>
             </div>
 
@@ -3913,16 +3956,13 @@
 
           <!-- Accordion Item 02: Contribution & Gather with Global Community -->
           <div class="hub-accordion-item" id="hub-item-01">
-            <div class="hub-accordion-header" onclick="toggleHubAccordion('hub-item-01')">
+            <div class="hub-accordion-header">
               <div class="hub-accordion-title-group">
                 <h3 class="hub-accordion-title" data-i18n="dev_item02_title">
                   <i class="fas fa-cubes" style="color: var(--nv-green); font-size: 1.1rem;"></i>
                   02 Contribution & Gather with Global Community
                 </h3>
                 <p class="hub-accordion-subtitle" data-i18n="dev_item02_subtitle">Explore real-world projects and creative builds from global developers</p>
-              </div>
-              <div class="hub-accordion-icon">
-                <i class="fas fa-chevron-down"></i>
               </div>
             </div>
             
@@ -4139,16 +4179,13 @@
 
           <!-- Accordion Item 03: Co-Create with Seeed -->
           <div class="hub-accordion-item" id="cocreate">
-            <div class="hub-accordion-header" onclick="toggleHubAccordion('cocreate')">
+            <div class="hub-accordion-header">
               <div class="hub-accordion-title-group">
                 <h3 class="hub-accordion-title" data-i18n="dev_item03_title">
                   <i class="fas fa-hands-helping" style="color: var(--nv-green); font-size: 1.1rem;"></i>
                   03 Co-Create with Seeed
                 </h3>
                 <p class="hub-accordion-subtitle" data-i18n="dev_item03_subtitle">Join Seeed's global community, project calls, and partnership programs</p>
-              </div>
-              <div class="hub-accordion-icon">
-                <i class="fas fa-chevron-down"></i>
               </div>
             </div>
             
