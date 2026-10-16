@@ -517,6 +517,17 @@ function setupLanguageSelector() {
     if (buyMenu) buyMenu.classList.remove('active');
     if (buyWrapper) buyWrapper.classList.remove('open');
 
+    // Close nav menu if open
+    const navMenu = document.querySelector('.hub-nav-menu');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    if (navMenu && navMenu.classList.contains('open')) {
+      navMenu.classList.remove('open');
+      if (mobileBtn) {
+        const icon = mobileBtn.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
+      }
+    }
+
     langMenu.classList.toggle('active');
     langWrapper.classList.toggle('open');
   });
@@ -618,6 +629,17 @@ function setupMobileMenu() {
   if (mobileBtn && navMenu) {
     mobileBtn.addEventListener('click', (e) => {
       e.stopPropagation();
+      // Close buy and lang dropdowns if open
+      const buyWrapper = document.getElementById('buy-dropdown-wrapper');
+      const buyMenu = document.getElementById('buy-dropdown-menu');
+      if (buyMenu) buyMenu.classList.remove('active');
+      if (buyWrapper) buyWrapper.classList.remove('open');
+
+      const langWrapper = document.getElementById('lang-dropdown-wrapper');
+      const langMenu = document.getElementById('lang-dropdown-menu');
+      if (langMenu) langMenu.classList.remove('active');
+      if (langWrapper) langWrapper.classList.remove('open');
+
       const isOpen = navMenu.classList.toggle('open');
       const icon = mobileBtn.querySelector('i');
       if (icon) {
@@ -1060,6 +1082,17 @@ function initSmartBuyButton() {
     const langMenu = document.getElementById('lang-dropdown-menu');
     if (langMenu) langMenu.classList.remove('active');
     if (langWrapper) langWrapper.classList.remove('open');
+
+    // Close nav menu if open
+    const navMenu = document.querySelector('.hub-nav-menu');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    if (navMenu && navMenu.classList.contains('open')) {
+      navMenu.classList.remove('open');
+      if (mobileBtn) {
+        const icon = mobileBtn.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
+      }
+    }
 
     if (buyMenu && buyWrapper) {
       buyMenu.classList.toggle('active');

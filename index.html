@@ -313,48 +313,116 @@
       letter-spacing: -0.01em;
     }
 
-    /* Mobile Responsive Hamburger Menu Button */
+    /* Responsive Hamburger Menu Button & Quick Links Dropdown */
     .mobile-menu-btn {
       display: none;
       background: transparent;
       border: 1px solid var(--nv-border);
       color: var(--text-primary);
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 8px;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       cursor: pointer;
       transition: all 0.2s ease;
+      flex-shrink: 0;
     }
     .mobile-menu-btn:hover {
       border-color: var(--nv-green);
       color: var(--nv-green);
       background-color: var(--nv-surface-2);
     }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
 
-    @media (max-width: 960px) {
+    @media (max-width: 1440px) {
+      .hub-nav-menu {
+        gap: 1.2rem;
+      }
+      .hub-nav-link {
+        font-size: 0.88rem;
+      }
+    }
+
+    @media (max-width: 1200px) {
       .mobile-menu-btn {
-        display: flex;
+        display: inline-flex;
       }
       .hub-nav-menu {
         display: none;
         position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
+        top: 64px;
+        right: 1.5rem;
+        width: 250px;
         flex-direction: column;
         background-color: #ffffff;
-        border-bottom: 1px solid var(--nv-border);
-        padding: 1.2rem 2rem;
-        gap: 1.2rem;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-        z-index: 999;
-        align-items: flex-start;
+        border: 1px solid var(--nv-border);
+        border-radius: 14px;
+        padding: 0.5rem;
+        gap: 0.25rem;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+        z-index: 1001;
+        align-items: stretch;
+        animation: hubMenuSlideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
       }
       .hub-nav-menu.open {
         display: flex;
+      }
+      .hub-nav-menu li {
+        width: 100%;
+        list-style: none;
+      }
+      .hub-nav-menu .hub-nav-link {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 0.65rem 0.9rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+      }
+      .hub-nav-menu .hub-nav-link:hover {
+        background-color: rgba(104, 166, 0, 0.08);
+        color: var(--nv-green);
+        transform: translateX(4px);
+      }
+      .hub-nav-menu .hub-nav-link::after {
+        display: none;
+      }
+    }
+
+    @keyframes hubMenuSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hub-nav-menu {
+        left: 1rem;
+        right: 1rem;
+        width: auto;
+      }
+      .buy-now-nav-btn {
+        padding: 0.45rem 0.75rem;
+        font-size: 0.8rem;
+      }
+      .lang-selector-btn {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.8rem;
       }
     }
 
@@ -2820,7 +2888,7 @@
       justify-content: center;
       padding: 0.7rem 1.5rem;
       background: var(--nv-green);
-      color: #000000 !important;
+      color: #FFFFFF !important;
       font-weight: 700;
       font-size: 0.88rem;
       border-radius: 30px;
@@ -2832,9 +2900,10 @@
       cursor: pointer;
     }
     .cocreate-apply-btn:hover {
-      background: #85C200;
+      background: #578C00;
+      color: #FFFFFF !important;
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(114, 183, 0, 0.3);
+      box-shadow: 0 6px 18px rgba(104, 166, 0, 0.35);
     }
 
     /* Community Channels Section */
@@ -3050,6 +3119,242 @@
       }
     }
 
+    /* ==========================================================================
+       Laptop & Small Desktop Screen Responsive Optimizations (1025px - 1440px)
+       Resolves oversized typography, excessive paddings, and cramped vertical viewports
+       ========================================================================== */
+    @media (max-width: 1440px) {
+      html {
+        font-size: 14.5px;
+      }
+      .container {
+        max-width: 1240px !important;
+      }
+      
+      /* Global Section Whitespace Compression */
+      .high-performance-section,
+      .spec-section,
+      .app-scenarios-section,
+      .sim-experience-section,
+      .sensecraft-section,
+      .developer-hub-section,
+      .accessories-section,
+      .faq-section {
+        padding: 3.5rem 0 !important;
+      }
+
+      /* Section Titles & Subtitles */
+      .section-title-group {
+        margin-bottom: 2rem !important;
+      }
+      .section-title {
+        font-size: clamp(1.75rem, 2.4vw, 2.25rem) !important;
+      }
+      .section-subtitle {
+        font-size: 0.95rem !important;
+      }
+
+      /* Hero Banner Proportion Optimization - Ample Majestic Height for Laptop */
+      .unitree-hero-section {
+        height: 100vh !important;
+        min-height: 640px !important;
+        max-height: 960px !important;
+      }
+      .unitree-hero-container {
+        padding: 0 3rem !important;
+      }
+      .unitree-hero-title {
+        font-size: clamp(2.4rem, 4vw, 3.6rem) !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .unitree-hero-subtitle {
+        font-size: clamp(1.25rem, 2vw, 1.75rem) !important;
+        margin-bottom: 1rem !important;
+      }
+      .hero-tag-badge {
+        margin-bottom: 1.25rem !important;
+        padding: 0.38rem 0.9rem !important;
+        font-size: 0.82rem !important;
+      }
+      .unitree-hero-description {
+        font-size: 1.05rem !important;
+        line-height: 1.6 !important;
+      }
+
+      /* High Performance Squeeze Carousel */
+      .squeeze-track {
+        height: 380px !important;
+      }
+
+      /* Specification Comparison Table */
+      .spec-comparison-card {
+        padding: 2rem 1.75rem !important;
+      }
+      .spec-header-row {
+        gap: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+      }
+      .spec-header-col .product-img-wrapper img {
+        max-height: 110px !important;
+      }
+      .spec-table-row {
+        padding: 0.85rem 1.5rem !important;
+      }
+      .spec-value {
+        font-size: 1rem !important;
+      }
+
+      /* Application Scenarios */
+      .scenarios-tabbar {
+        margin-bottom: 2rem !important;
+      }
+      .scenarios-split-container {
+        gap: 2rem !important;
+      }
+      .scenario-media-wrapper {
+        height: 200px !important;
+      }
+      .scenario-column-card {
+        padding: 1.5rem 1.25rem !important;
+      }
+      .scenario-title {
+        font-size: 1.45rem !important;
+      }
+      .scenario-desc {
+        font-size: 0.88rem !important;
+        margin-bottom: 1.25rem !important;
+        min-height: auto !important;
+      }
+      .scenario-stat-item,
+      .scenario-stat-box {
+        min-height: 74px !important;
+        padding: 0.7rem 0.85rem !important;
+      }
+
+      /* MuJoCo Sim-to-Real Experience */
+      .sim-experience-card {
+        padding: 1.75rem !important;
+        gap: 2rem !important;
+      }
+      .sim-canvas-container {
+        height: 420px !important;
+      }
+
+      /* DLI Course Card */
+      .dli-course-card {
+        padding: 2.25rem !important;
+        gap: 2rem !important;
+      }
+
+      /* Developer Hub */
+      .hub-accordion-container {
+        gap: 3rem !important;
+      }
+      .hub-accordion-item:not(:first-child) {
+        padding-top: 3rem !important;
+      }
+      .hub-accordion-header {
+        margin-bottom: 1.5rem !important;
+      }
+      .hub-accordion-title {
+        font-size: 1.25rem !important;
+      }
+      .dev-card-wide { width: 300px !important; height: 200px !important; }
+      .dev-card-medium { width: 250px !important; height: 200px !important; }
+      .dev-card-square { width: 210px !important; height: 200px !important; }
+      .dev-card-portrait { width: 180px !important; height: 200px !important; }
+      .dev-card-overlay {
+        padding: 1rem !important;
+      }
+      .dev-card-title {
+        font-size: 0.95rem !important;
+      }
+      .dev-card-desc {
+        font-size: 0.78rem !important;
+      }
+      .gs-step-item {
+        padding: 0.75rem 0.95rem !important;
+      }
+      .gs-column {
+        padding: 1.25rem !important;
+      }
+
+      /* Accessories Cards */
+      .accessory-card {
+        padding: 1.25rem !important;
+      }
+      .accessory-img-wrapper {
+        height: 140px !important;
+      }
+      
+      /* FAQ Section */
+      .faq-header {
+        padding: 1.25rem 1.5rem !important;
+      }
+      .faq-question {
+        font-size: 1.05rem !important;
+      }
+    }
+
+    /* Additional refinement for compact laptop screens (<= 1280px width) */
+    @media (max-width: 1280px) {
+      html {
+        font-size: 14px;
+      }
+      .container {
+        max-width: 1140px !important;
+      }
+      .unitree-hero-section {
+        height: 100vh !important;
+        min-height: 620px !important;
+        max-height: 960px !important;
+      }
+      .unitree-hero-title {
+        font-size: clamp(2rem, 3.6vw, 2.8rem) !important;
+      }
+      .squeeze-track {
+        height: 350px !important;
+      }
+      .sim-canvas-container {
+        height: 380px !important;
+      }
+    }
+
+    /* Vertical-constrained viewport optimization (e.g. 1366x768 laptop screen with browser UI) */
+    @media (max-height: 820px) and (min-width: 769px) {
+      .unitree-hero-section {
+        height: 100vh !important;
+        min-height: 600px !important;
+      }
+      .unitree-hero-title {
+        font-size: 2.5rem !important;
+        margin-bottom: 0.35rem !important;
+      }
+      .unitree-hero-subtitle {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.65rem !important;
+      }
+      .hero-tag-badge {
+        margin-bottom: 0.75rem !important;
+      }
+      .squeeze-track {
+        height: 360px !important;
+      }
+      .sim-canvas-container {
+        height: 390px !important;
+      }
+      .high-performance-section,
+      .spec-section,
+      .app-scenarios-section,
+      .sim-experience-section,
+      .sensecraft-section,
+      .developer-hub-section,
+      .accessories-section,
+      .faq-section {
+        padding: 2.75rem 0 !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -3067,80 +3372,82 @@
       </div>
     </div>
 
-    <!-- Navigation Links -->
-    <nav style="flex: 1; display: flex; justify-content: flex-end; margin: 0 1.5rem;">
-      <ul class="hub-nav-menu">
+    <!-- Navigation Links (Quick Jump Links) -->
+    <nav style="flex: 1; display: flex; justify-content: flex-end; margin: 0 1.25rem;">
+      <ul class="hub-nav-menu" id="hub-nav-menu">
         <li><a href="https://sensecraft.seeed.cc/en/robotics#download" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_sensecraft">SenseCraft</a></li>
         <li><a href="https://wiki.seeedstudio.com/" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_wiki">Wiki Tutorials</a></li>
         <li><a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_demos">GitHub</a></li>
         <li><a href="#sim-to-real" class="hub-nav-link" data-i18n="nav_sim">MuJoCo Sim-to-Real</a></li>
         <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_projects">Host Your Workshop</a></li>
         <li><a href="#cocreate" class="hub-nav-link" onclick="openCocreateAccordion()" data-i18n="nav_customization">Customization</a></li>
-        <!-- Buy Dropdown Button & Menu -->
-        <li class="buy-dropdown-wrapper" id="buy-dropdown-wrapper">
-          <a id="nav-buy-now-btn" href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="buy-now-nav-btn">
-            <i class="fas fa-shopping-bag"></i>
-            <span data-i18n="nav_buynow">Buy Now</span>
-            <i class="fas fa-chevron-down dropdown-arrow"></i>
-          </a>
-          <div class="buy-dropdown-menu" id="buy-dropdown-menu">
-            <!-- 1. Bazaar -->
-            <a href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="buy-dropdown-item" id="buy-opt-bazaar">
-              <div class="buy-item-icon" style="background-color: rgba(104, 166, 0, 0.1); color: var(--nv-green);">
-                <i class="fas fa-store"></i>
-              </div>
-              <span class="buy-item-title">Bazaar</span>
-            </a>
-
-            <div class="buy-dropdown-divider"></div>
-
-            <!-- 2. Amazon -->
-            <a href="https://www.amazon.com/seeedstudio" target="_blank" rel="noopener noreferrer" class="buy-dropdown-item" id="buy-opt-amazon">
-              <div class="buy-item-icon" style="background-color: rgba(255, 153, 0, 0.12); color: #FF9900;">
-                <i class="fab fa-amazon"></i>
-              </div>
-              <span class="buy-item-title">Amazon</span>
-            </a>
-
-            <div class="buy-dropdown-divider"></div>
-
-            <!-- 3. AliExpress -->
-            <a href="https://seeed.aliexpress.com/" target="_blank" rel="noopener noreferrer" class="buy-dropdown-item" id="buy-opt-aliexpress">
-              <div class="buy-item-icon" style="background-color: rgba(255, 71, 71, 0.12); color: #FF4747;">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-              <span class="buy-item-title">AliExpress</span>
-            </a>
-          </div>
-        </li>
-
-        <!-- Language Selector Dropdown -->
-        <li class="lang-dropdown-wrapper" id="lang-dropdown-wrapper">
-          <button class="lang-selector-btn" id="lang-selector-btn" aria-label="Select Language" title="Select Language / 选择语言">
-            <i class="fas fa-globe"></i>
-            <span id="current-lang-code">EN</span>
-            <i class="fas fa-chevron-down lang-arrow"></i>
-          </button>
-          <ul class="lang-dropdown-menu" id="lang-dropdown-menu">
-            <li>
-              <button type="button" class="lang-option-btn active" data-lang="en">
-                <span class="lang-flag">🇺🇸</span>
-                <span class="lang-name">English</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="lang-option-btn" data-lang="zh">
-                <span class="lang-flag">🇨🇳</span>
-                <span class="lang-name">中文</span>
-              </button>
-            </li>
-          </ul>
-        </li>
       </ul>
     </nav>
 
-    <!-- Header Right (Responsive Mobile Hamburger Menu Button Only) -->
+    <!-- Header Right Actions: Buy Now + Language Selector + Hamburger Menu Button -->
     <div class="header-right">
+      <!-- Buy Dropdown Button & Menu -->
+      <div class="buy-dropdown-wrapper" id="buy-dropdown-wrapper">
+        <a id="nav-buy-now-btn" href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="buy-now-nav-btn">
+          <i class="fas fa-shopping-bag"></i>
+          <span data-i18n="nav_buynow">Buy Now</span>
+          <i class="fas fa-chevron-down dropdown-arrow"></i>
+        </a>
+        <div class="buy-dropdown-menu" id="buy-dropdown-menu">
+          <!-- 1. Bazaar -->
+          <a href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="buy-dropdown-item" id="buy-opt-bazaar">
+            <div class="buy-item-icon" style="background-color: rgba(104, 166, 0, 0.1); color: var(--nv-green);">
+              <i class="fas fa-store"></i>
+            </div>
+            <span class="buy-item-title">Bazaar</span>
+          </a>
+
+          <div class="buy-dropdown-divider"></div>
+
+          <!-- 2. Amazon -->
+          <a href="https://www.amazon.com/seeedstudio" target="_blank" rel="noopener noreferrer" class="buy-dropdown-item" id="buy-opt-amazon">
+            <div class="buy-item-icon" style="background-color: rgba(255, 153, 0, 0.12); color: #FF9900;">
+              <i class="fab fa-amazon"></i>
+            </div>
+            <span class="buy-item-title">Amazon</span>
+          </a>
+
+          <div class="buy-dropdown-divider"></div>
+
+          <!-- 3. AliExpress -->
+          <a href="https://seeed.aliexpress.com/" target="_blank" rel="noopener noreferrer" class="buy-dropdown-item" id="buy-opt-aliexpress">
+            <div class="buy-item-icon" style="background-color: rgba(255, 71, 71, 0.12); color: #FF4747;">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <span class="buy-item-title">AliExpress</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Language Selector Dropdown -->
+      <div class="lang-dropdown-wrapper" id="lang-dropdown-wrapper">
+        <button class="lang-selector-btn" id="lang-selector-btn" aria-label="Select Language" title="Select Language / 选择语言">
+          <i class="fas fa-globe"></i>
+          <span id="current-lang-code">EN</span>
+          <i class="fas fa-chevron-down lang-arrow"></i>
+        </button>
+        <ul class="lang-dropdown-menu" id="lang-dropdown-menu">
+          <li>
+            <button type="button" class="lang-option-btn active" data-lang="en">
+              <span class="lang-flag">🇺🇸</span>
+              <span class="lang-name">English</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="lang-option-btn" data-lang="zh">
+              <span class="lang-flag">🇨🇳</span>
+              <span class="lang-name">中文</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Collapsed Quick Links Menu Toggle Button (shown when navbar is crowded) -->
       <button class="mobile-menu-btn" id="mobile-menu-btn" title="Toggle Navigation Menu" aria-label="Toggle Navigation Menu">
         <i class="fas fa-bars"></i>
       </button>
