@@ -1,0 +1,48 @@
+{
+  "generated": "2026-10-20T10:16:04.362Z",
+  "source": "https://www.seeedstudio.com/blog/wp-json/wp/v2/posts?categories=1&per_page=6&_embed=1",
+  "posts": [
+    {
+      "title": "PCBA Firmware Programming Guide: Methods, Workflow, and Verification",
+      "excerpt": "A programming tool can report a successful write even when the application does not start.",
+      "link": "https://www.seeedstudio.com/blog/2026/10/20/seeed-fusion-pcba-firmware-programming-guide-methods-workflow-and-verification/",
+      "date": "2026-10-20T10:04:50",
+      "image": "https://www.seeedstudio.com/blog/wp-content/uploads/2026/10/1-768x432.png"
+    },
+    {
+      "title": "Seeed Studio at Meteorological Technology World Expo 2026: Advancing Weather Intelligence Together",
+      "excerpt": "Thank you to everyone who joined Seeed Studio at Meteorological Technology World Expo 2026! From",
+      "link": "https://www.seeedstudio.com/blog/2026/10/20/seeed-at-meteorological-technology-world-expo-2026-recap/",
+      "date": "2026-10-20T09:27:25",
+      "image": "https://www.seeedstudio.com/blog/wp-content/uploads/2026/10/图片1-768x532.png"
+    },
+    {
+      "title": "Seeed Studio × reTUTU: Rebuilding the Audio Ballerina in Wuppertal",
+      "excerpt": "🔈From Shenzhen to Wuppertal, Germany: On October 31, 2026, we are partnering with sound artist",
+      "link": "https://www.seeedstudio.com/blog/2026/10/19/seeed-studio-x-retutu-rebuilding-the-audio-ballerina-in-wuppertal/",
+      "date": "2026-10-19T08:49:32",
+      "image": "https://www.seeedstudio.com/blog/wp-content/uploads/2026/10/1280X1280-1-1-768x512.png"
+    },
+    {
+      "title": "Seeed Studio × hackTurin: Bringing Hardware and Mentorship to 100 Young Engineers in Turin",
+      "excerpt": "From Shenzhen to Turin: Seeed supports local innovation events around the world — and hackTurin",
+      "link": "https://www.seeedstudio.com/blog/2026/10/19/seeed-studio-x-hackturin-bringing-hardware-and-mentorship-to-100-young-engineers-in-arduinos-hometown/",
+      "date": "2026-10-19T05:55:57",
+      "image": "https://www.seeedstudio.com/blog/wp-content/uploads/2026/10/1280X1280-1-768x576.jpeg"
+    },
+    {
+      "title": "How Can Farm Irrigation Be Adjusted to Changing Weather?",
+      "excerpt": "Crops on outdoor farms need suitable light, air temperature, humidity, and moisture conditions to grow",
+      "link": "https://www.seeedstudio.com/blog/2026/10/16/weather-monitoring-irrigation-management/",
+      "date": "2026-10-16T08:48:28",
+      "image": "https://www.seeedstudio.com/blog/wp-content/uploads/2026/10/Weather_sensor_blog_2-4-768x432.png"
+    },
+    {
+      "title": "Mobile Robot Full-stack Development In Practice Ⅱ: Give the Robot Its Eyes — GMSL2 Multi-Camera, Calibration, and BEV Surround View",
+      "excerpt": "If this is your first time coming across the series, Mobile Robot Full-stack Development In",
+      "link": "https://www.seeedstudio.com/blog/2026/10/16/mobile-robot-full-stack-development-in-practice-module-2-gmsl-calibration-bev/",
+      "date": "2026-10-16T03:38:51",
+      "image": "https://www.seeedstudio.com/blog/wp-content/uploads/2026/10/mobilerobot-fullstack2_featured-768x402.png"
+    }
+  ]
+}

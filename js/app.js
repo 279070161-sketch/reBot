@@ -134,7 +134,8 @@ const i18nDict = {
     sensecraft_hl3_d: "Cut data prep time from 5–7 days down to 1–2 days",
     sensecraft_hl4_t: "Closed-Loop Validation",
     sensecraft_hl4_d: "Review training results anytime on desktop, with full traceability and reproducibility",
-    sensecraft_cta: "Sign in to get 1,000 FREE credits for cloud training and inference",
+    sensecraft_cta: "Sign in",
+    sensecraft_cta_note: "Get 1,000 free credits for cloud training and inference",
 
     // Developer Hub
     dev_main_title: "Developer Hub",
@@ -227,6 +228,14 @@ const i18nDict = {
     faq_a9: "Sim-to-real means you can train and test your algorithms in simulation first, then deploy them directly to the real robot with minimal changes. And yes — you can try our MuJoCo simulator right in your browser for free. It's a fully interactive virtual reBot Arm. Launch the simulator to start exploring.",
     faq_q10: "What's the shipping and warranty policy?",
     faq_a10: "We ship worldwide. Orders typically ship within 3–5 business days, and delivery time depends on your location (usually 7–14 days for most countries). reBot Arm comes with a 1-year limited warranty covering manufacturing defects. If you have any issues, our support team is here to help — reach us through GitHub Issues, Discord, or our support email.",
+
+    // News (live blog feed)
+    news_title: "Latest News",
+    news_subtitle: "Fresh updates from the Seeed Studio Blog — product news, events, and more",
+    news_loading: "Loading latest news...",
+    news_error: "Couldn't load the news feed right now. Click to retry, or check the full blog.",
+    news_viewall: "View All News",
+    news_readmore: "Read More",
 
     // Community & Footer
     community_title: "Community & Developer Channels",
@@ -362,7 +371,8 @@ const i18nDict = {
     sensecraft_hl3_d: "数据准备时间从 5–7 天缩短至 1–2 天",
     sensecraft_hl4_t: "闭环验证",
     sensecraft_hl4_d: "随时在桌面端查看训练结果,全程可追溯、可复现",
-    sensecraft_cta: "登录即领 1,000 免费积分,用于云端训练与推理",
+    sensecraft_cta: "登录",
+    sensecraft_cta_note: "登录即领 1,000 免费积分，用于云端训练与推理",
 
     // Developer Hub
     dev_main_title: "开发者中心",
@@ -456,11 +466,246 @@ const i18nDict = {
     faq_q10: "发货与质保政策是什么样的？",
     faq_a10: "我们支持全球发货。订单通常在 3–5 个工作日内发货，运输时间视具体地区而定（多数国家 7–14 天）。reBot Arm 提供 1 年有限硬件质保。如有任何问题，我们的技术支持团队随时通过 GitHub Issues、Discord 或邮件为您解答。",
 
+    // News (live blog feed)
+    news_title: "最新动态",
+    news_subtitle: "Seeed Studio 博客实时更新 — 产品新闻、活动资讯与更多",
+    news_loading: "正在加载最新动态...",
+    news_error: "暂时无法加载新闻列表，点击重试，或前往博客查看完整内容。",
+    news_viewall: "查看全部动态",
+    news_readmore: "阅读全文",
+
     // Community & Footer
     community_title: "社区与开发者频道",
     footer_copyright: "© 2026 Seeed Studio & NVIDIA DLI | reBot Arm 项目"
   }
 };
+
+/* ==========================================================================
+   News Feed — live fetch from the Seeed Studio Blog (WordPress REST API).
+   Category 1 = "News" (seeedstudio.com/blog/category/news/). The endpoint
+   sends permissive CORS headers, so it works directly from this static site.
+   Posts are cached in sessionStorage for 10 minutes; the feed refreshes on
+   every revisit. Falls back to a friendly error state (click to retry).
+   ========================================================================== */
+const NEWS_FEED_CONFIG = {
+  endpoint: 'https://www.seeedstudio.com/blog/wp-json/wp/v2/posts?categories=1&per_page=6&_embed=1',
+  snapshotUrl: './news_feed.json',
+  fallbackUrl: 'https://www.seeedstudio.com/blog/category/news/',
+  cacheKey: 'rebot-news-feed',
+  cacheTtlMs: 10 * 60 * 1000,
+  cardCount: 6
+};
+
+function stripHtmlTags(html) {
+  const div = document.createElement('div');
+  div.innerHTML = html || '';
+  return (div.textContent || '').replace(/\s+/g, ' ').trim();
+}
+
+function resolveNewsImage(post) {
+  const embedded = post._embedded && post._embedded['wp:featuredmedia'];
+  if (embedded && embedded[0] && embedded[0].media_details && embedded[0].media_details.sizes) {
+    const s = embedded[0].media_details.sizes;
+    const pick = s.medium_large || s.medium || s.large || s.full;
+    if (pick && pick.source_url) return pick.source_url;
+  }
+  const urls = post.featured_image_urls || {};
+  const pick2 = urls.medium_large || urls.medium || urls.large || urls.full;
+  if (Array.isArray(pick2) && pick2[0]) return pick2[0];
+  return null;
+}
+
+function formatNewsDate(isoDate, lang) {
+  try {
+    const d = new Date(isoDate);
+    if (isNaN(d.getTime())) return isoDate.slice(0, 10);
+    return d.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+      year: 'numeric', month: 'short', day: 'numeric'
+    });
+  } catch (_) {
+    return isoDate.slice(0, 10);
+  }
+}
+
+function isRendered(obj) {
+  // WordPress REST objects carry { rendered }; snapshot posts carry plain strings.
+  return obj && typeof obj === 'object' && 'rendered' in obj ? obj.rendered : obj;
+}
+
+function renderNewsCards(posts) {
+  const grid = document.getElementById('news-grid');
+  if (!grid) return;
+  const isZh = (window.currentLang === 'zh') || document.body.classList.contains('lang-zh');
+  const readMoreLabel = (i18nDict[isZh ? 'zh' : 'en'] && i18nDict[isZh ? 'zh' : 'en'].news_readmore) || 'Read More';
+  const frag = document.createDocumentFragment();
+
+  posts.forEach(post => {
+    const imgUrl = (typeof post.image === 'string' && post.image) || resolveNewsImage(post);
+    const title = stripHtmlTags(isRendered(post.title)) || 'Untitled';
+    let excerpt = stripHtmlTags(isRendered(post.excerpt));
+    if (!excerpt) {
+      const body = isRendered(post.content);
+      excerpt = stripHtmlTags(body).slice(0, 200);
+    }
+    const date = formatNewsDate(post.date, isZh ? 'zh' : 'en');
+
+    const card = document.createElement('a');
+    card.className = 'news-card';
+    card.href = post.link || NEWS_FEED_CONFIG.fallbackUrl;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+
+    const media = document.createElement('div');
+    media.className = 'news-card-media';
+    if (imgUrl) {
+      const im = document.createElement('img');
+      im.src = imgUrl;
+      im.alt = title;
+      im.loading = 'lazy';
+      im.decoding = 'async';
+      media.appendChild(im);
+    } else {
+      const ph = document.createElement('div');
+      ph.className = 'news-card-placeholder';
+      ph.innerHTML = '<i class="fas fa-newspaper"></i>';
+      media.appendChild(ph);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'news-card-body';
+    body.innerHTML =
+      '<span class="news-card-date"></span>' +
+      '<h3 class="news-card-title"></h3>' +
+      (excerpt ? '<p class="news-card-excerpt"></p>' : '') +
+      '<span class="news-card-more"><span></span><i class="fas fa-arrow-right"></i></span>';
+    body.querySelector('.news-card-date').textContent = date;
+    body.querySelector('.news-card-title').textContent = title;
+    const excerptEl = body.querySelector('.news-card-excerpt');
+    if (excerptEl) excerptEl.textContent = excerpt;
+    body.querySelector('.news-card-more span').textContent = readMoreLabel;
+
+    card.appendChild(media);
+    card.appendChild(body);
+    frag.appendChild(card);
+  });
+
+  grid.appendChild(frag);
+}
+
+function renderNewsSkeletons(count) {
+  const grid = document.getElementById('news-grid');
+  if (!grid) return;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < count; i++) {
+    const sk = document.createElement('div');
+    sk.className = 'news-skeleton';
+    sk.innerHTML =
+      '<div class="news-skeleton-media"></div>' +
+      '<div class="news-skeleton-body">' +
+      '<div class="news-skeleton-line w-40"></div>' +
+      '<div class="news-skeleton-line"></div>' +
+      '<div class="news-skeleton-line w-60"></div>' +
+      '</div>';
+    frag.appendChild(sk);
+  }
+  grid.appendChild(frag);
+}
+
+function clearNewsGrid() {
+  const grid = document.getElementById('news-grid');
+  if (!grid) return;
+  grid.querySelectorAll('.news-skeleton, .news-card').forEach(el => el.remove());
+}
+
+function initNewsFeed() {
+  const grid = document.getElementById('news-grid');
+  const loadingEl = document.getElementById('news-status-loading');
+  const errorEl = document.getElementById('news-status-error');
+  if (!grid) return;
+
+  const showLoading = () => { if (loadingEl) loadingEl.hidden = false; if (errorEl) errorEl.hidden = true; };
+  const showError = () => { if (loadingEl) loadingEl.hidden = true; if (errorEl) errorEl.hidden = false; };
+  const showContent = () => { if (loadingEl) loadingEl.hidden = true; if (errorEl) errorEl.hidden = true; };
+
+  const onFail = () => { clearNewsGrid(); showError(); };
+
+  const render = posts => {
+    clearNewsGrid();
+    if (!Array.isArray(posts) || posts.length === 0) { onFail(); return; }
+    showContent();
+    renderNewsCards(posts);
+  };
+
+  if (errorEl && !errorEl._newsRetryBound) {
+    errorEl._newsRetryBound = true;
+    errorEl.addEventListener('click', load);
+  }
+
+  function load() {
+    clearNewsGrid();
+    showLoading();
+    renderNewsSkeletons(NEWS_FEED_CONFIG.cardCount);
+
+    // 1) fresh session cache (avoids refetching while the visitor is browsing)
+    let cached = null;
+    try {
+      const raw = sessionStorage.getItem(NEWS_FEED_CONFIG.cacheKey);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && Array.isArray(parsed.posts) && (Date.now() - parsed.ts) < NEWS_FEED_CONFIG.cacheTtlMs) {
+          cached = parsed.posts;
+        }
+      }
+    } catch (_) { /* private mode / quota — fall through to network */ }
+
+    if (cached) { render(cached); return; }
+
+    // 2) live fetch — when the blog's CORS headers are not browser-friendly
+    //    (or the API is down), fall back to the bundled snapshot news_feed.json
+    //    (refreshed by sync_news_feed.js), and only then show the error state.
+    //    The live attempt gets a short timeout: a CORS-blocked request can take
+    //    many seconds to fail on its own, and the snapshot should render fast.
+    const fetchJson = (url, timeoutMs) => new Promise((resolve, reject) => {
+      const ctrl2 = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+      const t = ctrl2 ? setTimeout(() => ctrl2.abort(), timeoutMs) : null;
+      fetch(url, ctrl2 ? { signal: ctrl2.signal } : {})
+        .then(resp => {
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          return resp.json();
+        })
+        .then(posts => { if (t) clearTimeout(t); resolve(posts); })
+        .catch(err => { if (t) clearTimeout(t); reject(err); });
+    });
+
+    const saveCache = posts => {
+      try {
+        sessionStorage.setItem(NEWS_FEED_CONFIG.cacheKey, JSON.stringify({ ts: Date.now(), posts }));
+      } catch (_) { /* quota exceeded — non-fatal */ }
+    };
+
+    const validPosts = posts => Array.isArray(posts) && posts.length > 0;
+
+    fetchJson(NEWS_FEED_CONFIG.endpoint, 5000)
+      .then(posts => {
+        if (!validPosts(posts)) throw new Error('Bad payload');
+        saveCache(posts);
+        return posts;
+      })
+      .catch(() => fetchJson(NEWS_FEED_CONFIG.snapshotUrl, 8000).then(data => {
+        // snapshot file is { generated, source, posts: [...] } — unwrap it
+        if (Array.isArray(data)) return data;
+        if (data && Array.isArray(data.posts)) return data.posts;
+        throw new Error('Bad snapshot payload');
+      }))
+      .then(posts => {
+        if (!validPosts(posts)) throw new Error('Bad payload');
+        render(posts);
+      })
+      .catch(() => onFail());
+  }
+
+  load();
+}
 
 function initApp() {
   setupLanguageSelector();
@@ -482,6 +727,7 @@ function initApp() {
     initSmartBuyButton();
     initLazySimIframe();
     initSimJengaArmAnimation();
+    initNewsFeed();
   };
   if ('requestIdleCallback' in window) {
     window.requestIdleCallback(deferredInits, { timeout: 5000 });
