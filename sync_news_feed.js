@@ -1,9 +1,10 @@
 // News feed snapshot sync for the reBot site.
-// Fetches the "News" category (id=1) posts from the Seeed Studio blog
-// WordPress REST API and writes a compact snapshot to news_feed.json
-// (next to index.html). The site falls back to this file whenever the live
-// browser-side fetch is blocked by CORS (the blog currently returns a
-// comma-joined Access-Control-Allow-Origin header that browsers reject).
+// Fetches posts tagged "robot-arm" (5679) or "reBot" (5540) from the Seeed
+// Studio blog WordPress REST API (comma-separated tags = OR) and writes a
+// compact snapshot to news_feed.json (next to index.html). The site falls
+// back to this file whenever the live browser-side fetch is blocked by CORS
+// (the blog currently returns a comma-joined Access-Control-Allow-Origin
+// header that browsers reject).
 //
 // Usage:  node sync_news_feed.js [--out <path>] [--count <n>] [--verbose]
 // Output: news_feed.json  { generated, source, posts: [{title, excerpt, link, date, image}] }
@@ -20,9 +21,10 @@ const OUT_FILE = path.resolve(__dirname, argVal('--out', 'news_feed.json'));
 const PER_PAGE = Number(argVal('--count', 6));
 const VERBOSE = args.includes('--verbose');
 
-const API_URL = 'https://www.seeedstudio.com/blog/wp-json/wp/v2/posts?categories=1&per_page=' +
-  PER_PAGE + '&_embed=1';
-const FALLBACK_URL = 'https://www.seeedstudio.com/blog/category/news/';
+const NEWS_TAGS = '5679,5540'; // robot-arm, reBot
+const API_URL = 'https://www.seeedstudio.com/blog/wp-json/wp/v2/posts?tags=' + NEWS_TAGS +
+  '&per_page=' + PER_PAGE + '&_embed=1';
+const FALLBACK_URL = 'https://www.seeedstudio.com/blog/tag/rebot/';
 
 const ENTITIES = {
   '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&apos;': "'",

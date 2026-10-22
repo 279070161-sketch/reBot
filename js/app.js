@@ -482,15 +482,15 @@ const i18nDict = {
 
 /* ==========================================================================
    News Feed — live fetch from the Seeed Studio Blog (WordPress REST API).
-   Category 1 = "News" (seeedstudio.com/blog/category/news/). The endpoint
+   Tags: 5679 = "robot-arm", 5540 = "reBot" (comma = OR). The endpoint
    sends permissive CORS headers, so it works directly from this static site.
    Posts are cached in sessionStorage for 10 minutes; the feed refreshes on
    every revisit. Falls back to a friendly error state (click to retry).
    ========================================================================== */
 const NEWS_FEED_CONFIG = {
-  endpoint: 'https://www.seeedstudio.com/blog/wp-json/wp/v2/posts?categories=1&per_page=6&_embed=1',
+  endpoint: 'https://www.seeedstudio.com/blog/wp-json/wp/v2/posts?tags=5679,5540&per_page=6&_embed=1',
   snapshotUrl: './news_feed.json',
-  fallbackUrl: 'https://www.seeedstudio.com/blog/category/news/',
+  fallbackUrl: 'https://www.seeedstudio.com/blog/tag/rebot/',
   cacheKey: 'rebot-news-feed',
   cacheTtlMs: 10 * 60 * 1000,
   cardCount: 6
