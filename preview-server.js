@@ -56,8 +56,27 @@ const server = http.createServer((req, res) => {
         res.end();
         return;
       }
+      const range = req.headers.range;
+      const contentType = MIME[path.extname(filePath).toLowerCase()] || 'application/octet-stream';
+      if (range) {
+        const parts = range.replace(/bytes=/, '').split('-');
+        const start = parseInt(parts[0], 10);
+        const end = parts[1] ? parseInt(parts[1], 10) : st.size - 1;
+        const chunksize = (end - start) + 1;
+        res.writeHead(206, {
+          'Content-Range': `bytes ${start}-${end}/${st.size}`,
+          'Accept-Ranges': 'bytes',
+          'Content-Length': chunksize,
+          'Content-Type': contentType,
+          'ETag': etag,
+          'Cache-Control': 'no-cache'
+        });
+        fs.createReadStream(filePath, { start, end }).pipe(res);
+        return;
+      }
       res.writeHead(200, {
-        'Content-Type': MIME[path.extname(filePath).toLowerCase()] || 'application/octet-stream',
+        'Content-Type': contentType,
+        'Accept-Ranges': 'bytes',
         'Content-Length': st.size,
         'ETag': etag,
         'Cache-Control': 'no-cache'

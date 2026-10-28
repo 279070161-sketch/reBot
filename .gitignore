@@ -4,3 +4,5 @@ backup_v*/
 rebot_backup_*.png
 .DS_Store
 *.log
+video/_originals/
+
