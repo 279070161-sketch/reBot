@@ -43,30 +43,46 @@ const i18nDict = {
     // Spec
     spec_title: "Specification",
     spec_subtitle: "Find the Right Configuration for You",
+    spec_col_model: "Parameters",
+    spec_lbl_showcase: "Typical Use Case",
+    spec_selection_guide: "<strong>Selection Guide:</strong> Choose <strong>DM</strong> if you are a beginner, educator, or budget-conscious; choose <strong>RS</strong> for high precision, heavier payload, VLA research, and high-frequency data collection.",
+    spec_l1_title: "Try Free Simulator First",
+    spec_l1_desc: "Zero hardware required. Test real MuJoCo physics, forward/inverse kinematics, and robot control directly in your browser.",
+    spec_l1_btn: "Launch Simulator",
     spec_badge_dof: "6 Joints + 1 Gripper",
     spec_badge_dm_payload: "1.5kg Payload",
     spec_badge_dm_motor: "DAMIAO Motors",
     spec_badge_rs_payload: "2.5kg Payload",
     spec_badge_rs_motor: "RobStride Dynamics Motors",
+    spec_so_badge_dof: "5 Joints + 1 Gripper",
+    spec_so_badge_payload: "0.5kg Payload",
+    spec_so_badge_servo: "Bus Servo",
     spec_lbl_dof: "Degrees of Freedom",
     spec_lbl_rated_payload: "Rated Payload",
     spec_lbl_max_payload: "Max Payload",
-    spec_lbl_precision: "Precision",
+    spec_lbl_precision: "Precision (Repeatability)",
     spec_lbl_reach: "Reach",
-    spec_lbl_motors: "Motor Specs",
+    spec_lbl_motors: "Actuators / Motors",
     spec_lbl_finish: "Construction & Finish",
     spec_lbl_scenarios: "Application Scenarios",
     spec_val_dmapp: "Home & Domestic Automation",
     spec_val_rsapp: "Lab / Light Industrial Scenarios",
+    spec_val_soapp: "LeRobot, Teleop & Imitation",
+    spec_val_soapp_card: "LeRobot, Teleoperation, and Imitation Learning",
     spec_val_finish: "Industrial CNC",
+    spec_val_soact: "Feetech Serial Bus Servos",
+    spec_val_soconstr: "3D-Printed Structural Parts",
+    spec_view_full: "View Full Specs",
+    spec_hide_full: "Hide Detailed Specs",
 
     // Application Scenarios
     scenarios_main_title: "From Learning to Deployment",
     scenarios_main_subtitle: "From Academic Embodied AI Education to Industrial Edge AI Deployment",
-    
+
     // Column 1: Education
     scenarios_edu_badge: "Education",
     scenarios_edu_title: "Learning Physical AI",
+    scenarios_edu_short: "19-module NVIDIA Isaac × Seeed hands-on Sim-to-Real curriculum.",
     scenarios_edu_desc: "Collaborating with NVIDIA, Seeed provides a Sim-to-Real VLA Pipeline with Seeed reBot Arm and NVIDIA Isaac. Official hands-on curriculum bridging academic research and higher education.",
     scenarios_edu_stat1_val: "19",
     scenarios_edu_stat1_lbl: "Detailed Modules",
@@ -82,6 +98,7 @@ const i18nDict = {
     // Column 2: Scientific Research
     scenarios_sci_badge: "Scientific Research",
     scenarios_sci_title: "Accelerate VLA Research",
+    scenarios_sci_short: "7+ pre-adapted VLA models with native LeRobot & Isaac Sim pipelines.",
     scenarios_sci_desc: "A ready-to-run experiment platform for cutting-edge Vision-Language-Action models. Seeed reBot Arm comes with compatibility and verification of today's most popular VLA baselines — so you can go from paper to real-robot evaluation in hours, not weeks.",
     scenarios_sci_stat1_val: "7+",
     scenarios_sci_stat1_lbl: "PRE-ADAPTED VLA MODELS",
@@ -91,11 +108,12 @@ const i18nDict = {
     scenarios_sci_stat3_lbl: "ISAAC SIM READY",
     scenarios_sci_stat4_val: "Jetson",
     scenarios_sci_stat4_lbl: "EDGE SEAMLESS INFERENCE",
-    scenarios_sci_btn: "Stay Tuned for Series Video Courses",
+    scenarios_sci_btn: "Explore VLA Research",
 
     // Column 3: Enterprise
     scenarios_ent_badge: "Enterprise",
     scenarios_ent_title: "Massive Support for Robot Data Acquisition",
+    scenarios_ent_short: "Multi-cam teleoperation to Hugging Face Parquet datasets at fleet scale.",
     scenarios_ent_desc: "Scale up your embodied AI data engine. Seeed reBot Arm turns teleoperation into training-ready datasets — native LeRobot Dataset format, multi-camera capture, checkpoint-and-resume recording, and one-click sync to Hugging Face Hub — ready to deploy across fleets, sites, and annotation teams.",
     scenarios_ent_stat1_val: "LeRobot",
     scenarios_ent_stat1_lbl: "PARQUET DATASET FORMAT",
@@ -105,11 +123,13 @@ const i18nDict = {
     scenarios_ent_stat3_lbl: "ONE-CLICK SYNC",
     scenarios_ent_stat4_val: "VR Teleop",
     scenarios_ent_stat4_lbl: "QUEST 3 & LEADER ARM",
-    scenarios_ent_btn: "Get Dataset to Train Your reBot Now",
+    scenarios_ent_btn: "Explore Open Datasets",
 
     // Sim Section
-    sim_main_title: "Quick Sim-to-Real Experience",
+    sim_main_title: "Try reBot Before You Buy",
     sim_main_subtitle: "Interactive 3D MuJoCo Simulation in Your Browser",
+    sim_topbar_left: "INTERACTIVE 3D SANDBOX",
+    sim_topbar_right: "DIGITAL TWIN SPECS",
     sim_card_title: "MuJoCo 3D Simulation",
     sim_card_desc: "Watch reBot Arm B601-RS digital twin executing real-time 3D physics trajectories, pick-and-place tasks, and multi-camera perception.",
     sim_feat1_title: "100Hz Physics",
@@ -121,21 +141,68 @@ const i18nDict = {
     sim_feat4_title: "Sim-to-Real",
     sim_feat4_desc: "1:1 Kinematic model to hardware",
     sim_btn: "Open Full Web Simulator",
+    sim_real_btn: "Try Real Robot (Coming Soon)",
 
     // SenseCraft Robotics
     sensecraft_title: "SenseCraft Robotics",
-    sensecraft_subtitle: "No-Code Platform From Data to Deployment, All in One Place",
-    sensecraft_desc: "SenseCraft Robotics unifies robotic arm calibration, data collection, model training, and inference validation into one seamless workflow — prepare data on desktop, train in the cloud, and validate results without any high-end hardware.",
-    sensecraft_hl1_t: "Guided Onboarding",
-    sensecraft_hl1_d: "Step-by-step workflows for device setup and data collection — get started easily, even as a beginner",
-    sensecraft_hl2_t: "Cloud Training",
-    sensecraft_hl2_d: "Upload your data and train in the cloud — no local high-performance hardware required, saving compute and ops costs",
-    sensecraft_hl3_t: "Faster Iteration",
-    sensecraft_hl3_d: "Cut data prep time from 5–7 days down to 1–2 days",
-    sensecraft_hl4_t: "Closed-Loop Validation",
-    sensecraft_hl4_d: "Review training results anytime on desktop, with full traceability and reproducibility",
-    sensecraft_cta: "Sign in",
-    sensecraft_cta_note: "Get 1,000 free credits for cloud training and inference",
+    sensecraft_subtitle: "Go From Idea to Working Robot — No Coding Required",
+    sensecraft_desc: "Prepare data on desktop, train in the cloud, and validate real-robot policies without writing code or buying local GPUs.",
+    sensecraft_line1: "<strong>Guided Onboarding</strong><span class=\"sensecraft-feature-desc\">Step-by-step setup & data collection for beginners.</span>",
+    sensecraft_line2: "<strong>Cloud Training</strong><span class=\"sensecraft-feature-desc\">Train VLA & ACT models in the cloud with zero local GPU required.</span>",
+    sensecraft_line3: "<strong>Faster Iteration</strong><span class=\"sensecraft-feature-desc\">Cut dataset preparation time from 5–7 days down to 1–2 days.</span>",
+    sensecraft_line4: "<strong>Closed-Loop Validation</strong><span class=\"sensecraft-feature-desc\">One-click desktop policy deployment with full traceability.</span>",
+    sensecraft_cta: "Start Free in SenseCraft",
+    sensecraft_cta_note: "Get 1,000 free credits for cloud training & inference",
+    sensecraft_ui_badge: "UI Preview / GIF Placeholder",
+
+    // University & Lab Co-Building (Screen 7)
+    lab_main_title: "University & Embodied AI Lab Co-Building",
+    lab_main_subtitle: "Turnkey hardware, NVIDIA-accredited curriculum, and Sim-to-Real infrastructure for higher education and research institutes",
+    lab_tier1_badge: "Starter · 10–20 Units",
+    lab_tier1_title: "Embodied AI Teaching Lab",
+    lab_tier1_desc: "Designed for undergraduate robotics courses, kinematics labs, and hands-on Physical AI workshops.",
+    lab_tier1_f1: "10–20× reBot Arm DM + 3D Depth Camera Station Kits",
+    lab_tier1_f2: "19-Module NVIDIA & Seeed Physical AI Curriculum Syllabus",
+    lab_tier1_f3: "Browser MuJoCo Digital Twin Classroom Simulation Access",
+    lab_tier1_f4: "Faculty Onboarding Workshop & Lab Experiment Manuals",
+    lab_tier2_badge: "Standard · 30–50 Units",
+    lab_tier2_rec: "Most Popular",
+    lab_tier2_title: "VLA & Sim-to-Real Joint Lab",
+    lab_tier2_desc: "Built for department-wide teaching, graduate research, and closed-loop Sim-to-Real VLA model pipelines.",
+    lab_tier2_f1: "30–50× Mixed DM/RS Stations + Star Arm 102 Teleop Kits",
+    lab_tier2_f2: "reComputer Jetson Orin Edge AI Compute Nodes",
+    lab_tier2_f3: "SenseCraft Cloud Training Credits Pool & Fleet Management",
+    lab_tier2_f4: "Joint Lab Plaque, Co-Branded Course & On-Site Commissioning",
+    lab_tier3_badge: "Advanced · 50+ Units",
+    lab_tier3_title: "Embodied AI Innovation & Data Center",
+    lab_tier3_desc: "Engineered for university AI institutes, large-scale robot data collection factories, and flagship research.",
+    lab_tier3_f1: "50+ reBot Arm RS High-Payload Synchronized Data Stations",
+    lab_tier3_f2: "NVIDIA Isaac Sim / Isaac Lab & AGX Thor Compute Architecture",
+    lab_tier3_f3: "Custom End-Effector / Lift Engineering & Dedicated SLA Support",
+    lab_tier3_f4: "Global Hackathon Hosting, Hardware Grants & Academic Co-Publishing",
+    lab_uni_wall_title: "Trusted by Global Universities, Robotics Institutes & Innovation Labs",
+    lab_uni_1: "MIT · MITERS",
+    lab_uni_1_sub: "Robotics & Maker Community",
+    lab_uni_2: "Tsinghua University",
+    lab_uni_2_sub: "Embodied AI Research",
+    lab_uni_3: "UC Berkeley",
+    lab_uni_3_sub: "Robot Learning Lab",
+    lab_uni_4: "ETH Zürich",
+    lab_uni_4_sub: "Autonomous Systems",
+    lab_uni_5: "Stanford University",
+    lab_uni_5_sub: "Physical AI & VLA",
+    lab_uni_6: "Shanghai Jiao Tong Univ.",
+    lab_uni_6_sub: "Robotics Institute",
+    lab_uni_7: "Zhejiang University",
+    lab_uni_7_sub: "Control & Intelligence Lab",
+    lab_uni_8: "HKUST",
+    lab_uni_8_sub: "Robotics & Perception",
+    lab_uni_9: "National Univ. of Singapore",
+    lab_uni_9_sub: "Advanced Robotics Centre",
+    lab_uni_10: "NVIDIA DLI Partner",
+    lab_uni_10_sub: "Official Curriculum Ecosystem",
+    lab_cta_download: "Download Lab Proposal",
+    lab_cta_talk: "Talk to Education Team",
 
     // Developer Hub
     dev_main_title: "Developer Hub",
@@ -157,17 +224,23 @@ const i18nDict = {
     gs_link9: "with Agent Claw",
     gs_link10: "Beginner Course",
     gs_group_resources: "Open-Source Resources",
-    gs_link11: "Hardware Collection",
-    gs_link12: "Description Package (URDF / Mesh)",
-    gs_link13: "Digital Twin / Web Control System",
-    gs_link14: "Main Repository",
+    gs_view_all_tutorials: "View All Resources & Tutorials",
+    gs_hide_tutorials: "Hide Tutorials",
+    dev_view_all_projects: "View All Projects",
+    diff_beginner: "Beginner",
+    diff_intermediate: "Intermediate",
+    diff_advanced: "Advanced",
+    gs_link11: "Hardware",
+    gs_link12: "URDF / Mesh",
+    gs_link13: "Digital Twin",
+    gs_link14: "Main Repo",
     gs_link15: "Python SDK",
-    gs_link16: "ROS2 Controller",
-    gs_link17: "LeRobot Robot Adapter",
-    gs_link18: "LeRobot Teleoperator Adapter",
+    gs_link16: "ROS2 Ctrl",
+    gs_link17: "LeRobot Arm",
+    gs_link18: "Teleop",
     gs_link19: "Isaac Sim",
-    gs_link20: "Visual Grasping Demo",
-    gs_link21: "Camera Mounts Collection",
+    gs_link20: "Visual Grasp",
+    gs_link21: "Cam Mounts",
     cocreate_card1_title: "Physical AI Project of the Month",
     cocreate_card1_desc: "Showcase your innovative robotics builds with Seeed reBot Arm. Win hardware grants, global community spotlights, and official co-marketing support from Seeed team.",
     cocreate_card1_btn: "Submit Your Project",
@@ -182,52 +255,62 @@ const i18nDict = {
     // Accessories
     acc_title: "Complete Your AI Robotics Station",
     acc_subtitle: "Plug-and-play accessories verified by Seeed team",
-    acc_tab_data_acq: "Data acquisition accessories",
-    acc_tab_edge: "Edge computing solution",
-    acc_tab_rs: "rebot arm RS accessories",
-    acc_tab_dm: "rebot arm DM accessories",
-    acc_dm_p1: "Orbbec Gemini 2 3D Camera",
-    acc_dm_p2: "Orbbec Gemini 336 Depth Camera",
-    acc_dm_p3: "Intel RealSense Depth Camera D435i",
-    acc_dm_p4: "RealSense Depth Camera D405",
-    acc_dm_p5: "ET-S231 Megapixel 90° Wide-Angle 1080P USB Camera Module",
-    acc_dm_p6: "Star Arm-102",
-    acc_dm_p7: "AC/DC Power Adapter DC5521 Male 12V 2A 1500mm",
-    acc_dm_p8: "DM4340P High Torque Actuator",
-    acc_dm_p9: "Damiao 4310 Actuator Motor",
-    acc_rs_p1: "RobStride 00 QDD 14N.m integrated actuator module",
-    acc_rs_p2: "RobStride 06 QDD 36 N.m integrated actuator module",
-    acc_rs_p3: "Power Adapter Kit for reBot Arm B601-RS",
-    acc_rs_p4: "6-Inch G-Clamp for reBot Arm",
-    acc_rs_p5: "Power Cable-F R/A to F R/A-200mm - for reBot Arm B601-RS",
-    acc_rs_p6: "Power Cable-F R/A to F R/A-320mm - for reBot Arm B601-RS",
-    acc_rs_p7: "Power Cable-F to F-R/A-300mm - for reBot Arm B601-RS",
-    acc_rs_p8: "Power Cable-F to F-300mm - for reBot Arm B601-RS",
-    acc_rs_p9: "XT30 2+2 Power Separation Board",
+    acc_bundles_heading: "Recommended Station Bundles",
+    acc_bundle_buy_btn: "Buy on Seeed Studio",
+    acc_bundle1_badge: "Starter Station",
+    acc_bundle1_title: "Starter Station Bundle",
+    acc_bundle1_item1: "reBot Arm B601-DM (Pre-assembled & calibrated)",
+    acc_bundle1_item2: "Orbbec Gemini 2 3D RGB-D depth camera",
+    acc_bundle1_item3: "Heavy-duty desktop quick-mount G-Clamp",
+    acc_bundle1_item4: "24V power supply & certified connection cables",
+    acc_bundle2_badge: "Research Station",
+    acc_bundle2_title: "VLA Research & Data Collection Bundle",
+    acc_bundle2_item1: "reBot Arm B601-RS (1.5kg high payload · 0.1mm precision)",
+    acc_bundle2_item2: "Orbbec Gemini 2 3D RGB-D depth camera",
+    acc_bundle2_item3: "reComputer J3011 Edge AI Box (Jetson Orin Nano 8GB)",
+    acc_bundle2_item4: "Multi-channel synchronized data collection box & 24V power",
+    acc_bundle3_badge: "Teleoperation Station",
+    acc_bundle3_title: "Leader-Follower Teleoperation Bundle",
+    acc_bundle3_item1: "reBot Arm B601-RS (Follower manipulator, pre-assembled)",
+    acc_bundle3_item2: "Star Arm 102 (1:1 kinematic leader teleoperator)",
+    acc_bundle3_item3: "Dedicated camera & arm desktop mounting bracket kit",
+    acc_bundle3_item4: "Turnkey LeRobot teleoperation & imitation learning stack",
+    acc_featured_heading: "Featured Core Accessories",
+    acc_feat_1: "Orbbec Gemini 2 3D Camera",
+    acc_feat_2: "Orbbec Gemini 336 3D Camera",
+    acc_feat_3: "Intel RealSense Depth Camera D435i",
+    acc_feat_4: "Star Arm 102 - For reBot B601-DM&RS Leader Arm",
+    acc_feat_5: "Robotic-Arm Data Collection Box",
+    acc_feat_6: "Robot Arm Camera Mount for LeRobot SO-101 & reBot B601",
+    acc_feat_7: "reComputer J3011 - Edge AI Computer (Orin Nano 8GB)",
+    acc_feat_8: "ReBot Soft Gripper",
+    acc_more_heading: "Actuators, Power & Expansion Accessories",
+    acc_view_all: "View All Accessories",
+    acc_hide_all: "Hide Extra Accessories",
 
     // FAQ
     faq_title: "F & Q",
     faq_subtitle: "Everything you need to know about reBot Arm, open-source resources, and getting started",
-    faq_q1: "What's the difference between reBot Arm DM and RS? Which one should I choose?",
-    faq_a1: "The DM version uses Damiao actuators (DM4310 / DM4340P) with a 1.5 kg rated payload and ±0.2 mm repeatability — ideal for beginners, education, and lightweight projects. The RS version uses RobStride actuators (00 / 06) with a 2.5 kg rated payload, ±0.1 mm repeatability, and higher torque — built for research labs and lightweight industrial automation. Not sure? Start with DM if you're learning, go with RS if you need precision and payload. Check the spec comparison table above for details.",
-    faq_q2: "Is reBot Arm fully open-source? What exactly is open?",
-    faq_a2: "Yes — reBot Arm is fully open-source. This includes hardware design files, firmware, ROS2 drivers, MuJoCo / Isaac Sim simulation models, and all example code. Everything is hosted on our GitHub repository. You're free to modify, customize, and build on top of it for your own projects.",
-    faq_q3: "Who is reBot Arm for? Can a beginner get started with it?",
-    faq_a3: "reBot Arm is designed for developers, researchers, students, and AI innovators — anyone who wants to explore physical AI and robotics. If you're new to robotics, absolutely: our Learning Physical AI course walks you from the very basics all the way to VLA model deployment, with 19 modules and 20+ hours of hands-on content.",
+    faq_q1: "Who is reBot Arm for? Can a beginner get started?",
+    faq_a1: "reBot Arm is built for developers, researchers, students, and AI innovators exploring Embodied AI. Beginners can start effortlessly: try our zero-code SenseCraft platform or follow our 19-module Learning Physical AI course (20+ hours) from basic kinematics to Sim-to-Real VLA deployment. <a href=\"https://wiki.seeedstudio.com/rebot_physical_ai_course_introduction/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">Read Beginner Guide on Wiki →</a>",
+    faq_q2: "What's the difference between reBot Arm DM and RS? Which one should I choose?",
+    faq_a2: "The DM edition uses Damiao actuators (1.5 kg rated payload, ±0.2 mm repeatability), ideal for beginners, education, and budget-conscious setups. The RS edition uses RobStride actuators (2.5 kg rated payload, ±0.1 mm repeatability, higher torque), built for VLA research labs and high-frequency data collection. <a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">Compare Specs on Wiki →</a>",
+    faq_q3: "Is reBot Arm fully open-source? What exactly is open?",
+    faq_a3: "Yes — reBot Arm is 100% open-source across hardware and software. We provide STEP/CAD files, BOM, motor firmware SDKs, URDF/MJCF digital twins, ROS 2 drivers, and LeRobot training pipelines so you can freely customize and extend the arm. <a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">Explore Open-Source Docs on Wiki →</a>",
     faq_q4: "What programming languages and frameworks does reBot Arm support?",
-    faq_a4: "reBot Arm supports Python, ROS2 Humble, and the LeRobot framework out of the box. You can control it directly from your browser via SenseCraft, write custom Python scripts, or integrate with ROS2 for more advanced workflows. It's also compatible with MuJoCo and NVIDIA Isaac Sim for simulation-to-real pipelines.",
+    faq_a4: "reBot Arm supports Python, C++, ROS 2 Humble, and Hugging Face LeRobot out of the box. You can run zero-code workflows in SenseCraft, develop kinematics with Pinocchio, or train Sim-to-Real policies in MuJoCo and NVIDIA Isaac Sim. <a href=\"https://wiki.seeedstudio.com/rebot_arm_b601_rs_lerobot/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">View Framework Guides on Wiki →</a>",
     faq_q5: "Which depth cameras are compatible? Do I need to buy one separately?",
-    faq_a5: "reBot Arm is officially tested and validated with Orbbec Gemini 2, Orbbec Gemini 336, Intel RealSense D435i, and RealSense D405. All are available as add-on accessories — see our accessories section below. You can also use your own USB camera that supports standard video capture.",
+    faq_a5: "reBot Arm is officially validated with Orbbec Gemini 2, Orbbec Gemini 336, Intel RealSense D435i, RealSense D405, and standard UVC USB cameras. Cameras are available separately or in station bundles with 3D-printable wrist and top mounts. <a href=\"https://wiki.seeedstudio.com/rebot_arm_b601_rs_grasping_demo/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">See Camera Setup on Wiki →</a>",
     faq_q6: "What kind of computer do I need? Any GPU requirements?",
-    faq_a6: "For basic control and learning, any modern laptop will do. For AI training and VLA model deployment, we recommend a machine with an NVIDIA GPU (8GB+ VRAM), or our reComputer J3011 edge AI box for on-device deployment. And if you just want to try things out first, our browser-based MuJoCo simulator runs entirely in your browser — no local setup needed.",
+    faq_a6: "Any modern laptop handles basic control, teleoperation, and our browser-based MuJoCo simulator. For local VLA/ACT policy training and inference, we recommend an NVIDIA GPU (8GB+ VRAM) or our reComputer J3011 (Jetson Orin Nano 8GB) edge box. <a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">Check System Requirements on Wiki →</a>",
     faq_q7: "What's included in the Learning Physical AI course? Is it free with the arm?",
-    faq_a7: "The Learning Physical AI course is a paid program with 19 detailed modules across 5 core chapters, totaling 20+ hours of content. It covers everything from basic machine vision to building a full Sim-to-Real VLA pipeline using reBot Arm and NVIDIA Isaac. You can purchase it separately, or grab the Arm + Course bundle for a discounted price — see the course section above.",
+    faq_a7: "Co-developed with NVIDIA DLI, the course features 19 hands-on modules across 5 chapters (20+ hours), covering 3D vision, ROS 2, Isaac Sim, and VLA deployment. Core documentation is open on our Wiki, or you can grab the Arm + Course bundle. <a href=\"https://wiki.seeedstudio.com/rebot_physical_ai_course_introduction/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">Browse Full Syllabus on Wiki →</a>",
     faq_q8: "Are there tutorials and community support available?",
-    faq_a8: "Absolutely. We have comprehensive Wiki documentation with separate getting-started guides for both DM and RS editions. Our open-source community is active on GitHub, Discord, and WeChat groups. We also run a monthly project showcase and global workshop program — check out the Developer Hub to join.",
+    faq_a8: "Yes! We maintain step-by-step Wiki documentation for both DM and RS editions, covering calibration, ROS 2, LeRobot, and Isaac Sim. Our engineering team and global community provide active support on GitHub Issues and Discord. <a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">Visit Official reBot Wiki →</a>",
     faq_q9: "What is sim-to-real? Can I try reBot Arm without buying the hardware first?",
-    faq_a9: "Sim-to-real means you can train and test your algorithms in simulation first, then deploy them directly to the real robot with minimal changes. And yes — you can try our MuJoCo simulator right in your browser for free. It's a fully interactive virtual reBot Arm. Launch the simulator to start exploring.",
+    faq_a9: "Sim-to-Real lets you train and validate control policies in physics simulation before deploying to physical hardware. You can test the interactive reBot digital twin right now in our free browser-based MuJoCo simulator — zero hardware required. <a href=\"https://wiki.seeedstudio.com/rebot_arm_b601_rs_web_simulator_developer_guide/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">Read Simulator Guide on Wiki →</a>",
     faq_q10: "What's the shipping and warranty policy?",
-    faq_a10: "We ship worldwide. Orders typically ship within 3–5 business days, and delivery time depends on your location (usually 7–14 days for most countries). reBot Arm comes with a 1-year limited warranty covering manufacturing defects. If you have any issues, our support team is here to help — reach us through GitHub Issues, Discord, or our support email.",
+    faq_a10: "We ship globally within 3–5 business days (typical delivery in 7–14 days). Every reBot Arm includes a 1-year limited warranty covering manufacturing defects, plus full access to open-source replacement part files and technical support. <a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">Check Support Details on Wiki →</a>",
 
     // News (live blog feed)
     news_title: "Latest News",
@@ -280,30 +363,46 @@ const i18nDict = {
     // Spec
     spec_title: "规格参数",
     spec_subtitle: "选择最适合你的配置",
+    spec_col_model: "对比项目",
+    spec_lbl_showcase: "典型场景展示",
+    spec_selection_guide: "<strong>选型指南：</strong>选 <strong>DM</strong> 如果你是初学者 / 教学 / 预算有限；选 <strong>RS</strong> 如果需要精度、负载、做 VLA 与数采。",
+    spec_l1_title: "先免费试仿真",
+    spec_l1_desc: "无需购买实体机械臂，零成本在浏览器中体验 MuJoCo 真实物理引擎与正逆运动学控制",
+    spec_l1_btn: "立即体验仿真",
     spec_badge_dof: "6 关节 + 1 夹爪",
     spec_badge_dm_payload: "1.5kg 额定负载",
     spec_badge_dm_motor: "达妙电机",
     spec_badge_rs_payload: "2.5kg 额定负载",
     spec_badge_rs_motor: "RobStride 动力电机",
+    spec_so_badge_dof: "5 关节 + 1 夹爪",
+    spec_so_badge_payload: "0.5kg 负载",
+    spec_so_badge_servo: "总线舵机",
     spec_lbl_dof: "自由度",
     spec_lbl_rated_payload: "额定负载",
     spec_lbl_max_payload: "最大负载",
     spec_lbl_precision: "重复定位精度",
     spec_lbl_reach: "工作臂展",
-    spec_lbl_motors: "电机规格",
+    spec_lbl_motors: "电机 / 执行器",
     spec_lbl_finish: "结构与工艺",
     spec_lbl_scenarios: "应用场景",
     spec_val_dmapp: "家庭与日常自动化",
     spec_val_rsapp: "实验室与轻工业场景",
+    spec_val_soapp: "LeRobot、遥操作与模仿学习",
+    spec_val_soapp_card: "LeRobot、遥操作与模仿学习",
     spec_val_finish: "工业级 CNC 加工",
+    spec_val_soact: "Feetech 串行总线舵机",
+    spec_val_soconstr: "3D 打印结构件",
+    spec_view_full: "展开完整规格参数",
+    spec_hide_full: "收起完整规格参数",
 
     // Application Scenarios
     scenarios_main_title: "从学习到部署落地",
     scenarios_main_subtitle: "从学术具身智能教育到工业边缘 AI 部署",
-    
+
     // Column 1: Education
     scenarios_edu_badge: "教育与培训",
     scenarios_edu_title: "学习物理 AI",
+    scenarios_edu_short: "NVIDIA Isaac × Seeed 联合打造 19 模块 Sim-to-Real 实操课程。",
     scenarios_edu_desc: "Seeed 与 NVIDIA 合作，提供基于 Seeed reBot Arm 和 NVIDIA Isaac 的 Sim-to-Real VLA 流程与官方实操课程，连接学术研究与高等教育。",
     scenarios_edu_stat1_val: "19 个",
     scenarios_edu_stat1_lbl: "详细实操模块",
@@ -319,6 +418,7 @@ const i18nDict = {
     // Column 2: Scientific Research
     scenarios_sci_badge: "前沿科学研究",
     scenarios_sci_title: "加速 VLA 模型研究",
+    scenarios_sci_short: "预适配 7+ 主流 VLA 模型，原生打通 LeRobot 与 Isaac Sim 流程。",
     scenarios_sci_desc: "开箱即用的前沿视觉-语言-动作 (VLA) 模型实验平台，支持主流 VLA 基线算法，实现数小时内从论文算法到真实机器人评估。",
     scenarios_sci_stat1_val: "7+",
     scenarios_sci_stat1_lbl: "已预适配 VLA 模型",
@@ -328,11 +428,12 @@ const i18nDict = {
     scenarios_sci_stat3_lbl: "支持 ISAAC SIM 仿真",
     scenarios_sci_stat4_val: "Jetson",
     scenarios_sci_stat4_lbl: "边缘无缝推理",
-    scenarios_sci_btn: "敬请期待系列视频课程",
+    scenarios_sci_btn: "探索科研方案",
 
     // Column 3: Enterprise
     scenarios_ent_badge: "企业级应用",
     scenarios_ent_title: "海量机器人数据采集支持",
+    scenarios_ent_short: "支持多视角遥操数采，一键生成并同步 Hugging Face Parquet 数据集。",
     scenarios_ent_desc: "扩展你的具身智能数据引擎。Seeed reBot Arm 将遥操作转化为训练即用的数据集——原生 LeRobot 数据格式、多摄像头采集、断点续录与一键同步至 Hugging Face Hub。",
     scenarios_ent_stat1_val: "LeRobot",
     scenarios_ent_stat1_lbl: "PARQUET 数据集格式",
@@ -342,11 +443,13 @@ const i18nDict = {
     scenarios_ent_stat3_lbl: "一键同步云端",
     scenarios_ent_stat4_val: "VR 遥操作",
     scenarios_ent_stat4_lbl: "QUEST 3 & 主从臂",
-    scenarios_ent_btn: "立即获取数据集训练你的 reBot",
+    scenarios_ent_btn: "获取开源数据集",
 
     // Sim Section
-    sim_main_title: "快速体验 Sim-to-Real 仿真",
+    sim_main_title: "购买前在线试用 reBot",
     sim_main_subtitle: "在浏览器中实时运行 3D MuJoCo 物理仿真",
+    sim_topbar_left: "交互式 3D 物理沙盒",
+    sim_topbar_right: "数字孪生技术规格",
     sim_card_title: "MuJoCo 3D 仿真与遥操作",
     sim_card_desc: "实时体验 reBot Arm B601-RS 数字孪生体在 3D 物理环境中的轨迹规划、抓取堆叠与多视角感知。",
     sim_feat1_title: "100Hz 物理引擎",
@@ -358,21 +461,68 @@ const i18nDict = {
     sim_feat4_title: "Sim-to-Real 映射",
     sim_feat4_desc: "1:1 仿真模型与真实硬件映射",
     sim_btn: "打开完整网页仿真器",
+    sim_real_btn: "在线试用真机（即将上线）",
 
     // SenseCraft Robotics
     sensecraft_title: "SenseCraft Robotics",
-    sensecraft_subtitle: "无代码平台:从数据到部署,一站式搞定",
-    sensecraft_desc: "SenseCraft Robotics 将机械臂标定、数据采集、模型训练与推理验证整合为一条无缝工作流——桌面端准备数据、云端训练、无需高端硬件即可完成验证。",
-    sensecraft_hl1_t: "引导式上手",
-    sensecraft_hl1_d: "设备设置与数据采集的分步引导工作流——即使零基础也能轻松开始",
-    sensecraft_hl2_t: "云端训练",
-    sensecraft_hl2_d: "上传数据,在云端完成训练——无需本地高性能硬件,节省算力与运维成本",
-    sensecraft_hl3_t: "更快迭代",
-    sensecraft_hl3_d: "数据准备时间从 5–7 天缩短至 1–2 天",
-    sensecraft_hl4_t: "闭环验证",
-    sensecraft_hl4_d: "随时在桌面端查看训练结果,全程可追溯、可复现",
-    sensecraft_cta: "登录",
-    sensecraft_cta_note: "登录即领 1,000 免费积分，用于云端训练与推理",
+    sensecraft_subtitle: "从创意到真机运行 —— 全程零代码",
+    sensecraft_desc: "在桌面端准备数据、云端训练模型、一键真机验证策略 —— 无需编写代码，无需本地高配 GPU。",
+    sensecraft_line1: "<strong>引导式上手</strong><span class=\"sensecraft-feature-desc\">设备配置与数采分步引导，新手也能快速上手。</span>",
+    sensecraft_line2: "<strong>云端训练</strong><span class=\"sensecraft-feature-desc\">上传数据即可云端训练 VLA/ACT 模型，零本地算力门槛。</span>",
+    sensecraft_line3: "<strong>极速迭代</strong><span class=\"sensecraft-feature-desc\">将数据准备与训练周期从 5–7 天大幅缩短至 1–2 天。</span>",
+    sensecraft_line4: "<strong>闭环验证</strong><span class=\"sensecraft-feature-desc\">桌面端一键下发策略并复盘结果，全流程可追溯。</span>",
+    sensecraft_cta: "免费体验 SenseCraft",
+    sensecraft_cta_note: "注册即送 1,000 免费云端训练与推理积分",
+    sensecraft_ui_badge: "真实界面 / GIF 占位图",
+
+    // University & Lab Co-Building (Screen 7)
+    lab_main_title: "高校具身智能实验室共建方案",
+    lab_main_subtitle: "面向高校院系与科研机构的交钥匙硬件、NVIDIA 联合认证课程体系与 Sim-to-Real 实验平台",
+    lab_tier1_badge: "Starter · 10–20 台",
+    lab_tier1_title: "具身智能基础教学实验室",
+    lab_tier1_desc: "适用于本科机器人课程、运动学教学实验与物理 AI 动手实训工坊。",
+    lab_tier1_f1: "10–20 套 reBot Arm DM + 3D 深度相机教学工作站",
+    lab_tier1_f2: "19 模块 NVIDIA × Seeed 物理 AI 标准课程大纲与讲义",
+    lab_tier1_f3: "网页端 MuJoCo 数字孪生仿真课堂教学授权",
+    lab_tier1_f4: "师资培训工作坊与全套实验指导手册",
+    lab_tier2_badge: "Standard · 30–50 台",
+    lab_tier2_rec: "主流推荐",
+    lab_tier2_title: "VLA 与 Sim-to-Real 联合实验室",
+    lab_tier2_desc: "适用于院系级规模化教学、研究生课题攻关与 Sim-to-Real 闭环算法验证。",
+    lab_tier2_f1: "30–50 套 DM/RS 混合工作站 + Star Arm 102 主从遥操套件",
+    lab_tier2_f2: "reComputer Jetson Orin 边缘 AI 算力节点配置",
+    lab_tier2_f3: "SenseCraft 云端训练积分池与实验室设备集群管理",
+    lab_tier2_f4: "联合实验室授牌、产学研课程共建与现场交付调试",
+    lab_tier3_badge: "Advanced · 50+ 台",
+    lab_tier3_title: "具身智能创新与大规模数采中心",
+    lab_tier3_desc: "专为校级具身智能研究院、大规模机器人数据采集中心与前沿联合科研打造。",
+    lab_tier3_f1: "50+ 套 reBot Arm RS 高负载多路同步数采工作站",
+    lab_tier3_f2: "NVIDIA Isaac Sim / Isaac Lab 与 AGX Thor 高算力集群支持",
+    lab_tier3_f3: "末端执行器/升降平台定制开发与专属工程师 SLA 保障",
+    lab_tier3_f4: "全球黑客松承办权、硬件科研基金与学术论文联合推广",
+    lab_uni_wall_title: "全球合作高校、机器人研究院与创新实验室",
+    lab_uni_1: "麻省理工 MIT · MITERS",
+    lab_uni_1_sub: "机器人与创客社区",
+    lab_uni_2: "清华大学",
+    lab_uni_2_sub: "具身智能与机器人课题组",
+    lab_uni_3: "加州大学伯克利分校",
+    lab_uni_3_sub: "机器人学习实验室",
+    lab_uni_4: "苏黎世联邦理工 ETH",
+    lab_uni_4_sub: "自主系统研究所",
+    lab_uni_5: "斯坦福大学",
+    lab_uni_5_sub: "物理 AI 与 VLA 研究",
+    lab_uni_6: "上海交通大学",
+    lab_uni_6_sub: "机器人研究所",
+    lab_uni_7: "浙江大学",
+    lab_uni_7_sub: "控制与智能系统实验室",
+    lab_uni_8: "香港科技大学 HKUST",
+    lab_uni_8_sub: "机器人与感知实验室",
+    lab_uni_9: "新加坡国立大学 NUS",
+    lab_uni_9_sub: "先进机器人研究中心",
+    lab_uni_10: "NVIDIA DLI 生态伙伴",
+    lab_uni_10_sub: "官方联合课程体系",
+    lab_cta_download: "下载实验室建设方案",
+    lab_cta_talk: "联系教育合作团队",
 
     // Developer Hub
     dev_main_title: "开发者中心",
@@ -394,17 +544,23 @@ const i18nDict = {
     gs_link9: "Agent Claw 夹爪",
     gs_link10: "入门课程",
     gs_group_resources: "开源资源",
-    gs_link11: "硬件资料合集",
-    gs_link12: "模型描述包 (URDF / Mesh)",
-    gs_link13: "数字孪生 / 网页控制系统",
-    gs_link14: "主代码仓库",
+    gs_view_all_tutorials: "查看全部资源与教程",
+    gs_hide_tutorials: "收起更多教程",
+    dev_view_all_projects: "查看全部项目",
+    diff_beginner: "入门",
+    diff_intermediate: "进阶",
+    diff_advanced: "高阶",
+    gs_link11: "硬件资料",
+    gs_link12: "URDF / Mesh",
+    gs_link13: "数字孪生",
+    gs_link14: "主代码仓",
     gs_link15: "Python SDK",
     gs_link16: "ROS2 控制器",
-    gs_link17: "LeRobot 机械臂适配器",
-    gs_link18: "LeRobot 遥操作适配器",
+    gs_link17: "LeRobot 机械臂",
+    gs_link18: "遥操作适配",
     gs_link19: "Isaac Sim",
-    gs_link20: "视觉抓取 Demo",
-    gs_link21: "相机支架合集",
+    gs_link20: "视觉抓取",
+    gs_link21: "相机支架",
     cocreate_card1_title: "物理 AI 月度项目征集",
     cocreate_card1_desc: "展示你基于 Seeed reBot Arm 创作的创新机器人项目，赢取硬件赞助、全球社区聚光灯展示及 Seeed 官方联合推广支持。",
     cocreate_card1_btn: "提交你的项目",
@@ -419,52 +575,62 @@ const i18nDict = {
     // Accessories
     acc_title: "打造你的具身智能机器人工作站",
     acc_subtitle: "经过 Seeed 团队验证的即插即用配件",
-    acc_tab_data_acq: "数采配件",
-    acc_tab_edge: "边缘计算方案",
-    acc_tab_rs: "reBot Arm RS 配件",
-    acc_tab_dm: "reBot Arm DM 配件",
-    acc_dm_p1: "奥比中光 Gemini 2 3D 深度相机",
-    acc_dm_p2: "奥比中光 Gemini 336 深度相机",
-    acc_dm_p3: "英特尔 RealSense 深度相机 D435i",
-    acc_dm_p4: "RealSense 深度相机 D405",
-    acc_dm_p5: "ET-S231 百万像素 90°广角 1080P USB 相机模块",
-    acc_dm_p6: "Star Arm-102 夹爪配件",
-    acc_dm_p7: "AC/DC 电源适配器 DC5521 公头 12V 2A 1500mm",
-    acc_dm_p8: "DM4340P 高扭矩电机驱动执行器",
-    acc_dm_p9: "达妙 4310 执行器电机",
-    acc_rs_p1: "RobStride 00 QDD 14N.m 一体化执行器模块",
-    acc_rs_p2: "RobStride 06 QDD 36 N.m 一体化执行器模块",
-    acc_rs_p3: "reBot Arm B601-RS 专属电源适配器套件",
-    acc_rs_p4: "reBot Arm 6 英寸 G 型固定夹",
-    acc_rs_p5: "电源线-F R/A 至 F R/A-200mm (reBot B601-RS)",
-    acc_rs_p6: "电源线-F R/A 至 F R/A-320mm (reBot B601-RS)",
-    acc_rs_p7: "电源线-F 至 F-R/A-300mm (reBot B601-RS)",
-    acc_rs_p8: "电源线-F 至 F-300mm (reBot B601-RS)",
-    acc_rs_p9: "XT30 2+2 电源分流板",
+    acc_bundles_heading: "推荐具身智能工作站套装",
+    acc_bundle_buy_btn: "在 Seeed 官方商城购买",
+    acc_bundle1_badge: "入门工作站",
+    acc_bundle1_title: "具身智能入门工作站套装",
+    acc_bundle1_item1: "出厂预装调校完毕的 reBot Arm B601-DM 机械臂整机",
+    acc_bundle1_item2: "奥比中光 Gemini 2 3D 深度立体相机",
+    acc_bundle1_item3: "重载桌面快捷加固固定 G 型夹具",
+    acc_bundle1_item4: "24V 标配稳压电源与专用线缆包",
+    acc_bundle2_badge: "科研数采站",
+    acc_bundle2_title: "VLA 科研与多路数采工作站套装",
+    acc_bundle2_item1: "reBot Arm B601-RS（1.5kg 高负载 · 0.1mm 重复定位精度）",
+    acc_bundle2_item2: "奥比中光 Gemini 2 3D 深度立体相机",
+    acc_bundle2_item3: "reComputer J3011 边缘 AI 计算盒 (Orin Nano 8GB)",
+    acc_bundle2_item4: "机械臂多路同步数据采集盒与 24V 专用稳压电源",
+    acc_bundle3_badge: "遥操工作站",
+    acc_bundle3_title: "主从同构遥操作工作站套装",
+    acc_bundle3_item1: "reBot Arm B601-RS 从臂（整机预装与精密标定）",
+    acc_bundle3_item2: "Star Arm 102 专属 1:1 主臂遥操控制器",
+    acc_bundle3_item3: "LeRobot 专用结构支架（相机与机械臂安装支架）",
+    acc_bundle3_item4: "开箱即用的高频模仿学习遥操软件栈与算法环境",
+    acc_featured_heading: "精选核心配件",
+    acc_feat_1: "奥比中光 Gemini 2 3D 深度相机",
+    acc_feat_2: "奥比中光 Gemini 336 3D 深度相机",
+    acc_feat_3: "英特尔 RealSense 深度相机 D435i",
+    acc_feat_4: "Star Arm 102 - reBot B601-DM&RS 主臂遥操器",
+    acc_feat_5: "机械臂多路同步数据采集盒",
+    acc_feat_6: "LeRobot SO-101 & reBot B601 专属相机支架",
+    acc_feat_7: "reComputer J3011 边缘 AI 计算盒 (Orin Nano 8GB)",
+    acc_feat_8: "ReBot 柔性夹爪 (Soft Gripper)",
+    acc_more_heading: "电机执行器、电源与扩展配件",
+    acc_view_all: "查看全部配件",
+    acc_hide_all: "收起更多配件",
 
     // FAQ
     faq_title: "常见问题",
     faq_subtitle: "关于 reBot Arm、开源资源与快速入门的一切解答",
-    faq_q1: "reBot Arm DM 和 RS 版本有什么区别？我应该选择哪一个？",
-    faq_a1: "DM 版本采用达妙执行器 (DM4310 / DM4340P)，额定负载 1.5 kg，重复定位精度 ±0.2 mm，非常适合初学者、教育教学和轻量级项目。RS 版本采用 RobStride 动力执行器 (00 / 06)，额定负载 2.5 kg，重复定位精度 ±0.1 mm，扭矩更大，专为科研实验室和轻工业自动化打造。如果不确定，新手学习建议选择 DM，需要更高精度和负载建议选择 RS。详情见上方规格对比表。",
-    faq_q2: "reBot Arm 是完全开源的吗？具体开源了哪些部分？",
-    faq_a2: "是的，reBot Arm 完全开源。包含硬件设计图纸、固件代码、ROS2 驱动、MuJoCo / Isaac Sim 仿真模型以及所有示例代码。全部开源托管于 GitHub 仓库，您可以自由修改、定制和二次开发。",
-    faq_q3: "reBot Arm 适合哪些人群？零基础初学者可以上手吗？",
-    faq_a3: "reBot Arm 专为开发者、科研人员、高校学生及 AI 创新者设计。如果您是机器人新手，完全没问题：我们的《物理 AI 课程》从零基础教学，包含 19 个实操模块和 20+ 小时课程，直通 VLA 模型部署。",
+    faq_q1: "reBot Arm 适合哪些人群？零基础初学者可以上手吗？",
+    faq_a1: "reBot Arm 专为探索具身智能的开发者、科研人员、高校学生与 AI 创新者打造。零基础新手也能轻松上手：既可通过 SenseCraft 零代码平台快速体验，也能跟随包含 19 个实操模块（20+ 小时）的《学习物理 AI》课程，从基础运动学直通 Sim-to-Real VLA 部署。<a href=\"https://wiki.seeedstudio.com/rebot_physical_ai_course_introduction/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">查看 Wiki 入门指南 →</a>",
+    faq_q2: "reBot Arm DM 和 RS 版本有什么区别？我应该选择哪一个？",
+    faq_a2: "DM 版采用达妙执行器（1.5 kg 额定负载，±0.2 mm 重复定位精度），适合初学者、教学与高性价比入门；RS 版采用 RobStride 动力执行器（2.5 kg 额定负载，±0.1 mm 精度，更高扭矩），专为 VLA 科研实验室与高频数采打造。<a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">查看 Wiki 硬件选型对比 →</a>",
+    faq_q3: "reBot Arm 是完全开源的吗？具体开源了哪些部分？",
+    faq_a3: "是的，reBot Arm 软硬件 100% 开源。我们开放了全部 STEP/CAD 结构图纸、BOM 清单、电机底层 SDK、URDF/MJCF 数字孪生模型、ROS 2 驱动与 LeRobot 训练代码，支持自由定制与二次开发。<a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">查看 Wiki 开源资料详情 →</a>",
     faq_q4: "reBot Arm 支持哪些编程语言和开发框架？",
-    faq_a4: "reBot Arm 原生支持 Python、ROS2 Humble 和 LeRobot 框架。您可以通过 SenseCraft 在网页中直接控制，编写自定义 Python 脚本，或集成 ROS2 进行高级运动规划，同时全面兼容 MuJoCo 和 NVIDIA Isaac Sim 进行 Sim-to-Real 仿真。",
+    faq_a4: "reBot Arm 原生支持 Python、C++、ROS 2 Humble 与 Hugging Face LeRobot 框架。您既可使用 SenseCraft 零代码操作，也能基于 Pinocchio 开发运动学，或在 MuJoCo 与 NVIDIA Isaac Sim 中训练 Sim-to-Real 策略。<a href=\"https://wiki.seeedstudio.com/rebot_arm_b601_rs_lerobot/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">查看 Wiki 开发框架教程 →</a>",
     faq_q5: "兼容哪些深度相机？需要单独购买吗？",
-    faq_a5: "reBot Arm 官方经过测试与验证的深度相机包括奥比中光 Gemini 2、Gemini 336、英特尔 RealSense D435i 和 D405。所有相机均可在配件区单独选购，您也可以使用支持标准 UVC 的 USB 摄像头。",
+    faq_a5: "reBot Arm 已官方适配验证奥比中光 Gemini 2、Gemini 336、英特尔 RealSense D435i、D405 及标准 UVC USB 相机。相机可单独选购或随工作站套装购买，并提供腕部/顶部开源支架图纸。<a href=\"https://wiki.seeedstudio.com/rebot_arm_b601_rs_grasping_demo/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">查看 Wiki 视觉相机配置指南 →</a>",
     faq_q6: "使用 reBot Arm 需要什么配置的电脑？有 GPU 要求吗？",
-    faq_a6: "对于基础控制和课程学习，普通笔记本电脑即可满足需求。对于 AI 模型训练与 VLA 模型部署，建议配备 NVIDIA GPU (8GB+ 显存) 的电脑，或使用 reComputer J3011 边缘 AI 盒进行端侧部署。如果您只想试用，浏览器内 MuJoCo 仿真器完全在本地浏览器运行，无需任何本地环境配置。",
+    faq_a6: "普通现代笔记本电脑即可满足基础控制、遥操作与网页端 MuJoCo 仿真。若需在本地进行 VLA/ACT 模型训练与推理，建议配备 NVIDIA GPU（8GB+ 显存）或搭配 reComputer J3011（Orin Nano 8GB）边缘计算盒。<a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">查看 Wiki 软硬件环境要求 →</a>",
     faq_q7: "《物理 AI 课程》包含什么内容？买机械臂免费送吗？",
-    faq_a7: "《物理 AI 课程》为深度官方实操教程，涵盖 5 大章节 19 个实操模块，超过 20 小时内容，覆盖从基础机器视觉到使用 reBot Arm 和 NVIDIA Isaac 搭建完整 Sim-to-Real VLA 流程。您可以单独购买，也可以选购“机械臂 + 课程”优惠套餐。",
+    faq_a7: "该课程与 NVIDIA 联合打造，涵盖 5 大章节 19 个实操模块（20+ 小时），贯通 3D 视觉、ROS 2、Isaac Sim 与 VLA 部署。核心教程文档已在 Wiki 开放，您也可直接选购“机械臂 + 课程”优惠套装。<a href=\"https://wiki.seeedstudio.com/rebot_physical_ai_course_introduction/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">前往 Wiki 查看完整课程大纲 →</a>",
     faq_q8: "有配套教程和社区支持吗？",
-    faq_a8: "当然有！我们提供完善的 Wiki 官方文档，为 DM 和 RS 版本准备了独立的快速入门指南。开源社区在 GitHub、Discord 以及微信交流群中非常活跃，同时我们每月举办项目征集与全球工作坊计划，欢迎加入开发者中心。",
+    faq_a8: "当然有！我们为 DM 和 RS 版本维护了详尽的分步 Wiki 文档，覆盖标定、ROS 2、LeRobot 与 Isaac Sim。Seeed 工程师团队与全球开发者社区也会在 GitHub 与 Discord 提供实时技术支持。<a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">访问 reBot 官方 Wiki 文档中心 →</a>",
     faq_q9: "什么是 Sim-to-Real 仿真到现实？在购买硬件前可以先体验吗？",
-    faq_a9: "Sim-to-Real（仿真到现实）意味着您可以先在虚拟仿真环境中训练和测试算法，然后以极低改造成本直接部署到真实机器人上。是的，您可以随时免费体验我们网页端 3D MuJoCo 仿真器，完全交互式操作数字孪生机械臂。",
+    faq_a9: "Sim-to-Real 支持先在物理仿真中训练并验证控制策略，再无缝迁移至真实机械臂。无需购买硬件或配置环境，您现在即可在网页端免费体验交互式 MuJoCo 数字孪生仿真器。<a href=\"https://wiki.seeedstudio.com/rebot_arm_b601_rs_web_simulator_developer_guide/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">查看 Wiki 网页仿真器开发指南 →</a>",
     faq_q10: "发货与质保政策是什么样的？",
-    faq_a10: "我们支持全球发货。订单通常在 3–5 个工作日内发货，运输时间视具体地区而定（多数国家 7–14 天）。reBot Arm 提供 1 年有限硬件质保。如有任何问题，我们的技术支持团队随时通过 GitHub Issues、Discord 或邮件为您解答。",
+    faq_a10: "我们支持全球发货，订单通常在 3–5 个工作日内发出（多数地区 7–14 天送达）。每台 reBot Arm 均享 1 年有限硬件质保、开源结构件图纸以及官方技术团队支持。<a href=\"https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"faq-wiki-link\">查看 Wiki 售后与技术支持说明 →</a>",
 
     // News (live blog feed)
     news_title: "最新动态",
@@ -488,12 +654,12 @@ const i18nDict = {
    every revisit. Falls back to a friendly error state (click to retry).
    ========================================================================== */
 const NEWS_FEED_CONFIG = {
-  endpoint: 'https://www.seeedstudio.com/blog/wp-json/wp/v2/posts?tags=5679,5540&per_page=6&_embed=1',
+  endpoint: 'https://www.seeedstudio.com/blog/wp-json/wp/v2/posts?tags=5679,5540&per_page=4&_embed=1',
   snapshotUrl: './news_feed.json',
   fallbackUrl: 'https://www.seeedstudio.com/blog/tag/rebot/',
-  cacheKey: 'rebot-news-feed',
+  cacheKey: 'rebot-news-feed-v2',
   cacheTtlMs: 10 * 60 * 1000,
-  cardCount: 6
+  cardCount: 4
 };
 
 function stripHtmlTags(html) {
@@ -537,9 +703,14 @@ function renderNewsCards(posts) {
   if (!grid) return;
   const isZh = (window.currentLang === 'zh') || document.body.classList.contains('lang-zh');
   const readMoreLabel = (i18nDict[isZh ? 'zh' : 'en'] && i18nDict[isZh ? 'zh' : 'en'].news_readmore) || 'Read More';
+  const featuredLabel = isZh ? '精选动态' : 'Featured';
   const frag = document.createDocumentFragment();
 
-  posts.forEach(post => {
+  // Exactly 1 Big + 3 Small (4 cards total)
+  const displayPosts = posts.slice(0, 4);
+
+  displayPosts.forEach((post, index) => {
+    const isFeatured = (index === 0);
     const imgUrl = (typeof post.image === 'string' && post.image) || resolveNewsImage(post);
     const title = stripHtmlTags(isRendered(post.title)) || 'Untitled';
     let excerpt = stripHtmlTags(isRendered(post.excerpt));
@@ -550,7 +721,7 @@ function renderNewsCards(posts) {
     const date = formatNewsDate(post.date, isZh ? 'zh' : 'en');
 
     const card = document.createElement('a');
-    card.className = 'news-card';
+    card.className = `news-card ${isFeatured ? 'featured' : 'compact'}`;
     card.href = post.link || NEWS_FEED_CONFIG.fallbackUrl;
     card.target = '_blank';
     card.rel = 'noopener noreferrer';
@@ -569,6 +740,13 @@ function renderNewsCards(posts) {
       ph.className = 'news-card-placeholder';
       ph.innerHTML = '<i class="fas fa-newspaper"></i>';
       media.appendChild(ph);
+    }
+
+    if (isFeatured) {
+      const badge = document.createElement('span');
+      badge.className = 'news-featured-badge';
+      badge.innerHTML = `<i class="fas fa-bolt"></i> ${featuredLabel}`;
+      media.appendChild(badge);
     }
 
     const body = document.createElement('div');
@@ -592,13 +770,15 @@ function renderNewsCards(posts) {
   grid.appendChild(frag);
 }
 
-function renderNewsSkeletons(count) {
+function renderNewsSkeletons(count = 4) {
   const grid = document.getElementById('news-grid');
   if (!grid) return;
   const frag = document.createDocumentFragment();
-  for (let i = 0; i < count; i++) {
+  const total = Math.min(count, 4);
+  for (let i = 0; i < total; i++) {
+    const isFeatured = (i === 0);
     const sk = document.createElement('div');
-    sk.className = 'news-skeleton';
+    sk.className = `news-skeleton ${isFeatured ? 'featured' : 'compact'}`;
     sk.innerHTML =
       '<div class="news-skeleton-media"></div>' +
       '<div class="news-skeleton-body">' +
@@ -813,7 +993,7 @@ function setupLanguageSelector() {
     try {
       if (typeof updateSqueezeLanguage === 'function') updateSqueezeLanguage();
     } catch (_) { /* not initialized yet (TDZ) — harmless */ }
-    
+
     if (currentLangText) {
       currentLangText.textContent = lang === 'zh' ? '中文' : 'EN';
     }
@@ -829,11 +1009,14 @@ function setupLanguageSelector() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (i18nDict[lang] && i18nDict[lang][key]) {
+        const val = i18nDict[lang][key];
         const icon = el.querySelector('i');
         if (icon) {
-          el.innerHTML = icon.outerHTML + ' ' + i18nDict[lang][key];
+          el.innerHTML = icon.outerHTML + ' ' + val;
+        } else if (val.includes('<')) {
+          el.innerHTML = val;
         } else {
-          el.textContent = i18nDict[lang][key];
+          el.textContent = val;
         }
       }
     });
@@ -846,6 +1029,15 @@ function setupLanguageSelector() {
 }
 
 function setupNavLinks() {
+  const header = document.querySelector('.dli-header');
+  if (header) {
+    const updateHeaderScroll = () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    };
+    updateHeaderScroll();
+    window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+  }
+
   const links = document.querySelectorAll('.hub-nav-link');
   links.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -907,43 +1099,63 @@ function setupMobileMenu() {
 }
 
 function setupSpecToggle() {
-  const toggleBtn = document.getElementById('toggle-specs-btn');
-  const specContent = document.getElementById('spec-comparison-content');
-  if (toggleBtn && specContent) {
+  const toggleBtn = document.getElementById('spec-fold-toggle-btn');
+  const wrapper = document.getElementById('spec-collapsible-wrapper');
+  if (toggleBtn && wrapper) {
     toggleBtn.addEventListener('click', () => {
-      const isExpanded = specContent.classList.toggle('expanded');
-      const icon = toggleBtn.querySelector('i');
-      const label = toggleBtn.querySelector('.toggle-label');
-      
-      if (icon) {
-        icon.className = isExpanded ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
-      }
+      const isExpanded = wrapper.classList.toggle('expanded');
+      toggleBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      const label = toggleBtn.querySelector('.toggle-text');
+      const lang = window.currentLang || 'en';
       if (label) {
-        label.textContent = isExpanded ? 'Hide Detailed Specification' : 'Expand Detailed Specification';
+        if (isExpanded) {
+          label.textContent = lang === 'zh' ? '收起完整规格参数' : 'Hide Detailed Specs';
+        } else {
+          label.textContent = lang === 'zh' ? '展开完整规格参数' : 'View Full Specs';
+        }
+      }
+    });
+  }
+
+  const gsViewAllBtn = document.getElementById('gs-view-all-btn');
+  const gsExtraTutorials = document.getElementById('gs-extra-tutorials');
+  if (gsViewAllBtn && gsExtraTutorials) {
+    gsViewAllBtn.addEventListener('click', () => {
+      const isExpanded = gsExtraTutorials.classList.toggle('expanded');
+      gsViewAllBtn.classList.toggle('expanded', isExpanded);
+      gsViewAllBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      const label = gsViewAllBtn.querySelector('.toggle-text');
+      const lang = window.currentLang || 'en';
+      if (label) {
+        if (isExpanded) {
+          label.textContent = lang === 'zh' ? '收起资源与教程' : 'Hide Resources & Tutorials';
+        } else {
+          label.textContent = lang === 'zh' ? '查看全部资源与教程' : 'View All Resources & Tutorials';
+        }
       }
     });
   }
 }
 
 function setupAccessoriesTabs() {
-  const tabBtns = document.querySelectorAll('.accessories-tabs .tab-pill-btn');
-  const grids = document.querySelectorAll('.accessory-grid');
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-target');
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      grids.forEach(grid => {
-        if (grid.id === target + '-accessories-grid') {
-          grid.style.display = 'grid';
+  const accViewAllBtn = document.getElementById('acc-view-all-btn');
+  const accExtraCollapsible = document.getElementById('acc-extra-collapsible');
+  if (accViewAllBtn && accExtraCollapsible) {
+    accViewAllBtn.addEventListener('click', () => {
+      const isExpanded = accExtraCollapsible.classList.toggle('expanded');
+      accViewAllBtn.classList.toggle('expanded', isExpanded);
+      accViewAllBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      const label = accViewAllBtn.querySelector('.toggle-text');
+      const lang = window.currentLang || 'en';
+      if (label) {
+        if (isExpanded) {
+          label.textContent = lang === 'zh' ? '收起更多配件' : 'Hide Extra Accessories';
         } else {
-          grid.style.display = 'none';
+          label.textContent = lang === 'zh' ? '查看全部配件' : 'View All Accessories';
         }
-      });
+      }
     });
-  });
+  }
 }
 
 /**
@@ -985,10 +1197,10 @@ function setup3DCardSpotlight() {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left; // x position within card
       const y = e.clientY - rect.top;  // y position within card
-      
+
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      
+
       // Calculate subtle 3D rotate degrees (-5deg to +5deg)
       const rotateX = -((y - centerY) / centerY) * 5;
       const rotateY = ((x - centerX) / centerX) * 5;
@@ -1140,25 +1352,20 @@ function setupNeuralParticleCanvas() {
 function setupScrollAndEntranceAnimations() {
   // 1. Hero Staggered Entrance
   setTimeout(() => {
-    document.querySelectorAll('.hero-main-title, .hero-sub-text').forEach((el, idx) => {
-      el.style.transitionDelay = `${idx * 0.15}s`;
+    document.querySelectorAll('.hero-main-title, .hero-sub-text, .unitree-hero-title, .unitree-hero-description').forEach((el) => {
       el.classList.add('is-visible');
     });
-  }, 80);
+  }, 50);
 
-  // 2. IntersectionObserver for Reveal-on-Scroll Elements
+  // 2. Unified, Fast Reveal-on-Scroll Across ALL Sections
   const revealElements = document.querySelectorAll(
-    '.section-title-group, .video-card, .product-summary-card, .accessory-card, .hub-accordion-item, .cocreate-card, .community-channels-section'
+    '.section-title-group, .swiss-scenarios-grid, .sim-experience-card, .dev-hub-grid, .squeeze-carousel, .sensecraft-card, .spec-card, .lab-tier-grid, .accessory-card, .faq-accordion, .news-grid, .community-channels-section'
   );
-
-  revealElements.forEach(el => {
-    el.classList.add('reveal-on-scroll');
-  });
 
   const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -60px 0px',
-    threshold: 0.1
+    rootMargin: '120px 0px 40px 0px', // Trigger ahead of entering viewport so content is ready
+    threshold: 0.02
   };
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -1170,8 +1377,17 @@ function setupScrollAndEntranceAnimations() {
     });
   }, observerOptions);
 
-  revealElements.forEach((el) => {
-    revealObserver.observe(el);
+  const initialViewportLimit = window.innerHeight + 150;
+
+  revealElements.forEach(el => {
+    el.classList.add('reveal-on-scroll');
+    // If element is already in/near viewport on initial load, show immediately without delay
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= initialViewportLimit) {
+      el.classList.add('is-visible');
+    } else {
+      revealObserver.observe(el);
+    }
   });
 
   // 3. Navbar ScrollSpy Auto-Highlighting
@@ -1227,7 +1443,7 @@ function initDliCardAsciiBg() {
     h = rect.height;
     ctx = canvas.getContext('2d');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.font = `500 ${FONT_SIZE}px "JetBrains Mono", monospace`;
+    ctx.font = `500 ${FONT_SIZE}px "Montserrat", monospace`;
     ctx.textBaseline = 'top';
     return true;
   }
@@ -1251,7 +1467,7 @@ function initDliCardAsciiBg() {
         const idx = Math.min(PALETTE.length - 1, Math.floor(v * PALETTE.length));
         const ch = PALETTE[idx];
         if (ch === ' ') continue;
-        
+
         const alpha = (0.08 + (v - 0.22) * 0.55);
         ctx.fillStyle = `rgba(141, 195, 31, ${alpha.toFixed(3)})`;
         ctx.fillText(ch, cc * CELL, r * CELL);
@@ -1380,7 +1596,7 @@ function initHeroVideoBackground() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const p = vid.play();
-          if (p && typeof p.catch === 'function') p.catch(() => {});
+          if (p && typeof p.catch === 'function') p.catch(() => { });
         } else {
           vid.pause();
         }
@@ -1392,7 +1608,7 @@ function initHeroVideoBackground() {
   // Some mobile browsers block autoplay until the first user gesture.
   const tryPlay = () => {
     const p = vid.play();
-    if (p && typeof p.catch === 'function') p.catch(() => {});
+    if (p && typeof p.catch === 'function') p.catch(() => { });
   };
   if (vid.paused) tryPlay();
   window.addEventListener('touchstart', tryPlay, { once: true, passive: true });
@@ -2100,7 +2316,7 @@ function initVideoViewportController() {
     entries.forEach(entry => {
       const video = entry.target;
       if (entry.isIntersecting) {
-        video.play().catch(() => {});
+        video.play().catch(() => { });
       } else {
         video.pause();
       }
@@ -2186,7 +2402,7 @@ function initSqueezeCarousel() {
       const video = p.querySelector("video");
       if (video) {
         if (isCurrent) {
-          if (video.paused) video.play().catch(() => {});
+          if (video.paused) video.play().catch(() => { });
         } else {
           if (!video.paused) video.pause();
         }
