@@ -1966,197 +1966,7 @@
       font-size: 0.95rem;
     }
 
-    /* ==========================================================================
-       High Performance & Extensive Application Video Section Styling
-       ========================================================================== */
-    .high-performance-section {
-      padding: 5.5rem 0;
-      background: #FAFAFC;
-      border-bottom: 1px solid var(--nv-border);
-      position: relative;
-    }
 
-    /* Squeeze Header Row: Title only */
-    .squeeze-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin-bottom: 2rem;
-    }
-    .squeeze-header-row .section-title-group {
-      margin-bottom: 0;
-    }
-
-    .squeeze-track-wrapper {
-      width: 100%;
-      overflow: hidden;
-      border-radius: 8px;
-      background: transparent;
-      box-shadow: none;
-      padding: 0;
-    }
-    .squeeze-track {
-      display: flex;
-      gap: 0.85rem;
-      width: 100%;
-      height: 580px;
-      position: relative;
-    }
-    @media (max-width: 1200px) {
-      .squeeze-track {
-        height: 520px;
-      }
-    }
-    @media (max-width: 992px) {
-      .squeeze-track {
-        height: 460px;
-      }
-    }
-    @media (max-width: 640px) {
-      .squeeze-track {
-        height: 540px;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-    }
-
-    .squeeze-panel {
-      position: relative;
-      flex: 0 0 11.5%;
-      height: 100%;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--nv-border);
-      padding: 0;
-      background: #F1F5F9;
-      cursor: pointer;
-      outline: none;
-      transition: flex 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-      display: block;
-      text-align: left;
-    }
-    .squeeze-panel:hover:not(.active) {
-      flex: 0 0 16%;
-      border-color: rgba(104, 166, 0, 0.4);
-    }
-    .squeeze-panel.active {
-      flex: 0 0 60.5%;
-      cursor: default;
-      border-color: var(--nv-green);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    }
-    @media (max-width: 640px) {
-      .squeeze-panel {
-        flex: 0 0 16% !important;
-        width: 100%;
-      }
-      .squeeze-panel.active {
-        flex: 0 0 52% !important;
-      }
-    }
-
-    .squeeze-video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      min-height: 100%;
-      object-fit: cover;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      transition: filter 0.5s ease;
-    }
-    .squeeze-panel:not(.active) .squeeze-video {
-      filter: brightness(0.92) contrast(1.02);
-    }
-    .squeeze-panel.active .squeeze-video {
-      filter: brightness(1) contrast(1);
-    }
-
-    .squeeze-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: flex-start;
-      padding: 1.25rem;
-      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.12) 40%, transparent 100%);
-      pointer-events: none;
-    }
-    .squeeze-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.35rem 0.85rem;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      white-space: nowrap;
-      color: #FFFFFF;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .squeeze-panel.active .squeeze-badge {
-      background: rgba(104, 166, 0, 0.35);
-      border-color: var(--nv-green);
-      box-shadow: 0 0 12px rgba(104, 166, 0, 0.4);
-      color: #FFFFFF;
-    }
-    @media (max-width: 768px) {
-      .squeeze-overlay {
-        padding: 0.75rem;
-      }
-      .squeeze-badge {
-        font-size: 0.72rem;
-        padding: 0.25rem 0.6rem;
-      }
-    }
-
-    /* Navigation Bar directly below the track */
-    .squeeze-bottom-nav {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.75rem;
-      margin-top: 1.25rem;
-    }
-    .squeeze-counter {
-      font-family: var(--font-mono, monospace);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      margin-right: 0.5rem;
-    }
-    .squeeze-arrow-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 6px;
-      border: 1px solid var(--nv-border);
-      background: #FFFFFF;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    .squeeze-arrow-btn:hover {
-      background: var(--nv-green);
-      border-color: var(--nv-green);
-      color: #FFFFFF;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(104, 166, 0, 0.3);
-    }
-    .squeeze-arrow-btn:active {
-      transform: translateY(0);
-    }
 
     /* ==========================================================================
        Specification Section Styling
@@ -4293,7 +4103,6 @@
       }
       
       /* Global Section Whitespace Compression */
-      .high-performance-section,
       .spec-section,
       .app-scenarios-section,
       .sim-experience-section,
@@ -4341,11 +4150,6 @@
       .unitree-hero-description {
         font-size: 1.05rem !important;
         line-height: 1.6 !important;
-      }
-
-      /* High Performance Squeeze Carousel */
-      .squeeze-track {
-        height: 540px !important;
       }
 
       /* Specification Comparison Table */
@@ -4480,9 +4284,6 @@
         font-size: clamp(2rem, 3.6vw, 2.8rem) !important;
         white-space: nowrap !important;
       }
-      .squeeze-track {
-        height: 500px !important;
-      }
       .sim-canvas-container {
         height: 380px !important;
       }
@@ -4506,13 +4307,9 @@
       .hero-tag-badge {
         margin-bottom: 0.75rem !important;
       }
-      .squeeze-track {
-        height: 520px !important;
-      }
       .sim-canvas-container {
         height: 390px !important;
       }
-      .high-performance-section,
       .spec-section,
       .app-scenarios-section,
       .sim-experience-section,
@@ -5851,71 +5648,7 @@
       </div>
     </section>
 
-    <!-- ==========================================================================
-         High Performance & Extensive Application Section (Squeeze Carousel)
-         ========================================================================== -->
-    <section class="high-performance-section" id="performance">
-      <div class="container" style="max-width: 1680px; margin: 0 auto; padding: 0 1.5rem;">
-        
-        <!-- Section Header: Title Only -->
-        <div class="squeeze-header-row">
-          <div class="section-title-group" style="text-align: left; margin-bottom: 0;">
-            <h2 class="section-main-title" data-i18n="perf_title">High Performance &amp; Extensive Application</h2>
-          </div>
-        </div>
 
-        <!-- Squeeze Carousel Accordion Track -->
-        <div class="squeeze-track-wrapper">
-          <div class="squeeze-track" id="squeeze-track" role="tablist" aria-label="Performance Showcase">
-            
-            <!-- Panel 1 -->
-            <button type="button" class="squeeze-panel active" data-index="0" role="tab" aria-selected="true" aria-label="Multi-Axis Motion &amp; Dexterous Control">
-              <video src="video/multi_axis_motion.mp4" autoplay loop muted playsinline preload="auto" class="squeeze-video"></video>
-              <div class="squeeze-overlay">
-                <span class="squeeze-badge" data-i18n="perf_slide1_badge">Dexterous Control</span>
-              </div>
-            </button>
-
-            <!-- Panel 2 -->
-            <button type="button" class="squeeze-panel" data-index="1" role="tab" aria-selected="false" aria-label="High Dynamic Performance">
-              <video src="video/High Dynamic performance.mp4" autoplay loop muted playsinline preload="auto" class="squeeze-video"></video>
-              <div class="squeeze-overlay">
-                <span class="squeeze-badge" data-i18n="perf_slide2_badge">High Dynamic</span>
-              </div>
-            </button>
-
-            <!-- Panel 3 -->
-            <button type="button" class="squeeze-panel" data-index="2" role="tab" aria-selected="false" aria-label="Powerful Payload Capacity">
-              <video src="video/payload.mp4" autoplay loop muted playsinline preload="auto" class="squeeze-video"></video>
-              <div class="squeeze-overlay">
-                <span class="squeeze-badge" data-i18n="perf_slide3_badge">Payload Power</span>
-              </div>
-            </button>
-
-            <!-- Panel 4 -->
-            <button type="button" class="squeeze-panel" data-index="3" role="tab" aria-selected="false" aria-label="Sub-Millimeter ±0.1mm Repeatability">
-              <video src="video/0.1mm.mp4" autoplay loop muted playsinline preload="auto" class="squeeze-video"></video>
-              <div class="squeeze-overlay">
-                <span class="squeeze-badge" data-i18n="perf_slide4_badge">±0.1mm Precision</span>
-              </div>
-            </button>
-
-          </div>
-        </div>
-
-        <!-- Carousel Navigation Placed Below Track -->
-        <div class="squeeze-bottom-nav" aria-label="Carousel Navigation">
-          <span class="squeeze-counter" id="squeeze-counter" aria-live="polite">01 / 04</span>
-          <button type="button" class="squeeze-arrow-btn" id="squeeze-prev-btn" aria-label="Previous Performance Demo" title="Previous Demo">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <button type="button" class="squeeze-arrow-btn" id="squeeze-next-btn" aria-label="Next Performance Demo" title="Next Demo">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-
-      </div>
-    </section>
 
     <!-- ==========================================================================
          SenseCraft Robotics: No-Code Platform Section
@@ -7252,8 +6985,8 @@
   <script src="js/lib/three.min.js"></script>
   <script src="js/lib/STLLoader.js"></script>
 
-  <!-- Main JavaScript File with Cache-Buster v120 (Clean Card 02 image watermark and overlay text) -->
-  <script src="js/app.js?v=20261116_v120" defer></script>
+  <!-- Main JavaScript File with Cache-Buster v121 (Remove High Performance & Extensive Application section) -->
+  <script src="js/app.js?v=20261116_v121" defer></script>
   <script>
 
     function toggleFaq(id) {
