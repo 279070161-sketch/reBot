@@ -10,7 +10,7 @@ const i18nDict = {
     nav_wiki: "Wiki Tutorials",
     nav_demos: "GitHub",
     nav_sim: "MuJoCo Sim-to-Real",
-    nav_projects: "Host Your Workshop",
+    nav_projects: "Demo & Events",
     nav_customization: "Customization",
     nav_buynow: "Buy Now",
 
@@ -23,6 +23,15 @@ const i18nDict = {
     hero_badge: "6+1 DoF Open-Source Arm",
     hero_desc: "Accelerate Physical AI Deployment in Real World",
     hero_watch_video: "Watch Video",
+    hero_learn_more: "Learn More",
+    spec_strip_1_val: "Up to 5 kg",
+    spec_strip_1_lbl: "Payloads",
+    spec_strip_2_val: "754mm",
+    spec_strip_2_lbl: "Reach",
+    spec_strip_3_val: "6.7kg",
+    spec_strip_3_lbl: "Weight",
+    spec_strip_4_val: "±0.1mm",
+    spec_strip_4_lbl: "Repeatability",
 
     // Performance
     perf_title: "High Performance & Extensive Application",
@@ -76,14 +85,14 @@ const i18nDict = {
     spec_hide_full: "Hide Detailed Specs",
 
     // Application Scenarios
-    scenarios_main_title: "From Learning to Deployment",
-    scenarios_main_subtitle: "From Academic Embodied AI Education to Industrial Edge AI Deployment",
+    scenarios_main_title: "Who is Using reBot Arm?",
+    scenarios_main_subtitle: "From Academic Physical AI Learning to Industrial Automation Deployment",
 
     // Column 1: Education
     scenarios_edu_badge: "Education",
     scenarios_edu_title: "Learning Physical AI",
     scenarios_edu_short: "19-module NVIDIA Isaac × Seeed hands-on Sim-to-Real curriculum.",
-    scenarios_edu_desc: "Collaborating with NVIDIA, Seeed provides a Sim-to-Real VLA Pipeline with Seeed reBot Arm and NVIDIA Isaac. Official hands-on curriculum bridging academic research and higher education.",
+    scenarios_edu_desc: "In collaboration with NVIDIA, Seeed provides the end-to-end Sim-to-Real VLA development workflow with Seeed reBot Arm and NVIDIA Isaac. Supported by the hands-on learning curriculum, it bridges cutting-edge Physical AI research and practical robotics learning in higher education.",
     scenarios_edu_stat1_val: "19",
     scenarios_edu_stat1_lbl: "Detailed Modules",
     scenarios_edu_stat2_val: "Sim-to-Real",
@@ -99,7 +108,7 @@ const i18nDict = {
     scenarios_sci_badge: "Scientific Research",
     scenarios_sci_title: "Accelerate VLA Research",
     scenarios_sci_short: "7+ pre-adapted VLA models with native LeRobot & Isaac Sim pipelines.",
-    scenarios_sci_desc: "A ready-to-run experiment platform for cutting-edge Vision-Language-Action models. Seeed reBot Arm comes with compatibility and verification of today's most popular VLA baselines — so you can go from paper to real-robot evaluation in hours, not weeks.",
+    scenarios_sci_desc: "A ready-to-run platform for Vision-Language-Action (VLA) research. Seeed reBot Arm supports verified integration with the most popular VLA baselines, accelerating the transition from research papers to real-world robotic evaluation.",
     scenarios_sci_stat1_val: "7+",
     scenarios_sci_stat1_lbl: "PRE-ADAPTED VLA MODELS",
     scenarios_sci_stat2_val: "LeRobot",
@@ -112,9 +121,9 @@ const i18nDict = {
 
     // Column 3: Enterprise
     scenarios_ent_badge: "Enterprise",
-    scenarios_ent_title: "Massive Support for Robot Data Acquisition",
+    scenarios_ent_title: "Streamline Robotic Data Acquisition",
     scenarios_ent_short: "Multi-cam teleoperation to Hugging Face Parquet datasets at fleet scale.",
-    scenarios_ent_desc: "Scale up your embodied AI data engine. Seeed reBot Arm turns teleoperation into training-ready datasets — native LeRobot Dataset format, multi-camera capture, checkpoint-and-resume recording, and one-click sync to Hugging Face Hub — ready to deploy across fleets, sites, and annotation teams.",
+    scenarios_ent_desc: "Build scalable Physical AI datasets with Seeed reBot Arm. Supporting teleoperation, multi-camera capture, native LeRobot Dataset format, checkpoint-and-resume recording, and Hugging Face Hub integration for efficient data collection and model training.",
     scenarios_ent_stat1_val: "LeRobot",
     scenarios_ent_stat1_lbl: "PARQUET DATASET FORMAT",
     scenarios_ent_stat2_val: "3× 1080p",
@@ -144,13 +153,21 @@ const i18nDict = {
     sim_real_btn: "Try Real Robot (Coming Soon)",
 
     // SenseCraft Robotics
-    sensecraft_title: "SenseCraft Robotics",
-    sensecraft_subtitle: "Go From Idea to Working Robot — No Coding Required",
-    sensecraft_desc: "Prepare data on desktop, train in the cloud, and validate real-robot policies without writing code or buying local GPUs.",
-    sensecraft_line1: "<strong>Guided Onboarding</strong><span class=\"sensecraft-feature-desc\">Step-by-step setup & data collection for beginners.</span>",
-    sensecraft_line2: "<strong>Cloud Training</strong><span class=\"sensecraft-feature-desc\">Train VLA & ACT models in the cloud with zero local GPU required.</span>",
-    sensecraft_line3: "<strong>Faster Iteration</strong><span class=\"sensecraft-feature-desc\">Cut dataset preparation time from 5–7 days down to 1–2 days.</span>",
-    sensecraft_line4: "<strong>Closed-Loop Validation</strong><span class=\"sensecraft-feature-desc\">One-click desktop policy deployment with full traceability.</span>",
+    sensecraft_title: "From Robot Setup to Real-World Task within 3 Hours",
+    sensecraft_subtitle: "A step-by-step workflow to complete end-to-end robotic manipulation and learning in real-world — all in one NO-CODE platform.",
+    sensecraft_workflow_heading: "Accelerate Your Robot Development Workflow",
+    sc_step1_title: "Calibrate",
+    sc_step1_desc: "Set up your robot and cameras with guided calibration for accurate data collection.",
+    sc_step2_title: "Collect Data",
+    sc_step2_desc: "Record robot demonstrations and build training-ready datasets through teleoperation.",
+    sc_step3_title: "Train",
+    sc_step3_desc: "Train VLA models in the cloud without requiring a local GPU.",
+    sc_step4_title: "Deploy Model",
+    sc_step4_desc: "Deploy trained policies to reBot with one-click desktop deployment and traceable workflows.",
+    sc_step5_title: "Inference",
+    sc_step5_desc: "Run trained policies on the edge and evaluate robot performance in real time.",
+    sc_step6_title: "Grasp",
+    sc_step6_desc: "Execute learned manipulation tasks and see your robot turn pre-trained policies into real-world actions.",
     sensecraft_cta: "Start Free in SenseCraft",
     sensecraft_cta_note: "Get 1,000 free credits for cloud training & inference",
     sensecraft_ui_badge: "UI Preview / GIF Placeholder",
@@ -205,11 +222,11 @@ const i18nDict = {
     lab_cta_talk: "Talk to Education Team",
 
     // Developer Hub
-    dev_main_title: "Developer Hub",
-    dev_main_subtitle: "Explore projects, tutorials, and co-creation opportunities with global developers",
+    dev_main_title: "reBot Real User Cases",
+    dev_main_subtitle: "Explore more real-world projects and creative builds from reBot global developer community.",
     dev_item01_title: "01 How to Get Started",
     dev_item01_subtitle: "Official guides for the reBot-RS robotic arm — from first boot to advanced applications",
-    dev_item02_title: "02 Contribution & Gather with Global Community",
+    dev_item02_title: "01 Contribution & Gather with Global Community",
     dev_item02_subtitle: "Explore real-world projects and creative builds from global developers",
     dev_item03_title: "03 Co-Create with Seeed",
     dev_item03_subtitle: "Join Seeed's global community, project calls, and partnership programs",
@@ -227,6 +244,7 @@ const i18nDict = {
     gs_view_all_tutorials: "View All Resources & Tutorials",
     gs_hide_tutorials: "Hide Tutorials",
     dev_view_all_projects: "View All Projects",
+    dev_fb_group_btn: "Show us your demo in Seeed Facebook group",
     diff_beginner: "Beginner",
     diff_intermediate: "Intermediate",
     diff_advanced: "Advanced",
@@ -253,9 +271,17 @@ const i18nDict = {
     partners_title: "Supported Platforms & Developer Tools",
 
     // Accessories
-    acc_title: "Complete Your AI Robotics Station",
-    acc_subtitle: "Plug-and-play accessories verified by Seeed team",
-    acc_bundles_heading: "Recommended Station Bundles",
+    acc_title: "Build Your Own Robotics Workstation",
+    acc_subtitle: "Discover ready-to-use workstation bundles and verified accessories for advanced robotic manipulation, teleoperation, and Physical AI development.",
+    acc_bundles_heading: "Recommended Workstation Bundles",
+    acc_jetson_heading: "Jetson-Powered Edge Computer",
+    acc_camera_heading: "Camera",
+    acc_actuator_heading: "Actuator",
+    acc_expansion_heading: "Expansion Accessories",
+    acc_tag_control: "For Robot Control",
+    acc_tag_infer: "For Policy Inferencing",
+    acc_view_all: "View All",
+    acc_show_less: "Show Less",
     acc_bundle_buy_btn: "Buy on Seeed Studio",
     acc_bundle1_badge: "Starter Station",
     acc_bundle1_title: "Starter Station Bundle",
@@ -317,7 +343,7 @@ const i18nDict = {
     news_subtitle: "Fresh updates from the Seeed Studio Blog — product news, events, and more",
     news_loading: "Loading latest news...",
     news_error: "Couldn't load the news feed right now. Click to retry, or check the full blog.",
-    news_viewall: "View All News",
+    news_viewall: "Subscribe to Seeed Newsletter for Latest Updates",
     news_readmore: "Read More",
 
     // Community & Footer
@@ -330,7 +356,7 @@ const i18nDict = {
     nav_wiki: "Wiki 教程",
     nav_demos: "GitHub",
     nav_sim: "MuJoCo 仿真到现实",
-    nav_projects: "举办你的工作坊",
+    nav_projects: "演示与活动",
     nav_customization: "定制服务",
     nav_buynow: "立即购买",
 
@@ -343,6 +369,15 @@ const i18nDict = {
     hero_badge: "6+1 自由度开源机械臂",
     hero_desc: "加速物理 AI 在真实世界的落地部署",
     hero_watch_video: "观看视频",
+    hero_learn_more: "了解更多",
+    spec_strip_1_val: "最高 5 kg",
+    spec_strip_1_lbl: "负载能力",
+    spec_strip_2_val: "754mm",
+    spec_strip_2_lbl: "工作半径",
+    spec_strip_3_val: "6.7kg",
+    spec_strip_3_lbl: "整机重量",
+    spec_strip_4_val: "±0.1mm",
+    spec_strip_4_lbl: "重复定位精度",
 
     // Performance
     perf_title: "高性能与广泛应用场景",
@@ -396,14 +431,14 @@ const i18nDict = {
     spec_hide_full: "收起完整规格参数",
 
     // Application Scenarios
-    scenarios_main_title: "从学习到部署落地",
-    scenarios_main_subtitle: "从学术具身智能教育到工业边缘 AI 部署",
+    scenarios_main_title: "谁在使用 reBot Arm？",
+    scenarios_main_subtitle: "从高校物理 AI 教学到工业自动化部署落地",
 
     // Column 1: Education
     scenarios_edu_badge: "教育与培训",
     scenarios_edu_title: "学习物理 AI",
     scenarios_edu_short: "NVIDIA Isaac × Seeed 联合打造 19 模块 Sim-to-Real 实操课程。",
-    scenarios_edu_desc: "Seeed 与 NVIDIA 合作，提供基于 Seeed reBot Arm 和 NVIDIA Isaac 的 Sim-to-Real VLA 流程与官方实操课程，连接学术研究与高等教育。",
+    scenarios_edu_desc: "Seeed 与 NVIDIA 联合打造基于 Seeed reBot Arm 与 NVIDIA Isaac 的端到端 Sim-to-Real VLA 开发工作流，配套实操教学课程，架起前沿物理 AI 研究与高校机器人实践教学之间的桥梁。",
     scenarios_edu_stat1_val: "19 个",
     scenarios_edu_stat1_lbl: "详细实操模块",
     scenarios_edu_stat2_val: "Sim-to-Real",
@@ -419,7 +454,7 @@ const i18nDict = {
     scenarios_sci_badge: "前沿科学研究",
     scenarios_sci_title: "加速 VLA 模型研究",
     scenarios_sci_short: "预适配 7+ 主流 VLA 模型，原生打通 LeRobot 与 Isaac Sim 流程。",
-    scenarios_sci_desc: "开箱即用的前沿视觉-语言-动作 (VLA) 模型实验平台，支持主流 VLA 基线算法，实现数小时内从论文算法到真实机器人评估。",
+    scenarios_sci_desc: "开箱即用的视觉-语言-动作 (VLA) 研究平台。Seeed reBot Arm 已验证并全面适配主流 VLA 基线模型，大幅加速从科研论文到真实机器人实机评估的转化进程。",
     scenarios_sci_stat1_val: "7+",
     scenarios_sci_stat1_lbl: "已预适配 VLA 模型",
     scenarios_sci_stat2_val: "LeRobot",
@@ -432,9 +467,9 @@ const i18nDict = {
 
     // Column 3: Enterprise
     scenarios_ent_badge: "企业级应用",
-    scenarios_ent_title: "海量机器人数据采集支持",
+    scenarios_ent_title: "精简高效的机器人数据采集",
     scenarios_ent_short: "支持多视角遥操数采，一键生成并同步 Hugging Face Parquet 数据集。",
-    scenarios_ent_desc: "扩展你的具身智能数据引擎。Seeed reBot Arm 将遥操作转化为训练即用的数据集——原生 LeRobot 数据格式、多摄像头采集、断点续录与一键同步至 Hugging Face Hub。",
+    scenarios_ent_desc: "借助 Seeed reBot Arm 构建可扩展的物理 AI 数据集。支持遥操作、多摄像头同步采集、原生 LeRobot 数据集格式、断点续录及 Hugging Face Hub 一键同步，实现高效数据采集与模型训练。",
     scenarios_ent_stat1_val: "LeRobot",
     scenarios_ent_stat1_lbl: "PARQUET 数据集格式",
     scenarios_ent_stat2_val: "3× 1080p",
@@ -464,13 +499,21 @@ const i18nDict = {
     sim_real_btn: "在线试用真机（即将上线）",
 
     // SenseCraft Robotics
-    sensecraft_title: "SenseCraft Robotics",
-    sensecraft_subtitle: "从创意到真机运行 —— 全程零代码",
-    sensecraft_desc: "在桌面端准备数据、云端训练模型、一键真机验证策略 —— 无需编写代码，无需本地高配 GPU。",
-    sensecraft_line1: "<strong>引导式上手</strong><span class=\"sensecraft-feature-desc\">设备配置与数采分步引导，新手也能快速上手。</span>",
-    sensecraft_line2: "<strong>云端训练</strong><span class=\"sensecraft-feature-desc\">上传数据即可云端训练 VLA/ACT 模型，零本地算力门槛。</span>",
-    sensecraft_line3: "<strong>极速迭代</strong><span class=\"sensecraft-feature-desc\">将数据准备与训练周期从 5–7 天大幅缩短至 1–2 天。</span>",
-    sensecraft_line4: "<strong>闭环验证</strong><span class=\"sensecraft-feature-desc\">桌面端一键下发策略并复盘结果，全流程可追溯。</span>",
+    sensecraft_title: "3 小时内从机械臂配置到真实任务落地",
+    sensecraft_subtitle: "手把手引导您在一个零代码（NO-CODE）平台内，完成端到端的真实世界机器人操作与具身学习工作流。",
+    sensecraft_workflow_heading: "加速您的机器人开发全流程",
+    sc_step1_title: "设备标定 (Calibrate)",
+    sc_step1_desc: "引导式完成机械臂与相机标定，确保高精度数据采集。",
+    sc_step2_title: "数据采集 (Collect Data)",
+    sc_step2_desc: "通过遥操作录制机械臂示教轨迹，构建可直接用于训练的数据集。",
+    sc_step3_title: "云端训练 (Train)",
+    sc_step3_desc: "无需本地高配 GPU，直接在云端高效训练 VLA 模型。",
+    sc_step4_title: "策略部署 (Deploy Model)",
+    sc_step4_desc: "桌面端一键下发训练好的策略至 reBot，全程可追溯。",
+    sc_step5_title: "实时推理 (Inference)",
+    sc_step5_desc: "在边缘端实时运行已训练策略，即时评估机械臂执行表现。",
+    sc_step6_title: "真机抓取 (Grasp)",
+    sc_step6_desc: "执行习得的操作任务，见证机械臂将预训练策略转化为真实动作。",
     sensecraft_cta: "免费体验 SenseCraft",
     sensecraft_cta_note: "注册即送 1,000 免费云端训练与推理积分",
     sensecraft_ui_badge: "真实界面 / GIF 占位图",
@@ -525,11 +568,11 @@ const i18nDict = {
     lab_cta_talk: "联系教育合作团队",
 
     // Developer Hub
-    dev_main_title: "开发者中心",
-    dev_main_subtitle: "探索全球开发者优秀项目、教程与共创合作机会",
+    dev_main_title: "reBot 真实用户案例",
+    dev_main_subtitle: "探索来自 reBot 全球开发者社区的更多真实项目与创意构建。",
     dev_item01_title: "01 如何快速入门",
     dev_item01_subtitle: "reBot-RS 机械臂官方指南——从首次开机到进阶应用",
-    dev_item02_title: "02 参与贡献,汇聚全球社区",
+    dev_item02_title: "01 参与贡献,汇聚全球社区",
     dev_item02_subtitle: "探索全球开发者基于 reBot 打造的真实应用与创意项目",
     dev_item03_title: "03 与 Seeed 联合共创",
     dev_item03_subtitle: "加入 Seeed 全球社区、项目征集与合作伙伴计划",
@@ -547,6 +590,7 @@ const i18nDict = {
     gs_view_all_tutorials: "查看全部资源与教程",
     gs_hide_tutorials: "收起更多教程",
     dev_view_all_projects: "查看全部项目",
+    dev_fb_group_btn: "在 Seeed Facebook 群组分享你的演示",
     diff_beginner: "入门",
     diff_intermediate: "进阶",
     diff_advanced: "高阶",
@@ -573,9 +617,17 @@ const i18nDict = {
     partners_title: "支持的平台与开发者工具",
 
     // Accessories
-    acc_title: "打造你的具身智能机器人工作站",
-    acc_subtitle: "经过 Seeed 团队验证的即插即用配件",
-    acc_bundles_heading: "推荐具身智能工作站套装",
+    acc_title: "打造您的专属机器人工作站",
+    acc_subtitle: "探索开箱即用的工作站套件与官方验证配件，赋能高阶机器人操作、遥操作与物理 AI 开发。",
+    acc_bundles_heading: "推荐工作站套装",
+    acc_jetson_heading: "Jetson 边缘计算主机",
+    acc_camera_heading: "视觉相机",
+    acc_actuator_heading: "关节执行器",
+    acc_expansion_heading: "扩展配件",
+    acc_tag_control: "用于机械臂控制",
+    acc_tag_infer: "用于策略推理",
+    acc_view_all: "展开全部",
+    acc_show_less: "收起",
     acc_bundle_buy_btn: "在 Seeed 官方商城购买",
     acc_bundle1_badge: "入门工作站",
     acc_bundle1_title: "具身智能入门工作站套装",
@@ -637,7 +689,7 @@ const i18nDict = {
     news_subtitle: "Seeed Studio 博客实时更新 — 产品新闻、活动资讯与更多",
     news_loading: "正在加载最新动态...",
     news_error: "暂时无法加载新闻列表，点击重试，或前往博客查看完整内容。",
-    news_viewall: "查看全部动态",
+    news_viewall: "订阅 Seeed 机器人简报获取最新动态",
     news_readmore: "阅读全文",
 
     // Community & Footer
@@ -899,6 +951,8 @@ function initApp() {
   initHeroVideoBackground();
   initVideoViewportController();
   initSqueezeCarousel();
+  initHeroSpecsCounter();
+  initSenseCraftWorkflow();
 
   // Defer non-critical background scripts until the browser is idle, so the
   // Hero 3D entrance animation gets 100% CPU/GPU headroom on startup.
@@ -990,6 +1044,12 @@ function setupLanguageSelector() {
     const buyMenu = document.getElementById('buy-dropdown-menu');
     if (buyWrapper) buyWrapper.classList.remove('open');
     if (buyMenu) buyMenu.classList.remove('active');
+    const heroLearnMoreBtn = document.getElementById('hero-learn-more-btn');
+    if (heroLearnMoreBtn) {
+      heroLearnMoreBtn.href = lang === 'zh'
+        ? 'https://seeedstudio.world.tmall.com/shop/view_shop.htm?spm=a21xtw.29978516.0.0'
+        : 'https://www.seeedstudio.com/';
+    }
     try {
       if (typeof updateSqueezeLanguage === 'function') updateSqueezeLanguage();
     } catch (_) { /* not initialized yet (TDZ) — harmless */ }
@@ -1138,24 +1198,82 @@ function setupSpecToggle() {
 }
 
 function setupAccessoriesTabs() {
-  const accViewAllBtn = document.getElementById('acc-view-all-btn');
-  const accExtraCollapsible = document.getElementById('acc-extra-collapsible');
-  if (accViewAllBtn && accExtraCollapsible) {
-    accViewAllBtn.addEventListener('click', () => {
-      const isExpanded = accExtraCollapsible.classList.toggle('expanded');
-      accViewAllBtn.classList.toggle('expanded', isExpanded);
-      accViewAllBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-      const label = accViewAllBtn.querySelector('.toggle-text');
-      const lang = window.currentLang || 'en';
-      if (label) {
-        if (isExpanded) {
-          label.textContent = lang === 'zh' ? '收起更多配件' : 'Hide Extra Accessories';
-        } else {
-          label.textContent = lang === 'zh' ? '查看全部配件' : 'View All Accessories';
-        }
+  const grids = Array.from(document.querySelectorAll('#accessories .acc-category-grid'));
+  if (!grids.length) return;
+
+  const states = grids.map((grid) => {
+    const cards = Array.from(grid.children);
+    const toggleRow = document.createElement('div');
+    toggleRow.className = 'acc-category-toggle-row';
+    toggleRow.style.display = 'none';
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'gs-view-all-btn';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="toggle-text" data-i18n="acc_view_all">View All</span> <i class="fas fa-chevron-down toggle-icon"></i>';
+    toggleRow.appendChild(btn);
+
+    grid.parentNode.insertBefore(toggleRow, grid.nextSibling);
+
+    const state = { grid, cards, toggleRow, btn, expanded: false };
+
+    btn.addEventListener('click', () => {
+      state.expanded = !state.expanded;
+      applyRowLimit(state);
+    });
+
+    return state;
+  });
+
+  function getColumnCount(grid) {
+    const cols = window.getComputedStyle(grid).gridTemplateColumns;
+    if (!cols || cols === 'none') return 4;
+    return cols.trim().split(/\s+/).length || 4;
+  }
+
+  function applyRowLimit(state) {
+    const { grid, cards, toggleRow, btn, expanded } = state;
+    const cols = getColumnCount(grid);
+    const maxVisible = cols * 2;
+    const needsToggle = cards.length > maxVisible;
+
+    cards.forEach((card, idx) => {
+      if (!needsToggle || expanded || idx < maxVisible) {
+        card.classList.remove('acc-card-hidden-row');
+      } else {
+        card.classList.add('acc-card-hidden-row');
       }
     });
+
+    toggleRow.style.display = needsToggle ? 'flex' : 'none';
+    btn.classList.toggle('expanded', expanded);
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+
+    const label = btn.querySelector('.toggle-text');
+    const lang = window.currentLang || 'en';
+    if (label) {
+      if (expanded) {
+        label.setAttribute('data-i18n', 'acc_show_less');
+        label.textContent = (typeof i18nDict !== 'undefined' && i18nDict[lang]?.acc_show_less) || 'Show Less';
+      } else {
+        label.setAttribute('data-i18n', 'acc_view_all');
+        label.textContent = (typeof i18nDict !== 'undefined' && i18nDict[lang]?.acc_view_all) || 'View All';
+      }
+    }
   }
+
+  function refreshAll() {
+    states.forEach(applyRowLimit);
+  }
+
+  refreshAll();
+
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(refreshAll, 120);
+  });
 }
 
 /**
@@ -2587,6 +2705,220 @@ if (document.readyState === 'complete') {
   initSimIframeLazyLoad();
 } else {
   document.addEventListener('DOMContentLoaded', initSimIframeLazyLoad);
+}
+
+/**
+ * Key Specifications Strip Odometer Digit-Rolling Animation
+ */
+function initHeroSpecsCounter() {
+  const strip = document.querySelector('.hero-specs-strip');
+  if (!strip) return;
+
+  const valueEls = Array.from(strip.querySelectorAll('.hero-spec-value'));
+  if (!valueEls.length) return;
+
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let hasAnimated = false;
+
+  function buildOdometerDOM(el, text) {
+    el.innerHTML = '';
+    const tokens = text.match(/\d|\D+/g) || [text];
+    let digitIndex = 0;
+
+    tokens.forEach((tok) => {
+      if (/^\d$/.test(tok)) {
+        const targetDigit = parseInt(tok, 10);
+        // Roll a full cycle for small digits (0, 1, 2) so every digit visibly scrolls
+        const steps = targetDigit < 3 ? 10 + targetDigit : targetDigit;
+        const total = steps + 1;
+
+        const win = document.createElement('span');
+        win.className = 'odo-digit-window';
+
+        const reel = document.createElement('span');
+        reel.className = 'odo-digit-reel';
+        reel.dataset.targetPct = ((steps / total) * 100).toFixed(4);
+        reel.style.transitionDelay = `${digitIndex * 70}ms`;
+
+        for (let i = 0; i <= steps; i++) {
+          const dSpan = document.createElement('span');
+          dSpan.textContent = String(i % 10);
+          reel.appendChild(dSpan);
+        }
+
+        win.appendChild(reel);
+        el.appendChild(win);
+        digitIndex++;
+      } else {
+        const sSpan = document.createElement('span');
+        sSpan.className = 'odo-static';
+        sSpan.textContent = tok;
+        el.appendChild(sSpan);
+      }
+    });
+  }
+
+  function runAnimation() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+
+    if (prefersReduced) return;
+
+    valueEls.forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      const lang = window.currentLang || 'en';
+      const dictVal = (typeof i18nDict !== 'undefined' && i18nDict[lang] && i18nDict[lang][key])
+        ? i18nDict[lang][key]
+        : el.textContent.trim();
+      buildOdometerDOM(el, dictVal);
+    });
+
+    // Double rAF ensures initial translateY(0) is committed before transitioning
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        strip.querySelectorAll('.odo-digit-reel').forEach((reel) => {
+          reel.style.transform = `translateY(-${reel.dataset.targetPct}%)`;
+        });
+      });
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          runAnimation();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    observer.observe(strip);
+  } else {
+    runAnimation();
+  }
+}
+
+/**
+ * SenseCraft 6-Step Workflow Auto-Sequential Highlight & Hover Pause Controller
+ */
+function initSenseCraftWorkflow() {
+  const section = document.getElementById('sensecraft');
+  const listEl = document.getElementById('sensecraft-steps-list');
+  const videoEl = document.getElementById('sensecraft-step-video');
+  const badgeEl = document.getElementById('sensecraft-step-badge');
+  const visualEl = document.getElementById('sensecraft-visual');
+  if (!listEl || !videoEl) return;
+
+  const items = Array.from(listEl.querySelectorAll('.sensecraft-step-item'));
+  if (!items.length) return;
+
+  const INTERVAL_MS = 4500;
+  let activeIndex = 0;
+  let isPaused = false;
+  let isVisible = true;
+  let timerId = null;
+
+  function setStep(idx, restartProgress = true) {
+    activeIndex = (idx + items.length) % items.length;
+    items.forEach((item, i) => {
+      const isCurrent = i === activeIndex;
+      item.classList.toggle('active', isCurrent);
+      const bar = item.querySelector('.sensecraft-step-progress');
+      if (bar) {
+        bar.style.transition = 'none';
+        bar.style.width = isCurrent ? '0%' : '0%';
+        if (isCurrent && restartProgress && !isPaused && isVisible) {
+          void bar.offsetWidth; // force reflow
+          bar.style.transition = `width ${INTERVAL_MS}ms linear`;
+          bar.style.width = '100%';
+        }
+      }
+    });
+
+    const currentItem = items[activeIndex];
+    const nextSrc = currentItem.getAttribute('data-video');
+    const nextBadge = currentItem.getAttribute('data-badge');
+    if (badgeEl && nextBadge) {
+      badgeEl.textContent = nextBadge;
+    }
+    if (nextSrc && videoEl.getAttribute('src') !== nextSrc) {
+      videoEl.setAttribute('src', nextSrc);
+      videoEl.load();
+      videoEl.play().catch(() => {});
+    }
+  }
+
+  function startTimer() {
+    stopTimer();
+    if (isPaused || !isVisible) return;
+    const activeBar = items[activeIndex]?.querySelector('.sensecraft-step-progress');
+    if (activeBar) {
+      activeBar.style.transition = 'none';
+      activeBar.style.width = '0%';
+      void activeBar.offsetWidth;
+      activeBar.style.transition = `width ${INTERVAL_MS}ms linear`;
+      activeBar.style.width = '100%';
+    }
+    timerId = setInterval(() => {
+      if (!isPaused && isVisible) {
+        setStep(activeIndex + 1, true);
+      }
+    }, INTERVAL_MS);
+  }
+
+  function stopTimer() {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+  }
+
+  function pauseAt(idx) {
+    isPaused = true;
+    stopTimer();
+    if (typeof idx === 'number') {
+      setStep(idx, false);
+    } else {
+      const activeBar = items[activeIndex]?.querySelector('.sensecraft-step-progress');
+      if (activeBar) {
+        activeBar.style.transition = 'none';
+        activeBar.style.width = '100%';
+      }
+    }
+  }
+
+  function resume() {
+    isPaused = false;
+    startTimer();
+  }
+
+  items.forEach((item, idx) => {
+    item.addEventListener('mouseenter', () => pauseAt(idx));
+    item.addEventListener('click', () => pauseAt(idx));
+  });
+
+  listEl.addEventListener('mouseleave', resume);
+  if (visualEl) {
+    visualEl.addEventListener('mouseenter', () => pauseAt());
+    visualEl.addEventListener('mouseleave', resume);
+  }
+
+  if ('IntersectionObserver' in window && section) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !isPaused) {
+          startTimer();
+          videoEl.play().catch(() => {});
+        } else {
+          stopTimer();
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(section);
+  } else {
+    startTimer();
+  }
 }
 
 

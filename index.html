@@ -668,6 +668,126 @@
       font-weight: 400;
       text-shadow: 0 1px 14px rgba(8, 13, 24, 0.5);
     }
+    .hero-learn-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-top: 2rem;
+      padding: 0.85rem 1.85rem;
+      background: #99DA00;
+      color: #0F172A !important;
+      font-family: var(--font-main);
+      font-size: 0.98rem;
+      font-weight: 700;
+      border-radius: 6px;
+      text-decoration: none !important;
+      border: 1px solid #B9F227;
+      box-shadow: 0 4px 20px rgba(153, 218, 0, 0.35);
+      transition: all 0.25s ease;
+    }
+    .hero-learn-more-btn:hover {
+      background: #B9F227;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(153, 218, 0, 0.5);
+    }
+    .hero-learn-more-btn i {
+      font-size: 0.85rem;
+      transition: transform 0.25s ease;
+    }
+    .hero-learn-more-btn:hover i {
+      transform: translateX(4px);
+    }
+
+    /* Hero Bottom Key Specs Strip */
+    .hero-specs-strip {
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--nv-border);
+      padding: 2.25rem 0;
+      position: relative;
+      z-index: 5;
+    }
+    .hero-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+    }
+    .hero-spec-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5rem 1.5rem;
+      border-right: 1px solid #E2E8F0;
+      gap: 0.4rem;
+    }
+    .hero-spec-item:last-child {
+      border-right: none;
+    }
+    .hero-spec-value {
+      font-family: var(--font-main);
+      font-size: clamp(1.85rem, 2.7vw, 2.55rem);
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+    .odo-static {
+      white-space: pre;
+    }
+    .odo-digit-window {
+      display: inline-block;
+      height: 1.15em;
+      line-height: 1.15em;
+      overflow: hidden;
+      vertical-align: bottom;
+    }
+    .odo-digit-reel {
+      display: flex;
+      flex-direction: column;
+      transform: translateY(0);
+      transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    .odo-digit-reel span {
+      display: block;
+      height: 1.15em;
+      line-height: 1.15em;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .odo-digit-reel {
+        transition: none;
+      }
+    }
+    .hero-spec-label {
+      font-family: var(--font-code);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--nv-green);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 992px) {
+      .hero-specs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 1.5rem;
+      }
+      .hero-spec-item:nth-child(2n) {
+        border-right: none;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-specs-strip {
+        padding: 1.75rem 0;
+      }
+      .hero-spec-item {
+        padding: 0.4rem 0.75rem;
+      }
+    }
     @media (max-width: 992px) {
       .unitree-hero-section {
         flex-direction: column;
@@ -729,6 +849,9 @@
       overflow: hidden;
       position: relative;
       z-index: 10;
+    }
+    .partners-marquee-section .marquee-track {
+      animation-direction: reverse;
     }
     .partners-header {
       text-align: center;
@@ -1870,70 +1993,99 @@
       color: #A3E635;
       border: 1px solid rgba(104, 166, 0, 0.35);
     }
-    .sensecraft-visual img {
+    .sensecraft-visual img,
+    .sensecraft-visual video {
       display: block;
       width: 100%;
-      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #0F172A;
     }
-    .sensecraft-features-list {
+    .sensecraft-workflow-heading {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0F172A;
+      font-family: var(--font-main);
+      letter-spacing: -0.01em;
+    }
+    .sensecraft-steps-list {
       display: flex;
       flex-direction: column;
-      gap: 0.65rem;
+      gap: 0.5rem;
       margin: 0;
     }
-    .sensecraft-feature-line {
+    .sensecraft-step-item {
+      position: relative;
+      overflow: hidden;
       background: #F8FAFC;
       border: 1px solid #E2E8F0;
       border-radius: 6px;
-      padding: 0.75rem 1rem;
+      padding: 0.65rem 0.95rem;
       display: flex;
       align-items: flex-start;
       gap: 0.75rem;
-      transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      transition: border-color 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
     }
-    .sensecraft-feature-line:hover {
-      border-color: rgba(104, 166, 0, 0.45);
-      background: #FFFFFF;
-      transform: translateX(3px);
+    .sensecraft-step-item:hover,
+    .sensecraft-step-item.active {
+      border-color: var(--nv-green);
+      background: #F4FBF0;
+      box-shadow: 0 4px 14px rgba(104, 166, 0, 0.1);
     }
-    .sensecraft-feature-line i {
-      font-size: 0.95rem;
-      color: var(--nv-green);
+    .sensecraft-step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: #E2E8F0;
+      color: #475569;
+      font-family: var(--font-code);
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
-      width: 20px;
-      text-align: center;
-      margin-top: 0.2rem;
+      margin-top: 0.1rem;
+      transition: background-color 0.22s ease, color 0.22s ease;
     }
-    .sensecraft-feature-text {
-      font-size: 0.88rem;
-      color: #334155;
-      line-height: 1.45;
-      font-family: var(--font-main);
-      white-space: normal;
-      overflow: visible;
-      text-overflow: clip;
+    .sensecraft-step-item:hover .sensecraft-step-num,
+    .sensecraft-step-item.active .sensecraft-step-num {
+      background: var(--nv-green);
+      color: #FFFFFF;
+    }
+    .sensecraft-step-body {
       display: flex;
       flex-direction: column;
-      gap: 0.2rem;
+      gap: 0.15rem;
+      min-width: 0;
     }
-    @media (max-width: 640px) {
-      .sensecraft-feature-text {
-        white-space: normal;
-      }
-    }
-    .sensecraft-feature-text strong {
-      display: block;
+    .sensecraft-step-title {
       color: #0F172A;
       font-weight: 700;
-      font-size: 0.92rem;
-      line-height: 1.35;
-      margin-right: 0;
+      font-size: 0.9rem;
+      line-height: 1.3;
+      font-family: var(--font-main);
     }
-    .sensecraft-feature-desc {
-      display: block;
+    .sensecraft-step-desc {
       color: #475569;
-      font-size: 0.85rem;
-      line-height: 1.45;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      font-family: var(--font-main);
+    }
+    .sensecraft-step-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2.5px;
+      width: 0%;
+      background: var(--nv-green);
+      opacity: 0;
+      transition: none;
+    }
+    .sensecraft-step-item.active .sensecraft-step-progress {
+      opacity: 1;
     }
     .sensecraft-cta-hero-box {
       background: transparent;
@@ -2776,6 +2928,34 @@
       transform: scale(1.06);
     }
 
+    .acc-category-block {
+      margin-top: 3.25rem;
+    }
+    .acc-card-hidden-row {
+      display: none !important;
+    }
+    .acc-category-toggle-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.75rem;
+    }
+    .acc-role-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      align-self: flex-start;
+      padding: 0.22rem 0.65rem;
+      border-radius: 4px;
+      font-family: var(--font-code);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--nv-green);
+      background: rgba(104, 166, 0, 0.1);
+      border: 1px solid rgba(104, 166, 0, 0.28);
+      margin-bottom: 0.5rem;
+    }
+
     .accessory-info {
       display: flex;
       flex-direction: column;
@@ -2971,9 +3151,9 @@
     }
     .lab-uni-marquee-section {
       width: 100%;
-      margin-top: 1rem;
-      margin-bottom: 2.75rem;
-      padding: 2.25rem 0 0.5rem;
+      margin-top: 3.5rem;
+      margin-bottom: 0;
+      padding: 2.5rem 0 0;
       border-top: 1px solid var(--nv-border);
       background: transparent;
       overflow: hidden;
@@ -3752,7 +3932,11 @@
       animation: specFadeIn 0.3s ease;
     }
     .dev-projects-footer {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
       padding-top: 0.5rem;
     }
 
@@ -4675,7 +4859,7 @@
         <li><a href="https://wiki.seeedstudio.com/" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_wiki">Wiki Tutorials</a></li>
         <li><a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_demos">GitHub</a></li>
         <li><a href="#sim-to-real" class="hub-nav-link" data-i18n="nav_sim">MuJoCo Sim-to-Real</a></li>
-        <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_projects">Host Your Workshop</a></li>
+        <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_projects">Demo &amp; Events</a></li>
         <li><a href="#cocreate" class="hub-nav-link" onclick="openCocreateAccordion()" data-i18n="nav_customization">Customization</a></li>
       </ul>
     </nav>
@@ -4782,6 +4966,34 @@
           <p class="unitree-hero-description" data-i18n="hero_desc">
             Accelerate Physical AI Deployment in Real World
           </p>
+          <a id="hero-learn-more-btn" href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="hero-learn-more-btn">
+            <span data-i18n="hero_learn_more">Learn More</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Specifications Highlight Strip -->
+    <section class="hero-specs-strip" aria-label="Key Specifications">
+      <div class="container" style="max-width: 1680px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
+        <div class="hero-specs-grid">
+          <div class="hero-spec-item">
+            <span class="hero-spec-value" data-i18n="spec_strip_1_val">Up to 5 kg</span>
+            <span class="hero-spec-label" data-i18n="spec_strip_1_lbl">Payloads</span>
+          </div>
+          <div class="hero-spec-item">
+            <span class="hero-spec-value" data-i18n="spec_strip_2_val">754mm</span>
+            <span class="hero-spec-label" data-i18n="spec_strip_2_lbl">Reach</span>
+          </div>
+          <div class="hero-spec-item">
+            <span class="hero-spec-value" data-i18n="spec_strip_3_val">6.7kg</span>
+            <span class="hero-spec-label" data-i18n="spec_strip_3_lbl">Weight</span>
+          </div>
+          <div class="hero-spec-item">
+            <span class="hero-spec-value" data-i18n="spec_strip_4_val">±0.1mm</span>
+            <span class="hero-spec-label" data-i18n="spec_strip_4_lbl">Repeatability</span>
+          </div>
         </div>
       </div>
     </section>
@@ -4794,8 +5006,8 @@
         
         <!-- Section Header -->
         <div class="section-title-group" style="text-align: center; margin-bottom: 3.5rem;">
-          <h2 class="section-main-title" data-i18n="scenarios_main_title">From Learning to Deployment</h2>
-          <p class="section-subtitle" data-i18n="scenarios_main_subtitle">From Academic Embodied AI Education to Industrial Edge AI Deployment</p>
+          <h2 class="section-main-title" data-i18n="scenarios_main_title">Who is Using reBot Arm?</h2>
+          <p class="section-subtitle" data-i18n="scenarios_main_subtitle">From Academic Physical AI Learning to Industrial Automation Deployment</p>
         </div>
 
         <!-- Swiss Technical Grid: 01 Education / 02 Scientific Research / 03 Enterprise -->
@@ -4817,7 +5029,7 @@
 
               <div class="swiss-col-copy">
                 <h3 class="swiss-col-title" data-i18n="scenarios_edu_title">Learning Physical AI</h3>
-                <p class="swiss-col-summary" data-i18n="scenarios_edu_desc">Collaborating with NVIDIA, Seeed provides a Sim-to-Real VLA Pipeline with Seeed reBot Arm and NVIDIA Isaac. Official hands-on curriculum bridging academic research and higher education.</p>
+                <p class="swiss-col-summary" data-i18n="scenarios_edu_desc">In collaboration with NVIDIA, Seeed provides the end-to-end Sim-to-Real VLA development workflow with Seeed reBot Arm and NVIDIA Isaac. Supported by the hands-on learning curriculum, it bridges cutting-edge Physical AI research and practical robotics learning in higher education.</p>
               </div>
             </div>
 
@@ -4849,7 +5061,7 @@
 
               <div class="swiss-col-copy">
                 <h3 class="swiss-col-title" data-i18n="scenarios_sci_title">Accelerate VLA Research</h3>
-                <p class="swiss-col-summary" data-i18n="scenarios_sci_desc">A ready-to-run experiment platform for cutting-edge Vision-Language-Action models. Seeed reBot Arm comes with compatibility and verification of today's most popular VLA baselines — so you can go from paper to real-robot evaluation in hours, not weeks.</p>
+                <p class="swiss-col-summary" data-i18n="scenarios_sci_desc">A ready-to-run platform for Vision-Language-Action (VLA) research. Seeed reBot Arm supports verified integration with the most popular VLA baselines, accelerating the transition from research papers to real-world robotic evaluation.</p>
               </div>
             </div>
 
@@ -4874,8 +5086,8 @@
               </div>
 
               <div class="swiss-col-copy">
-                <h3 class="swiss-col-title" data-i18n="scenarios_ent_title">Massive Support for Robot Data Acquisition</h3>
-                <p class="swiss-col-summary" data-i18n="scenarios_ent_desc">Scale up your embodied AI data engine. Seeed reBot Arm turns teleoperation into training-ready datasets — native LeRobot Dataset format, multi-camera capture, checkpoint-and-resume recording, and one-click sync to Hugging Face Hub — ready to deploy across fleets, sites, and annotation teams.</p>
+                <h3 class="swiss-col-title" data-i18n="scenarios_ent_title">Streamline Robotic Data Acquisition</h3>
+                <p class="swiss-col-summary" data-i18n="scenarios_ent_desc">Build scalable Physical AI datasets with Seeed reBot Arm. Supporting teleoperation, multi-camera capture, native LeRobot Dataset format, checkpoint-and-resume recording, and Hugging Face Hub integration for efficient data collection and model training.</p>
               </div>
             </div>
 
@@ -4886,6 +5098,159 @@
           </article>
 
         </div>
+
+        <!-- Partner Universities & Research Labs Marquee (Same style as Supported Platforms & Developer Tools) -->
+        <div class="lab-uni-marquee-section">
+          <div class="partners-header" data-i18n="lab_uni_wall_title">Trusted by Global Universities, Robotics Institutes &amp; Innovation Labs</div>
+          <div class="marquee-container">
+            <div class="marquee-track">
+
+              <!-- Track Set 1 -->
+              <div class="partner-logo-item" title="MIT 麻省理工学院">
+                <img src="image/高校logo/06%20MIT%20麻省理工学院.png" alt="MIT" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="UC Berkeley 加州大学伯克利">
+                <img src="image/高校logo/07%20UC%20Berkeley%20加州大学伯克利.png" alt="UC Berkeley" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="Higher Colleges of Technology">
+                <img src="image/高校logo/08%20Higher%20Colleges%20of%20Technology.png" alt="Higher Colleges of Technology" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="华南农业大学">
+                <img src="image/高校logo/22%20华南农业大学.png" alt="华南农业大学" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="西南交通大学">
+                <img src="image/高校logo/20%20西南交通大学.png" alt="西南交通大学" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="深圳信息职业技术大学">
+                <img src="image/高校logo/24%20深圳信息职业技术大学.png" alt="深圳信息职业技术大学" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="重庆工程学院">
+                <img src="image/高校logo/21%20重庆工程学院.png" alt="重庆工程学院" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="宜宾学院">
+                <img src="image/高校logo/23%20宜宾学院.png" alt="宜宾学院" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="MITERS">
+                <img src="image/高校logo/09%20MITERS.png" alt="MITERS" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="FAB LAB BCN">
+                <img src="image/高校logo/14%20FAB%20LAB%20BCN.png" alt="FAB LAB BCN" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="FAB HUB">
+                <img src="image/高校logo/10%20FAB%20HUB.png" alt="FAB HUB" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="柴火创客空间 Chaihuo Makers">
+                <img src="image/高校logo/04%20柴火创客%20Chaihuo%20Makers.png" alt="柴火创客" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="OPENELAB">
+                <img src="image/高校logo/05%20OPENELAB.png" alt="OPENELAB" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="深圳市机器人协会 SRA">
+                <img src="image/高校logo/01%20深圳市机器人协会%20SRA.png" alt="深圳市机器人协会" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="HACK OPS">
+                <img src="image/高校logo/02%20HACK%20OPS.png" alt="HACK OPS" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="Physical AI Belgrade">
+                <img src="image/高校logo/19%20Physical%20AI%20Belgrade.png" alt="Physical AI Belgrade" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="RoboSEasy">
+                <img src="image/高校logo/12%20RoboSEasy.png" alt="RoboSEasy" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="ROBO STATION">
+                <img src="image/高校logo/16%20ROBO%20STATION.png" alt="ROBO STATION" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="ROBSTRIDE DYNAMICS">
+                <img src="image/高校logo/17%20ROBSTRIDE%20DYNAMICS.png" alt="ROBSTRIDE DYNAMICS" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="FAIR plus 机器人全产业链接会">
+                <img src="image/高校logo/18%20FAIR%20plus%20机器人全产业链接会.png" alt="FAIR plus" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="agora">
+                <img src="image/高校logo/13%20agora.png" alt="agora" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="ALIENBAZAAR">
+                <img src="image/高校logo/03%20ALIENBAZAAR.png" alt="ALIENBAZAAR" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" title="Solo">
+                <img src="image/高校logo/15%20Solo.png" alt="Solo" loading="lazy" decoding="async">
+              </div>
+
+              <!-- Track Set 2 (Seamless Loop) -->
+              <div class="partner-logo-item" aria-hidden="true" title="MIT 麻省理工学院">
+                <img src="image/高校logo/06%20MIT%20麻省理工学院.png" alt="MIT" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="UC Berkeley 加州大学伯克利">
+                <img src="image/高校logo/07%20UC%20Berkeley%20加州大学伯克利.png" alt="UC Berkeley" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="Higher Colleges of Technology">
+                <img src="image/高校logo/08%20Higher%20Colleges%20of%20Technology.png" alt="Higher Colleges of Technology" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="华南农业大学">
+                <img src="image/高校logo/22%20华南农业大学.png" alt="华南农业大学" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="西南交通大学">
+                <img src="image/高校logo/20%20西南交通大学.png" alt="西南交通大学" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="深圳信息职业技术大学">
+                <img src="image/高校logo/24%20深圳信息职业技术大学.png" alt="深圳信息职业技术大学" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="重庆工程学院">
+                <img src="image/高校logo/21%20重庆工程学院.png" alt="重庆工程学院" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="宜宾学院">
+                <img src="image/高校logo/23%20宜宾学院.png" alt="宜宾学院" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="MITERS">
+                <img src="image/高校logo/09%20MITERS.png" alt="MITERS" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="FAB LAB BCN">
+                <img src="image/高校logo/14%20FAB%20LAB%20BCN.png" alt="FAB LAB BCN" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="FAB HUB">
+                <img src="image/高校logo/10%20FAB%20HUB.png" alt="FAB HUB" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="柴火创客空间 Chaihuo Makers">
+                <img src="image/高校logo/04%20柴火创客%20Chaihuo%20Makers.png" alt="柴火创客" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="OPENELAB">
+                <img src="image/高校logo/05%20OPENELAB.png" alt="OPENELAB" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="深圳市机器人协会 SRA">
+                <img src="image/高校logo/01%20深圳市机器人协会%20SRA.png" alt="深圳市机器人协会" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="HACK OPS">
+                <img src="image/高校logo/02%20HACK%20OPS.png" alt="HACK OPS" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="Physical AI Belgrade">
+                <img src="image/高校logo/19%20Physical%20AI%20Belgrade.png" alt="Physical AI Belgrade" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="RoboSEasy">
+                <img src="image/高校logo/12%20RoboSEasy.png" alt="RoboSEasy" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="ROBO STATION">
+                <img src="image/高校logo/16%20ROBO%20STATION.png" alt="ROBO STATION" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="ROBSTRIDE DYNAMICS">
+                <img src="image/高校logo/17%20ROBSTRIDE%20DYNAMICS.png" alt="ROBSTRIDE DYNAMICS" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="FAIR plus 机器人全产业链接会">
+                <img src="image/高校logo/18%20FAIR%20plus%20机器人全产业链接会.png" alt="FAIR plus" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="agora">
+                <img src="image/高校logo/13%20agora.png" alt="agora" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="ALIENBAZAAR">
+                <img src="image/高校logo/03%20ALIENBAZAAR.png" alt="ALIENBAZAAR" loading="lazy" decoding="async">
+              </div>
+              <div class="partner-logo-item" aria-hidden="true" title="Solo">
+                <img src="image/高校logo/15%20Solo.png" alt="Solo" loading="lazy" decoding="async">
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -4980,202 +5345,15 @@
         
         <!-- Section Header -->
         <div class="section-title-group" style="text-align: center; margin: 0 auto 3rem;">
-          <h2 class="section-main-title" data-i18n="dev_main_title">Developer Hub</h2>
-          <p class="section-subtitle" data-i18n="dev_main_subtitle">Explore projects, tutorials, and co-creation opportunities with global developers</p>
+          <h2 class="section-main-title" data-i18n="dev_main_title">reBot Real User Cases</h2>
+          <p class="section-subtitle" data-i18n="dev_main_subtitle">Explore more real-world projects and creative builds from reBot global developer community.</p>
         </div>
 
         <!-- Accordion List -->
         <div class="hub-accordion-container">
           
-          <!-- Accordion Item 01: How to Get Started -->
-          <div class="hub-accordion-item" id="get-started">
-            <div class="hub-accordion-header">
-              <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title" data-i18n="dev_item01_title">
-                  <i class="fas fa-rocket" style="color: var(--nv-green); font-size: 1.1rem;"></i>
-                  01 How to Get Started
-                </h3>
-                <p class="hub-accordion-subtitle" data-i18n="dev_item01_subtitle">Official guides for the reBot-RS robotic arm — from first boot to advanced applications</p>
-              </div>
-            </div>
-
-            <div class="hub-accordion-content">
-              <!-- Wiki Entry Links Grid (4 Featured Tutorials + View All Tutorials + 1-Row Open-Source Icons) -->
-              <div class="getstarted-grid">
-                
-                <!-- Featured 4 Tutorials -->
-                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_b601_rs_getting_started/" target="_blank" rel="noopener noreferrer">
-                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">1</span>
-                  <div class="gs-step-content">
-                    <div class="gs-step-title-row">
-                      <span class="gs-step-title" data-i18n="gs_link1">Quick Start</span>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </div>
-                  </div>
-                </a>
-                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_lerobot/" target="_blank" rel="noopener noreferrer">
-                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">2</span>
-                  <div class="gs-step-content">
-                    <div class="gs-step-title-row">
-                      <span class="gs-step-title" data-i18n="gs_link2">with LeRobot</span>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </div>
-                  </div>
-                </a>
-                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_ros2_integration/" target="_blank" rel="noopener noreferrer">
-                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">3</span>
-                  <div class="gs-step-content">
-                    <div class="gs-step-title-row">
-                      <span class="gs-step-title" data-i18n="gs_link6">with ROS2</span>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </div>
-                  </div>
-                </a>
-                <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_isaacsim/" target="_blank" rel="noopener noreferrer">
-                  <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">4</span>
-                  <div class="gs-step-content">
-                    <div class="gs-step-title-row">
-                      <span class="gs-step-title" data-i18n="gs_link7">with Isaac Sim</span>
-                      <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                    </div>
-                  </div>
-                </a>
-
-                <!-- Collapsible Remaining Tutorials & Open-Source Resources -->
-                <div class="gs-extra-tutorials" id="gs-extra-tutorials">
-                  <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_pinocchio_meshcat/" target="_blank" rel="noopener noreferrer">
-                    <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">5</span>
-                    <div class="gs-step-content">
-                      <div class="gs-step-title-row">
-                        <span class="gs-step-title" data-i18n="gs_link3">with Pinocchio</span>
-                        <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                      </div>
-                    </div>
-                  </a>
-                  <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_mit_control/" target="_blank" rel="noopener noreferrer">
-                    <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">6</span>
-                    <div class="gs-step-content">
-                      <div class="gs-step-title-row">
-                        <span class="gs-step-title" data-i18n="gs_link4">Motor SDK</span>
-                        <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                      </div>
-                    </div>
-                  </a>
-                  <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_grasping_demo/" target="_blank" rel="noopener noreferrer">
-                    <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">7</span>
-                    <div class="gs-step-content">
-                      <div class="gs-step-title-row">
-                        <span class="gs-step-title" data-i18n="gs_link5">with Visual Grasping</span>
-                        <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                      </div>
-                    </div>
-                  </a>
-                  <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_arm_b601_rs_web_simulator_developer_guide/" target="_blank" rel="noopener noreferrer">
-                    <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">8</span>
-                    <div class="gs-step-content">
-                      <div class="gs-step-title-row">
-                        <span class="gs-step-title" data-i18n="gs_link8">Web Control System</span>
-                        <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                      </div>
-                    </div>
-                  </a>
-                  <a class="gs-step-item" href="https://wiki.seeedstudio.com/wrc_demo_tutorial/" target="_blank" rel="noopener noreferrer">
-                    <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">9</span>
-                    <div class="gs-step-content">
-                      <div class="gs-step-title-row">
-                        <span class="gs-step-title" data-i18n="gs_link9">with Agent Claw</span>
-                        <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                      </div>
-                    </div>
-                  </a>
-                  <a class="gs-step-item" href="https://wiki.seeedstudio.com/rebot_physical_ai_course_introduction/" target="_blank" rel="noopener noreferrer">
-                    <span class="gs-step-num" style="background: rgba(104, 166, 0, 0.12); color: var(--nv-green);">10</span>
-                    <div class="gs-step-content">
-                      <div class="gs-step-title-row">
-                        <span class="gs-step-title" data-i18n="gs_link10">Beginner Course</span>
-                        <i class="fas fa-arrow-right gs-step-link-icon"></i>
-                      </div>
-                    </div>
-                  </a>
-
-                  <!-- Open-Source Resources (Inside Collapsible) -->
-                  <div class="getstarted-group-label" data-i18n="gs_group_resources">
-                    <i class="fab fa-github"></i> Open-Source Resources
-                  </div>
-
-                  <!-- 11 Open-Source Resources as a Single Row of Icons -->
-                  <div class="gs-opensource-icon-row">
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/reBot-DevArm/tree/main/hardware/reBot_B601_RS" target="_blank" rel="noopener noreferrer" title="Hardware Collection">
-                      <i class="fas fa-microchip"></i>
-                      <span data-i18n="gs_link11">Hardware Collection</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/reBot-DevArm/tree/main/Rebot_Arm_description/RS" target="_blank" rel="noopener noreferrer" title="Description Package (URDF / Mesh)">
-                      <i class="fas fa-cube"></i>
-                      <span data-i18n="gs_link12">URDF / Mesh</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Yang-Ci/ReBot_Arm_DigitalTwin_RS" target="_blank" rel="noopener noreferrer" title="Digital Twin / Web Control System">
-                      <i class="fas fa-globe"></i>
-                      <span data-i18n="gs_link13">Digital Twin</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/reBot-DevArm" target="_blank" rel="noopener noreferrer" title="Main Repository">
-                      <i class="fab fa-github"></i>
-                      <span data-i18n="gs_link14">Main Repo</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/reBotArm_control_py" target="_blank" rel="noopener noreferrer" title="Python SDK">
-                      <i class="fab fa-python"></i>
-                      <span data-i18n="gs_link15">Python SDK</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/reBotArmController_ROS2" target="_blank" rel="noopener noreferrer" title="ROS2 Controller">
-                      <i class="fas fa-cogs"></i>
-                      <span data-i18n="gs_link16">ROS2 Controller</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/lerobot-robot-seeed-b601" target="_blank" rel="noopener noreferrer" title="LeRobot Robot Adapter">
-                      <i class="fas fa-robot"></i>
-                      <span data-i18n="gs_link17">LeRobot Adapter</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/lerobot-teleoperator-rebot-arm-102" target="_blank" rel="noopener noreferrer" title="LeRobot Teleoperator Adapter">
-                      <i class="fas fa-gamepad"></i>
-                      <span data-i18n="gs_link18">Teleop Adapter</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/reBot-Isaacsim" target="_blank" rel="noopener noreferrer" title="Isaac Sim">
-                      <i class="fas fa-vr-cardboard"></i>
-                      <span data-i18n="gs_link19">Isaac Sim</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/reBot-DevArm-Grasp" target="_blank" rel="noopener noreferrer" title="Visual Grasping Demo">
-                      <i class="fas fa-eye"></i>
-                      <span data-i18n="gs_link20">Visual Grasping</span>
-                    </a>
-                    <a class="gs-os-icon-item" href="https://github.com/Seeed-Projects/reBot-DevArm/tree/main/hardware/camera-mounts" target="_blank" rel="noopener noreferrer" title="Camera Mounts Collection">
-                      <i class="fas fa-camera"></i>
-                      <span data-i18n="gs_link21">Camera Mounts</span>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- View All Tutorials Button -->
-                <div class="gs-view-all-row">
-                  <button type="button" class="gs-view-all-btn" id="gs-view-all-btn" aria-expanded="false">
-                    <span class="toggle-text" data-i18n="gs_view_all_tutorials">View All Resources &amp; Tutorials</span>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
-                  </button>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
           <!-- Accordion Item 02: Contribution & Gather with Global Community -->
           <div class="hub-accordion-item" id="hub-item-01">
-            <div class="hub-accordion-header">
-              <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title" data-i18n="dev_item02_title">
-                  <i class="fas fa-cubes" style="color: var(--nv-green); font-size: 1.1rem;"></i>
-                  02 Contribution & Gather with Global Community
-                </h3>
-                <p class="hub-accordion-subtitle" data-i18n="dev_item02_subtitle">Explore real-world projects and creative builds from global developers</p>
-              </div>
-            </div>
-            
             <div class="hub-accordion-content">
               <!-- Horizontal Auto-Scroll Marquee Carousel (Curated Projects with Author & Difficulty Badges) -->
               <div class="dev-marquee-wrapper">
@@ -5426,75 +5604,17 @@
                   <span>View All Projects</span>
                   <i class="fas fa-arrow-right" style="font-size: 0.78rem;"></i>
                 </a>
+                <a href="https://www.facebook.com/share/g/19tAXjAEWt/" target="_blank" rel="noopener noreferrer" class="dev-view-all-btn">
+                  <i class="fab fa-facebook" style="color: #1877F2; font-size: 0.95rem;"></i>
+                  <span data-i18n="dev_fb_group_btn">Show us your demo in Seeed Facebook group</span>
+                  <i class="fas fa-arrow-right" style="font-size: 0.78rem;"></i>
+                </a>
               </div>
 
             </div>
           </div>
 
-          <!-- Accordion Item 03: Co-Create with Seeed -->
-          <div class="hub-accordion-item" id="cocreate">
-            <div class="hub-accordion-header">
-              <div class="hub-accordion-title-group">
-                <h3 class="hub-accordion-title" data-i18n="dev_item03_title">
-                  <i class="fas fa-hands-helping" style="color: var(--nv-green); font-size: 1.1rem;"></i>
-                  03 Co-Create with Seeed
-                </h3>
-                <p class="hub-accordion-subtitle" data-i18n="dev_item03_subtitle">Join Seeed's global community, project calls, and partnership programs</p>
-              </div>
-            </div>
-            
-            <div class="hub-accordion-content">
-              <div class="cocreate-wrapper">
-                
-                <!-- 2 Co-Creation Program Cards (Text Description & Sign-Up Buttons) -->
-                <div class="cocreate-cards-grid">
-                  
-                  <!-- Left Card: Physical AI Project of the Month -->
-                  <div class="cocreate-card" style="padding: 2rem; justify-content: space-between;">
-                    <div>
-                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;" data-i18n="cocreate_card1_title">
-                        Physical AI Project of the Month
-                      </h4>
-                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;" data-i18n="cocreate_card1_desc">
-                        Showcase your innovative robotics builds with Seeed reBot Arm. Win hardware grants, global community spotlights, and official co-marketing support from Seeed team.
-                      </p>
-                    </div>
-                    <a href="https://forms.gle/arTTnAJ1UW2CeRWBA" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn" data-i18n="cocreate_card1_btn">
-                      Submit Your Project
-                    </a>
-                  </div>
-
-                  <!-- Card 2: Global Physical AI Workshop Partnership Program -->
-                  <div class="cocreate-card" style="padding: 2rem; justify-content: space-between;">
-                    <div>
-                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;" data-i18n="cocreate_card2_title">
-                        Global Physical AI Workshop Partnership
-                      </h4>
-                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;" data-i18n="cocreate_card2_desc">
-                        Host a hands-on Physical AI &amp; Embodied AI workshop at your university, lab, or hackerspace. Seeed provides reBot hardware grants, curriculum resources, and event support.
-                      </p>
-                    </div>
-                    <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn" data-i18n="cocreate_card2_btn">
-                      Apply for Workshop Host
-                    </a>
-                  </div>
-
-                  <!-- Card 3: Embodied AI Hackathon & Events -->
-                  <div class="cocreate-card" style="padding: 2rem; justify-content: space-between;">
-                    <div>
-                      <h4 class="cocreate-card-title" style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;" data-i18n="cocreate_card3_title">
-                        Embodied AI Hackathon &amp; Events
-                      </h4>
-                      <p class="cocreate-card-desc" style="font-size: 0.92rem; color: #475569; line-height: 1.6;" data-i18n="cocreate_card3_desc">
-                        Join Seeed global hackathons and developer events. Explore upcoming competition calendars, challenge tracks, hardware sponsorships, and past event recaps.
-                      </p>
-                    </div>
-                    <a href="https://www.seeedstudio.com/embodied-ai-hackathon" target="_blank" rel="noopener noreferrer" class="cocreate-apply-btn" data-i18n="cocreate_card3_btn">
-                      Check Upcoming Events
-                    </a>
-                  </div>
-
-                </div>
+        </div>
 
                 <!-- Partners Monochrome SVG Logo Marquee Carousel (Full Width) -->
                 <section class="partners-marquee-section" style="width: 100%; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--nv-border);">
@@ -5639,92 +5759,10 @@
       </div>
     </section>
 
-              </div>
-            </div>
-          </div>
-
-        </div>
-
       </div>
     </section>
 
 
-
-    <!-- ==========================================================================
-         SenseCraft Robotics: No-Code Platform Section
-         ========================================================================== -->
-    <section class="sensecraft-section" id="sensecraft">
-      <div class="container" style="max-width: 1680px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
-
-        <!-- Section Header (Benefit-Oriented) -->
-        <div class="section-title-group" style="text-align: center; margin-bottom: 2.25rem;">
-          <h2 class="section-main-title" data-i18n="sensecraft_title">SenseCraft Robotics</h2>
-          <p class="section-subtitle" data-i18n="sensecraft_subtitle">Go From Idea to Working Robot — No Coding Required</p>
-        </div>
-
-        <div class="sensecraft-card">
-          <div class="sensecraft-layout">
-            <!-- Left: 4 Highlights + Action CTA -->
-            <div class="sensecraft-copy">
-
-              <!-- 4 Feature Highlights with Stacked Title & Description -->
-              <div class="sensecraft-features-list">
-                <div class="sensecraft-feature-line">
-                  <i class="fas fa-compass"></i>
-                  <div class="sensecraft-feature-text" data-i18n="sensecraft_line1">
-                    <strong>Guided Onboarding</strong><span class="sensecraft-feature-desc">Step-by-step setup &amp; data collection for beginners.</span>
-                  </div>
-                </div>
-                <div class="sensecraft-feature-line">
-                  <i class="fas fa-cloud-upload-alt"></i>
-                  <div class="sensecraft-feature-text" data-i18n="sensecraft_line2">
-                    <strong>Cloud Training</strong><span class="sensecraft-feature-desc">Train VLA &amp; ACT models in the cloud with zero local GPU required.</span>
-                  </div>
-                </div>
-                <div class="sensecraft-feature-line">
-                  <i class="fas fa-tachometer-alt"></i>
-                  <div class="sensecraft-feature-text" data-i18n="sensecraft_line3">
-                    <strong>Faster Iteration</strong><span class="sensecraft-feature-desc">Cut dataset preparation time from 5–7 days down to 1–2 days.</span>
-                  </div>
-                </div>
-                <div class="sensecraft-feature-line">
-                  <i class="fas fa-clipboard-check"></i>
-                  <div class="sensecraft-feature-text" data-i18n="sensecraft_line4">
-                    <strong>Closed-Loop Validation</strong><span class="sensecraft-feature-desc">One-click desktop policy deployment with full traceability.</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Prominent CTA Hero Box (Placed Below 4 Highlights) -->
-              <div class="sensecraft-cta-hero-box">
-                <a href="https://sensecraft.seeed.cc/en/robotics" target="_blank" rel="noopener noreferrer" class="sim-primary-btn" data-i18n="sensecraft_cta">
-                  <i class="fas fa-rocket"></i> Start Free in SenseCraft
-                </a>
-                <span class="sensecraft-cta-credit-badge">
-                  <i class="fas fa-gift"></i>
-                  <span data-i18n="sensecraft_cta_note">Get 1,000 free credits for cloud training &amp; inference</span>
-                </span>
-              </div>
-
-            </div>
-
-            <!-- Right: Real UI Screenshot / GIF Placeholder with App Window Chrome -->
-            <div class="sensecraft-visual">
-              <div class="sensecraft-ui-chrome">
-                <div class="sensecraft-ui-dots">
-                  <span></span><span></span><span></span>
-                </div>
-                <div class="sensecraft-ui-title">
-                  <i class="fas fa-desktop"></i> SenseCraft Robotics Studio
-                </div>
-                <span class="sensecraft-ui-badge" data-i18n="sensecraft_ui_badge">UI Preview / GIF Placeholder</span>
-              </div>
-              <img src="image/sensecraft/img_v3_0216h_7886f39f.webp" alt="SenseCraft Robotics UI Screenshot / GIF Placeholder" loading="lazy" decoding="async">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ==========================================================================
          Specification Module Section (3 Products Comparison & Selection Guide)
@@ -5976,336 +6014,126 @@
     </section>
 
     <!-- ==========================================================================
-         Screen 7: University & Lab Co-Building Section (B2B / Education Entry)
+         SenseCraft Robotics: No-Code Platform Section
          ========================================================================== -->
-    <section class="university-lab-section" id="university-lab">
-      <div class="container" style="max-width: 1680px; margin: 0 auto; padding: 0 1.5rem;">
-        
-        <!-- Section Header -->
-        <div class="section-title-group" style="text-align: center; margin: 0 auto 3.25rem;">
-          <h2 class="section-main-title" data-i18n="lab_main_title">University &amp; Embodied AI Lab Co-Building</h2>
-          <p class="section-subtitle" data-i18n="lab_main_subtitle">Turnkey hardware, NVIDIA-accredited curriculum, and Sim-to-Real infrastructure for higher education and research institutes</p>
+    <section class="sensecraft-section" id="sensecraft">
+      <div class="container" style="max-width: 1680px; width: 100%; margin: 0 auto; padding: 0 1.5rem;">
+
+        <!-- Section Header (Benefit-Oriented) -->
+        <div class="section-title-group" style="text-align: center; margin-bottom: 2.25rem;">
+          <h2 class="section-main-title" data-i18n="sensecraft_title">From Robot Setup to Real-World Task within 3 Hours</h2>
+          <p class="section-subtitle" data-i18n="sensecraft_subtitle">A step-by-step workflow to complete end-to-end robotic manipulation and learning in real-world — all in one NO-CODE platform.</p>
         </div>
 
-        <!-- 3-Tier Lab Solutions Grid -->
-        <div class="lab-tiers-grid">
-          
-          <!-- Tier 1: Starter (10-20 Units) -->
-          <div class="lab-tier-card">
-            <div>
-              <div class="lab-tier-top-bar">
-                <span class="lab-tier-scale-badge">
-                  <i class="fas fa-seedling"></i>
-                  <span data-i18n="lab_tier1_badge">Starter · 10–20 Units</span>
+        <div class="sensecraft-card">
+          <div class="sensecraft-layout">
+            <!-- Left: 6-Step Workflow + Action CTA -->
+            <div class="sensecraft-copy">
+              <h3 class="sensecraft-workflow-heading" data-i18n="sensecraft_workflow_heading">Accelerate Your Robot Development Workflow</h3>
+
+              <!-- 6 Interactive Steps (Auto-Sequential Highlight + Hover/Click Pause) -->
+              <div class="sensecraft-steps-list" id="sensecraft-steps-list">
+                <div class="sensecraft-step-item active" data-step="0" data-video="video/sensecraft/step_01.mp4" data-badge="Step 1 · Calibrate">
+                  <span class="sensecraft-step-num">1</span>
+                  <div class="sensecraft-step-body">
+                    <span class="sensecraft-step-title" data-i18n="sc_step1_title">Calibrate</span>
+                    <span class="sensecraft-step-desc" data-i18n="sc_step1_desc">Set up your robot and cameras with guided calibration for accurate data collection.</span>
+                  </div>
+                  <div class="sensecraft-step-progress"></div>
+                </div>
+
+                <div class="sensecraft-step-item" data-step="1" data-video="video/sensecraft/step_03.mp4" data-badge="Step 2 · Collect Data">
+                  <span class="sensecraft-step-num">2</span>
+                  <div class="sensecraft-step-body">
+                    <span class="sensecraft-step-title" data-i18n="sc_step2_title">Collect Data</span>
+                    <span class="sensecraft-step-desc" data-i18n="sc_step2_desc">Record robot demonstrations and build training-ready datasets through teleoperation.</span>
+                  </div>
+                  <div class="sensecraft-step-progress"></div>
+                </div>
+
+                <div class="sensecraft-step-item" data-step="2" data-video="video/sensecraft/step_04.mp4" data-badge="Step 3 · Train">
+                  <span class="sensecraft-step-num">3</span>
+                  <div class="sensecraft-step-body">
+                    <span class="sensecraft-step-title" data-i18n="sc_step3_title">Train</span>
+                    <span class="sensecraft-step-desc" data-i18n="sc_step3_desc">Train VLA models in the cloud without requiring a local GPU.</span>
+                  </div>
+                  <div class="sensecraft-step-progress"></div>
+                </div>
+
+                <div class="sensecraft-step-item" data-step="3" data-video="video/sensecraft/step_05.mp4" data-badge="Step 4 · Deploy Model">
+                  <span class="sensecraft-step-num">4</span>
+                  <div class="sensecraft-step-body">
+                    <span class="sensecraft-step-title" data-i18n="sc_step4_title">Deploy Model</span>
+                    <span class="sensecraft-step-desc" data-i18n="sc_step4_desc">Deploy trained policies to reBot with one-click desktop deployment and traceable workflows.</span>
+                  </div>
+                  <div class="sensecraft-step-progress"></div>
+                </div>
+
+                <div class="sensecraft-step-item" data-step="4" data-video="video/sensecraft/step_06.mp4" data-badge="Step 5 · Inference">
+                  <span class="sensecraft-step-num">5</span>
+                  <div class="sensecraft-step-body">
+                    <span class="sensecraft-step-title" data-i18n="sc_step5_title">Inference</span>
+                    <span class="sensecraft-step-desc" data-i18n="sc_step5_desc">Run trained policies on the edge and evaluate robot performance in real time.</span>
+                  </div>
+                  <div class="sensecraft-step-progress"></div>
+                </div>
+
+                <div class="sensecraft-step-item" data-step="5" data-video="video/sensecraft/step_02.mp4" data-badge="Step 6 · Grasp">
+                  <span class="sensecraft-step-num">6</span>
+                  <div class="sensecraft-step-body">
+                    <span class="sensecraft-step-title" data-i18n="sc_step6_title">Grasp</span>
+                    <span class="sensecraft-step-desc" data-i18n="sc_step6_desc">Execute learned manipulation tasks and see your robot turn pre-trained policies into real-world actions.</span>
+                  </div>
+                  <div class="sensecraft-step-progress"></div>
+                </div>
+              </div>
+
+              <!-- Prominent CTA Hero Box (Preserved) -->
+              <div class="sensecraft-cta-hero-box">
+                <a href="https://sensecraft.seeed.cc/en/robotics" target="_blank" rel="noopener noreferrer" class="sim-primary-btn" data-i18n="sensecraft_cta">
+                  <i class="fas fa-rocket"></i> Start Free in SenseCraft
+                </a>
+                <span class="sensecraft-cta-credit-badge">
+                  <i class="fas fa-gift"></i>
+                  <span data-i18n="sensecraft_cta_note">Get 1,000 free credits for cloud training &amp; inference</span>
                 </span>
               </div>
-              <h3 class="lab-tier-title" data-i18n="lab_tier1_title">Embodied AI Teaching Lab</h3>
-              <p class="lab-tier-desc" data-i18n="lab_tier1_desc">Designed for undergraduate robotics courses, kinematics labs, and hands-on Physical AI workshops.</p>
-              <ul class="lab-tier-features">
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier1_f1">10–20× reBot Arm DM + 3D Depth Camera Station Kits</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier1_f2">19-Module NVIDIA &amp; Seeed Physical AI Curriculum Syllabus</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier1_f3">Browser MuJoCo Digital Twin Classroom Simulation Access</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier1_f4">Faculty Onboarding Workshop &amp; Lab Experiment Manuals</span></li>
-              </ul>
+
             </div>
-          </div>
 
-          <!-- Tier 2: Standard (30-50 Units) - Featured -->
-          <div class="lab-tier-card featured">
-            <div>
-              <div class="lab-tier-top-bar">
-                <span class="lab-tier-scale-badge">
-                  <i class="fas fa-layer-group"></i>
-                  <span data-i18n="lab_tier2_badge">Standard · 30–50 Units</span>
-                </span>
-                <span class="lab-tier-rec-tag" data-i18n="lab_tier2_rec">Most Popular</span>
-              </div>
-              <h3 class="lab-tier-title" data-i18n="lab_tier2_title">VLA &amp; Sim-to-Real Joint Lab</h3>
-              <p class="lab-tier-desc" data-i18n="lab_tier2_desc">Built for department-wide teaching, graduate research, and closed-loop Sim-to-Real VLA model pipelines.</p>
-              <ul class="lab-tier-features">
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier2_f1">30–50× Mixed DM/RS Stations + Star Arm 102 Teleop Kits</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier2_f2">reComputer Jetson Orin Edge AI Compute Nodes</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier2_f3">SenseCraft Cloud Training Credits Pool &amp; Fleet Management</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier2_f4">Joint Lab Plaque, Co-Branded Course &amp; On-Site Commissioning</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Tier 3: Advanced (50+ Units) -->
-          <div class="lab-tier-card">
-            <div>
-              <div class="lab-tier-top-bar">
-                <span class="lab-tier-scale-badge">
-                  <i class="fas fa-building-columns"></i>
-                  <span data-i18n="lab_tier3_badge">Advanced · 50+ Units</span>
-                </span>
-              </div>
-              <h3 class="lab-tier-title" data-i18n="lab_tier3_title">Embodied AI Innovation &amp; Data Center</h3>
-              <p class="lab-tier-desc" data-i18n="lab_tier3_desc">Engineered for university AI institutes, large-scale robot data collection factories, and flagship research.</p>
-              <ul class="lab-tier-features">
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier3_f1">50+ reBot Arm RS High-Payload Synchronized Data Stations</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier3_f2">NVIDIA Isaac Sim / Isaac Lab &amp; AGX Thor Compute Architecture</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier3_f3">Custom End-Effector / Lift Engineering &amp; Dedicated SLA Support</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-i18n="lab_tier3_f4">Global Hackathon Hosting, Hardware Grants &amp; Academic Co-Publishing</span></li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Partner Universities & Research Labs Marquee (Same style as Supported Platforms & Developer Tools) -->
-        <div class="lab-uni-marquee-section">
-          <div class="partners-header" data-i18n="lab_uni_wall_title">Trusted by Global Universities, Robotics Institutes &amp; Innovation Labs</div>
-          <div class="marquee-container">
-            <div class="marquee-track">
-
-              <!-- Track Set 1 -->
-              <div class="partner-logo-item" title="MIT 麻省理工学院">
-                <img src="image/高校logo/06%20MIT%20麻省理工学院.png" alt="MIT" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="UC Berkeley 加州大学伯克利">
-                <img src="image/高校logo/07%20UC%20Berkeley%20加州大学伯克利.png" alt="UC Berkeley" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="Higher Colleges of Technology">
-                <img src="image/高校logo/08%20Higher%20Colleges%20of%20Technology.png" alt="Higher Colleges of Technology" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="华南农业大学">
-                <img src="image/高校logo/22%20华南农业大学.png" alt="华南农业大学" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="西南交通大学">
-                <img src="image/高校logo/20%20西南交通大学.png" alt="西南交通大学" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="深圳信息职业技术大学">
-                <img src="image/高校logo/24%20深圳信息职业技术大学.png" alt="深圳信息职业技术大学" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="重庆工程学院">
-                <img src="image/高校logo/21%20重庆工程学院.png" alt="重庆工程学院" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="宜宾学院">
-                <img src="image/高校logo/23%20宜宾学院.png" alt="宜宾学院" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="MITERS">
-                <img src="image/高校logo/09%20MITERS.png" alt="MITERS" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="FAB LAB BCN">
-                <img src="image/高校logo/14%20FAB%20LAB%20BCN.png" alt="FAB LAB BCN" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="FAB HUB">
-                <img src="image/高校logo/10%20FAB%20HUB.png" alt="FAB HUB" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="柴火创客空间 Chaihuo Makers">
-                <img src="image/高校logo/04%20柴火创客%20Chaihuo%20Makers.png" alt="柴火创客" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="OPENELAB">
-                <img src="image/高校logo/05%20OPENELAB.png" alt="OPENELAB" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="深圳市机器人协会 SRA">
-                <img src="image/高校logo/01%20深圳市机器人协会%20SRA.png" alt="深圳市机器人协会" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="HACK OPS">
-                <img src="image/高校logo/02%20HACK%20OPS.png" alt="HACK OPS" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="Physical AI Belgrade">
-                <img src="image/高校logo/19%20Physical%20AI%20Belgrade.png" alt="Physical AI Belgrade" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="RoboSEasy">
-                <img src="image/高校logo/12%20RoboSEasy.png" alt="RoboSEasy" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="ROBO STATION">
-                <img src="image/高校logo/16%20ROBO%20STATION.png" alt="ROBO STATION" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="ROBSTRIDE DYNAMICS">
-                <img src="image/高校logo/17%20ROBSTRIDE%20DYNAMICS.png" alt="ROBSTRIDE DYNAMICS" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="FAIR plus 机器人全产业链接会">
-                <img src="image/高校logo/18%20FAIR%20plus%20机器人全产业链接会.png" alt="FAIR plus" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="agora">
-                <img src="image/高校logo/13%20agora.png" alt="agora" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="ALIENBAZAAR">
-                <img src="image/高校logo/03%20ALIENBAZAAR.png" alt="ALIENBAZAAR" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" title="Solo">
-                <img src="image/高校logo/15%20Solo.png" alt="Solo" loading="lazy" decoding="async">
-              </div>
-
-              <!-- Track Set 2 (Seamless Loop) -->
-              <div class="partner-logo-item" aria-hidden="true" title="MIT 麻省理工学院">
-                <img src="image/高校logo/06%20MIT%20麻省理工学院.png" alt="MIT" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="UC Berkeley 加州大学伯克利">
-                <img src="image/高校logo/07%20UC%20Berkeley%20加州大学伯克利.png" alt="UC Berkeley" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="Higher Colleges of Technology">
-                <img src="image/高校logo/08%20Higher%20Colleges%20of%20Technology.png" alt="Higher Colleges of Technology" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="华南农业大学">
-                <img src="image/高校logo/22%20华南农业大学.png" alt="华南农业大学" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="西南交通大学">
-                <img src="image/高校logo/20%20西南交通大学.png" alt="西南交通大学" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="深圳信息职业技术大学">
-                <img src="image/高校logo/24%20深圳信息职业技术大学.png" alt="深圳信息职业技术大学" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="重庆工程学院">
-                <img src="image/高校logo/21%20重庆工程学院.png" alt="重庆工程学院" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="宜宾学院">
-                <img src="image/高校logo/23%20宜宾学院.png" alt="宜宾学院" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="MITERS">
-                <img src="image/高校logo/09%20MITERS.png" alt="MITERS" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="FAB LAB BCN">
-                <img src="image/高校logo/14%20FAB%20LAB%20BCN.png" alt="FAB LAB BCN" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="FAB HUB">
-                <img src="image/高校logo/10%20FAB%20HUB.png" alt="FAB HUB" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="柴火创客空间 Chaihuo Makers">
-                <img src="image/高校logo/04%20柴火创客%20Chaihuo%20Makers.png" alt="柴火创客" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="OPENELAB">
-                <img src="image/高校logo/05%20OPENELAB.png" alt="OPENELAB" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="深圳市机器人协会 SRA">
-                <img src="image/高校logo/01%20深圳市机器人协会%20SRA.png" alt="深圳市机器人协会" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="HACK OPS">
-                <img src="image/高校logo/02%20HACK%20OPS.png" alt="HACK OPS" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="Physical AI Belgrade">
-                <img src="image/高校logo/19%20Physical%20AI%20Belgrade.png" alt="Physical AI Belgrade" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="RoboSEasy">
-                <img src="image/高校logo/12%20RoboSEasy.png" alt="RoboSEasy" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="ROBO STATION">
-                <img src="image/高校logo/16%20ROBO%20STATION.png" alt="ROBO STATION" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="ROBSTRIDE DYNAMICS">
-                <img src="image/高校logo/17%20ROBSTRIDE%20DYNAMICS.png" alt="ROBSTRIDE DYNAMICS" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="FAIR plus 机器人全产业链接会">
-                <img src="image/高校logo/18%20FAIR%20plus%20机器人全产业链接会.png" alt="FAIR plus" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="agora">
-                <img src="image/高校logo/13%20agora.png" alt="agora" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="ALIENBAZAAR">
-                <img src="image/高校logo/03%20ALIENBAZAAR.png" alt="ALIENBAZAAR" loading="lazy" decoding="async">
-              </div>
-              <div class="partner-logo-item" aria-hidden="true" title="Solo">
-                <img src="image/高校logo/15%20Solo.png" alt="Solo" loading="lazy" decoding="async">
-              </div>
-
+            <!-- Right: Step-Synced Video Player -->
+            <div class="sensecraft-visual" id="sensecraft-visual">
+              <video id="sensecraft-step-video" src="video/sensecraft/step_01.mp4" autoplay loop muted playsinline preload="metadata"></video>
             </div>
           </div>
         </div>
-
-        <!-- Dual B2B / Academic CTAs -->
-        <div class="lab-cta-dual-row">
-          <a href="https://wiki.seeedstudio.com/rebot_physical_ai_course_introduction/" target="_blank" rel="noopener noreferrer" class="lab-cta-primary">
-            <i class="fas fa-file-arrow-down"></i>
-            <span data-i18n="lab_cta_download">Download Lab Proposal</span>
-          </a>
-          <a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" target="_blank" rel="noopener noreferrer" class="lab-cta-secondary">
-            <i class="fas fa-comments"></i>
-            <span data-i18n="lab_cta_talk">Talk to Education Team</span>
-          </a>
-        </div>
-
       </div>
     </section>
 
     <!-- ==========================================================================
-         Accessories Module Section (Complete Your AI Robotics Station)
+         Accessories Module Section (Build Your Own Robotics Workstation)
          ========================================================================== -->
     <section class="accessories-section" id="accessories">
       <div class="container" style="max-width: 1680px; margin: 0 auto; padding: 0 1.5rem;">
         
         <!-- Section Header -->
         <div class="section-title-group" style="text-align: center; margin: 0 auto 3rem;">
-          <h2 class="section-main-title" data-i18n="acc_title">Complete Your AI Robotics Station</h2>
-          <p class="section-subtitle" data-i18n="acc_subtitle">Plug-and-play accessories verified by Seeed team</p>
+          <h2 class="section-main-title" data-i18n="acc_title">Build Your Own Robotics Workstation</h2>
+          <p class="section-subtitle" data-i18n="acc_subtitle">Discover ready-to-use workstation bundles and verified accessories for advanced robotic manipulation, teleoperation, and Physical AI development.</p>
         </div>
 
-        <!-- 1. Recommended Station Bundles (Official Hardware Bundles) -->
+        <!-- 1. Recommended Workstation Bundles (Order: 3, 1, 2) -->
         <div class="acc-bundles-wrapper">
           <h3 class="acc-sub-heading">
             <i class="fas fa-boxes-stacked"></i>
-            <span data-i18n="acc_bundles_heading">Recommended Station Bundles</span>
+            <span data-i18n="acc_bundles_heading">Recommended Workstation Bundles</span>
           </h3>
-          <div class="acc-bundles-grid">
-            <!-- Bundle 1: Starter Bundle (DM + Gemini 2 + G-Clamp) -->
+          <div class="acc-bundles-grid acc-category-grid" data-category="bundles">
+            <!-- Bundle 3 (1st): Teleoperation Bundle (RS + Star Arm 102 + Mount) -->
             <article class="swiss-scenario-col">
               <div class="swiss-col-topbar">
                 <div class="swiss-col-index-group">
                   <span class="swiss-col-num">01 /</span>
-                  <span class="swiss-col-category" data-i18n="acc_bundle1_badge">Starter Station</span>
-                </div>
-              </div>
-
-              <div class="swiss-col-body">
-                <div class="swiss-col-media acc-bundle-media">
-                  <img src="image/bundle_dm.webp?v=3" alt="reBot Arm B601-DM Starter Station Bundle" class="swiss-col-img" loading="lazy" decoding="async">
-                </div>
-
-                <div class="swiss-col-copy">
-                  <h3 class="swiss-col-title" data-i18n="acc_bundle1_title">Starter Station Bundle</h3>
-                  <ul class="acc-bundle-list">
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle1_item1">reBot Arm B601-DM (Pre-assembled & calibrated)</span></li>
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle1_item2">Orbbec Gemini 2 3D RGB-D depth camera</span></li>
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle1_item3">Heavy-duty desktop quick-mount G-Clamp</span></li>
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle1_item4">24V power supply & certified connection cables</span></li>
-                  </ul>
-                </div>
-              </div>
-
-              <a href="https://www.seeedstudio.com/reBot-Arm-B601-DM-Assembled-Kit-with-Power-Supply-Bundle.html" target="_blank" rel="noopener noreferrer" class="swiss-col-footer">
-                <span data-i18n="acc_bundle_buy_btn">Buy on Seeed Studio</span>
-                <span class="swiss-footer-arrow"><i class="fas fa-shopping-cart"></i></span>
-              </a>
-            </article>
-
-            <!-- Bundle 2: Research Bundle (RS + Gemini 2 + J3011 + Data Box) -->
-            <article class="swiss-scenario-col">
-              <div class="swiss-col-topbar">
-                <div class="swiss-col-index-group">
-                  <span class="swiss-col-num">02 /</span>
-                  <span class="swiss-col-category" data-i18n="acc_bundle2_badge">Research Station</span>
-                </div>
-              </div>
-
-              <div class="swiss-col-body">
-                <div class="swiss-col-media acc-bundle-media">
-                  <img src="image/bundle_rs.webp?v=3" alt="reBot Arm B601-RS VLA Research Bundle" class="swiss-col-img" loading="lazy" decoding="async">
-                </div>
-
-                <div class="swiss-col-copy">
-                  <h3 class="swiss-col-title" data-i18n="acc_bundle2_title">VLA Research & Data Collection Bundle</h3>
-                  <ul class="acc-bundle-list">
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle2_item1">reBot Arm B601-RS (1.5kg high payload · 0.1mm precision)</span></li>
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle2_item2">Orbbec Gemini 2 3D RGB-D depth camera</span></li>
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle2_item3">reComputer J3011 Edge AI Box (Jetson Orin Nano 8GB)</span></li>
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle2_item4">Multi-channel synchronized data collection box & 24V power</span></li>
-                  </ul>
-                </div>
-              </div>
-
-              <a href="https://www.seeedstudio.com/reBot-Arm-B601-RS-Bundle-p-6898.html" target="_blank" rel="noopener noreferrer" class="swiss-col-footer">
-                <span data-i18n="acc_bundle_buy_btn">Buy on Seeed Studio</span>
-                <span class="swiss-footer-arrow"><i class="fas fa-shopping-cart"></i></span>
-              </a>
-            </article>
-
-            <!-- Bundle 3: Teleoperation Bundle (RS + Star Arm 102 + Mount) -->
-            <article class="swiss-scenario-col">
-              <div class="swiss-col-topbar">
-                <div class="swiss-col-index-group">
-                  <span class="swiss-col-num">03 /</span>
                   <span class="swiss-col-category" data-i18n="acc_bundle3_badge">Teleoperation Station</span>
                 </div>
               </div>
@@ -6320,8 +6148,70 @@
                   <ul class="acc-bundle-list">
                     <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle3_item1">reBot Arm B601-RS (Follower manipulator, pre-assembled)</span></li>
                     <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle3_item2">Star Arm 102 (1:1 kinematic leader teleoperator)</span></li>
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle3_item3">Dedicated camera & arm desktop mounting bracket kit</span></li>
-                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle3_item4">Turnkey LeRobot teleoperation & imitation learning stack</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle3_item3">Dedicated camera &amp; arm desktop mounting bracket kit</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle3_item4">Turnkey LeRobot teleoperation &amp; imitation learning stack</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <a href="https://www.seeedstudio.com/reBot-Arm-B601-RS-Bundle-p-6898.html" target="_blank" rel="noopener noreferrer" class="swiss-col-footer">
+                <span data-i18n="acc_bundle_buy_btn">Buy on Seeed Studio</span>
+                <span class="swiss-footer-arrow"><i class="fas fa-shopping-cart"></i></span>
+              </a>
+            </article>
+
+            <!-- Bundle 1 (2nd): Starter Bundle (DM + Gemini 2 + G-Clamp) -->
+            <article class="swiss-scenario-col">
+              <div class="swiss-col-topbar">
+                <div class="swiss-col-index-group">
+                  <span class="swiss-col-num">02 /</span>
+                  <span class="swiss-col-category" data-i18n="acc_bundle1_badge">Starter Station</span>
+                </div>
+              </div>
+
+              <div class="swiss-col-body">
+                <div class="swiss-col-media acc-bundle-media">
+                  <img src="image/bundle_dm.webp?v=3" alt="reBot Arm B601-DM Starter Station Bundle" class="swiss-col-img" loading="lazy" decoding="async">
+                </div>
+
+                <div class="swiss-col-copy">
+                  <h3 class="swiss-col-title" data-i18n="acc_bundle1_title">Starter Station Bundle</h3>
+                  <ul class="acc-bundle-list">
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle1_item1">reBot Arm B601-DM (Pre-assembled &amp; calibrated)</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle1_item2">Orbbec Gemini 2 3D RGB-D depth camera</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle1_item3">Heavy-duty desktop quick-mount G-Clamp</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle1_item4">24V power supply &amp; certified connection cables</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <a href="https://www.seeedstudio.com/reBot-Arm-B601-DM-Assembled-Kit-with-Power-Supply-Bundle.html" target="_blank" rel="noopener noreferrer" class="swiss-col-footer">
+                <span data-i18n="acc_bundle_buy_btn">Buy on Seeed Studio</span>
+                <span class="swiss-footer-arrow"><i class="fas fa-shopping-cart"></i></span>
+              </a>
+            </article>
+
+            <!-- Bundle 2 (3rd): Research Bundle (RS + Gemini 2 + J3011 + Data Box) -->
+            <article class="swiss-scenario-col">
+              <div class="swiss-col-topbar">
+                <div class="swiss-col-index-group">
+                  <span class="swiss-col-num">03 /</span>
+                  <span class="swiss-col-category" data-i18n="acc_bundle2_badge">Research Station</span>
+                </div>
+              </div>
+
+              <div class="swiss-col-body">
+                <div class="swiss-col-media acc-bundle-media">
+                  <img src="image/bundle_rs.webp?v=3" alt="reBot Arm B601-RS VLA Research Bundle" class="swiss-col-img" loading="lazy" decoding="async">
+                </div>
+
+                <div class="swiss-col-copy">
+                  <h3 class="swiss-col-title" data-i18n="acc_bundle2_title">VLA Research &amp; Data Collection Bundle</h3>
+                  <ul class="acc-bundle-list">
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle2_item1">reBot Arm B601-RS (1.5kg high payload · 0.1mm precision)</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle2_item2">Orbbec Gemini 2 3D RGB-D depth camera</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle2_item3">reComputer J3011 Edge AI Box (Jetson Orin Nano 8GB)</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-i18n="acc_bundle2_item4">Multi-channel synchronized data collection box &amp; 24V power</span></li>
                   </ul>
                 </div>
               </div>
@@ -6334,148 +6224,105 @@
           </div>
         </div>
 
-        <!-- 2. Featured Core Accessories (8 Curated SKUs) -->
-        <h3 class="acc-sub-heading">
-          <i class="fas fa-star"></i>
-          <span data-i18n="acc_featured_heading">Featured Core Accessories</span>
-        </h3>
-        <div class="accessory-grid" id="featured-accessories-grid">
-          <!-- 1. Orbbec Gemini 2 ($289.00) -->
-          <div class="accessory-card">
-            <div class="accessory-img-box">
-              <img src="image/orbbec_gemini_2.webp" alt="Orbbec Gemini 2 3D Camera" loading="lazy" decoding="async">
-            </div>
-            <div class="accessory-info">
-              <h3 class="accessory-title" data-i18n="acc_feat_1">Orbbec Gemini 2 3D Camera</h3>
-              <div class="accessory-price-row">
-                <span class="accessory-price">$289.00</span>
-                <a href="https://www.seeedstudio.com/Orbbec-Gemini-2-3D-Camera-p-6464.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
+        <!-- 2. Jetson-Powered Edge Computer -->
+        <div class="acc-category-block">
+          <h3 class="acc-sub-heading">
+            <i class="fas fa-microchip"></i>
+            <span data-i18n="acc_jetson_heading">Jetson-Powered Edge Computer</span>
+          </h3>
+          <div class="accessory-grid acc-category-grid" data-category="jetson">
+            <!-- reComputer J3011 ($749.00) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/recomputer_j3011.webp" alt="reComputer J3011 - Edge AI Computer" loading="lazy" decoding="async">
+              </div>
+              <div class="accessory-info">
+                <span class="acc-role-tag" data-i18n="acc_tag_control">For Robot Control</span>
+                <h3 class="accessory-title" data-i18n="acc_feat_7">reComputer J3011 - Edge AI Computer (Orin Nano 8GB)</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$749.00</span>
+                  <a href="https://www.seeedstudio.com/reComputer-J3011-p-5590.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- 2. Orbbec Gemini 336 ($499.00) -->
-          <div class="accessory-card">
-            <div class="accessory-img-box">
-              <img src="image/orbbec_gemini_336.webp" alt="Orbbec Gemini 336 3D Camera" loading="lazy" decoding="async">
-            </div>
-            <div class="accessory-info">
-              <h3 class="accessory-title" data-i18n="acc_feat_2">Orbbec Gemini 336 3D Camera</h3>
-              <div class="accessory-price-row">
-                <span class="accessory-price">$499.00</span>
-                <a href="https://www.seeedstudio.com/Orbbec-Gemini-336-3D-Camera-3D-p-6662.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
+            <!-- NVIDIA Jetson AGX Thor Developer Kit Bundle ($5,500.30) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/jetson_thor_bundle.webp" alt="NVIDIA® Jetson AGX Thor™ Developer Kit Bundle" loading="lazy" decoding="async">
               </div>
-            </div>
-          </div>
-
-          <!-- 3. Intel RealSense D435i ($349.00) -->
-          <div class="accessory-card">
-            <div class="accessory-img-box">
-              <img src="image/realsense_d435i.webp" alt="Intel RealSense Depth Camera D435i" loading="lazy" decoding="async">
-            </div>
-            <div class="accessory-info">
-              <h3 class="accessory-title" data-i18n="acc_feat_3">Intel RealSense Depth Camera D435i</h3>
-              <div class="accessory-price-row">
-                <span class="accessory-price">$349.00</span>
-                <a href="https://www.seeedstudio.com/Intel-RealSense-Depth-Camera-D435i-p-4423.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 4. Star Arm 102 ($200.00) -->
-          <div class="accessory-card">
-            <div class="accessory-img-box">
-              <img src="image/star_arm_102.webp" alt="Star Arm 102 - For reBot B601-DM&RS Leader Arm" loading="lazy" decoding="async">
-            </div>
-            <div class="accessory-info">
-              <h3 class="accessory-title" data-i18n="acc_feat_4">Star Arm 102 - For reBot B601-DM&amp;RS Leader Arm</h3>
-              <div class="accessory-price-row">
-                <span class="accessory-price">$200.00</span>
-                <a href="https://www.seeedstudio.com/Star-Arm-102-p-6765.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5. Robotic-Arm Data Collection Box ($59.00) -->
-          <div class="accessory-card">
-            <div class="accessory-img-box">
-              <img src="image/data_collection_box.webp" alt="Robotic-Arm Data Collection Box" loading="lazy" decoding="async">
-            </div>
-            <div class="accessory-info">
-              <h3 class="accessory-title" data-i18n="acc_feat_5">Robotic-Arm Data Collection Box</h3>
-              <div class="accessory-price-row">
-                <span class="accessory-price">$59.00</span>
-                <a href="https://www.seeedstudio.com/Robotic-Arm-Data-Collection-Box-p-6943.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 6. Robot Arm Camera Mount ($19.90) -->
-          <div class="accessory-card">
-            <div class="accessory-img-box">
-              <img src="image/camera_mount_lerobot.webp" alt="Robot Arm Camera Mount for LeRobot SO-101 & reBot B601" loading="lazy" decoding="async">
-            </div>
-            <div class="accessory-info">
-              <h3 class="accessory-title" data-i18n="acc_feat_6">Robot Arm Camera Mount for LeRobot SO-101 &amp; reBot B601</h3>
-              <div class="accessory-price-row">
-                <span class="accessory-price">$19.90</span>
-                <a href="https://www.seeedstudio.com/Robot-Arm-Camera-Mount-for-LeRobot-SO-10&reBot-B601-p-7003.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 7. reComputer J3011 ($749.00) -->
-          <div class="accessory-card">
-            <div class="accessory-img-box">
-              <img src="image/recomputer_j3011.webp" alt="reComputer J3011 - Edge AI Computer" loading="lazy" decoding="async">
-            </div>
-            <div class="accessory-info">
-              <h3 class="accessory-title" data-i18n="acc_feat_7">reComputer J3011 - Edge AI Computer (Orin Nano 8GB)</h3>
-              <div class="accessory-price-row">
-                <span class="accessory-price">$749.00</span>
-                <a href="https://www.seeedstudio.com/reComputer-J3011-p-5590.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 8. ReBot Soft Gripper ($9.90) -->
-          <div class="accessory-card">
-            <div class="accessory-img-box">
-              <img src="image/rebot_soft_gripper.webp" alt="ReBot Soft Gripper" loading="lazy" decoding="async">
-            </div>
-            <div class="accessory-info">
-              <h3 class="accessory-title" data-i18n="acc_feat_8">ReBot Soft Gripper</h3>
-              <div class="accessory-price-row">
-                <span class="accessory-price">$9.90</span>
-                <a href="https://www.seeedstudio.com/reBot-Soft-Gripper-p-6989.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
+              <div class="accessory-info">
+                <span class="acc-role-tag" data-i18n="acc_tag_infer">For Policy Inferencing</span>
+                <h3 class="accessory-title">NVIDIA® Jetson AGX Thor™ Developer Kit Bundle</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$5,500.30</span>
+                  <a href="https://www.seeedstudio.com/NVIDIAr-Jetson-AGX-Thortm-Developer-Kit-Bundle.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 3. Collapsible Remaining Accessories (Deduplicated) -->
-        <div class="acc-extra-collapsible" id="acc-extra-collapsible">
+        <!-- 3. Camera -->
+        <div class="acc-category-block">
           <h3 class="acc-sub-heading">
-            <i class="fas fa-cubes"></i>
-            <span data-i18n="acc_more_heading">Actuators, Power &amp; Expansion Accessories</span>
+            <i class="fas fa-camera"></i>
+            <span data-i18n="acc_camera_heading">Camera</span>
           </h3>
-          <div class="accessory-grid" id="extra-accessories-grid">
+          <div class="accessory-grid acc-category-grid" data-category="camera">
+            <!-- Orbbec Gemini 2 ($289.00) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/orbbec_gemini_2.webp" alt="Orbbec Gemini 2 3D Camera" loading="lazy" decoding="async">
+              </div>
+              <div class="accessory-info">
+                <h3 class="accessory-title" data-i18n="acc_feat_1">Orbbec Gemini 2 3D Camera</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$289.00</span>
+                  <a href="https://www.seeedstudio.com/Orbbec-Gemini-2-3D-Camera-p-6464.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Orbbec Gemini 336 ($499.00) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/orbbec_gemini_336.webp" alt="Orbbec Gemini 336 3D Camera" loading="lazy" decoding="async">
+              </div>
+              <div class="accessory-info">
+                <h3 class="accessory-title" data-i18n="acc_feat_2">Orbbec Gemini 336 3D Camera</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$499.00</span>
+                  <a href="https://www.seeedstudio.com/Orbbec-Gemini-336-3D-Camera-3D-p-6662.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Intel RealSense D435i ($349.00) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/realsense_d435i.webp" alt="Intel RealSense Depth Camera D435i" loading="lazy" decoding="async">
+              </div>
+              <div class="accessory-info">
+                <h3 class="accessory-title" data-i18n="acc_feat_3">Intel RealSense Depth Camera D435i</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$349.00</span>
+                  <a href="https://www.seeedstudio.com/Intel-RealSense-Depth-Camera-D435i-p-4423.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- RealSense D405 ($299.00) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/realsense_d405.webp" alt="RealSense D405 3D Camera" loading="lazy" decoding="async">
@@ -6491,6 +6338,7 @@
               </div>
             </div>
 
+            <!-- ET-S231-90 USB Camera ($19.90) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/usb_camera_s231.webp" alt="ET-S231-90 USB Camera" loading="lazy" decoding="async">
@@ -6505,37 +6353,16 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div class="accessory-card">
-              <div class="accessory-img-box">
-                <img src="image/jetson_thor_bundle.webp" alt="NVIDIA® Jetson AGX Thor™ Developer Kit Bundle" loading="lazy" decoding="async">
-              </div>
-              <div class="accessory-info">
-                <h3 class="accessory-title">NVIDIA® Jetson AGX Thor™ Developer Kit Bundle</h3>
-                <div class="accessory-price-row">
-                  <span class="accessory-price">$5,500.30</span>
-                  <a href="https://www.seeedstudio.com/NVIDIAr-Jetson-AGX-Thortm-Developer-Kit-Bundle.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                    <i class="fas fa-shopping-cart"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="accessory-card">
-              <div class="accessory-img-box">
-                <img src="image/rs_g_clamp.webp" alt="6-Inch G-Clamp for reBot Arm" loading="lazy" decoding="async">
-              </div>
-              <div class="accessory-info">
-                <h3 class="accessory-title">6-Inch G-Clamp for reBot Arm</h3>
-                <div class="accessory-price-row">
-                  <span class="accessory-price">$14.70</span>
-                  <a href="https://www.seeedstudio.com/6-Inch-G-Clamp-p-6912.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
-                    <i class="fas fa-shopping-cart"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
+        <!-- 4. Actuator -->
+        <div class="acc-category-block">
+          <h3 class="acc-sub-heading">
+            <i class="fas fa-cogs"></i>
+            <span data-i18n="acc_actuator_heading">Actuator</span>
+          </h3>
+          <div class="accessory-grid acc-category-grid" data-category="actuator">
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/rs_00_actuator.webp" alt="RobStride 00 QDD 14N.m integrated actuator module" loading="lazy" decoding="async">
@@ -6595,7 +6422,97 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
+        <!-- 5. Expansion Accessories -->
+        <div class="acc-category-block">
+          <h3 class="acc-sub-heading">
+            <i class="fas fa-cubes"></i>
+            <span data-i18n="acc_expansion_heading">Expansion Accessories</span>
+          </h3>
+          <div class="accessory-grid acc-category-grid" data-category="expansion">
+            <!-- 1. Star Arm 102 ($200.00) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/star_arm_102.webp" alt="Star Arm 102 - For reBot B601-DM&RS Leader Arm" loading="lazy" decoding="async">
+              </div>
+              <div class="accessory-info">
+                <h3 class="accessory-title" data-i18n="acc_feat_4">Star Arm 102 - For reBot B601-DM&amp;RS Leader Arm</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$200.00</span>
+                  <a href="https://www.seeedstudio.com/Star-Arm-102-p-6765.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Robotic-Arm Data Collection Box ($59.00) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/data_collection_box.webp" alt="Robotic-Arm Data Collection Box" loading="lazy" decoding="async">
+              </div>
+              <div class="accessory-info">
+                <h3 class="accessory-title" data-i18n="acc_feat_5">Robotic-Arm Data Collection Box</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$59.00</span>
+                  <a href="https://www.seeedstudio.com/Robotic-Arm-Data-Collection-Box-p-6943.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Robot Arm Camera Mount ($19.90) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/camera_mount_lerobot.webp" alt="Robot Arm Camera Mount for LeRobot SO-101 & reBot B601" loading="lazy" decoding="async">
+              </div>
+              <div class="accessory-info">
+                <h3 class="accessory-title" data-i18n="acc_feat_6">Robot Arm Camera Mount for LeRobot SO-101 &amp; reBot B601</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$19.90</span>
+                  <a href="https://www.seeedstudio.com/Robot-Arm-Camera-Mount-for-LeRobot-SO-10&reBot-B601-p-7003.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. ReBot Soft Gripper ($9.90) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/rebot_soft_gripper.webp" alt="ReBot Soft Gripper" loading="lazy" decoding="async">
+              </div>
+              <div class="accessory-info">
+                <h3 class="accessory-title" data-i18n="acc_feat_8">ReBot Soft Gripper</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$9.90</span>
+                  <a href="https://www.seeedstudio.com/reBot-Soft-Gripper-p-6989.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. 6-Inch G-Clamp ($14.70) -->
+            <div class="accessory-card">
+              <div class="accessory-img-box">
+                <img src="image/rs_g_clamp.webp" alt="6-Inch G-Clamp for reBot Arm" loading="lazy" decoding="async">
+              </div>
+              <div class="accessory-info">
+                <h3 class="accessory-title">6-Inch G-Clamp for reBot Arm</h3>
+                <div class="accessory-price-row">
+                  <span class="accessory-price">$14.70</span>
+                  <a href="https://www.seeedstudio.com/6-Inch-G-Clamp-p-6912.html" target="_blank" rel="noopener noreferrer" class="accessory-cart-btn" title="Buy Now on Seeed Studio">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Power Adapter Kit RS ($79.00) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/rs_power_adapter_kit.webp" alt="Power Adapter Kit for reBot Arm B601-RS" loading="lazy" decoding="async">
@@ -6611,6 +6528,7 @@
               </div>
             </div>
 
+            <!-- 7. Power Adapter Kit DM ($64.99) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/dm_power_adapter_kit.webp" alt="Power Adapter Kit for reBot Arm B601-DM" loading="lazy" decoding="async">
@@ -6626,6 +6544,7 @@
               </div>
             </div>
 
+            <!-- 8. Emergency Stop Switch Module RS ($59.90) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/rs_emergency_stop_module.webp" alt="Circuit Protection and Emergency Stop Switch Module for reBot Arm B601-RS" loading="lazy" decoding="async">
@@ -6641,6 +6560,7 @@
               </div>
             </div>
 
+            <!-- 9. Emergency Stop Switch Module DM ($59.90) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/dm_emergency_stop_module.webp" alt="Circuit Protection and Emergency Stop Switch Module for reBot Arm B601-DM" loading="lazy" decoding="async">
@@ -6656,6 +6576,7 @@
               </div>
             </div>
 
+            <!-- 10. UTC-T01 Industrial USB-to-CAN Adapter ($15.00) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/rs_canable.webp" alt="UTC-T01 Industrial USB-to-CAN Adapter" loading="lazy" decoding="async">
@@ -6671,6 +6592,7 @@
               </div>
             </div>
 
+            <!-- 11. Damiao 43 Motor USB2CAN Driver Board ($15.00) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/dm_can_usb_driver_board.webp" alt="Damiao 43 Motor USB2CAN Driver Board" loading="lazy" decoding="async">
@@ -6686,6 +6608,7 @@
               </div>
             </div>
 
+            <!-- 12. Leader Arm Power Adapter ($9.90) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/power_adapter_12v2a.webp" alt="Leader Arm Power Adapter" loading="lazy" decoding="async">
@@ -6701,6 +6624,7 @@
               </div>
             </div>
 
+            <!-- 13. XT30 2+2 Power Separation Board ($5.00) -->
             <div class="accessory-card">
               <div class="accessory-img-box">
                 <img src="image/xt30_power_separation_board.webp" alt="XT30 2+2 Power Separation Board" loading="lazy" decoding="async">
@@ -6716,14 +6640,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- View All Accessories Toggle Button -->
-        <div class="acc-view-all-row">
-          <button type="button" class="gs-view-all-btn" id="acc-view-all-btn" aria-expanded="false">
-            <span class="toggle-text" data-i18n="acc_view_all">View All Accessories</span>
-            <i class="fas fa-chevron-down"></i>
-          </button>
         </div>
 
       </div>
@@ -6899,8 +6815,8 @@
 
         <!-- CTA -->
         <div class="news-actions">
-          <a href="https://www.seeedstudio.com/blog/tag/rebot/" target="_blank" rel="noopener noreferrer" class="news-view-all-btn" data-i18n="news_viewall">
-            <i class="fas fa-external-link-alt"></i> View All News
+          <a href="https://mailchi.mp/seeed/ai-robotics-newsletter-subscribe" target="_blank" rel="noopener noreferrer" class="news-view-all-btn" data-i18n="news_viewall">
+            <i class="fas fa-envelope"></i> Subscribe to Seeed Newsletter for Latest Updates
           </a>
         </div>
 
@@ -6985,8 +6901,8 @@
   <script src="js/lib/three.min.js"></script>
   <script src="js/lib/STLLoader.js"></script>
 
-  <!-- Main JavaScript File with Cache-Buster v121 (Remove High Performance & Extensive Application section) -->
-  <script src="js/app.js?v=20261116_v121" defer></script>
+  <!-- Main JavaScript File with Cache-Buster v123 (Add Hero Learn More button with language-based Bazaar/Taobao redirect) -->
+  <script src="js/app.js?v=20261118_v139" defer></script>
   <script>
 
     function toggleFaq(id) {
