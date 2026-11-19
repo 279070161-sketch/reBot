@@ -954,6 +954,7 @@ function initApp() {
   initHeroSpecsCounter();
   initSenseCraftWorkflow();
   initLabUniMarquee();
+  initDevCasesMarquee();
 
   // Defer non-critical background scripts until the browser is idle, so the
   // Hero 3D entrance animation gets 100% CPU/GPU headroom on startup.
@@ -2805,13 +2806,13 @@ function initHeroSpecsCounter() {
 function initSenseCraftWorkflow() {
   const section = document.getElementById('sensecraft');
   const listEl = document.getElementById('sensecraft-steps-list');
-  const videoEl = document.getElementById('sensecraft-step-video');
   const badgeEl = document.getElementById('sensecraft-step-badge');
   const visualEl = document.getElementById('sensecraft-visual');
-  if (!listEl || !videoEl) return;
+  if (!listEl || !visualEl) return;
 
   const items = Array.from(listEl.querySelectorAll('.sensecraft-step-item'));
-  if (!items.length) return;
+  const videos = Array.from(visualEl.querySelectorAll('.sensecraft-step-video'));
+  if (!items.length || !videos.length) return;
 
   const INTERVAL_MS = 4500;
   let activeIndex = 0;
@@ -2837,16 +2838,25 @@ function initSenseCraftWorkflow() {
     });
 
     const currentItem = items[activeIndex];
-    const nextSrc = currentItem.getAttribute('data-video');
     const nextBadge = currentItem.getAttribute('data-badge');
     if (badgeEl && nextBadge) {
       badgeEl.textContent = nextBadge;
     }
-    if (nextSrc && videoEl.getAttribute('src') !== nextSrc) {
-      videoEl.setAttribute('src', nextSrc);
-      videoEl.load();
-      videoEl.play().catch(() => {});
-    }
+
+    videos.forEach((vid, i) => {
+      if (i === activeIndex) {
+        vid.classList.add('active');
+        try { vid.currentTime = 0; } catch (_) {}
+        vid.play().catch(() => {});
+      } else {
+        vid.classList.remove('active');
+        setTimeout(() => {
+          if (!vid.classList.contains('active')) {
+            vid.pause();
+          }
+        }, 300);
+      }
+    });
   }
 
   function startTimer() {
@@ -2899,10 +2909,8 @@ function initSenseCraftWorkflow() {
   });
 
   listEl.addEventListener('mouseleave', resume);
-  if (visualEl) {
-    visualEl.addEventListener('mouseenter', () => pauseAt());
-    visualEl.addEventListener('mouseleave', resume);
-  }
+  visualEl.addEventListener('mouseenter', () => pauseAt());
+  visualEl.addEventListener('mouseleave', resume);
 
   if ('IntersectionObserver' in window && section) {
     const observer = new IntersectionObserver((entries) => {
@@ -2910,7 +2918,7 @@ function initSenseCraftWorkflow() {
         isVisible = entry.isIntersecting;
         if (isVisible && !isPaused) {
           startTimer();
-          videoEl.play().catch(() => {});
+          videos[activeIndex]?.play().catch(() => {});
         } else {
           stopTimer();
         }
@@ -3006,6 +3014,111 @@ function initLabUniMarquee() {
       });
     }, { threshold: 0.05 });
     observer.observe(section);
+  }
+
+  requestAnimationFrame(tick);
+}
+
+/**
+ * reBot Real User Cases Marquee: Smooth Scroll + Hover Pause + Manual Drag
+ */
+function initDevCasesMarquee() {
+  const wrapper = document.querySelector('.dev-marquee-wrapper');
+  const track = document.getElementById('dev-marquee-track');
+  if (!wrapper || !track) return;
+
+  const SPEED_PX_PER_SEC = 48;
+  let offset = 0;
+  let isHovered = false;
+  let isDragging = false;
+  let isVisible = true;
+  let didDrag = false;
+  let startX = 0;
+  let startOffset = 0;
+  let lastTime = performance.now();
+
+  function wrapOffset(val) {
+    const halfWidth = track.scrollWidth / 2;
+    if (!halfWidth || halfWidth <= 0) return val;
+    let next = val;
+    while (next <= -halfWidth) next += halfWidth;
+    while (next > 0) next -= halfWidth;
+    return next;
+  }
+
+  function tick(now) {
+    const dt = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+
+    if (isVisible && !isHovered && !isDragging) {
+      offset = wrapOffset(offset - SPEED_PX_PER_SEC * dt);
+      track.style.transform = `translate3d(${offset}px, 0, 0)`;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  wrapper.addEventListener('mouseenter', () => {
+    isHovered = true;
+  });
+
+  wrapper.addEventListener('mouseleave', () => {
+    isHovered = false;
+  });
+
+  wrapper.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
+    isDragging = true;
+    didDrag = false;
+    startX = e.clientX;
+    startOffset = offset;
+    wrapper.classList.add('is-dragging');
+    if (wrapper.setPointerCapture) {
+      try { wrapper.setPointerCapture(e.pointerId); } catch (_) {}
+    }
+  });
+
+  wrapper.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 6) {
+      didDrag = true;
+    }
+    offset = wrapOffset(startOffset + dx);
+    track.style.transform = `translate3d(${offset}px, 0, 0)`;
+  });
+
+  const endDrag = (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    wrapper.classList.remove('is-dragging');
+    if (e && wrapper.releasePointerCapture) {
+      try { wrapper.releasePointerCapture(e.pointerId); } catch (_) {}
+    }
+    if (didDrag) {
+      setTimeout(() => { didDrag = false; }, 50);
+    }
+  };
+
+  wrapper.addEventListener('pointerup', endDrag);
+  wrapper.addEventListener('pointercancel', endDrag);
+
+  // Prevent card onclick navigation when user actually dragged
+  wrapper.addEventListener('click', (e) => {
+    if (didDrag) {
+      e.preventDefault();
+      e.stopPropagation();
+      didDrag = false;
+    }
+  }, true);
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) lastTime = performance.now();
+      });
+    }, { threshold: 0.05 });
+    observer.observe(wrapper);
   }
 
   requestAnimationFrame(tick);

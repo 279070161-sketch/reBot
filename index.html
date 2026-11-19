@@ -1936,34 +1936,29 @@
       position: relative;
     }
     .sensecraft-card {
-      background: #FFFFFF;
-      border: 1px solid var(--nv-border);
-      border-radius: 8px;
-      padding: 2.25rem 2.5rem;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
-    }
-    @media (max-width: 768px) {
-      .sensecraft-card {
-        padding: 1.5rem 1.25rem;
-      }
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
     }
     .sensecraft-layout {
       display: grid;
-      grid-template-columns: 0.96fr 1.04fr;
-      gap: 2.5rem;
-      align-items: center;
-    }
-    @media (max-width: 992px) {
-      .sensecraft-layout {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 1.75rem;
+      align-items: stretch;
     }
     .sensecraft-copy {
       min-width: 0;
+      background: #FFFFFF;
+      border: 1px solid var(--nv-border);
+      border-radius: 8px;
+      padding: 1.75rem 1.85rem;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
       display: flex;
       flex-direction: column;
-      gap: 1.35rem;
+      justify-content: space-between;
+      gap: 1.15rem;
     }
     .sensecraft-desc {
       margin: 0;
@@ -1974,13 +1969,31 @@
       text-align: left;
     }
     .sensecraft-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--nv-border);
       background: #0F172A;
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
-      display: flex;
-      flex-direction: column;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+    }
+    @media (max-width: 992px) {
+      .sensecraft-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .sensecraft-visual {
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+      }
+    }
+    @media (max-width: 768px) {
+      .sensecraft-copy {
+        padding: 1.35rem 1.15rem;
+      }
     }
     .sensecraft-ui-chrome {
       display: flex;
@@ -2023,11 +2036,23 @@
     }
     .sensecraft-visual img,
     .sensecraft-visual video {
+      position: absolute;
+      inset: 0;
       display: block;
       width: 100%;
-      aspect-ratio: 16 / 9;
+      height: 100%;
       object-fit: cover;
       background: #0F172A;
+    }
+    .sensecraft-step-video {
+      opacity: 0;
+      z-index: 1;
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+    .sensecraft-step-video.active {
+      opacity: 1;
+      z-index: 2;
     }
     .sensecraft-workflow-heading {
       margin: 0;
@@ -3387,25 +3412,28 @@
       overflow: hidden;
       user-select: none;
       padding: 1rem 0;
+      cursor: grab;
+      touch-action: pan-y;
       mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    }
+    .dev-marquee-wrapper.is-dragging {
+      cursor: grabbing;
+    }
+    .dev-marquee-wrapper.is-dragging .dev-project-card {
+      cursor: grabbing;
     }
 
     .dev-marquee-track {
       display: flex;
       gap: 1.5rem;
       width: max-content;
-      animation: devMarqueeScroll 45s linear infinite;
       will-change: transform;
+      transform: translate3d(0, 0, 0);
     }
-
-    .dev-marquee-track:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes devMarqueeScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .dev-project-card img {
+      -webkit-user-drag: none;
+      user-select: none;
     }
 
     /* Varied Sized Cards */
@@ -4904,7 +4932,6 @@
         <li><a href="https://github.com/Seeed-Projects/reBot-DevArm?tab=readme-ov-file" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_demos">GitHub</a></li>
         <li><a href="#sim-to-real" class="hub-nav-link" data-i18n="nav_sim">MuJoCo Sim-to-Real</a></li>
         <li><a href="https://www.seeedstudio.com/seeed-physical-ai-global-workshop-partnership-program" class="hub-nav-link" target="_blank" rel="noopener" data-i18n="nav_projects">Demo &amp; Events</a></li>
-        <li><a href="#cocreate" class="hub-nav-link" onclick="openCocreateAccordion()" data-i18n="nav_customization">Customization</a></li>
       </ul>
     </nav>
 
@@ -6042,9 +6069,14 @@
 
             </div>
 
-            <!-- Right: Step-Synced Video Player -->
+            <!-- Right: Zero-Flash Stacked Preloaded Video Players -->
             <div class="sensecraft-visual" id="sensecraft-visual">
-              <video id="sensecraft-step-video" src="video/sensecraft/step_01.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <video class="sensecraft-step-video active" data-step="0" src="video/sensecraft/step_01.mp4" autoplay loop muted playsinline preload="auto"></video>
+              <video class="sensecraft-step-video" data-step="1" src="video/sensecraft/step_03.mp4" loop muted playsinline preload="auto"></video>
+              <video class="sensecraft-step-video" data-step="2" src="video/sensecraft/step_04.mp4" loop muted playsinline preload="auto"></video>
+              <video class="sensecraft-step-video" data-step="3" src="video/sensecraft/step_05.mp4" loop muted playsinline preload="auto"></video>
+              <video class="sensecraft-step-video" data-step="4" src="video/sensecraft/step_06.mp4" loop muted playsinline preload="auto"></video>
+              <video class="sensecraft-step-video" data-step="5" src="video/sensecraft/step_02.mp4" loop muted playsinline preload="auto"></video>
             </div>
           </div>
         </div>
@@ -6843,7 +6875,7 @@
   <script src="js/lib/STLLoader.js"></script>
 
   <!-- Main JavaScript File with Cache-Buster v123 (Add Hero Learn More button with language-based Bazaar/Taobao redirect) -->
-  <script src="js/app.js?v=20261119_v143" defer></script>
+  <script src="js/app.js?v=20261119_v145" defer></script>
   <script>
 
     function toggleFaq(id) {
