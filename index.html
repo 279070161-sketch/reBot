@@ -850,8 +850,36 @@
       position: relative;
       z-index: 10;
     }
+    .partners-marquee-section .marquee-container {
+      mask-image: none;
+      -webkit-mask-image: none;
+      justify-content: center;
+    }
     .partners-marquee-section .marquee-track {
-      animation-direction: reverse;
+      animation: none;
+      transform: none;
+      width: 100%;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: clamp(1.25rem, 2.2vw, 2.5rem);
+    }
+    .partners-marquee-section .partner-logo-item {
+      padding: 0.25rem;
+    }
+    .partners-marquee-section .logo-nvidia { height: 22px; }
+    .partners-marquee-section .logo-isaac { height: 24px; }
+    .partners-marquee-section .logo-ros2 { height: 24px; }
+    .partners-marquee-section .logo-huggingface { height: 28px; }
+    .partners-marquee-section .logo-lerobot { height: 24px; }
+    .partners-marquee-section .logo-mujoco { height: 24px; }
+    .partners-marquee-section .logo-moveit2 { height: 25px; }
+    .partners-marquee-section .logo-pinocchio { height: 25px; }
+    .partners-marquee-section .logo-agora { height: 24px; }
+    @media (max-width: 960px) {
+      .partners-marquee-section .marquee-track {
+        flex-wrap: wrap;
+        gap: 1.25rem 2rem;
+      }
     }
     .partners-header {
       text-align: center;
@@ -3159,6 +3187,19 @@
       overflow: hidden;
       position: relative;
     }
+    .lab-uni-marquee-section .marquee-container {
+      cursor: grab;
+      touch-action: pan-y;
+    }
+    .lab-uni-marquee-section .marquee-container.is-dragging {
+      cursor: grabbing;
+    }
+    .lab-uni-marquee-section .marquee-track {
+      animation: none;
+    }
+    .lab-uni-marquee-section .partner-logo-item {
+      cursor: inherit;
+    }
     .lab-uni-marquee-section .partner-logo-item img {
       height: 38px;
       max-height: 42px;
@@ -3166,6 +3207,9 @@
       object-fit: contain;
       filter: none;
       opacity: 1;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
       transition: all 0.25s ease;
     }
     .lab-uni-marquee-section .partner-logo-item:hover img {
@@ -4966,7 +5010,7 @@
           <p class="unitree-hero-description" data-i18n="hero_desc">
             Accelerate Physical AI Deployment in Real World
           </p>
-          <a id="hero-learn-more-btn" href="https://www.seeedstudio.com/" target="_blank" rel="noopener noreferrer" class="hero-learn-more-btn">
+          <a id="hero-learn-more-btn" href="https://www.seeedstudio.com/reBot-Arm-B601-RS-Assembled-Kit-with-Gripper-p-6865.html" target="_blank" rel="noopener noreferrer" class="hero-learn-more-btn">
             <span data-i18n="hero_learn_more">Learn More</span>
             <i class="fas fa-arrow-right"></i>
           </a>
@@ -5623,7 +5667,7 @@
       <div class="marquee-container">
         <div class="marquee-track">
           
-          <!-- Track Set 1 -->
+          <!-- Static Centered Platform & Developer Tool Logos -->
           <div class="partner-logo-item" title="NVIDIA">
             <img src="image/logo/NVIDIA_logo.svg" alt="NVIDIA Logo" class="logo-nvidia" loading="lazy" decoding="async">
           </div>
@@ -5648,111 +5692,8 @@
           <div class="partner-logo-item" title="Pinocchio">
             <img src="image/logo/pinocchio.png" alt="Pinocchio Logo" class="logo-pinocchio" loading="lazy" decoding="async">
           </div>
-          <div class="partner-logo-item" title="OpenELAB">
-            <img src="image/logo/OPENELAB_Logo_Final_04-horizontal_2_2b022bbb-431d-46ff-b1e2-e4073456bb7d.svg" alt="OpenELAB Logo" class="logo-openelab" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Chaihuo Maker Space">
-            <img src="image/logo/CHAIHUO.svg" alt="Chaihuo Maker Space Logo" class="logo-chaihuo" loading="lazy" decoding="async">
-          </div>
           <div class="partner-logo-item" title="Agora">
             <img src="image/logo/agora.svg" alt="Agora Logo" class="logo-agora" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Fab Hub">
-            <img src="image/logo/fab%20hub.svg" alt="Fab Hub Logo" class="logo-fabhub" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="MITERS">
-            <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Solo">
-            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo" loading="lazy" decoding="async">
-          </div>
-
-          <!-- Track Set 2 -->
-          <div class="partner-logo-item" title="NVIDIA">
-            <img src="image/logo/NVIDIA_logo.svg" alt="NVIDIA Logo" class="logo-nvidia" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="NVIDIA Isaac Sim">
-            <img src="image/logo/nvidia-isaac.webp" alt="NVIDIA Isaac Logo" class="logo-isaac" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="ROS 2">
-            <img src="image/logo/ROS-2_logo-2392x9999-1.webp" alt="ROS 2 Logo" class="logo-ros2" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Hugging Face">
-            <img src="image/logo/hugging-face.png" alt="Hugging Face Logo" class="logo-huggingface" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="LeRobot">
-            <img src="image/logo/LeRobot@1x.webp" alt="LeRobot Logo" class="logo-lerobot" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="MuJoCo">
-            <img src="image/logo/mujoco.png" alt="MuJoCo Logo" class="logo-mujoco" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="MoveIt 2">
-            <img src="image/logo/moveit-2-logo-dark.webp" alt="MoveIt 2 Logo" class="logo-moveit2" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Pinocchio">
-            <img src="image/logo/pinocchio.png" alt="Pinocchio Logo" class="logo-pinocchio" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="OpenELAB">
-            <img src="image/logo/OPENELAB_Logo_Final_04-horizontal_2_2b022bbb-431d-46ff-b1e2-e4073456bb7d.svg" alt="OpenELAB Logo" class="logo-openelab" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Chaihuo Maker Space">
-            <img src="image/logo/CHAIHUO.svg" alt="Chaihuo Maker Space Logo" class="logo-chaihuo" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Agora">
-            <img src="image/logo/agora.svg" alt="Agora Logo" class="logo-agora" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Fab Hub">
-            <img src="image/logo/fab%20hub.svg" alt="Fab Hub Logo" class="logo-fabhub" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="MITERS">
-            <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Solo">
-            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo" loading="lazy" decoding="async">
-          </div>
-
-          <!-- Track Set 3 -->
-          <div class="partner-logo-item" title="NVIDIA">
-            <img src="image/logo/NVIDIA_logo.svg" alt="NVIDIA Logo" class="logo-nvidia" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="NVIDIA Isaac Sim">
-            <img src="image/logo/nvidia-isaac.webp" alt="NVIDIA Isaac Logo" class="logo-isaac" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="ROS 2">
-            <img src="image/logo/ROS-2_logo-2392x9999-1.webp" alt="ROS 2 Logo" class="logo-ros2" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Hugging Face">
-            <img src="image/logo/hugging-face.png" alt="Hugging Face Logo" class="logo-huggingface" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="LeRobot">
-            <img src="image/logo/LeRobot@1x.webp" alt="LeRobot Logo" class="logo-lerobot" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="MuJoCo">
-            <img src="image/logo/mujoco.png" alt="MuJoCo Logo" class="logo-mujoco" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="MoveIt 2">
-            <img src="image/logo/moveit-2-logo-dark.webp" alt="MoveIt 2 Logo" class="logo-moveit2" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Pinocchio">
-            <img src="image/logo/pinocchio.png" alt="Pinocchio Logo" class="logo-pinocchio" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="OpenELAB">
-            <img src="image/logo/OPENELAB_Logo_Final_04-horizontal_2_2b022bbb-431d-46ff-b1e2-e4073456bb7d.svg" alt="OpenELAB Logo" class="logo-openelab" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Chaihuo Maker Space">
-            <img src="image/logo/CHAIHUO.svg" alt="Chaihuo Maker Space Logo" class="logo-chaihuo" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Agora">
-            <img src="image/logo/agora.svg" alt="Agora Logo" class="logo-agora" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Fab Hub">
-            <img src="image/logo/fab%20hub.svg" alt="Fab Hub Logo" class="logo-fabhub" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="MITERS">
-            <img src="image/logo/miters.svg" alt="MITERS Logo" class="logo-miters" loading="lazy" decoding="async">
-          </div>
-          <div class="partner-logo-item" title="Solo">
-            <img src="image/logo/solo-full-original-white-text-.svg" alt="Solo Logo" class="logo-solo" loading="lazy" decoding="async">
           </div>
 
         </div>
@@ -6902,7 +6843,7 @@
   <script src="js/lib/STLLoader.js"></script>
 
   <!-- Main JavaScript File with Cache-Buster v123 (Add Hero Learn More button with language-based Bazaar/Taobao redirect) -->
-  <script src="js/app.js?v=20261118_v139" defer></script>
+  <script src="js/app.js?v=20261119_v143" defer></script>
   <script>
 
     function toggleFaq(id) {

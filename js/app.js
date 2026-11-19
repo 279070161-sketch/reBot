@@ -953,6 +953,7 @@ function initApp() {
   initSqueezeCarousel();
   initHeroSpecsCounter();
   initSenseCraftWorkflow();
+  initLabUniMarquee();
 
   // Defer non-critical background scripts until the browser is idle, so the
   // Hero 3D entrance animation gets 100% CPU/GPU headroom on startup.
@@ -1048,7 +1049,7 @@ function setupLanguageSelector() {
     if (heroLearnMoreBtn) {
       heroLearnMoreBtn.href = lang === 'zh'
         ? 'https://seeedstudio.world.tmall.com/shop/view_shop.htm?spm=a21xtw.29978516.0.0'
-        : 'https://www.seeedstudio.com/';
+        : 'https://www.seeedstudio.com/reBot-Arm-B601-RS-Assembled-Kit-with-Gripper-p-6865.html';
     }
     try {
       if (typeof updateSqueezeLanguage === 'function') updateSqueezeLanguage();
@@ -2919,6 +2920,95 @@ function initSenseCraftWorkflow() {
   } else {
     startTimer();
   }
+}
+
+/**
+ * Trusted Universities & Labs Marquee: Slower Scroll + Hover Pause + Manual Drag
+ */
+function initLabUniMarquee() {
+  const section = document.querySelector('.lab-uni-marquee-section');
+  if (!section) return;
+  const container = section.querySelector('.marquee-container');
+  const track = section.querySelector('.marquee-track');
+  if (!container || !track) return;
+
+  const SPEED_PX_PER_SEC = 40; // Gentle, readable scroll speed
+  let offset = 0;
+  let isHovered = false;
+  let isDragging = false;
+  let isVisible = true;
+  let startX = 0;
+  let startOffset = 0;
+  let lastTime = performance.now();
+
+  function wrapOffset(val) {
+    const halfWidth = track.scrollWidth / 2;
+    if (!halfWidth || halfWidth <= 0) return val;
+    let next = val;
+    while (next <= -halfWidth) next += halfWidth;
+    while (next > 0) next -= halfWidth;
+    return next;
+  }
+
+  function tick(now) {
+    const dt = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+
+    if (isVisible && !isHovered && !isDragging) {
+      offset = wrapOffset(offset - SPEED_PX_PER_SEC * dt);
+      track.style.transform = `translate3d(${offset}px, 0, 0)`;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  container.addEventListener('mouseenter', () => {
+    isHovered = true;
+  });
+
+  container.addEventListener('mouseleave', () => {
+    isHovered = false;
+  });
+
+  container.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
+    isDragging = true;
+    startX = e.clientX;
+    startOffset = offset;
+    container.classList.add('is-dragging');
+    if (container.setPointerCapture) {
+      try { container.setPointerCapture(e.pointerId); } catch (_) {}
+    }
+  });
+
+  container.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    offset = wrapOffset(startOffset + (e.clientX - startX));
+    track.style.transform = `translate3d(${offset}px, 0, 0)`;
+  });
+
+  const endDrag = (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    container.classList.remove('is-dragging');
+    if (e && container.releasePointerCapture) {
+      try { container.releasePointerCapture(e.pointerId); } catch (_) {}
+    }
+  };
+
+  container.addEventListener('pointerup', endDrag);
+  container.addEventListener('pointercancel', endDrag);
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) lastTime = performance.now();
+      });
+    }, { threshold: 0.05 });
+    observer.observe(section);
+  }
+
+  requestAnimationFrame(tick);
 }
 
 
