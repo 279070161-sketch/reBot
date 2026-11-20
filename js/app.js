@@ -156,18 +156,18 @@ const i18nDict = {
     sensecraft_title: "From Robot Setup to Real-World Task within 3 Hours",
     sensecraft_subtitle: "A step-by-step workflow to complete end-to-end robotic manipulation and learning in real-world — all in one NO-CODE platform.",
     sensecraft_workflow_heading: "Accelerate Your Robot Development Workflow",
-    sc_step1_title: "Calibrate",
-    sc_step1_desc: "Set up your robot and cameras with guided calibration for accurate data collection.",
-    sc_step2_title: "Collect Data",
-    sc_step2_desc: "Record robot demonstrations and build training-ready datasets through teleoperation.",
-    sc_step3_title: "Train",
-    sc_step3_desc: "Train VLA models in the cloud without requiring a local GPU.",
-    sc_step4_title: "Deploy Model",
-    sc_step4_desc: "Deploy trained policies to reBot with one-click desktop deployment and traceable workflows.",
-    sc_step5_title: "Inference",
-    sc_step5_desc: "Run trained policies on the edge and evaluate robot performance in real time.",
-    sc_step6_title: "Grasp",
-    sc_step6_desc: "Execute learned manipulation tasks and see your robot turn pre-trained policies into real-world actions.",
+    sc_step1_title: "Set Up & Calibrate",
+    sc_step1_desc: "Connect your robot and cameras, then complete guided calibration and teleoperation checks.",
+    sc_step2_title: "Collect Demonstrations",
+    sc_step2_desc: "Teleoperate your robot to record task demonstrations with synchronized camera and motion data.",
+    sc_step3_title: "Prepare Datasets",
+    sc_step3_desc: "Review recorded episodes, remove invalid demonstrations, and merge compatible datasets for training.",
+    sc_step4_title: "Train a Model",
+    sc_step4_desc: "Train a robot policy with your dataset using cloud GPUs, without a local training GPU.",
+    sc_step5_title: "Run on Your Robot",
+    sc_step5_desc: "Select your trained model and a supported inference mode to run the task on your robot.",
+    sc_step6_title: "Evaluate & Improve",
+    sc_step6_desc: "Check task performance, collect more demonstrations for challenging cases, and retrain to improve results.",
     sensecraft_cta: "Start Free in SenseCraft",
     sensecraft_cta_note: "Get 1,000 free credits for cloud training & inference",
     sensecraft_ui_badge: "UI Preview / GIF Placeholder",
@@ -502,18 +502,18 @@ const i18nDict = {
     sensecraft_title: "3 小时内从机械臂配置到真实任务落地",
     sensecraft_subtitle: "手把手引导您在一个零代码（NO-CODE）平台内，完成端到端的真实世界机器人操作与具身学习工作流。",
     sensecraft_workflow_heading: "加速您的机器人开发全流程",
-    sc_step1_title: "设备标定 (Calibrate)",
-    sc_step1_desc: "引导式完成机械臂与相机标定，确保高精度数据采集。",
-    sc_step2_title: "数据采集 (Collect Data)",
-    sc_step2_desc: "通过遥操作录制机械臂示教轨迹，构建可直接用于训练的数据集。",
-    sc_step3_title: "云端训练 (Train)",
-    sc_step3_desc: "无需本地高配 GPU，直接在云端高效训练 VLA 模型。",
-    sc_step4_title: "策略部署 (Deploy Model)",
-    sc_step4_desc: "桌面端一键下发训练好的策略至 reBot，全程可追溯。",
-    sc_step5_title: "实时推理 (Inference)",
-    sc_step5_desc: "在边缘端实时运行已训练策略，即时评估机械臂执行表现。",
-    sc_step6_title: "真机抓取 (Grasp)",
-    sc_step6_desc: "执行习得的操作任务，见证机械臂将预训练策略转化为真实动作。",
+    sc_step1_title: "设备配置与校准",
+    sc_step1_desc: "创建 AI 模型训练项目，连接主从臂，完成校准、遥操作验证和摄像头配置。",
+    sc_step2_title: "采集示教数据",
+    sc_step2_desc: "配置任务描述及采集参数，通过主臂遥操作从臂，多次演示完整任务。",
+    sc_step3_title: "整理训练数据",
+    sc_step3_desc: "回看采集片段，剔除失败或不完整的示教，按需合并兼容的数据集。",
+    sc_step4_title: "训练模型",
+    sc_step4_desc: "选择数据集、训练策略与计算资源，提交训练并查看进度。",
+    sc_step5_title: "真机运行",
+    sc_step5_desc: "选择训练完成的模型及兼容的推理方式，在真实机械臂上执行任务。",
+    sc_step6_title: "评估与迭代",
+    sc_step6_desc: "检查任务完成情况，针对失败场景补充正确示教，整理数据后再次训练。",
     sensecraft_cta: "免费体验 SenseCraft",
     sensecraft_cta_note: "注册即送 1,000 免费云端训练与推理积分",
     sensecraft_ui_badge: "真实界面 / GIF 占位图",
@@ -1055,6 +1055,9 @@ function setupLanguageSelector() {
     try {
       if (typeof updateSqueezeLanguage === 'function') updateSqueezeLanguage();
     } catch (_) { /* not initialized yet (TDZ) — harmless */ }
+    try {
+      if (typeof window.updateSenseCraftStage === 'function') window.updateSenseCraftStage();
+    } catch (_) { /* not initialized yet — harmless */ }
 
     if (currentLangText) {
       currentLangText.textContent = lang === 'zh' ? '中文' : 'EN';
@@ -2806,7 +2809,9 @@ function initHeroSpecsCounter() {
 function initSenseCraftWorkflow() {
   const section = document.getElementById('sensecraft');
   const listEl = document.getElementById('sensecraft-steps-list');
-  const badgeEl = document.getElementById('sensecraft-step-badge');
+  const stageBadgeEl = document.getElementById('sensecraft-stage-badge');
+  const stageTitleEl = document.getElementById('sensecraft-stage-title');
+  const stageDescEl = document.getElementById('sensecraft-stage-desc');
   const visualEl = document.getElementById('sensecraft-visual');
   if (!listEl || !visualEl) return;
 
@@ -2819,6 +2824,29 @@ function initSenseCraftWorkflow() {
   let isPaused = false;
   let isVisible = true;
   let timerId = null;
+
+  function updateStageHeader(idx) {
+    const currentItem = items[idx];
+    if (!currentItem) return;
+    const lang = window.currentLang || 'en';
+    const dict = (typeof i18nDict !== 'undefined' && i18nDict[lang]) ? i18nDict[lang] : {};
+    const titleKey = currentItem.getAttribute('data-title-key');
+    const descKey = currentItem.getAttribute('data-desc-key');
+
+    if (stageBadgeEl) {
+      const stepNum = String(idx + 1).padStart(2, '0');
+      const totalNum = String(items.length).padStart(2, '0');
+      stageBadgeEl.textContent = `Step ${stepNum} / ${totalNum}`;
+    }
+    if (stageTitleEl && titleKey && dict[titleKey]) {
+      stageTitleEl.textContent = dict[titleKey];
+    }
+    if (stageDescEl && descKey && dict[descKey]) {
+      stageDescEl.textContent = dict[descKey];
+    }
+  }
+
+  window.updateSenseCraftStage = () => updateStageHeader(activeIndex);
 
   function setStep(idx, restartProgress = true) {
     activeIndex = (idx + items.length) % items.length;
@@ -2837,11 +2865,7 @@ function initSenseCraftWorkflow() {
       }
     });
 
-    const currentItem = items[activeIndex];
-    const nextBadge = currentItem.getAttribute('data-badge');
-    if (badgeEl && nextBadge) {
-      badgeEl.textContent = nextBadge;
-    }
+    updateStageHeader(activeIndex);
 
     videos.forEach((vid, i) => {
       if (i === activeIndex) {
@@ -2911,6 +2935,8 @@ function initSenseCraftWorkflow() {
   listEl.addEventListener('mouseleave', resume);
   visualEl.addEventListener('mouseenter', () => pauseAt());
   visualEl.addEventListener('mouseleave', resume);
+
+  updateStageHeader(0);
 
   if ('IntersectionObserver' in window && section) {
     const observer = new IntersectionObserver((entries) => {

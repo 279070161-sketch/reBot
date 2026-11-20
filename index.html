@@ -1944,7 +1944,7 @@
     }
     .sensecraft-layout {
       display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
+      grid-template-columns: 0.72fr 1.28fr;
       gap: 1.75rem;
       align-items: stretch;
     }
@@ -1953,12 +1953,12 @@
       background: #FFFFFF;
       border: 1px solid var(--nv-border);
       border-radius: 8px;
-      padding: 1.75rem 1.85rem;
+      padding: 1.5rem 1.6rem;
       box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 1.15rem;
+      gap: 1rem;
     }
     .sensecraft-desc {
       margin: 0;
@@ -1968,26 +1968,71 @@
       font-family: var(--font-main);
       text-align: left;
     }
+    .sensecraft-right-panel {
+      min-width: 0;
+      background: #FFFFFF;
+      border: 1px solid var(--nv-border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+      display: flex;
+      flex-direction: column;
+    }
+    .sensecraft-stage-header {
+      padding: 1.25rem 1.65rem;
+      border-bottom: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.4rem;
+      flex: 1;
+    }
+    .sensecraft-stage-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+    .sensecraft-stage-badge {
+      font-family: var(--font-code);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--nv-green);
+      background: rgba(104, 166, 0, 0.1);
+      border: 1px solid rgba(104, 166, 0, 0.25);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .sensecraft-stage-title {
+      margin: 0;
+      font-family: var(--font-main);
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+    .sensecraft-stage-desc {
+      margin: 0;
+      font-family: var(--font-main);
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.5;
+    }
     .sensecraft-visual {
       position: relative;
       width: 100%;
-      height: 100%;
-      min-height: 460px;
-      border-radius: 8px;
+      aspect-ratio: 16 / 9;
+      flex-shrink: 0;
       overflow: hidden;
-      border: 1px solid var(--nv-border);
       background: #0F172A;
-      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
     }
-    @media (max-width: 992px) {
+    @media (max-width: 1024px) {
       .sensecraft-layout {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-      }
-      .sensecraft-visual {
-        height: auto;
-        min-height: 0;
-        aspect-ratio: 16 / 9;
       }
     }
     @media (max-width: 768px) {
@@ -2041,7 +2086,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       background: #0F172A;
     }
     .sensecraft-step-video {
@@ -2065,7 +2110,7 @@
     .sensecraft-steps-list {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.42rem;
       margin: 0;
     }
     .sensecraft-step-item {
@@ -2074,9 +2119,9 @@
       background: #F8FAFC;
       border: 1px solid #E2E8F0;
       border-radius: 6px;
-      padding: 0.65rem 0.95rem;
+      padding: 0.7rem 1rem;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 0.75rem;
       cursor: pointer;
       transition: border-color 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
@@ -2100,7 +2145,6 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: 0.1rem;
       transition: background-color 0.22s ease, color 0.22s ease;
     }
     .sensecraft-step-item:hover .sensecraft-step-num,
@@ -2111,21 +2155,19 @@
     .sensecraft-step-body {
       display: flex;
       flex-direction: column;
-      gap: 0.15rem;
+      gap: 0;
       min-width: 0;
+      padding-top: 0;
     }
     .sensecraft-step-title {
       color: #0F172A;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       line-height: 1.3;
       font-family: var(--font-main);
     }
     .sensecraft-step-desc {
-      color: #475569;
-      font-size: 0.8rem;
-      line-height: 1.4;
-      font-family: var(--font-main);
+      display: none;
     }
     .sensecraft-step-progress {
       position: absolute;
@@ -6001,56 +6043,50 @@
 
               <!-- 6 Interactive Steps (Auto-Sequential Highlight + Hover/Click Pause) -->
               <div class="sensecraft-steps-list" id="sensecraft-steps-list">
-                <div class="sensecraft-step-item active" data-step="0" data-video="video/sensecraft/step_01.mp4" data-badge="Step 1 · Calibrate">
+                <div class="sensecraft-step-item active" data-step="0" data-video="video/sensecraft/step_01.mp4?v=2" data-title-key="sc_step1_title" data-desc-key="sc_step1_desc">
                   <span class="sensecraft-step-num">1</span>
                   <div class="sensecraft-step-body">
-                    <span class="sensecraft-step-title" data-i18n="sc_step1_title">Calibrate</span>
-                    <span class="sensecraft-step-desc" data-i18n="sc_step1_desc">Set up your robot and cameras with guided calibration for accurate data collection.</span>
+                    <span class="sensecraft-step-title" data-i18n="sc_step1_title">Set Up &amp; Calibrate</span>
                   </div>
                   <div class="sensecraft-step-progress"></div>
                 </div>
 
-                <div class="sensecraft-step-item" data-step="1" data-video="video/sensecraft/step_03.mp4" data-badge="Step 2 · Collect Data">
+                <div class="sensecraft-step-item" data-step="1" data-video="video/sensecraft/step_02.mp4?v=2" data-title-key="sc_step2_title" data-desc-key="sc_step2_desc">
                   <span class="sensecraft-step-num">2</span>
                   <div class="sensecraft-step-body">
-                    <span class="sensecraft-step-title" data-i18n="sc_step2_title">Collect Data</span>
-                    <span class="sensecraft-step-desc" data-i18n="sc_step2_desc">Record robot demonstrations and build training-ready datasets through teleoperation.</span>
+                    <span class="sensecraft-step-title" data-i18n="sc_step2_title">Collect Demonstrations</span>
                   </div>
                   <div class="sensecraft-step-progress"></div>
                 </div>
 
-                <div class="sensecraft-step-item" data-step="2" data-video="video/sensecraft/step_04.mp4" data-badge="Step 3 · Train">
+                <div class="sensecraft-step-item" data-step="2" data-video="video/sensecraft/step_03.mp4?v=2" data-title-key="sc_step3_title" data-desc-key="sc_step3_desc">
                   <span class="sensecraft-step-num">3</span>
                   <div class="sensecraft-step-body">
-                    <span class="sensecraft-step-title" data-i18n="sc_step3_title">Train</span>
-                    <span class="sensecraft-step-desc" data-i18n="sc_step3_desc">Train VLA models in the cloud without requiring a local GPU.</span>
+                    <span class="sensecraft-step-title" data-i18n="sc_step3_title">Prepare Datasets</span>
                   </div>
                   <div class="sensecraft-step-progress"></div>
                 </div>
 
-                <div class="sensecraft-step-item" data-step="3" data-video="video/sensecraft/step_05.mp4" data-badge="Step 4 · Deploy Model">
+                <div class="sensecraft-step-item" data-step="3" data-video="video/sensecraft/step_04.mp4?v=2" data-title-key="sc_step4_title" data-desc-key="sc_step4_desc">
                   <span class="sensecraft-step-num">4</span>
                   <div class="sensecraft-step-body">
-                    <span class="sensecraft-step-title" data-i18n="sc_step4_title">Deploy Model</span>
-                    <span class="sensecraft-step-desc" data-i18n="sc_step4_desc">Deploy trained policies to reBot with one-click desktop deployment and traceable workflows.</span>
+                    <span class="sensecraft-step-title" data-i18n="sc_step4_title">Train a Model</span>
                   </div>
                   <div class="sensecraft-step-progress"></div>
                 </div>
 
-                <div class="sensecraft-step-item" data-step="4" data-video="video/sensecraft/step_06.mp4" data-badge="Step 5 · Inference">
+                <div class="sensecraft-step-item" data-step="4" data-video="video/sensecraft/step_05.mp4?v=2" data-title-key="sc_step5_title" data-desc-key="sc_step5_desc">
                   <span class="sensecraft-step-num">5</span>
                   <div class="sensecraft-step-body">
-                    <span class="sensecraft-step-title" data-i18n="sc_step5_title">Inference</span>
-                    <span class="sensecraft-step-desc" data-i18n="sc_step5_desc">Run trained policies on the edge and evaluate robot performance in real time.</span>
+                    <span class="sensecraft-step-title" data-i18n="sc_step5_title">Run on Your Robot</span>
                   </div>
                   <div class="sensecraft-step-progress"></div>
                 </div>
 
-                <div class="sensecraft-step-item" data-step="5" data-video="video/sensecraft/step_02.mp4" data-badge="Step 6 · Grasp">
+                <div class="sensecraft-step-item" data-step="5" data-video="video/sensecraft/step_06.mp4?v=2" data-title-key="sc_step6_title" data-desc-key="sc_step6_desc">
                   <span class="sensecraft-step-num">6</span>
                   <div class="sensecraft-step-body">
-                    <span class="sensecraft-step-title" data-i18n="sc_step6_title">Grasp</span>
-                    <span class="sensecraft-step-desc" data-i18n="sc_step6_desc">Execute learned manipulation tasks and see your robot turn pre-trained policies into real-world actions.</span>
+                    <span class="sensecraft-step-title" data-i18n="sc_step6_title">Evaluate &amp; Improve</span>
                   </div>
                   <div class="sensecraft-step-progress"></div>
                 </div>
@@ -6069,14 +6105,24 @@
 
             </div>
 
-            <!-- Right: Zero-Flash Stacked Preloaded Video Players -->
-            <div class="sensecraft-visual" id="sensecraft-visual">
-              <video class="sensecraft-step-video active" data-step="0" src="video/sensecraft/step_01.mp4" autoplay loop muted playsinline preload="auto"></video>
-              <video class="sensecraft-step-video" data-step="1" src="video/sensecraft/step_03.mp4" loop muted playsinline preload="auto"></video>
-              <video class="sensecraft-step-video" data-step="2" src="video/sensecraft/step_04.mp4" loop muted playsinline preload="auto"></video>
-              <video class="sensecraft-step-video" data-step="3" src="video/sensecraft/step_05.mp4" loop muted playsinline preload="auto"></video>
-              <video class="sensecraft-step-video" data-step="4" src="video/sensecraft/step_06.mp4" loop muted playsinline preload="auto"></video>
-              <video class="sensecraft-step-video" data-step="5" src="video/sensecraft/step_02.mp4" loop muted playsinline preload="auto"></video>
+            <!-- Right: Stage Header (Title + Description) & Zero-Flash 16:9 Video Player -->
+            <div class="sensecraft-right-panel">
+              <div class="sensecraft-stage-header">
+                <div class="sensecraft-stage-meta">
+                  <span class="sensecraft-stage-badge" id="sensecraft-stage-badge">Step 01 / 06</span>
+                  <h4 class="sensecraft-stage-title" id="sensecraft-stage-title" data-i18n="sc_step1_title">Set Up &amp; Calibrate</h4>
+                </div>
+                <p class="sensecraft-stage-desc" id="sensecraft-stage-desc" data-i18n="sc_step1_desc">Connect your robot and cameras, then complete guided calibration and teleoperation checks.</p>
+              </div>
+
+              <div class="sensecraft-visual" id="sensecraft-visual">
+                <video class="sensecraft-step-video active" data-step="0" src="video/sensecraft/step_01.mp4?v=2" autoplay loop muted playsinline preload="auto"></video>
+                <video class="sensecraft-step-video" data-step="1" src="video/sensecraft/step_02.mp4?v=2" loop muted playsinline preload="auto"></video>
+                <video class="sensecraft-step-video" data-step="2" src="video/sensecraft/step_03.mp4?v=2" loop muted playsinline preload="auto"></video>
+                <video class="sensecraft-step-video" data-step="3" src="video/sensecraft/step_04.mp4?v=2" loop muted playsinline preload="auto"></video>
+                <video class="sensecraft-step-video" data-step="4" src="video/sensecraft/step_05.mp4?v=2" loop muted playsinline preload="auto"></video>
+                <video class="sensecraft-step-video" data-step="5" src="video/sensecraft/step_06.mp4?v=2" loop muted playsinline preload="auto"></video>
+              </div>
             </div>
           </div>
         </div>
@@ -6875,7 +6921,7 @@
   <script src="js/lib/STLLoader.js"></script>
 
   <!-- Main JavaScript File with Cache-Buster v123 (Add Hero Learn More button with language-based Bazaar/Taobao redirect) -->
-  <script src="js/app.js?v=20261119_v145" defer></script>
+  <script src="js/app.js?v=20261120_v151" defer></script>
   <script>
 
     function toggleFaq(id) {
