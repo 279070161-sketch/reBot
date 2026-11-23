@@ -153,7 +153,7 @@ const i18nDict = {
     sim_real_btn: "Try Real Robot (Coming Soon)",
 
     // SenseCraft Robotics
-    sensecraft_title: "From Robot Setup to Real-World Task<br>within 1 Hour",
+    sensecraft_title: "From Robot Setup to Real-World Task within<br>1 Hour",
     sensecraft_subtitle: "A step-by-step workflow to complete end-to-end robotic manipulation and learning in real-world — all in one NO-CODE platform.",
     sensecraft_workflow_heading: "Accelerate Your Robot Development Workflow",
     sc_step1_title: "Set Up & Calibrate",
