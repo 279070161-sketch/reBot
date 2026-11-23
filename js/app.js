@@ -153,7 +153,7 @@ const i18nDict = {
     sim_real_btn: "Try Real Robot (Coming Soon)",
 
     // SenseCraft Robotics
-    sensecraft_title: "From Robot Setup to Real-World Task within 3 Hours",
+    sensecraft_title: "From Robot Setup to Real-World Task<br>within 1 Hour",
     sensecraft_subtitle: "A step-by-step workflow to complete end-to-end robotic manipulation and learning in real-world — all in one NO-CODE platform.",
     sensecraft_workflow_heading: "Accelerate Your Robot Development Workflow",
     sc_step1_title: "Set Up & Calibrate",
@@ -499,7 +499,7 @@ const i18nDict = {
     sim_real_btn: "在线试用真机（即将上线）",
 
     // SenseCraft Robotics
-    sensecraft_title: "3 小时内从机械臂配置到真实任务落地",
+    sensecraft_title: "1 小时内从机械臂配置到真实任务落地",
     sensecraft_subtitle: "手把手引导您在一个零代码（NO-CODE）平台内，完成端到端的真实世界机器人操作与具身学习工作流。",
     sensecraft_workflow_heading: "加速您的机器人开发全流程",
     sc_step1_title: "设备配置与校准",
